@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ganjun.net">
-  <title>Archives | Junnor.G</title>
+  <title>马尔科夫模型3 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="No one cares your tears , but ability.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Junnor.G">
-<meta property="og:url" content="http://ganjun.net/archives/index.html">
+  <meta name="description" content="前向算法（Forward Algorithm）​    计算观察序列的概率（Finding the probability of an observed sequence） 1.计算t=1时的局部概率α‘S​    按如下公式计算t=1的局部概率：$$\alpha{t}{(j)} = Pr(观察状态|隐藏状态) * Pr(t时刻所有指向j状态的路径)$$​    t=1的时，没有任何指向当前状态的">
+<meta name="keywords" content="马尔可夫模型,前向算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="马尔科夫模型3">
+<meta property="og:url" content="http://ganjun.net/2017/07/20/马尔科夫模型3/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="No one cares your tears , but ability.">
+<meta property="og:description" content="前向算法（Forward Algorithm）​    计算观察序列的概率（Finding the probability of an observed sequence） 1.计算t=1时的局部概率α‘S​    按如下公式计算t=1的局部概率：$$\alpha{t}{(j)} = Pr(观察状态|隐藏状态) * Pr(t时刻所有指向j状态的路径)$$​    t=1的时，没有任何指向当前状态的">
 <meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2017-07-20T07:55:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Junnor.G">
-<meta name="twitter:description" content="No one cares your tears , but ability.">
+<meta name="twitter:title" content="马尔科夫模型3">
+<meta name="twitter:description" content="前向算法（Forward Algorithm）​    计算观察序列的概率（Finding the probability of an observed sequence） 1.计算t=1时的局部概率α‘S​    按如下公式计算t=1的局部概率：$$\alpha{t}{(j)} = Pr(观察状态|隐藏状态) * Pr(t时刻所有指向j状态的路径)$$​    t=1的时，没有任何指向当前状态的">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -169,85 +171,73 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-马尔科夫模型3" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/" class="archive-article-date">
-  	<time datetime="2017-07-20T07:05:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/">IIP机器学习资料1-机器学习中的数学</a>
+    <h1 class="article-title" itemprop="name">
+      马尔科夫模型3
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">线性代数</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/机器学习/" class="article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/20/马尔科夫模型3/" class="archive-article-date">
+        
+        <a href="/2017/07/20/马尔科夫模型3/" class="archive-article-date">
   	<time datetime="2017-07-20T02:51:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/20/马尔科夫模型3/">马尔科夫模型3</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前向算法（Forward-Algorithm）"><a href="#前向算法（Forward-Algorithm）" class="headerlink" title="前向算法（Forward Algorithm）"></a>前向算法（Forward Algorithm）</h2><p>​    <strong><em>计算观察序列的概率（Finding the probability of an observed sequence）</em></strong></p>
+<h4 id="1-计算t-1时的局部概率α‘S"><a href="#1-计算t-1时的局部概率α‘S" class="headerlink" title="1.计算t=1时的局部概率α‘S"></a>1.计算t=1时的局部概率α‘S</h4><p>​    按如下公式计算t=1的局部概率：<br>$$<br>\alpha<em>{t}{(j)} = Pr(观察状态|隐藏状态) * Pr(t时刻所有指向j状态的路径)<br>$$<br>​    t=1的时，没有任何指向当前状态的路径。所以t=1时位于当前状态的概率是初始概率。<br>$$<br>\alpha</em>{1}{(j)} = \pi(j) * b<em>{jk</em>{1}}<br>$$</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@ pram k[]: 表示所获得的观察状态的序列，那么k1就是第一个观察状态的结果，因为第一个状态没有前面的依赖关系，我们总是将其先做好处理。</div><div class="line">@ pram 𝛑[]: 表示初始到达隐藏状态的概率序列</div><div class="line">@ pram α[][]: 其中的t表示在t时刻指向j这个隐藏状态的概率</div><div class="line">@ pram b[][]: 表示从隐藏状态指向观察状态的概率矩阵</div></pre></td></tr></table></figure>
+<h4 id="2-计算t-gt-1时的局部概率"><a href="#2-计算t-gt-1时的局部概率" class="headerlink" title="2.计算t&gt;1时的局部概率"></a>2.计算t&gt;1时的局部概率</h4><p>​    我们可以假设（递归地），乘号左边项“Pr( 观察状态 | 隐藏状态j )”已经有了，现在考虑其右边项“Pr(t时刻所有指向j状态的路径）”。<br>​    为了计算到达某个状态的所有路径的概率，我们可以计算到达此状态的每条路径的概率并对他们求和。否则用穷举的思想是指数级别上升的。</p>
+<p>​    计算α所需要的路径数目随着观察序列的增加而指数级递增，但是t-1时刻!α’s给出了所有到达此状态的前一路径概率，因此，我们可以通过t-1时刻的局部概率定义t时刻的α’s，即:<br>$$<br>\alpha<em>{t+1}{(j)} = b</em>{jk<em>{t+1}} \sum</em>{i=1}^{n} {\alpha<em>{t}(i) \alpha</em>{ij}}<br>$$<br>​    对于这一步，可以结合着前一篇文章<a href="https://cfonheart.github.io/2017/07/19/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B2/" target="_blank" rel="external">马尔科夫模型2</a>后面对前向算法的简单例子来看。</p>
+<h4 id="3-降低计算复杂度"><a href="#3-降低计算复杂度" class="headerlink" title="3.降低计算复杂度"></a>3.降低计算复杂度</h4><p>​    假设观察序列O的长度为T以及一个含有n个隐藏状态的隐马尔科夫模型 I = (pi,A,B)。</p>
+<p>​    穷举搜索的时间复杂度是2TN^T,前向算法的时间复杂度是T*N^2。</p>
+<p>​    根据上述可以把前向算法的公式进行简化（但实际复杂度是没有改变的）<br>$$<br>\sum<em>{X}{\pi(i</em>{1})b<em>{i</em>{1}k<em>{1}}}\prod</em>{j=2}^{T}{\alpha<em>{i</em>{j-1}i<em>j}b</em>{i_{j}k_j}}<br>$$</p>
+<h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h4><p>​    前向算法的目标是计算给定隐马尔科夫模型HMM下的观察序列的概率—Pr(observations | ℷ)。</p>
+<p>​    我们首先通过计算局部概率降低计算整个概率的复杂度，局部概率表示的是t时刻到达某个状态s的概率。</p>
+<p>​    t=1时候，可以利用初始概率（来自于P向量）和观察概率Pr(observation | state)(来自于混淆矩阵)计算局部概率；而t&gt;1时的局部概率可以利用t-1时的局部概率进行计算。</p>
+<p>​    因此，这个问题是递归定义的，观察序列的概率就是通过依次计算t=1,2,…,T时的局部概率，并且对于t=T时所有局部概率。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatQR.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -263,7 +253,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -276,407 +266,163 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ganjun.net/2017/07/20/马尔科夫模型3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/19/马尔可夫模型2/" class="archive-article-date">
-  	<time datetime="2017-07-19T03:00:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-19</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          IIP机器学习资料1-机器学习中的数学
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/19/马尔可夫模型2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">马尔可夫模型2</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/19/马尔可夫模型2/">马尔可夫模型2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马尔可夫模型</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">viterbi算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前向算法（Forward-Algorithm）"><span class="toc-number">1.</span> <span class="toc-text">前向算法（Forward Algorithm）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-计算t-1时的局部概率α‘S"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.计算t=1时的局部概率α‘S</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-计算t-gt-1时的局部概率"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.计算t>1时的局部概率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-降低计算复杂度"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.降低计算复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-总结"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.总结</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/本地Mac搭建hexo博客完整流程/" class="archive-article-date">
-  	<time datetime="2017-07-18T08:18:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/本地Mac搭建hexo博客完整流程/">本地Mac搭建hexo博客完整流程</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="马尔科夫模型3" data-title="马尔科夫模型3" data-url="http://ganjun.net/2017/07/20/马尔科夫模型3/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/hello-world/" class="archive-article-date">
-  	<time datetime="2017-07-18T07:13:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/马尔科夫模型1/" class="archive-article-date">
-  	<time datetime="2017-07-18T06:14:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/马尔科夫模型1/">马尔科夫模型1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/17/统计自然语言处理学习心得/" class="archive-article-date">
-  	<time datetime="2017-07-17T06:11:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/17/统计自然语言处理学习心得/">统计自然语言处理学习心得</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘/" class="article-tag-list-link color5">数据挖掘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/" class="archive-article-date">
-  	<time datetime="2017-07-16T12:42:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/">Python爬虫with(BeautifulSoup包)+Mangodb</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/15/简单神经网络学习/" class="archive-article-date">
-  	<time datetime="2017-07-15T07:32:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/15/简单神经网络学习/">简单神经网络学习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘/" class="article-tag-list-link color5">数据挖掘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/15/Mac下安装Mysql/" class="archive-article-date">
-  	<time datetime="2017-07-15T05:31:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/15/Mac下安装Mysql/">Mac下安装Mysql</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">服务器</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://ganjun.net/2017/07/20/马尔科夫模型3/", 
+    sourceId: "马尔科夫模型3",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
+  
+  <div id="SOHUCS" sid="马尔科夫模型3" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "true"; 
+var conf = "true"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
   
 
 
@@ -700,8 +446,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

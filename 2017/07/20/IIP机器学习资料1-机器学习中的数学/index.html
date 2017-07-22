@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ganjun.net">
-  <title>Archives | Junnor.G</title>
+  <title>IIP机器学习资料1-机器学习中的数学 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="No one cares your tears , but ability.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Junnor.G">
-<meta property="og:url" content="http://ganjun.net/archives/index.html">
+  <meta name="description" content="线性代数概念1.Rank of Matrix（矩阵的秩）​    在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数。通常表示为r(A)。">
+<meta name="keywords" content="线性代数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IIP机器学习资料1-机器学习中的数学">
+<meta property="og:url" content="http://ganjun.net/2017/07/20/IIP机器学习资料1-机器学习中的数学/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="No one cares your tears , but ability.">
+<meta property="og:description" content="线性代数概念1.Rank of Matrix（矩阵的秩）​    在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数。通常表示为r(A)。">
 <meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2017-07-20T10:03:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Junnor.G">
-<meta name="twitter:description" content="No one cares your tears , but ability.">
+<meta name="twitter:title" content="IIP机器学习资料1-机器学习中的数学">
+<meta name="twitter:description" content="线性代数概念1.Rank of Matrix（矩阵的秩）​    在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数。通常表示为r(A)。">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -169,36 +171,95 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-IIP机器学习资料1-机器学习中的数学" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/" class="archive-article-date">
-  	<time datetime="2017-07-20T07:05:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/">IIP机器学习资料1-机器学习中的数学</a>
+    <h1 class="article-title" itemprop="name">
+      IIP机器学习资料1-机器学习中的数学
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/" class="archive-article-date">
+  	<time datetime="2017-07-20T07:05:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="线性代数概念"><a href="#线性代数概念" class="headerlink" title="线性代数概念"></a>线性代数概念</h1><h3 id="1-Rank-of-Matrix（矩阵的秩）"><a href="#1-Rank-of-Matrix（矩阵的秩）" class="headerlink" title="1.Rank of Matrix（矩阵的秩）"></a>1.Rank of Matrix（矩阵的秩）</h3><p>​    在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数。通常表示为r(A)。</p>
+<a id="more"></a>
+<p>​    在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数目。类似地，行秩是A的线性无关的横行的极大数目。通俗一点说，如果把矩阵看成一个个行向量或者列向量，秩就是这些行向量或者列向量的秩，也就是极大无关组中所含向量的个数。</p>
+<p>​    矩阵的列秩和行秩总是相等的，因此可以简单地称作矩阵A的秩。</p>
+<p>​    这里以行秩来说，我们可以通过行变换，将具有线性依赖的不同行以其中某些行为基，其他行都可以转化为全0。rank(A)就是经过行变换后得到的非全0行数，且这些行已经不再具有线性依赖。<br>$$<br>A =<br>\begin{bmatrix}<br>1 &amp; 2 &amp; 1 \<br>-2 &amp; -3 &amp; 1 \<br>3 &amp; 5 &amp; 0<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br>1 &amp; 2 &amp; 1 \<br>0 &amp; 1 &amp; 3 \<br>0 &amp; 0 &amp; 0<br>\end{bmatrix} \<br>rank(A) = 2<br>$$</p>
+<h3 id="2-矩阵的行列式"><a href="#2-矩阵的行列式" class="headerlink" title="2.矩阵的行列式"></a>2.矩阵的行列式</h3><p>​    行列式在数学中，是由解<a href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84" target="_blank" rel="external">线性方程组</a>产生的一种算式，是取自不同行不同列的n个元素的乘积的代数和。</p>
+<p>​    列举一个简单的二阶行列式和三阶行列式的例子。<br>$$<br>A = \begin{bmatrix} 1 &amp; 2\ 3 &amp; 4 \end{bmatrix} \quad \<br>|A| = 1·4 - 2·3=-2 \<br>A = \begin{bmatrix} 1 &amp; 2 &amp; 3\ 4 &amp; 5 &amp; 6 \ 7 &amp; 8 &amp; 9 \end{bmatrix} \quad \<br>|A| = 1 · (5 · 9 - 6 · 8) + \ 2 · (6 · 7 - 4 · 9) + \3 · (4 · 8 - 5 · 7)<br>$$</p>
+<p>​    对于任意阶行列式，都可以改写为第一行每一个元素乘以去掉其对应行和列后得到的n-1阶矩阵的行列式（如果这个删去的元素前面有列，则需要把这些列放到最后），将每一个第一行元素这样做得到的结果叠加就是n阶行列式。</p>
+<h3 id="3-伴随矩阵A"><a href="#3-伴随矩阵A" class="headerlink" title="3.伴随矩阵A*"></a>3.伴随矩阵A*</h3><p><em>A</em>的伴随<a href="https://baike.baidu.com/item/%E7%9F%A9%E9%98%B5" target="_blank" rel="external">矩阵</a>可按如下步骤定义：</p>
+<p>1.把D的各个元素都换成它相应的<a href="https://baike.baidu.com/item/%E4%BB%A3%E6%95%B0%E4%BD%99%E5%AD%90%E5%BC%8F" target="_blank" rel="external">代数余子式</a>；</p>
+<p>（代数余子式定义：在一个n阶<a href="https://baike.baidu.com/item/%E8%A1%8C%E5%88%97%E5%BC%8F" target="_blank" rel="external">行列式</a>A中,把 (i,j)元aij所在的第i行和第j列划去后，留下来的n-1阶行列式叫做(i,j)元aij的余子式，记做Mij:<br>$$<br>A<em>{ij} = (-1)^{i+j}M</em>{ij}<br>$$<br>Aij就是(i,j)元aij的代数余子式，这是一个数值</p>
+<p>2.将所得到的矩阵转置便得到A的伴随矩阵</p>
+<h3 id="4-矩阵的逆"><a href="#4-矩阵的逆" class="headerlink" title="4.矩阵的逆"></a>4.矩阵的逆</h3><p>​    设<strong>A</strong>是数域上的一个n阶<a href="https://baike.baidu.com/item/%E6%96%B9%E9%98%B5" target="_blank" rel="external">方阵</a>，若在相同数域上存在另一个n阶矩阵<strong>B</strong>，使得： <strong>AB</strong>=<strong>BA</strong>=<strong>E</strong>。 则我们称<strong>B</strong>是<strong>A</strong>的逆矩阵，而A则被称为<a href="https://baike.baidu.com/item/%E5%8F%AF%E9%80%86%E7%9F%A9%E9%98%B5" target="_blank" rel="external">可逆矩阵</a>。</p>
+<ul>
+<li><p>若矩阵A是可逆的，则A的逆矩阵是唯一的。</p>
+</li>
+<li><p>可逆矩阵一定是方阵。</p>
+</li>
+<li><p>可逆矩阵的转置矩阵也可逆。</p>
+</li>
+<li><p>可逆矩阵的乘积依然可逆。</p>
+</li>
+<li><p>矩阵可逆当且仅当它是满秩矩阵。</p>
+</li>
+<li><p>逆矩阵的求解：</p>
+</li>
+<li><p>$$<br>A^{-1} = \frac{1}{|A|}A^{∗}<br>$$</p>
+<p>​</p>
+</li>
+</ul>
+<h3 id="5-特征值和特征向量"><a href="#5-特征值和特征向量" class="headerlink" title="5.特征值和特征向量"></a>5.特征值和特征向量</h3><p>​    X<strong>v</strong> = λ<strong>v</strong></p>
+<p>​    X是个n阶矩阵，<strong>v</strong>是X的特征向量，λ则是这个特征向量对应的特征值。</p>
+<p>​    矩阵X可以理解为是对于一个向量的旋转拉伸变化，但是对于特征向量来说，矩阵只对其作了拉伸，而并未做旋转，那么特征值就是对应拉伸的程度。</p>
+<p>参考资源：</p>
+<p><a href="https://www.zhihu.com/question/21874816" target="_blank" rel="external">如何理解矩阵特征值</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatQR.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -210,7 +271,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -223,460 +284,154 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ganjun.net/2017/07/20/IIP机器学习资料1-机器学习中的数学/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/20/马尔科夫模型3/" class="archive-article-date">
-  	<time datetime="2017-07-20T02:51:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/20/马尔科夫模型3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">马尔科夫模型3</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/20/马尔科夫模型3/">马尔科夫模型3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马尔可夫模型</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前向算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#线性代数概念"><span class="toc-number">1.</span> <span class="toc-text">线性代数概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Rank-of-Matrix（矩阵的秩）"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.Rank of Matrix（矩阵的秩）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-矩阵的行列式"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.矩阵的行列式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-伴随矩阵A"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.伴随矩阵A*</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-矩阵的逆"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.矩阵的逆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-特征值和特征向量"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.特征值和特征向量</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/19/马尔可夫模型2/" class="archive-article-date">
-  	<time datetime="2017-07-19T03:00:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/19/马尔可夫模型2/">马尔可夫模型2</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="IIP机器学习资料1-机器学习中的数学" data-title="IIP机器学习资料1-机器学习中的数学" data-url="http://ganjun.net/2017/07/20/IIP机器学习资料1-机器学习中的数学/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马尔可夫模型</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">viterbi算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/本地Mac搭建hexo博客完整流程/" class="archive-article-date">
-  	<time datetime="2017-07-18T08:18:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/本地Mac搭建hexo博客完整流程/">本地Mac搭建hexo博客完整流程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/hello-world/" class="archive-article-date">
-  	<time datetime="2017-07-18T07:13:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/马尔科夫模型1/" class="archive-article-date">
-  	<time datetime="2017-07-18T06:14:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/马尔科夫模型1/">马尔科夫模型1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/17/统计自然语言处理学习心得/" class="archive-article-date">
-  	<time datetime="2017-07-17T06:11:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/17/统计自然语言处理学习心得/">统计自然语言处理学习心得</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘/" class="article-tag-list-link color5">数据挖掘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/" class="archive-article-date">
-  	<time datetime="2017-07-16T12:42:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/">Python爬虫with(BeautifulSoup包)+Mangodb</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/15/简单神经网络学习/" class="archive-article-date">
-  	<time datetime="2017-07-15T07:32:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/15/简单神经网络学习/">简单神经网络学习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘/" class="article-tag-list-link color5">数据挖掘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/15/Mac下安装Mysql/" class="archive-article-date">
-  	<time datetime="2017-07-15T05:31:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/15/Mac下安装Mysql/">Mac下安装Mysql</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">服务器</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://ganjun.net/2017/07/20/IIP机器学习资料1-机器学习中的数学/", 
+    sourceId: "IIP机器学习资料1-机器学习中的数学",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
+  
+  <div id="SOHUCS" sid="IIP机器学习资料1-机器学习中的数学" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "true"; 
+var conf = "true"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
   
 
 
@@ -700,8 +455,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

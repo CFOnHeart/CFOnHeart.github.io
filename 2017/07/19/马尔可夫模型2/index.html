@@ -6,18 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ganjun.net">
-  <title>Archives | Junnor.G</title>
+  <title>马尔可夫模型2 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="No one cares your tears , but ability.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Junnor.G">
-<meta property="og:url" content="http://ganjun.net/archives/index.html">
+  <meta name="description" content="隐马尔可夫模型（HMM)​    隐马尔可夫模型（Hidden Markov ， HMM）是统计模型，它用来描述一个隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来做进一步的分析，例如模式识别。">
+<meta name="keywords" content="自然语言处理,马尔可夫模型,viterbi算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="马尔可夫模型2">
+<meta property="og:url" content="http://ganjun.net/2017/07/19/马尔可夫模型2/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="No one cares your tears , but ability.">
+<meta property="og:description" content="隐马尔可夫模型（HMM)​    隐马尔可夫模型（Hidden Markov ， HMM）是统计模型，它用来描述一个隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来做进一步的分析，例如模式识别。">
 <meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/1.png">
+<meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/2.png">
+<meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/3.png">
+<meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/4.png">
+<meta property="og:updated_time" content="2017-07-20T02:47:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Junnor.G">
-<meta name="twitter:description" content="No one cares your tears , but ability.">
+<meta name="twitter:title" content="马尔可夫模型2">
+<meta name="twitter:description" content="隐马尔可夫模型（HMM)​    隐马尔可夫模型（Hidden Markov ， HMM）是统计模型，它用来描述一个隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来做进一步的分析，例如模式识别。">
+<meta name="twitter:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -169,138 +176,207 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-马尔可夫模型2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/" class="archive-article-date">
-  	<time datetime="2017-07-20T07:05:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/">IIP机器学习资料1-机器学习中的数学</a>
+    <h1 class="article-title" itemprop="name">
+      马尔可夫模型2
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">线性代数</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/机器学习/" class="article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/20/马尔科夫模型3/" class="archive-article-date">
-  	<time datetime="2017-07-20T02:51:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/20/马尔科夫模型3/">马尔科夫模型3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马尔可夫模型</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前向算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/19/马尔可夫模型2/" class="archive-article-date">
+        
+        <a href="/2017/07/19/马尔可夫模型2/" class="archive-article-date">
   	<time datetime="2017-07-19T03:00:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-19</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/19/马尔可夫模型2/">马尔可夫模型2</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="隐马尔可夫模型（HMM"><a href="#隐马尔可夫模型（HMM" class="headerlink" title="隐马尔可夫模型（HMM)"></a>隐马尔可夫模型（HMM)</h2><p>​    <strong>隐马尔可夫模型（Hidden Markov ， HMM）是统计模型</strong>，它用来描述一个隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来做进一步的分析，例如模式识别。</p>
+<a id="more"></a>
+<p>​    是在被建模的系统被认为是一个马尔可夫过程与未观测到的（隐藏的）的状态的统计马尔可夫模型。</p>
+<p>​    用一个简单的例子来阐述：<br>​    假设我手里有三个不同的骰子。第一个骰子是我们平常见的骰子（称这个骰子为D6），6个面，每个面（1，2，3，4，5，6）出现的概率是1/6。第二个骰子是个四面体（称这个骰子为D4），每个面（1，2，3，4）出现的概率是1/4。第三个骰子有八个面（称这个骰子为D8），每个面（1，2，3，4，5，6，7，8）出现的概率是1/8。</p>
+<p>​    <img src="1.png" alt=""></p>
+<p>​    假设我们开始掷骰子，我们先从三个骰子里挑一个，挑到每一个骰子的概率都是1/3。然后我们掷骰子，得到一个数字，1，2，3，4，5，6，7，8中的一个。不停的重复上述过程，我们会得到一串数字，每个数字都是1，2，3，4，5，6，7，8中的一个。例如我们可能得到这么一串数字（掷骰子10次）：1 6 3 5 2 7 3 5 2 4</p>
+<p>​    这串数字叫做可见状态链。但是在隐马尔可夫模型中，我们不仅仅有这么一串可见状态链，还有一串隐含状态链。在这个例子里，这串隐含状态链就是你用的骰子的序列。比如，隐含状态链有可能是：D6 D8 D8 D6 D4 D8 D6 D6 D4 D8</p>
+<p>​    一般来说，HMM中说到的马尔可夫链其实是指隐含状态链，因为隐含状态（骰子）之间存在转换概率（transition probability）。在我们这个例子里，D6的下一个状态是D4，D6，D8的概率都是1/3。D4，D8的下一个状态是D4，D6，D8的转换概率也都一样是1/3。这样设定是为了最开始容易说清楚，但是我们其实是可以随意设定转换概率的。比如，我们可以这样定义，D6后面不能接D4，D6后面是D6的概率是0.9，是D8的概率是0.1。这样就是一个新的HMM。</p>
+<p>​    同样的，尽管可见状态之间没有转换概率，但是隐含状态和可见状态之间有一个概率叫做输出概率（emission probability）。就我们的例子来说，六面骰（D6）产生1的输出概率是1/6。产生2，3，4，5，6的概率也都是1/6。我们同样可以对输出概率进行其他定义。比如，我有一个被赌场动过手脚的六面骰子，掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。</p>
+<p><img src="2.png" alt=""></p>
+<p><img src="3.png" alt=""></p>
+<p>​    其实对于HMM来说，如果提前知道所有隐含状态之间的转换概率和所有隐含状态到所有可见状态之间的输出概率，做模拟是相当容易的。但是应用HMM模型时候呢，往往是缺失了一部分信息的，有时候你知道骰子有几种，每种骰子是什么，但是不知道掷出来的骰子序列；有时候你只是看到了很多次掷骰子的结果，剩下的什么都不知道。如果应用算法去估计这些缺失的信息，就成了一个很重要的问题。这些算法我会在下面详细讲。</p>
+<h2 id="隐马尔可夫-HMM-模型相关算法"><a href="#隐马尔可夫-HMM-模型相关算法" class="headerlink" title="隐马尔可夫(HMM)模型相关算法"></a>隐马尔可夫(HMM)模型相关算法</h2><p>在马尔可夫模型中，上一个状态到下一个状态是得到已知的概率矩阵的，就像在前一篇<a href="https://cfonheart.github.io/2017/07/18/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B1/" target="_blank" rel="external">马尔可夫模型1</a>文章中得到的非确定模式中的昨天天气-&gt;今天天气的转换矩阵，在这个例子中也同样道理，现在有D6,D4,D8三种类型的色子，假设他们之间的转换都是均匀的，那么应该得到如下转换矩阵：<br>$$<br>\begin{bmatrix}<br>    &amp;  D4 &amp; D6 &amp; D8\<br>D4 &amp; 1/3 &amp; 1/3 &amp; 1/3 \<br>D6 &amp; 1/3 &amp; 1/3 &amp; 1/3\<br>D8 &amp; 1/3 &amp; 1/3 &amp; 1/3<br>\end{bmatrix}<br>$$</p>
+<h3 id="1-最简单的解决方法"><a href="#1-最简单的解决方法" class="headerlink" title="1.最简单的解决方法"></a>1.最简单的解决方法</h3><p>实用性不大，但作为入门</p>
+<p><img src="4.png" alt=""></p>
+<p>那么我们需要知道产生上方隐式链的计算概率方式就应该是</p>
+<p>$$<br>P(D6,D8,D8) = P(D6) \ P(D6 -&gt; 1) \ P(D6 -&gt; D8) \ \  P(D8 -&gt; 6) <em> P(D8 -&gt; D8) </em> P(D8 -&gt; 3) \ =1/3 <em> 1/6 </em> 1/3 <em> 1/8 </em> 1/3 * 1/8<br>$$</p>
+<p>上述的式子就代表了得到这条隐式链的概率以及从隐式链的每一项对应到显式链每一项的概率。</p>
+<h3 id="2-看见不可见的，破解色子序列-viterbi算法"><a href="#2-看见不可见的，破解色子序列-viterbi算法" class="headerlink" title="2.看见不可见的，破解色子序列(viterbi算法)"></a>2.看见不可见的，破解色子序列(viterbi算法)</h3><blockquote>
+<p>viterbi算法只是解决隐马第三个问题（求观察序列的最可能的标注序列）的一种实现方式。这个问题可以用于viterbi算法实现，也可以用其他方式实现（如穷举法）；而viterbi算法可以用于解决隐马第三问题，也可以用于解决其他问题。</p>
+<p>viterbi算法其实就是多步骤每步多选择模型的最优选择问题，其在每一步的所有选择都保存了前续所有步骤到当前步骤当前选择的最小总代价（或者最大价值）以及当前代价的情况下前继步骤的选择。依次计算完所有步骤后，通过回溯的方法找到最优选择路径。符合这个模型的都可以用viterbi算法解决，隐马模型的第三问题刚好符合这个模型，所以才采用了viterbi算法。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">对于上述已经说了的我已知最终的10次投掷结果&#123;1 6 3 5 2 7 3 5 2 4&#125;，我不知道每次用了哪种骰子，我想知道最有可能的骰子序列。</div></pre></td></tr></table></figure>
+<h4 id="Step-1-首先只掷一次骰子"><a href="#Step-1-首先只掷一次骰子" class="headerlink" title="Step 1: 首先只掷一次骰子"></a>Step 1: 首先只掷一次骰子</h4><p>​    看到结果为1，初始概率也同样认为每个骰子都是1/3。</p>
+<p>​    P1(D4-&gt;1) = P(D4) * P(D4-&gt;1) = 1/3 * 1/4</p>
+<p>​    P1(D6-&gt;1) = P(D6) * P(D6-&gt;1) = 1/3 * 1/6</p>
+<p>​    P1(D8-&gt;1) = P(D8) * P(D8-&gt;1) = 1/3 * 1/8</p>
+<p>​    所以第一次就认为选择的是D4</p>
+<h4 id="Step-2-判断第二个骰子"><a href="#Step-2-判断第二个骰子" class="headerlink" title="Step 2: 判断第二个骰子"></a>Step 2: 判断第二个骰子</h4><p>​    看到结果为6。因为在马尔可夫模型中，当前状态只跟前一次状态存在转移关系。所以之前状态有3个-&gt;当前的3个状态，我们需要把9种状态都计算一遍，然后对于每个骰子的选择出选中它最大的一个，最后进行比较。</p>
+<p>（1）前一个状态为D4，后一个状态为D6:<br>$$<br>P2(D6 \rightarrow 6) = P1(D4 \rightarrow 1) <em> P(D4 \rightarrow D6) </em> P(D6 \rightarrow 6) = 1/12 <em> 1/3 </em> 1/6<br>$$<br>（2）前一个状态为D6，后一个状态为D6:<br>$$<br>P2(D6 \rightarrow 6) = P1(D6 \rightarrow 1) <em> P(D4 \rightarrow D6) </em> P(D6 \rightarrow 6) = 1/18 <em> 1/3 </em> 1/6<br>$$<br>（3）前一个状态为D8，后一个状态为D6:<br>$$<br>P2(D6 \rightarrow 6) = P1(D8 \rightarrow 1) <em> P(D4 \rightarrow D6) </em> P(D6 \rightarrow 6) = 1/24 <em> 1/3 </em> 1/6<br>$$<br>所以P2(D6-&gt;6)最后会选择最大的1/12 <em> 1/3 </em> 1/6</p>
+<p>同理可以求出P2(D4-&gt;6) , P2(D8-&gt;6)</p>
+<p>通过比较之后P2(D6-&gt;6)大于它们两个，所以第二个色子选择D6</p>
+<h4 id="Step-3-后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。"><a href="#Step-3-后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。" class="headerlink" title="Step 3: 后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。"></a>Step 3: 后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。</h4><h3 id="3-谁动了我的骰子–前向算法-解决一类得到已知结果的状态链，想要求出得到这个状态链的概率"><a href="#3-谁动了我的骰子–前向算法-解决一类得到已知结果的状态链，想要求出得到这个状态链的概率" class="headerlink" title="3.谁动了我的骰子–前向算法(解决一类得到已知结果的状态链，想要求出得到这个状态链的概率)"></a>3.谁动了我的骰子–前向算法(解决一类得到已知结果的状态链，想要求出得到这个状态链的概率)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">比如说你怀疑自己的六面骰被赌场动过手脚了，有可能被换成另一种六面骰，这种六面骰掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。你怎么办么？答案很简单，算一算正常的三个骰子掷出一段序列的概率，再算一算不正常的六面骰和另外两个正常骰子掷出这段序列的概率。如果前者比后者小，你就要小心了。</div></pre></td></tr></table></figure>
+<p>现在已知投掷结果是{1,6,3}</p>
+<p><strong><em>对于未被换过色子的情况来说：</em></strong></p>
+<h4 id="Step-1-第一个骰子的投掷结果"><a href="#Step-1-第一个骰子的投掷结果" class="headerlink" title="Step 1: 第一个骰子的投掷结果"></a>Step 1: 第一个骰子的投掷结果</h4><p>看到结果为1，产生这个结果的总概率就是计算每种色子到达1的概率的总和</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">P1</th>
+<th style="text-align:center">P2</th>
+<th style="text-align:center">P3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">D6</td>
+<td style="text-align:center">1/3 * 1/6</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D4</td>
+<td style="text-align:center">1/3 * 1/4</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D8</td>
+<td style="text-align:center">1/3 * 1/8</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Total</td>
+<td style="text-align:center">0.18</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="Step-2-第二个骰子的投掷结果"><a href="#Step-2-第二个骰子的投掷结果" class="headerlink" title="Step 2: 第二个骰子的投掷结果"></a>Step 2: 第二个骰子的投掷结果</h4><p>看到结果为6，从上一次状态转移到这一次的6选择的所有可能概率的总和</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">P1</th>
+<th style="text-align:center">P2</th>
+<th style="text-align:center">P3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">D6</td>
+<td style="text-align:center">1/3 * 1/6</td>
+<td style="text-align:center">P1(D6) <em> 1/3 </em> 1/6 + P1(D4) <em> 1/3 </em> 1/6 + P1(D8) <em> 1/3 </em> 1/6</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D4</td>
+<td style="text-align:center">1/3 * 1/4</td>
+<td style="text-align:center">P1(D6) <em> 1/3 </em> 0 + P1(D4) <em> 1/3 </em> 0 + P1(D8) <em> 1/3 </em> 0</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D8</td>
+<td style="text-align:center">1/3 * 1/8</td>
+<td style="text-align:center">P1(D6) <em> 1/3 </em> 1/8 + P1(D4) <em> 1/3 </em> 1/8 + P1(D8) <em> 1/3 </em> 1/8</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Total</td>
+<td style="text-align:center">0.18</td>
+<td style="text-align:center">0.05</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Step-3-第三个骰子的投掷结果"><a href="#Step-3-第三个骰子的投掷结果" class="headerlink" title="Step 3: 第三个骰子的投掷结果"></a>Step 3: 第三个骰子的投掷结果</h4><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">P1</th>
+<th style="text-align:center">P2</th>
+<th style="text-align:center">P3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">D6</td>
+<td style="text-align:center">1/3 * 1/6</td>
+<td style="text-align:center">P1(D6) <em> 1/3 </em> 1/6 + P1(D4) <em> 1/3 </em> 1/6 + P1(D8) <em> 1/3 </em> 1/6</td>
+<td style="text-align:center">P2(D6) <em> 1/3 </em> 1/6 + P2(D4) <em> 1/3 </em> 1/6 + P2(D8) <em> 1/3 </em> 1/6</td>
+</tr>
+<tr>
+<td style="text-align:center">D4</td>
+<td style="text-align:center">1/3 * 1/4</td>
+<td style="text-align:center">P1(D6) <em> 1/3 </em> 0 + P1(D4) <em> 1/3 </em> 0 + P1(D8) <em> 1/3 </em> 0</td>
+<td style="text-align:center">P2(D6) <em> 1/3 </em> 1/4 + P2(D4) <em> 1/3 </em> 1/4 + P2(D8) <em> 1/3 </em> 1/4</td>
+</tr>
+<tr>
+<td style="text-align:center">D8</td>
+<td style="text-align:center">1/3 * 1/8</td>
+<td style="text-align:center">P1(D6) <em> 1/3 </em> 1/8 + P1(D4) <em> 1/3 </em> 1/8 + P1(D8) <em> 1/3 </em> 1/8</td>
+<td style="text-align:center">P2(D6) <em> 1/3 </em> 1/8 + P2(D4) <em> 1/3 </em> 1/8 + P2(D8) <em> 1/3 </em> 1/8</td>
+</tr>
+<tr>
+<td style="text-align:center">Total</td>
+<td style="text-align:center">0.18</td>
+<td style="text-align:center">0.05</td>
+<td style="text-align:center">0.03</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>同样地可以计算出被换过的骰子所得到的概率，根据大小比较来判断是不是被换了</em></strong></p>
+<h4 id="参考资源："><a href="#参考资源：" class="headerlink" title="参考资源："></a>参考资源：</h4><p><a href="http://www.cnblogs.com/skyme/p/4651331.html" target="_blank" rel="external">一文搞懂HMM(隐马尔可夫模型)</a></p>
+<p><a href="https://www.zhihu.com/question/20136144" target="_blank" rel="external">Viterbi算法</a></p>
+<p><a href="http://www.52nlp.cn/hmm-learn-best-practices-five-forward-algorithm-2" target="_blank" rel="external">HMM学习最佳范例五：前向算法2</a></p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatQR.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -320,7 +396,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -333,350 +409,163 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ganjun.net/2017/07/19/马尔可夫模型2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/本地Mac搭建hexo博客完整流程/" class="archive-article-date">
-  	<time datetime="2017-07-18T08:18:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/07/20/马尔科夫模型3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          马尔科夫模型3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/18/本地Mac搭建hexo博客完整流程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">本地Mac搭建hexo博客完整流程</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/本地Mac搭建hexo博客完整流程/">本地Mac搭建hexo博客完整流程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#隐马尔可夫模型（HMM"><span class="toc-number">1.</span> <span class="toc-text">隐马尔可夫模型（HMM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐马尔可夫-HMM-模型相关算法"><span class="toc-number">2.</span> <span class="toc-text">隐马尔可夫(HMM)模型相关算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-最简单的解决方法"><span class="toc-number">2.1.</span> <span class="toc-text">1.最简单的解决方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-看见不可见的，破解色子序列-viterbi算法"><span class="toc-number">2.2.</span> <span class="toc-text">2.看见不可见的，破解色子序列(viterbi算法)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-1-首先只掷一次骰子"><span class="toc-number">2.2.1.</span> <span class="toc-text">Step 1: 首先只掷一次骰子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-2-判断第二个骰子"><span class="toc-number">2.2.2.</span> <span class="toc-text">Step 2: 判断第二个骰子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-3-后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。"><span class="toc-number">2.2.3.</span> <span class="toc-text">Step 3: 后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-谁动了我的骰子–前向算法-解决一类得到已知结果的状态链，想要求出得到这个状态链的概率"><span class="toc-number">2.3.</span> <span class="toc-text">3.谁动了我的骰子–前向算法(解决一类得到已知结果的状态链，想要求出得到这个状态链的概率)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-1-第一个骰子的投掷结果"><span class="toc-number">2.3.1.</span> <span class="toc-text">Step 1: 第一个骰子的投掷结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-2-第二个骰子的投掷结果"><span class="toc-number">2.3.2.</span> <span class="toc-text">Step 2: 第二个骰子的投掷结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-3-第三个骰子的投掷结果"><span class="toc-number">2.3.3.</span> <span class="toc-text">Step 3: 第三个骰子的投掷结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考资源："><span class="toc-number">2.3.4.</span> <span class="toc-text">参考资源：</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/hello-world/" class="archive-article-date">
-  	<time datetime="2017-07-18T07:13:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/hello-world/">Hello World</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="马尔可夫模型2" data-title="马尔可夫模型2" data-url="http://ganjun.net/2017/07/19/马尔可夫模型2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/马尔科夫模型1/" class="archive-article-date">
-  	<time datetime="2017-07-18T06:14:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/马尔科夫模型1/">马尔科夫模型1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/17/统计自然语言处理学习心得/" class="archive-article-date">
-  	<time datetime="2017-07-17T06:11:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/17/统计自然语言处理学习心得/">统计自然语言处理学习心得</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘/" class="article-tag-list-link color5">数据挖掘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/" class="archive-article-date">
-  	<time datetime="2017-07-16T12:42:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/">Python爬虫with(BeautifulSoup包)+Mangodb</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/15/简单神经网络学习/" class="archive-article-date">
-  	<time datetime="2017-07-15T07:32:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/15/简单神经网络学习/">简单神经网络学习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘/" class="article-tag-list-link color5">数据挖掘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/15/Mac下安装Mysql/" class="archive-article-date">
-  	<time datetime="2017-07-15T05:31:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/15/Mac下安装Mysql/">Mac下安装Mysql</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">服务器</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://ganjun.net/2017/07/19/马尔可夫模型2/", 
+    sourceId: "马尔可夫模型2",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
+  
+  <div id="SOHUCS" sid="马尔可夫模型2" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "true"; 
+var conf = "true"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
   
 
 
@@ -700,8 +589,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
