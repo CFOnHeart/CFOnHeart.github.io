@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/2.png">
 <meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/3.png">
 <meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/4.png">
-<meta property="og:updated_time" content="2017-07-20T02:47:49.000Z">
+<meta property="og:updated_time" content="2017-07-22T07:07:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="马尔可夫模型2">
 <meta name="twitter:description" content="隐马尔可夫模型（HMM)​    隐马尔可夫模型（Hidden Markov ， HMM）是统计模型，它用来描述一个隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来做进一步的分析，例如模式识别。">
@@ -212,7 +212,7 @@
 <h3 id="1-最简单的解决方法"><a href="#1-最简单的解决方法" class="headerlink" title="1.最简单的解决方法"></a>1.最简单的解决方法</h3><p>实用性不大，但作为入门</p>
 <p><img src="4.png" alt=""></p>
 <p>那么我们需要知道产生上方隐式链的计算概率方式就应该是</p>
-<p>$$<br>P(D6,D8,D8) = P(D6) \ P(D6 -&gt; 1) \ P(D6 -&gt; D8) \ \  P(D8 -&gt; 6) <em> P(D8 -&gt; D8) </em> P(D8 -&gt; 3) \ =1/3 <em> 1/6 </em> 1/3 <em> 1/8 </em> 1/3 * 1/8<br>$$</p>
+<p>$$<br>P(D6,D8,D8) = P(D6) \ P(D6 -&gt; 1) \ P(D6 -&gt; D8) \ \  P(D8 -&gt; 6) ∗  P(D8 -&gt; D8) ∗  P(D8 -&gt; 3) \ =1/3 ∗  1/6 ∗  1/3 ∗  1/8 ∗  1/3 ∗ 1/8<br>$$</p>
 <p>上述的式子就代表了得到这条隐式链的概率以及从隐式链的每一项对应到显式链每一项的概率。</p>
 <h3 id="2-看见不可见的，破解色子序列-viterbi算法"><a href="#2-看见不可见的，破解色子序列-viterbi算法" class="headerlink" title="2.看见不可见的，破解色子序列(viterbi算法)"></a>2.看见不可见的，破解色子序列(viterbi算法)</h3><blockquote>
 <p>viterbi算法只是解决隐马第三个问题（求观察序列的最可能的标注序列）的一种实现方式。这个问题可以用于viterbi算法实现，也可以用其他方式实现（如穷举法）；而viterbi算法可以用于解决隐马第三问题，也可以用于解决其他问题。</p>
@@ -220,12 +220,18 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">对于上述已经说了的我已知最终的10次投掷结果&#123;1 6 3 5 2 7 3 5 2 4&#125;，我不知道每次用了哪种骰子，我想知道最有可能的骰子序列。</div></pre></td></tr></table></figure>
 <h4 id="Step-1-首先只掷一次骰子"><a href="#Step-1-首先只掷一次骰子" class="headerlink" title="Step 1: 首先只掷一次骰子"></a>Step 1: 首先只掷一次骰子</h4><p>​    看到结果为1，初始概率也同样认为每个骰子都是1/3。</p>
-<p>​    P1(D4-&gt;1) = P(D4) * P(D4-&gt;1) = 1/3 * 1/4</p>
-<p>​    P1(D6-&gt;1) = P(D6) * P(D6-&gt;1) = 1/3 * 1/6</p>
-<p>​    P1(D8-&gt;1) = P(D8) * P(D8-&gt;1) = 1/3 * 1/8</p>
+<p>​    P1(D4-&gt;1) = P(D4) ∗  P(D4-&gt;1) = 1/3 ∗  1/4</p>
+<p>​    P1(D6-&gt;1) = P(D6) ∗  P(D6-&gt;1) = 1/3 ∗  1/6</p>
+<p>​    P1(D8-&gt;1) = P(D8) ∗  P(D8-&gt;1) = 1/3 ∗  1/8</p>
 <p>​    所以第一次就认为选择的是D4</p>
 <h4 id="Step-2-判断第二个骰子"><a href="#Step-2-判断第二个骰子" class="headerlink" title="Step 2: 判断第二个骰子"></a>Step 2: 判断第二个骰子</h4><p>​    看到结果为6。因为在马尔可夫模型中，当前状态只跟前一次状态存在转移关系。所以之前状态有3个-&gt;当前的3个状态，我们需要把9种状态都计算一遍，然后对于每个骰子的选择出选中它最大的一个，最后进行比较。</p>
-<p>（1）前一个状态为D4，后一个状态为D6:<br>$$<br>P2(D6 \rightarrow 6) = P1(D4 \rightarrow 1) <em> P(D4 \rightarrow D6) </em> P(D6 \rightarrow 6) = 1/12 <em> 1/3 </em> 1/6<br>$$<br>（2）前一个状态为D6，后一个状态为D6:<br>$$<br>P2(D6 \rightarrow 6) = P1(D6 \rightarrow 1) <em> P(D4 \rightarrow D6) </em> P(D6 \rightarrow 6) = 1/18 <em> 1/3 </em> 1/6<br>$$<br>（3）前一个状态为D8，后一个状态为D6:<br>$$<br>P2(D6 \rightarrow 6) = P1(D8 \rightarrow 1) <em> P(D4 \rightarrow D6) </em> P(D6 \rightarrow 6) = 1/24 <em> 1/3 </em> 1/6<br>$$<br>所以P2(D6-&gt;6)最后会选择最大的1/12 <em> 1/3 </em> 1/6</p>
+<p>（1）前一个状态为D4，后一个状态为D6: </p>
+<p>$$<br>P2(D6 -&gt; 6) = P1(D4 -&gt;1) ∗ P(D4 -&gt; D6) ∗ P(D6 -&gt; 6) = 1/12 ∗ 1/3 ∗ 1/6<br>$$</p>
+<p>（2）前一个状态为D6，后一个状态为D6: </p>
+<p>$$<br>P2(D6 -&gt; 6) = P1(D6 -&gt; 1) ∗  P(D4 -&gt; D6) ∗  P(D6 -&gt; 6) = 1/18 ∗  1/3 ∗  1/6<br>$$</p>
+<p>（3）前一个状态为D8，后一个状态为D6: </p>
+<p>$$<br>P2(D6 -&gt; 6) = P1(D8 -&gt; 1) ∗  P(D4 -&gt; D6) ∗  P(D6 -&gt; 6) = 1/24 ∗  1/3 ∗  1/6<br>$$</p>
+<p>所以P2(D6-&gt;6)最后会选择最大的1/12 ∗  1/3 ∗  1/6</p>
 <p>同理可以求出P2(D4-&gt;6) , P2(D8-&gt;6)</p>
 <p>通过比较之后P2(D6-&gt;6)大于它们两个，所以第二个色子选择D6</p>
 <h4 id="Step-3-后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。"><a href="#Step-3-后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。" class="headerlink" title="Step 3: 后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。"></a>Step 3: 后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。</h4><h3 id="3-谁动了我的骰子–前向算法-解决一类得到已知结果的状态链，想要求出得到这个状态链的概率"><a href="#3-谁动了我的骰子–前向算法-解决一类得到已知结果的状态链，想要求出得到这个状态链的概率" class="headerlink" title="3.谁动了我的骰子–前向算法(解决一类得到已知结果的状态链，想要求出得到这个状态链的概率)"></a>3.谁动了我的骰子–前向算法(解决一类得到已知结果的状态链，想要求出得到这个状态链的概率)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">比如说你怀疑自己的六面骰被赌场动过手脚了，有可能被换成另一种六面骰，这种六面骰掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。你怎么办么？答案很简单，算一算正常的三个骰子掷出一段序列的概率，再算一算不正常的六面骰和另外两个正常骰子掷出这段序列的概率。如果前者比后者小，你就要小心了。</div></pre></td></tr></table></figure>
@@ -244,19 +250,19 @@
 <tbody>
 <tr>
 <td style="text-align:center">D6</td>
-<td style="text-align:center">1/3 * 1/6</td>
+<td style="text-align:center">1/3 ∗ 1/6</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center">D4</td>
-<td style="text-align:center">1/3 * 1/4</td>
+<td style="text-align:center">1/3 ∗ 1/4</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center">D8</td>
-<td style="text-align:center">1/3 * 1/8</td>
+<td style="text-align:center">1/3 ∗ 1/8</td>
 <td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
@@ -280,20 +286,20 @@
 <tbody>
 <tr>
 <td style="text-align:center">D6</td>
-<td style="text-align:center">1/3 * 1/6</td>
-<td style="text-align:center">P1(D6) <em> 1/3 </em> 1/6 + P1(D4) <em> 1/3 </em> 1/6 + P1(D8) <em> 1/3 </em> 1/6</td>
+<td style="text-align:center">1/3 ∗ 1/6</td>
+<td style="text-align:center">P1(D6) ∗ 1/3 ∗ 1/6 + P1(D4) ∗ 1/3 ∗ 1/6 + P1(D8) ∗ 1/3 ∗ 1/6</td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center">D4</td>
-<td style="text-align:center">1/3 * 1/4</td>
-<td style="text-align:center">P1(D6) <em> 1/3 </em> 0 + P1(D4) <em> 1/3 </em> 0 + P1(D8) <em> 1/3 </em> 0</td>
+<td style="text-align:center">1/3 ∗ 1/4</td>
+<td style="text-align:center">P1(D6) ∗ 1/3 ∗ 0 + P1(D4) ∗ 1/3 ∗ 0 + P1(D8) ∗ 1/3 ∗ 0</td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center">D8</td>
-<td style="text-align:center">1/3 * 1/8</td>
-<td style="text-align:center">P1(D6) <em> 1/3 </em> 1/8 + P1(D4) <em> 1/3 </em> 1/8 + P1(D8) <em> 1/3 </em> 1/8</td>
+<td style="text-align:center">1/3 ∗ 1/8</td>
+<td style="text-align:center">P1(D6) ∗ 1/3 ∗ 1/8 + P1(D4) ∗ 1/3 ∗ 1/8 + P1(D8) ∗ 1/3 ∗ 1/8</td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
@@ -315,21 +321,21 @@
 <tbody>
 <tr>
 <td style="text-align:center">D6</td>
-<td style="text-align:center">1/3 * 1/6</td>
-<td style="text-align:center">P1(D6) <em> 1/3 </em> 1/6 + P1(D4) <em> 1/3 </em> 1/6 + P1(D8) <em> 1/3 </em> 1/6</td>
-<td style="text-align:center">P2(D6) <em> 1/3 </em> 1/6 + P2(D4) <em> 1/3 </em> 1/6 + P2(D8) <em> 1/3 </em> 1/6</td>
+<td style="text-align:center">1/3 ∗ 1/6</td>
+<td style="text-align:center">P1(D6) ∗ 1/3 ∗ 1/6 + P1(D4) ∗ 1/3 ∗ 1/6 + P1(D8) ∗ 1/3 ∗ 1/6</td>
+<td style="text-align:center">P2(D6) ∗ 1/3 ∗ 1/6 + P2(D4) ∗ 1/3 ∗ 1/6 + P2(D8) ∗ 1/3 ∗ 1/6</td>
 </tr>
 <tr>
 <td style="text-align:center">D4</td>
-<td style="text-align:center">1/3 * 1/4</td>
-<td style="text-align:center">P1(D6) <em> 1/3 </em> 0 + P1(D4) <em> 1/3 </em> 0 + P1(D8) <em> 1/3 </em> 0</td>
-<td style="text-align:center">P2(D6) <em> 1/3 </em> 1/4 + P2(D4) <em> 1/3 </em> 1/4 + P2(D8) <em> 1/3 </em> 1/4</td>
+<td style="text-align:center">1/3 ∗ 1/4</td>
+<td style="text-align:center">P1(D6) ∗ 1/3 ∗ 0 + P1(D4) ∗ 1/3 ∗ 0 + P1(D8) ∗ 1/3 ∗ 0</td>
+<td style="text-align:center">P2(D6) ∗ 1/3 ∗ 1/4 + P2(D4) ∗ 1/3 ∗ 1/4 + P2(D8) ∗ 1/3 ∗ 1/4</td>
 </tr>
 <tr>
 <td style="text-align:center">D8</td>
-<td style="text-align:center">1/3 * 1/8</td>
-<td style="text-align:center">P1(D6) <em> 1/3 </em> 1/8 + P1(D4) <em> 1/3 </em> 1/8 + P1(D8) <em> 1/3 </em> 1/8</td>
-<td style="text-align:center">P2(D6) <em> 1/3 </em> 1/8 + P2(D4) <em> 1/3 </em> 1/8 + P2(D8) <em> 1/3 </em> 1/8</td>
+<td style="text-align:center">1/3 ∗ 1/8</td>
+<td style="text-align:center">P1(D6) ∗ 1/3 ∗ 1/8 + P1(D4) ∗ 1/3 ∗ 1/8 + P1(D8) ∗ 1/3 ∗ 1/8</td>
+<td style="text-align:center">P2(D6) ∗ 1/3 ∗ 1/8 + P2(D4) ∗ 1/3 ∗ 1/8 + P2(D8) ∗ 1/3 ∗ 1/8</td>
 </tr>
 <tr>
 <td style="text-align:center">Total</td>

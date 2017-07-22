@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://ganjun.net">
   <title>马尔科夫模型3 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前向算法（Forward Algorithm）​    计算观察序列的概率（Finding the probability of an observed sequence） 1.计算t=1时的局部概率α‘S​    按如下公式计算t=1的局部概率：$$\alpha{t}{(j)} = Pr(观察状态|隐藏状态) * Pr(t时刻所有指向j状态的路径)$$​    t=1的时，没有任何指向当前状态的">
+  <meta name="description" content="前向算法（Forward Algorithm）​    计算观察序列的概率（Finding the probability of an observed sequence） 1.计算t=1时的局部概率α‘S​    按如下公式计算t=1的局部概率： $$\alpha_{t}{(j)} = Pr(观察状态|隐藏状态) ∗ Pr(t时刻所有指向j状态的路径)$$ ​    t=1的时，没有任何指向当前">
 <meta name="keywords" content="马尔可夫模型,前向算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="马尔科夫模型3">
 <meta property="og:url" content="http://ganjun.net/2017/07/20/马尔科夫模型3/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="前向算法（Forward Algorithm）​    计算观察序列的概率（Finding the probability of an observed sequence） 1.计算t=1时的局部概率α‘S​    按如下公式计算t=1的局部概率：$$\alpha{t}{(j)} = Pr(观察状态|隐藏状态) * Pr(t时刻所有指向j状态的路径)$$​    t=1的时，没有任何指向当前状态的">
+<meta property="og:description" content="前向算法（Forward Algorithm）​    计算观察序列的概率（Finding the probability of an observed sequence） 1.计算t=1时的局部概率α‘S​    按如下公式计算t=1的局部概率： $$\alpha_{t}{(j)} = Pr(观察状态|隐藏状态) ∗ Pr(t时刻所有指向j状态的路径)$$ ​    t=1的时，没有任何指向当前">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2017-07-22T06:50:16.000Z">
+<meta property="og:updated_time" content="2017-07-22T07:12:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="马尔科夫模型3">
-<meta name="twitter:description" content="前向算法（Forward Algorithm）​    计算观察序列的概率（Finding the probability of an observed sequence） 1.计算t=1时的局部概率α‘S​    按如下公式计算t=1的局部概率：$$\alpha{t}{(j)} = Pr(观察状态|隐藏状态) * Pr(t时刻所有指向j状态的路径)$$​    t=1的时，没有任何指向当前状态的">
+<meta name="twitter:description" content="前向算法（Forward Algorithm）​    计算观察序列的概率（Finding the probability of an observed sequence） 1.计算t=1时的局部概率α‘S​    按如下公式计算t=1的局部概率： $$\alpha_{t}{(j)} = Pr(观察状态|隐藏状态) ∗ Pr(t时刻所有指向j状态的路径)$$ ​    t=1的时，没有任何指向当前">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -192,14 +192,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前向算法（Forward-Algorithm）"><a href="#前向算法（Forward-Algorithm）" class="headerlink" title="前向算法（Forward Algorithm）"></a>前向算法（Forward Algorithm）</h2><p>​    <strong><em>计算观察序列的概率（Finding the probability of an observed sequence）</em></strong></p>
-<h4 id="1-计算t-1时的局部概率α‘S"><a href="#1-计算t-1时的局部概率α‘S" class="headerlink" title="1.计算t=1时的局部概率α‘S"></a>1.计算t=1时的局部概率α‘S</h4><p>​    按如下公式计算t=1的局部概率：<br>$$<br>\alpha<em>{t}{(j)} = Pr(观察状态|隐藏状态) * Pr(t时刻所有指向j状态的路径)<br>$$<br>​    t=1的时，没有任何指向当前状态的路径。所以t=1时位于当前状态的概率是初始概率。<br>$$<br>\alpha</em>{1}{(j)} = \pi(j) * b<em>{jk</em>{1}}<br>$$</p>
+<h4 id="1-计算t-1时的局部概率α‘S"><a href="#1-计算t-1时的局部概率α‘S" class="headerlink" title="1.计算t=1时的局部概率α‘S"></a>1.计算t=1时的局部概率α‘S</h4><p>​    按如下公式计算t=1的局部概率：</p>
+<p>$$<br>\alpha_{t}{(j)} = Pr(观察状态|隐藏状态) ∗ Pr(t时刻所有指向j状态的路径)<br>$$</p>
+<p>​    t=1的时，没有任何指向当前状态的路径。所以t=1时位于当前状态的概率是初始概率。</p>
+<p>$$<br>\pi(j) ∗ b<em>{jk</em>{1}}<br>$$</p>
 <a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@ pram k[]: 表示所获得的观察状态的序列，那么k1就是第一个观察状态的结果，因为第一个状态没有前面的依赖关系，我们总是将其先做好处理。</div><div class="line">@ pram 𝛑[]: 表示初始到达隐藏状态的概率序列</div><div class="line">@ pram α[][]: 其中的t表示在t时刻指向j这个隐藏状态的概率</div><div class="line">@ pram b[][]: 表示从隐藏状态指向观察状态的概率矩阵</div></pre></td></tr></table></figure>
 <h4 id="2-计算t-gt-1时的局部概率"><a href="#2-计算t-gt-1时的局部概率" class="headerlink" title="2.计算t&gt;1时的局部概率"></a>2.计算t&gt;1时的局部概率</h4><p>​    我们可以假设（递归地），乘号左边项“Pr( 观察状态 | 隐藏状态j )”已经有了，现在考虑其右边项“Pr(t时刻所有指向j状态的路径）”。<br>​    为了计算到达某个状态的所有路径的概率，我们可以计算到达此状态的每条路径的概率并对他们求和。否则用穷举的思想是指数级别上升的。</p>
-<p>​    计算α所需要的路径数目随着观察序列的增加而指数级递增，但是t-1时刻!α’s给出了所有到达此状态的前一路径概率，因此，我们可以通过t-1时刻的局部概率定义t时刻的α’s，即:<br>$$<br>\alpha<em>{t+1}{(j)} = b</em>{jk<em>{t+1}} \sum</em>{i=1}^{n} {\alpha<em>{t}(i) \alpha</em>{ij}}<br>$$<br>​    对于这一步，可以结合着前一篇文章<a href="https://cfonheart.github.io/2017/07/19/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B2/" target="_blank" rel="external">马尔科夫模型2</a>后面对前向算法的简单例子来看。</p>
+<p>​    计算α所需要的路径数目随着观察序列的增加而指数级递增，但是t-1时刻!α’s给出了所有到达此状态的前一路径概率，因此，我们可以通过t-1时刻的局部概率定义t时刻的α’s，即:</p>
+<p>$$<br>\alpha<em>{t+1}{(j)} = b</em>{jk<em>{t+1}} \sum</em>{i=1}^{n} {\alpha<em>{t}(i) \alpha</em>{ij}}<br>$$</p>
+<p>​    对于这一步，可以结合着前一篇文章<a href="https://cfonheart.github.io/2017/07/19/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B2/" target="_blank" rel="external">马尔科夫模型2</a>后面对前向算法的简单例子来看。</p>
 <h4 id="3-降低计算复杂度"><a href="#3-降低计算复杂度" class="headerlink" title="3.降低计算复杂度"></a>3.降低计算复杂度</h4><p>​    假设观察序列O的长度为T以及一个含有n个隐藏状态的隐马尔科夫模型 I = (pi,A,B)。</p>
 <p>​    穷举搜索的时间复杂度是2TN^T,前向算法的时间复杂度是T*N^2。</p>
-<p>​    根据上述可以把前向算法的公式进行简化（但实际复杂度是没有改变的）<br>$$<br>\sum<em>{X}{\pi(i</em>{1})b<em>{i</em>{1}k<em>{1}}}\prod</em>{j=2}^{T}{\alpha<em>{i</em>{j-1}i<em>j}b</em>{i_{j}k_j}}<br>$$</p>
+<p>​    根据上述可以把前向算法的公式进行简化（但实际复杂度是没有改变的）</p>
+<p>$$<br>\sum<em>{X}{\pi(i</em>{1})b<em>{i</em>{1}k<em>{1}}}\prod</em>{j=2}^{T}{\alpha<em>{i</em>{j-1}i<em>j}b</em>{i_{j}k_j}}<br>$$</p>
 <h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h4><p>​    前向算法的目标是计算给定隐马尔科夫模型HMM下的观察序列的概率—Pr(observations | ℷ)。</p>
 <p>​    我们首先通过计算局部概率降低计算整个概率的复杂度，局部概率表示的是t时刻到达某个状态s的概率。</p>
 <p>​    t=1时候，可以利用初始概率（来自于P向量）和观察概率Pr(observation | state)(来自于混淆矩阵)计算局部概率；而t&gt;1时的局部概率可以利用t-1时的局部概率进行计算。</p>

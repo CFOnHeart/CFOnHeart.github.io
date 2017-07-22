@@ -279,7 +279,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="前向算法（Forward-Algorithm）"><a href="#前向算法（Forward-Algorithm）" class="headerlink" title="前向算法（Forward Algorithm）"></a>前向算法（Forward Algorithm）</h2><p>​    <strong><em>计算观察序列的概率（Finding the probability of an observed sequence）</em></strong></p>
-<h4 id="1-计算t-1时的局部概率α‘S"><a href="#1-计算t-1时的局部概率α‘S" class="headerlink" title="1.计算t=1时的局部概率α‘S"></a>1.计算t=1时的局部概率α‘S</h4><p>​    按如下公式计算t=1的局部概率：<br>$$<br>\alpha<em>{t}{(j)} = Pr(观察状态|隐藏状态) * Pr(t时刻所有指向j状态的路径)<br>$$<br>​    t=1的时，没有任何指向当前状态的路径。所以t=1时位于当前状态的概率是初始概率。<br>$$<br>\alpha</em>{1}{(j)} = \pi(j) * b<em>{jk</em>{1}}<br>$$</p>
+<h4 id="1-计算t-1时的局部概率α‘S"><a href="#1-计算t-1时的局部概率α‘S" class="headerlink" title="1.计算t=1时的局部概率α‘S"></a>1.计算t=1时的局部概率α‘S</h4><p>​    按如下公式计算t=1的局部概率：</p>
+<p>$$<br>\alpha_{t}{(j)} = Pr(观察状态|隐藏状态) ∗ Pr(t时刻所有指向j状态的路径)<br>$$</p>
+<p>​    t=1的时，没有任何指向当前状态的路径。所以t=1时位于当前状态的概率是初始概率。</p>
+<p>$$<br>\pi(j) ∗ b<em>{jk</em>{1}}<br>$$</p>
         
           <a class="article-more-a" href="/2017/07/20/马尔科夫模型3/#more">more >></a>
         
