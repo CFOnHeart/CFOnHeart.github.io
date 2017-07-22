@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/2.png">
 <meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/3.png">
 <meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/4.png">
-<meta property="og:updated_time" content="2017-07-22T07:55:24.000Z">
+<meta property="og:updated_time" content="2017-07-22T08:04:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="马尔可夫模型2">
 <meta name="twitter:description" content="隐马尔可夫模型（HMM)​    隐马尔可夫模型（Hidden Markov ， HMM）是统计模型，它用来描述一个隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来做进一步的分析，例如模式识别。">
@@ -212,7 +212,7 @@
 <h3 id="1-最简单的解决方法"><a href="#1-最简单的解决方法" class="headerlink" title="1.最简单的解决方法"></a>1.最简单的解决方法</h3><p>实用性不大，但作为入门</p>
 <p><img src="4.png" alt=""></p>
 <p>那么我们需要知道产生上方隐式链的计算概率方式就应该是</p>
-<p>$$<br>P(D6,D8,D8) = P(D6) ∗ P(D6 -&gt; 1) ∗ P(D6 -&gt; D8) \\<br>∗ P(D8 -&gt; 6) ∗  P(D8 -&gt; D8) ∗  P(D8 -&gt; 3) \\<br>=1/3 ∗  1/6 ∗  1/3 ∗  1/8 ∗  1/3 ∗ 1/8<br>$$</p>
+<p>$$<br>P(D6,D8,D8) = P(D6) ∗ P(D6 \rightarrow 1) ∗ P(D6 \rightarrow D8) \\<br>∗ P(D8 \rightarrow 6) ∗  P(D8 \rightarrow D8) ∗  P(D8 \rightarrow 3) \\<br>=1/3 ∗  1/6 ∗  1/3 ∗  1/8 ∗  1/3 ∗ 1/8<br>$$</p>
 <p>上述的式子就代表了得到这条隐式链的概率以及从隐式链的每一项对应到显式链每一项的概率。</p>
 <h3 id="2-看见不可见的，破解色子序列-viterbi算法"><a href="#2-看见不可见的，破解色子序列-viterbi算法" class="headerlink" title="2.看见不可见的，破解色子序列(viterbi算法)"></a>2.看见不可见的，破解色子序列(viterbi算法)</h3><blockquote>
 <p>viterbi算法只是解决隐马第三个问题（求观察序列的最可能的标注序列）的一种实现方式。这个问题可以用于viterbi算法实现，也可以用其他方式实现（如穷举法）；而viterbi算法可以用于解决隐马第三问题，也可以用于解决其他问题。</p>
@@ -226,11 +226,11 @@
 <p>​    所以第一次就认为选择的是D4</p>
 <h4 id="Step-2-判断第二个骰子"><a href="#Step-2-判断第二个骰子" class="headerlink" title="Step 2: 判断第二个骰子"></a>Step 2: 判断第二个骰子</h4><p>​    看到结果为6。因为在马尔可夫模型中，当前状态只跟前一次状态存在转移关系。所以之前状态有3个-&gt;当前的3个状态，我们需要把9种状态都计算一遍，然后对于每个骰子的选择出选中它最大的一个，最后进行比较。</p>
 <p>（1）前一个状态为D4，后一个状态为D6: </p>
-<p>$$<br>P2(D6 -&gt; 6) = P1(D4 -&gt;1) ∗ P(D4 -&gt; D6) ∗ P(D6 -&gt; 6) = 1/12 ∗ 1/3 ∗ 1/6<br>$$</p>
+<p>$$<br>P2(D6 \rightarrow 6) = P1(D4 \rightarrow1) ∗ P(D4 \rightarrow D6) ∗ P(D6 \rightarrow 6) = 1/12 ∗ 1/3 ∗ 1/6<br>$$</p>
 <p>（2）前一个状态为D6，后一个状态为D6: </p>
-<p>$$<br>P2(D6 -&gt; 6) = P1(D6 -&gt; 1) ∗  P(D4 -&gt; D6) ∗  P(D6 -&gt; 6) = 1/18 ∗  1/3 ∗  1/6<br>$$</p>
+<p>$$<br>P2(D6 \rightarrow 6) = P1(D6 \rightarrow 1) ∗  P(D4 \rightarrow D6) ∗  P(D6 \rightarrow 6) = 1/18 ∗  1/3 ∗  1/6<br>$$</p>
 <p>（3）前一个状态为D8，后一个状态为D6: </p>
-<p>$$<br>P2(D6 -&gt; 6) = P1(D8 -&gt; 1) ∗  P(D4 -&gt; D6) ∗  P(D6 -&gt; 6) = 1/24 ∗  1/3 ∗  1/6<br>$$</p>
+<p>$$<br>P2(D6 \rightarrow 6) = P1(D8 \rightarrow 1) ∗  P(D4 \rightarrow D6) ∗  P(D6 \rightarrow 6) = 1/24 ∗  1/3 ∗  1/6<br>$$</p>
 <p>所以P2(D6-&gt;6)最后会选择最大的1/12 ∗  1/3 ∗  1/6</p>
 <p>同理可以求出P2(D4-&gt;6) , P2(D8-&gt;6)</p>
 <p>通过比较之后P2(D6-&gt;6)大于它们两个，所以第二个色子选择D6</p>
