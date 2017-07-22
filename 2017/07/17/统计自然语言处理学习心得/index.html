@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://ganjun.net">
   <title>统计自然语言处理学习心得 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="5.4互信息 ​    对于搭配发现，一种以信息论为根据的方法是点互信息。最初定义了两个特殊事件x’和y’之间的互信息，对于我们的情况，两个具体词同现的互信息如下：  $$I(x’,y’) =  \log{2}\frac{P(x’y’)}{P(x’)P(y’)}          \ = log{2}\frac{P(x’|y’)}{P(x’)}          \ = log_{2}\frac{">
+  <meta name="description" content="5.4互信息 ​    对于搭配发现，一种以信息论为根据的方法是点互信息。最初定义了两个特殊事件x’和y’之间的互信息，对于我们的情况，两个具体词同现的互信息如下：  $$I(x’,y’) =  \log_{2}\frac{P(x’y’)}{P(x’)P(y’)}          \ = log_{2}\frac{P(x’|y’)}{P(x’)}          \ = log_{2}\fra">
 <meta name="keywords" content="自然语言处理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="统计自然语言处理学习心得">
 <meta property="og:url" content="http://ganjun.net/2017/07/17/统计自然语言处理学习心得/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="5.4互信息 ​    对于搭配发现，一种以信息论为根据的方法是点互信息。最初定义了两个特殊事件x’和y’之间的互信息，对于我们的情况，两个具体词同现的互信息如下：  $$I(x’,y’) =  \log{2}\frac{P(x’y’)}{P(x’)P(y’)}          \ = log{2}\frac{P(x’|y’)}{P(x’)}          \ = log_{2}\frac{">
+<meta property="og:description" content="5.4互信息 ​    对于搭配发现，一种以信息论为根据的方法是点互信息。最初定义了两个特殊事件x’和y’之间的互信息，对于我们的情况，两个具体词同现的互信息如下：  $$I(x’,y’) =  \log_{2}\frac{P(x’y’)}{P(x’)P(y’)}          \ = log_{2}\frac{P(x’|y’)}{P(x’)}          \ = log_{2}\fra">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="http://ganjun.net/2017/07/17/统计自然语言处理学习心得/1.png">
-<meta property="og:updated_time" content="2017-07-18T08:16:36.000Z">
+<meta property="og:updated_time" content="2017-07-22T07:48:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="统计自然语言处理学习心得">
-<meta name="twitter:description" content="5.4互信息 ​    对于搭配发现，一种以信息论为根据的方法是点互信息。最初定义了两个特殊事件x’和y’之间的互信息，对于我们的情况，两个具体词同现的互信息如下：  $$I(x’,y’) =  \log{2}\frac{P(x’y’)}{P(x’)P(y’)}          \ = log{2}\frac{P(x’|y’)}{P(x’)}          \ = log_{2}\frac{">
+<meta name="twitter:description" content="5.4互信息 ​    对于搭配发现，一种以信息论为根据的方法是点互信息。最初定义了两个特殊事件x’和y’之间的互信息，对于我们的情况，两个具体词同现的互信息如下：  $$I(x’,y’) =  \log_{2}\frac{P(x’y’)}{P(x’)P(y’)}          \ = log_{2}\frac{P(x’|y’)}{P(x’)}          \ = log_{2}\fra">
 <meta name="twitter:image" content="http://ganjun.net/2017/07/17/统计自然语言处理学习心得/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
@@ -196,14 +196,14 @@
         <h2 id="5-4互信息"><a href="#5-4互信息" class="headerlink" title="5.4互信息"></a>5.4互信息</h2><blockquote>
 <p>​    对于搭配发现，一种以信息论为根据的方法是点互信息。最初定义了两个特殊事件x’和y’之间的互信息，对于我们的情况，两个具体词同现的互信息如下：</p>
 </blockquote>
-<p>$$<br>I(x’,y’) =  \log<em>{2}\frac{P(x’y’)}{P(x’)P(y’)}<br>          \ = log</em>{2}\frac{P(x’|y’)}{P(x’)}<br>          \ = log_{2}\frac{P(y’|x’)}{P(y’)}<br>$$</p>
+<p>$$<br>I(x’,y’) =  \log_{2}\frac{P(x’y’)}{P(x’)P(y’)}<br>          \ = log_{2}\frac{P(x’|y’)}{P(x’)}<br>          \ = log_{2}\frac{P(y’|x’)}{P(y’)}<br>$$</p>
 <a id="more"></a>
 <p><img src="1.png" alt=""></p>
 <p>​    那么确切地说，(点)互信息I(x’,y’)，是一种由于事件[y’]发生与事件[x’]发生相关联而提供的信息量，如上述式子所示。</p>
 <p>​    那我们根据上述式子得到的信息量就能知道Ruhollah在语料库中的i+1位置出现，那么Ayatollah在语料库中的i位置出现的信息量就增加了18.38比特。同样也告诉我们这样的信息量，如果知道了Ayatollah在语料库中的i位置出现，那么Ruhollah在语料库中的i+1位置出现的信息量就增加了18.38比特。也可以说是不确定性减少了18.38比特。换句话说，如果我们被告知Ayatollah是当前词，我们能够更有把握地说，Ruhollah将会在下一个位置出现。</p>
 <p>​    <strong>但是在稀疏数据中，互信息无法很好地解决低频率事件</strong></p>
 <p>​    <strong>考虑二元组(w1,w2)互信息两种极端情况:</strong></p>
-<p>​    1.两个词的出现是完全互相依赖的，比如w2的出现完全依赖于w1<br>$$<br>P(w<em>{1}w</em>{2}) = P(w<em>{1})\<br>I(w</em>{1},w<em>{2}) = \log{\frac{P(w</em>{1}w<em>{2})}{P(w</em>{1})P(w<em>{2})}} = \log{\frac{1}{P(w</em>{2})}}<br>$$<br>​    2.两个词相互之间是完全相互独立的<br>$$<br>P(w<em>{1}w</em>{2}) = P(w<em>{1})P(w</em>{2})\<br>I(w<em>{1},w</em>{2}) = \log{\frac{P(w<em>{1}w</em>{2})}{P(w<em>{1})P(w</em>{2})}} = \log{1} = 0<br>$$<br>​    通过上方两种情况可以看来，互信息是衡量独立性的一种很好的方法。接近0的互信息值表明了独立性（概率的独立性）。但是互信息不是衡量依赖性的一种很好的方法，因为对于依赖性来说，互信息的值是由单独次的频率决定的。在其他条件相等的情况下，由低频率词组成的二元组的互信息要大于高频率词组成的二元组。这一点使我们所不希望看到的，因为高频率意味着有更多的信息，并且对于那些有更多我们感兴趣的信息的二元组，我们宁愿它们的排列更靠前。对于这个问题已经设计出的一种解决办法是使用截断（cutoff），只考虑出现频率大于3的词。</p>
+<p>​    1.两个词的出现是完全互相依赖的，比如w2的出现完全依赖于w1<br>$$<br>P(w_{1}w_{2}) = P(w_{1})\\<br>I(w_{1},w_{2}) = \log{\frac{P(w_{1}w_{2})}{P(w_{1})P(w_{2})}} = \log{\frac{1}{P(w_{2})}}<br>$$<br>​    2.两个词相互之间是完全相互独立的<br>$$<br>P(w_{1}w_{2}) = P(w_{1})P(w_{2})\\<br>I(w_{1},w_{2}) = \log{\frac{P(w_{1}w_{2})}{P(w_{1})P(w_{2})}} = \log{1} = 0<br>$$<br>​    通过上方两种情况可以看来，互信息是衡量独立性的一种很好的方法。接近0的互信息值表明了独立性（概率的独立性）。但是互信息不是衡量依赖性的一种很好的方法，因为对于依赖性来说，互信息的值是由单独次的频率决定的。在其他条件相等的情况下，由低频率词组成的二元组的互信息要大于高频率词组成的二元组。这一点使我们所不希望看到的，因为高频率意味着有更多的信息，并且对于那些有更多我们感兴趣的信息的二元组，我们宁愿它们的排列更靠前。对于这个问题已经设计出的一种解决办法是使用截断（cutoff），只考虑出现频率大于3的词。</p>
 <h2 id="5-5-搭配的概念"><a href="#5-5-搭配的概念" class="headerlink" title="5.5.搭配的概念"></a>5.5.搭配的概念</h2><blockquote>
 <p>搭配的定义</p>
 <p>两个或多个连续的词序列，具有句法和语义单位的特性，并且它的准确无歧义的意思或含义不能直接由它的组成部分的意思和含义直接得出。</p>
@@ -221,15 +221,15 @@
 <blockquote>
 <p>多元等价类的实现是不现实的，因为参数量正在呈指数级别上升。在一些分类操作中，可以考虑使用“词干化”（删除词语的变形结尾）或者语义类的方法（通过使用已经存在的词典，或者引用一些聚类的方法）来构造等价类。这些方法有效地减少了我们在n元语法模型中使用词表的规模。而且我们完全没有必要使用n元语法。实际有很多办法构建历史等价类，只是这些方法都比n元语法更复杂一些。上面的例子也可以看出，一个句子当中谓语的知识是很有用的，所以我们可以设想一个模型，它基于先前出现的词和前面的谓语（无论它离得多远）来预测下一个词，但相对比较难以实现。</p>
 </blockquote>
-<h2 id="6-2-统计估计"><a href="#6-2-统计估计" class="headerlink" title="6.2 统计估计"></a>6.2 统计估计</h2><p>​    对于n元语法模型的计算，我们感兴趣的是概率:<br>$$<br>P(w<em>{1}…w</em>{n})\quad And \quad P(w<em>{n}|w</em>{1}…w<em>{n-1})<br>$$<br>​    因为类似朴素贝叶斯的思想，我们在已知1 , 2 ,…, n-1出现的情况下，判断n位置是什么词，我们可以用词表中的词语进行概率计算，那么概率最大的就是我们最可能希望的答案<br>$$<br>P(w</em>{n}|w<em>{1}…w</em>{n-1}) = \frac{P(w<em>{1}…w</em>{n})}{P(w<em>{1}…w</em>{n-1})}<br>$$<br>​    估计条件概率分布可以简化为估计n-gram的未知概率分布。</p>
+<h2 id="6-2-统计估计"><a href="#6-2-统计估计" class="headerlink" title="6.2 统计估计"></a>6.2 统计估计</h2><p>​    对于n元语法模型的计算，我们感兴趣的是概率:<br>$$<br>P(w_{1}…w_{n})\quad And \quad P(w_{n}|w_{1}…w_{n-1})<br>$$<br>​    因为类似朴素贝叶斯的思想，我们在已知1 , 2 ,…, n-1出现的情况下，判断n位置是什么词，我们可以用词表中的词语进行概率计算，那么概率最大的就是我们最可能希望的答案<br>$$<br>P(w_{n}|w_{1}…w_{n-1}) = \frac{P(w_{1}…w_{n})}{P(w_{1}…w_{n-1})}<br>$$<br>​    估计条件概率分布可以简化为估计n-gram的未知概率分布。</p>
 <h3 id="6-2-1-最大似然估计"><a href="#6-2-1-最大似然估计" class="headerlink" title="6.2.1 最大似然估计"></a>6.2.1 最大似然估计</h3><ul>
 <li><p>相对频率的最大似然估计<br>​    无论怎样形成等价类，都会得到包含一定数量训练实例的分类。假设一个trigram模型，它用上下文中前两个词来预测下一个词，并且重点关注两个先前出现的词是comes across的情况。在一个确定的语料库中，作者找到了词串comes across的10个训练实例，在他们中有8次后面接as，1次接more，1次接a。这种情况下如果要估计下一个词，明显应该使用相对频率作为概率估计。</p>
 </li>
 <li><p>$$</p>
 <p>$$</p>
 </li>
-<li><p>$$<br>P(as) = 0.8 \<br>P(more) = 0.1 \<br>P(a) = 0.1\<br>P(x) = 0\quad 当x不是上面三个词语中的任何一个时成立<br>$$</p>
-<p>​    这种估计被称作最大似然估计（MLE)：<br>$$<br>P<em>{MLE}(w</em>{1}…w<em>{n}) = \frac{C(w</em>{1}…w<em>{n})}{N}\<br>P</em>{MLE}(w<em>{n}|w</em>{1}…w<em>{n-1}) = \frac{C(w</em>{1}…w<em>{n})}{C(w</em>{1}…w_{n-1})}\<br>$$</p>
+<li><p>$$<br>P(as) = 0.8 \\<br>P(more) = 0.1 \\<br>P(a) = 0.1\\<br>P(x) = 0\quad 当x不是上面三个词语中的任何一个时成立<br>$$</p>
+<p>​    这种估计被称作最大似然估计（MLE)：<br>$$<br>P_{MLE}(w_{1}…w_{n}) = \frac{C(w_{1}…w_{n})}{N}\\<br>P_{MLE}(w_{n}|w_{1}…w_{n-1}) = \frac{C(w_{1}…w_{n})}{C(w_{1}…w_{n-1})}\\<br>$$</p>
 <blockquote>
 <p>如果固定观测数据，并且认为所有的参数空间服从某一分布（在这里是trigram模型），统计学家就把这个公式称为似然函数。之所以称为最大似然估计，是因为它选择的参数值对于训练数据给出了最高的概率。这个估计如上面的公式所示。它没有在训练语料中未出现的事件上浪费任何概率，而是使观测到的事件的概率达到最高（也就是说，服从正常随机约束情况下的最高值）。</p>
 <p>但是一般来讲，MLE并不适合于自然语言处理中的统计推理。这是由于数据稀疏引起的（即使当我们使用一个大的语料库中，也会有数据稀疏的问题）。对于不常用的词汇的n-gram很稀少，MLE会对于没有找到的事件指定一个0概率，这个0还会通过概率乘积传到，这显然是不合理的。</p>

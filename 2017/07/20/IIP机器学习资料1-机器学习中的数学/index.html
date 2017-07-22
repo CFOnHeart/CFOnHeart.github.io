@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Junnor.G">
 <meta property="og:description" content="线性代数概念1.Rank of Matrix（矩阵的秩）​    在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数。通常表示为r(A)。">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2017-07-20T10:03:08.000Z">
+<meta property="og:updated_time" content="2017-07-22T07:54:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IIP机器学习资料1-机器学习中的数学">
 <meta name="twitter:description" content="线性代数概念1.Rank of Matrix（矩阵的秩）​    在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数。通常表示为r(A)。">
@@ -195,13 +195,15 @@
 <a id="more"></a>
 <p>​    在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数目。类似地，行秩是A的线性无关的横行的极大数目。通俗一点说，如果把矩阵看成一个个行向量或者列向量，秩就是这些行向量或者列向量的秩，也就是极大无关组中所含向量的个数。</p>
 <p>​    矩阵的列秩和行秩总是相等的，因此可以简单地称作矩阵A的秩。</p>
-<p>​    这里以行秩来说，我们可以通过行变换，将具有线性依赖的不同行以其中某些行为基，其他行都可以转化为全0。rank(A)就是经过行变换后得到的非全0行数，且这些行已经不再具有线性依赖。<br>$$<br>A =<br>\begin{bmatrix}<br>1 &amp; 2 &amp; 1 \<br>-2 &amp; -3 &amp; 1 \<br>3 &amp; 5 &amp; 0<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br>1 &amp; 2 &amp; 1 \<br>0 &amp; 1 &amp; 3 \<br>0 &amp; 0 &amp; 0<br>\end{bmatrix} \<br>rank(A) = 2<br>$$</p>
+<p>​    这里以行秩来说，我们可以通过行变换，将具有线性依赖的不同行以其中某些行为基，其他行都可以转化为全0。rank(A)就是经过行变换后得到的非全0行数，且这些行已经不再具有线性依赖。<br>$$<br>A =<br>\begin{bmatrix}<br>1 &amp; 2 &amp; 1 \\<br>-2 &amp; -3 &amp; 1 \\<br>3 &amp; 5 &amp; 0<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br>1 &amp; 2 &amp; 1 \\<br>0 &amp; 1 &amp; 3 \\<br>0 &amp; 0 &amp; 0<br>\end{bmatrix} \\<br>rank(A) = 2<br>$$</p>
 <h3 id="2-矩阵的行列式"><a href="#2-矩阵的行列式" class="headerlink" title="2.矩阵的行列式"></a>2.矩阵的行列式</h3><p>​    行列式在数学中，是由解<a href="https://baike.baidu.com/item/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84" target="_blank" rel="external">线性方程组</a>产生的一种算式，是取自不同行不同列的n个元素的乘积的代数和。</p>
-<p>​    列举一个简单的二阶行列式和三阶行列式的例子。<br>$$<br>A = \begin{bmatrix} 1 &amp; 2\ 3 &amp; 4 \end{bmatrix} \quad \<br>|A| = 1·4 - 2·3=-2 \<br>A = \begin{bmatrix} 1 &amp; 2 &amp; 3\ 4 &amp; 5 &amp; 6 \ 7 &amp; 8 &amp; 9 \end{bmatrix} \quad \<br>|A| = 1 · (5 · 9 - 6 · 8) + \ 2 · (6 · 7 - 4 · 9) + \3 · (4 · 8 - 5 · 7)<br>$$</p>
+<p>​    列举一个简单的二阶行列式和三阶行列式的例子。</p>
+<p>$$<br>A =<br>\begin{bmatrix}<br>1 &amp; 2 \\<br>3 &amp; 4<br>\end{bmatrix}<br>\\<br>|A| = 1∗4 - 2∗3=-2<br>$$</p>
+<p>$$<br>A =<br>\begin{bmatrix}<br>1 &amp; 2 &amp; 3 \\<br>4 &amp; 5 &amp; 6 \\<br>7 &amp; 8 &amp; 9<br>\end{bmatrix}  \\<br>|A| = 1 ∗ (5 ∗ 9 - 6 ∗ 8) +  2 ∗ (6 ∗ 7 - 4 ∗ 9) + 3 ∗ (4 ∗ 8 - 5 ∗ 7)<br>$$</p>
 <p>​    对于任意阶行列式，都可以改写为第一行每一个元素乘以去掉其对应行和列后得到的n-1阶矩阵的行列式（如果这个删去的元素前面有列，则需要把这些列放到最后），将每一个第一行元素这样做得到的结果叠加就是n阶行列式。</p>
 <h3 id="3-伴随矩阵A"><a href="#3-伴随矩阵A" class="headerlink" title="3.伴随矩阵A*"></a>3.伴随矩阵A*</h3><p><em>A</em>的伴随<a href="https://baike.baidu.com/item/%E7%9F%A9%E9%98%B5" target="_blank" rel="external">矩阵</a>可按如下步骤定义：</p>
 <p>1.把D的各个元素都换成它相应的<a href="https://baike.baidu.com/item/%E4%BB%A3%E6%95%B0%E4%BD%99%E5%AD%90%E5%BC%8F" target="_blank" rel="external">代数余子式</a>；</p>
-<p>（代数余子式定义：在一个n阶<a href="https://baike.baidu.com/item/%E8%A1%8C%E5%88%97%E5%BC%8F" target="_blank" rel="external">行列式</a>A中,把 (i,j)元aij所在的第i行和第j列划去后，留下来的n-1阶行列式叫做(i,j)元aij的余子式，记做Mij:<br>$$<br>A<em>{ij} = (-1)^{i+j}M</em>{ij}<br>$$<br>Aij就是(i,j)元aij的代数余子式，这是一个数值</p>
+<p>（代数余子式定义：在一个n阶<a href="https://baike.baidu.com/item/%E8%A1%8C%E5%88%97%E5%BC%8F" target="_blank" rel="external">行列式</a>A中,把 (i,j)元aij所在的第i行和第j列划去后，留下来的n-1阶行列式叫做(i,j)元aij的余子式，记做Mij:<br>$$<br>A_{ij} = (-1)^{i+j}M_{ij}<br>$$<br>Aij就是(i,j)元aij的代数余子式，这是一个数值</p>
 <p>2.将所得到的矩阵转置便得到A的伴随矩阵</p>
 <h3 id="4-矩阵的逆"><a href="#4-矩阵的逆" class="headerlink" title="4.矩阵的逆"></a>4.矩阵的逆</h3><p>​    设<strong>A</strong>是数域上的一个n阶<a href="https://baike.baidu.com/item/%E6%96%B9%E9%98%B5" target="_blank" rel="external">方阵</a>，若在相同数域上存在另一个n阶矩阵<strong>B</strong>，使得： <strong>AB</strong>=<strong>BA</strong>=<strong>E</strong>。 则我们称<strong>B</strong>是<strong>A</strong>的逆矩阵，而A则被称为<a href="https://baike.baidu.com/item/%E5%8F%AF%E9%80%86%E7%9F%A9%E9%98%B5" target="_blank" rel="external">可逆矩阵</a>。</p>
 <ul>

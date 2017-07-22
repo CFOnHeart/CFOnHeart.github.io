@@ -18,7 +18,7 @@
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="http://ganjun.net/2017/07/18/马尔科夫模型1/1.gif">
 <meta property="og:image" content="http://ganjun.net/2017/07/18/马尔科夫模型1/2.gif">
-<meta property="og:updated_time" content="2017-07-18T08:15:33.000Z">
+<meta property="og:updated_time" content="2017-07-22T07:56:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="马尔科夫模型1">
 <meta name="twitter:description" content="1.非确定性模式​    假设我们想推断今天的天气怎么样，我们有一种做法是根据之前的天气规律来进行判断（假设模型的当前状态仅仅依赖于前面的几个状态，这被称为马尔科夫假设）">
@@ -200,7 +200,7 @@
 <p>n阶马尔科夫模型就是表示当前状态通过之前的n个状态来进行推断。</p>
 <p>那么对于有M个状态的一阶马尔科夫模型来说，共有M^2个状态转移，因为任何一个状态都有可能是下一个状态的转移</p>
 </blockquote>
-<p>​    对于我们要推断的天气来说，假设一共有sun , cloud , rain三种状态，对于一阶马尔科夫模型来说，共有9个状态转移，每种状态转移的概率用矩阵标注在了下方。（每一横行的概率和均为1）<br>$$<br>Yesterday -&gt;Today\quad\begin{bmatrix}<br>    &amp;  sun &amp; cloud &amp; rain\<br>sun &amp; 0.50 &amp; 0.375 &amp; 0.125 \<br>cloud &amp; 0.25 &amp; 0.125 &amp; 0.625\<br>rain &amp; 0.25 &amp; 0.375 &amp; 0.375<br>\end{bmatrix}<br>$$</p>
+<p>​    对于我们要推断的天气来说，假设一共有sun , cloud , rain三种状态，对于一阶马尔科夫模型来说，共有9个状态转移，每种状态转移的概率用矩阵标注在了下方。（每一横行的概率和均为1）<br>$$<br>Yesterday -&gt;Today \quad<br>\begin{bmatrix}<br>    &amp;  sun &amp; cloud &amp; rain \\<br>sun &amp; 0.50 &amp; 0.375 &amp; 0.125 \\<br>cloud &amp; 0.25 &amp; 0.125 &amp; 0.625 \\<br>rain &amp; 0.25 &amp; 0.375 &amp; 0.375<br>\end{bmatrix}<br>$$</p>
 <h2 id="2-隐马尔科夫模型"><a href="#2-隐马尔科夫模型" class="headerlink" title="2.隐马尔科夫模型"></a>2.隐马尔科夫模型</h2><p>​    在某些情况下，我们希望找到的模式用马尔科夫过程描述还显得不充分。回顾一下天气那个例子，一个隐士也许不能够直接获取到天气的观察情况，但是他有一些水藻。民间传说告诉我们水藻的状态与天气状态有一定的概率关系——天气和水藻的状态是紧密相关的。在这个例子中我们有两组状态，观察的状态（水藻的状态）和隐藏的状态（天气的状态）。我们希望为隐士设计一种算法，在不能够直接观察天气的情况下，通过水藻和马尔科夫假设来预测天气。</p>
 <p>​    下图显示的是天气例子中的隐藏状态和观察状态。假设隐藏状态（实际的天气）由一个简单的一阶马尔科夫过程描述，那么它们之间都相互连接。</p>
 <p><img src="1.gif" alt=""></p>
@@ -318,11 +318,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/07/18/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/07/18/本地Mac搭建hexo博客完整流程/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Hello World
+          本地Mac搭建hexo博客完整流程
         
       </div>
     </a>
