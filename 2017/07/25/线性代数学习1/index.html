@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ganjun.net">
-  <title>Junnor.G</title>
+  <title>线性代数学习1 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="No one cares your tears , but ability.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Junnor.G">
-<meta property="og:url" content="http://ganjun.net/index.html">
+  <meta name="description" content="1.方程组解的问题（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。 （2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。 如果rank(matrix)&amp;lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我">
+<meta name="keywords" content="线性代数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性代数学习1">
+<meta property="og:url" content="http://ganjun.net/2017/07/25/线性代数学习1/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="No one cares your tears , but ability.">
+<meta property="og:description" content="1.方程组解的问题（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。 （2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。 如果rank(matrix)&amp;lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我">
 <meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://ganjun.net/2017/07/25/线性代数学习1/逆矩阵计算.png">
+<meta property="og:updated_time" content="2017-07-26T06:43:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Junnor.G">
-<meta name="twitter:description" content="No one cares your tears , but ability.">
+<meta name="twitter:title" content="线性代数学习1">
+<meta name="twitter:description" content="1.方程组解的问题（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。 （2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。 如果rank(matrix)&amp;lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我">
+<meta name="twitter:image" content="http://ganjun.net/2017/07/25/线性代数学习1/逆矩阵计算.png">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -169,16 +173,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-线性代数学习1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-线性代数学习1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/25/线性代数学习1/">线性代数学习1</a>
+    <h1 class="article-title" itemprop="name">
+      线性代数学习1
     </h1>
   
 
@@ -196,11 +198,98 @@
 <p>如果rank(matrix)&lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我们总是将每一行第一次出现的非0位置作为限制变元（自己瞎取的名字- -），它们随着其他的n-rank(matrix)个变元的变化而变化。</p>
 <p>如果在消元过程中出现了[0 0 … 0 | 1]项，那就说明是无解的。</p>
 <p>如果rank(matrix)=n，那么只存在唯一解。</p>
-        
-          <a class="article-more-a" href="/2017/07/25/线性代数学习1/#more">more >></a>
-        
+<a id="more"></a>
+<h3 id="2-齐次方程组"><a href="#2-齐次方程组" class="headerlink" title="2.齐次方程组"></a>2.齐次方程组</h3><p>​    如果线性方程组的右端项全为0，则称其是齐次的，齐次方程组是相容的（线性方程组相容就说明有解），因为它至少存在一个所有未知变量都是0的解集。否则就存在自由变元，有无数的解。</p>
+<h3 id="3-行向量和列向量"><a href="#3-行向量和列向量" class="headerlink" title="3.行向量和列向量"></a>3.行向量和列向量</h3><p>（1）所有n<em>1的实矩阵构成的集合称为**</em>n维欧几里得空间(Euclidean n-space)<em>*</em>，通常记作 $\mathbf R^{n}$</p>
+<p>由于列向量被大量使用，列向量的标准记号采用黑斜体小写字母。<br>$$<br>\boldsymbol x = \begin{bmatrix}<br>x_{1} \\<br>x_{2} \\<br>\vdots \\<br>x_{n}<br>\end{bmatrix}<br>$$<br>（2）对于行向量，没有通用的标准记号，通常采用黑斜体小写字母表示行向量及列向量，但为了区分，行向量字母上方加一个水平箭头。<br>$$<br>\overrightarrow {\boldsymbol x} = (x_{1} , x_{2} , … , x{n}) \\<br>\boldsymbol x = \begin{bmatrix}<br>x_{1} \\<br>x_{2} \\<br>\vdots \\<br>x_{n}<br>\end{bmatrix}<br>$$<br>那么一个n∗r的矩阵B，用行向量或者列向量可以表示如下:</p>
+<p>$$<br>B = (\mathbf b_{1} , \mathbf b_{2} , … , \mathbf b_{r}) =<br>\begin{bmatrix}<br>\overrightarrow{\mathbf b_{1}}  \\<br>\overrightarrow{\mathbf b_{2}} \\<br>\vdots \\<br>\overrightarrow{\mathbf b_{n}}<br>\end{bmatrix}<br>$$</p>
+<h3 id="4-矩阵乘法"><a href="#4-矩阵乘法" class="headerlink" title="4.矩阵乘法"></a>4.矩阵乘法</h3><p><strong>定义</strong> 若 $A = (a_{ij}) $为一个m×n的矩阵，且$B = (b_{ij})$为一个n×r的矩阵，则乘积$AB=C=(c_{ij})$为一个m×r的矩阵，它的元素定义为<br>$$<br>c_{ij} = \overrightarrow{\mathbf a_{i}} \mathbf b_{j} = \sum_{k=1}^{n}{a_{ik} b_{kj}}<br>$$<br>更为一般地，如果矩阵A的列数等于矩阵B的行数，则矩阵A可以和矩阵B相乘，乘积的第一列由矩阵B的第一列求得，即AB的第一列为$A \mathbf b_{1}$， AB的第二列为$A \mathbf b_{2}$，等等。因此乘积AB是：<br>$$<br>AB = (A \mathbf b_{1} , A \mathbf b_{2} , \dots , A \mathbf b_{n})<br>$$<br>这里可以理解的一点是A如果是个n×m的矩阵，对于$A \mathbf b_{1}$，A是由n个$\mathbf R^m$中的向量组成，我们也称$A \mathbf b_{1}$是这n个向量的线性组合。</p>
+<p><strong>那很明显可以看出$\mathbf b_{1}$作为一个线性方程组的解，A就是这n个线性方程组上的参数，最后得到的是线性方程组右侧项的$\mathbf R^m$向量。</strong></p>
+<h3 id="5-矩阵的转置"><a href="#5-矩阵的转置" class="headerlink" title="5.矩阵的转置"></a>5.矩阵的转置</h3><p><strong>定义</strong> 一个m×n的矩阵A的转置(transpose)为n×m的矩阵B，那么$b_{ji} = a_{ij}$，其中j=1,2,…,n和i=1,2,…,m. A的转置矩阵B记做$A^T$.</p>
+<p><strong>定义</strong> 一个n×n的矩阵A，满足$A = A^T$，则称为A是<strong>对称的(symmetric)</strong>.</p>
+<h3 id="6-代数法则"><a href="#6-代数法则" class="headerlink" title="6.代数法则"></a>6.代数法则</h3><p><strong>定理</strong>  在定义了需要的运算后，下述法则对任何标量α和β及矩阵A，B和C都是成立的。</p>
+<ol>
+<li>A+B = B+A</li>
+<li>(A+B)+C = A+(B+C)</li>
+<li>(AB)C = A(BC)</li>
+<li>A(B+C) = AB+AC</li>
+<li>(A+B)C = AC+BC</li>
+<li>(αβ)A = α(βA)</li>
+<li>α(AB) = (αA)B = A(αB)</li>
+<li>(α+β)A = αA+βA</li>
+<li>α(A+B) = αA+αB</li>
+</ol>
+<h3 id="7-单位矩阵"><a href="#7-单位矩阵" class="headerlink" title="7.单位矩阵"></a>7.单位矩阵</h3><p>​    正如数1为实数乘法中的单位元一样，也存在一个特殊矩阵 $\mathbf I$ 是矩阵乘法中的单位元，即<br>$$<br>\mathbf I \mathbf A = \mathbf A \mathbf I = \mathbf A<br>$$<br>​    对于任意的n×n的矩阵都成立。容易验证，我们定义一个主对角元素均为1、其他元素均为0的n×n矩阵，则对任意的n×n矩阵 $\mathbf A$ ，$\mathbf I$ 满足上述公式。</p>
+<p>​    <strong>定义</strong>  n×n的单位矩阵(identity matrix)为矩阵 $\mathbf I = (δ_{ij})$ , 其中<br>$$<br>δ_{ij} =<br>\begin{cases}<br>1 \quad 当i=j \\<br>0 \quad 当i≠j<br>\end{cases}<br>$$<br>​    n×n单位矩阵中的列向量为用于定义n维欧几里得坐标空间的标准向量。$\mathbf I$ 的第j列向量的标准记号为 $\mathbf e_j$，而不是普通的 $\mathbf i_{j}$ ，因此，n×n单位矩阵可写为<br>$$<br>\mathbf I = (\mathbf e_{1} , \mathbf e_{2} , \dots , \mathbf e_{n})<br>$$</p>
+<h3 id="8-矩阵在网络和图中的运用-（线性代数P51）"><a href="#8-矩阵在网络和图中的运用-（线性代数P51）" class="headerlink" title="8.矩阵在网络和图中的运用 （线性代数P51）"></a>8.矩阵在网络和图中的运用 （线性代数P51）</h3><p><strong>定理</strong>  设A为某图的n×n邻接矩阵，且$a^{(k)}_{ij}$表示$A^k$的(i，j)元素$a^{(k)}_{ij}$等于顶点Vi和Vj间长度为k的路的条数。</p>
+<p>例如如下的包含5个点的邻接矩阵：<br>$$<br>A =<br>\begin{bmatrix}<br>0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\<br>1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\<br>0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\<br>0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\<br>0 &amp; 1 &amp; 1 &amp; 1 &amp; 0<br>\end{bmatrix}<br>$$<br>当前状态是表示的初始图，当然我们也能从中获取到等价地信息就是2 -&gt; 1距离为1的路径有一条，因为这是个无向图，所以1 -&gt; 2距离为1的路径也是一条</p>
+<p>当我们想知道两个点之间的距离为3的路径有多少条时，可以这么做：<br>$$<br>A^3 =<br>\begin{bmatrix}<br>0 &amp; 2 &amp; 1 &amp; 1 &amp; 0 \\<br>2 &amp; 0 &amp; 1 &amp; 1 &amp; 4 \\<br>1 &amp; 1 &amp; 2 &amp; 3 &amp; 4 \\<br>1 &amp; 1 &amp; 3 &amp; 2 &amp; 4 \\<br>0 &amp; 4 &amp; 4 &amp; 4 &amp; 2<br>\end{bmatrix}<br>$$</p>
+<h3 id="9-初等矩阵"><a href="#9-初等矩阵" class="headerlink" title="9.初等矩阵"></a>9.初等矩阵</h3><p><strong>定义</strong>  如果从单位矩阵 $\mathbf I$ 开始，只进行一次初等运算，得到的矩阵称为初等矩阵。</p>
+<p>初等矩阵一共存在三种类型，对应了三种行(列)变换。</p>
+<p>(1) 交换两行<br>$$<br>E_1 =<br>\begin{bmatrix}<br>0 &amp; 1 &amp; 0 \\<br>1 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 1<br>\end{bmatrix}<br>\quad<br>A =<br>\begin{bmatrix}<br>a_{11} &amp; a_{12} &amp; a_{13} \\<br>a_{21} &amp; a_{22} &amp; a_{23} \\<br>a_{31} &amp; a_{32} &amp; a_{33}<br>\end{bmatrix}<br>\\<br>E_1A =<br>\begin{bmatrix}<br>a_{21} &amp; a_{22} &amp; a_{23} \\<br>a_{11} &amp; a_{12} &amp; a_{13} \\<br>a_{31} &amp; a_{32} &amp; a_{33}<br>\end{bmatrix}<br>\quad<br>AE_1 =<br>\begin{bmatrix}<br>a_{12} &amp; a_{11} &amp; a_{13} \\<br>a_{22} &amp; a_{21} &amp; a_{23} \\<br>a_{32} &amp; a_{31} &amp; a_{33}<br>\end{bmatrix}<br>$$<br><strong>很容易发现：</strong></p>
+<p><strong>初等矩阵乘在前面，会导致A同等于初等矩阵两行进行了交换。</strong></p>
+<p><strong>初等矩阵乘在后面，会导致A同等于初等矩阵两列进行了交换。</strong></p>
+<p><strong>后面两种类型的初等矩阵同样道理</strong></p>
+<p>(2)由单位矩阵的某一行乘以一个非零常数得到<br>$$<br>E_2 =<br>\begin{bmatrix}<br>1 &amp; 0 &amp; 0 \\<br>0 &amp; 1 &amp; 0 \\<br>0 &amp; 0 &amp; 3<br>\end{bmatrix}<br>$$<br>(3)由单位矩阵某一行的倍数加到另一行得到<br>$$<br>E_3 =<br>\begin{bmatrix}<br>1 &amp; 0 &amp; 3 \\<br>0 &amp; 1 &amp; 0 \\<br>0 &amp; 0 &amp; 1<br>\end{bmatrix}<br>$$</p>
+<p><strong><em>重要性质</em></strong></p>
+<ul>
+<li><p>若E为初等矩阵，则E一定是非奇异的，且$E^{-1}$为一与它同类型的初等矩阵，改变的方式反一下即可，很容易理解。</p>
+</li>
+<li><p>初等矩阵就相当于将行(列)变化用多重初等矩阵相乘的方式来表示。</p>
+</li>
+<li><p>若存在一个有限初等矩阵的序列$E_1 , E_2 , … , E_k$，使得<br>$$<br>B =E_k ∗ E_k-1 ∗ … ∗ E_1 ∗ A<br>$$<br>则称A与B是行等价的。换句话说就是B可以通过A经过有限次行运算得到。</p>
+</li>
+<li><p>若A与B是行等价的，则B与A是行等价的。</p>
+</li>
+<li><p>若A与B行等价，B与C行等价，那么A与C行等价。</p>
+</li>
+<li><p>那么根据这个性质就很容易求出n阶非奇异矩阵的逆矩阵了。<br>对于矩阵A来说，经历一系列行变换得到了单位矩阵 $\mathbf I = E_k ∗ E_k-1 ∗ … ∗ E_1 ∗ A$ ,那么$E_k ∗ E_k-1 ∗ … ∗ E_1 = A^{-1}$ , 因为$A^{-1} \mathbf I = A^{-1}$ , 所以只要在另一个单位矩阵上做同样的行变化就能得到逆矩阵了。<br>利用基本的高斯消元的思想就很容易写出代码了。大致过程图片如图所示。</p>
+<p><img src="逆矩阵计算.png" alt="逆矩阵的计算基本流程"></p>
+</li>
+</ul>
+<h3 id="10-行列式-线性代数P87"><a href="#10-行列式-线性代数P87" class="headerlink" title="10.行列式 (线性代数P87)"></a>10.行列式 (线性代数P87)</h3><p>​    对每一个n×n的矩阵A，均可对应一个标量det(A)，它的值是否为0将告诉我们矩阵是否为非奇异的。A的行列式往往表示如下：<br>$$<br>det(A) =<br>\begin{vmatrix}<br>A<br>\end{vmatrix}<br>$$</p>
+<ul>
+<li><p><strong>情形一</strong>  1阶矩阵<br>$$<br>A = [a] \\<br>det(A) = a<br>$$</p>
+</li>
+<li><p><strong>情形二</strong>  2阶矩阵<br>$$<br>A =<br>\begin{bmatrix}<br>a_{11} &amp; a_{12} \\<br>a_{21} &amp; a_{22}<br>\end{bmatrix} \\<br>det(A) = a_{11}∗a_{22}-a_{12}∗a_{21}<br>$$</p>
+</li>
+<li><p><strong>情形三</strong>  3阶矩阵<br>$$<br>A =<br>\begin{bmatrix}<br>a_{11} &amp; a_{12} &amp; a_{13} \\<br>a_{21} &amp; a_{22} &amp; a_{23} \\<br>a_{31} &amp; a_{32} &amp; a_{33} \\<br>\end{bmatrix} \\<br>det(A) = a_{11}∗(a_{22}∗a_{33}-a_{23}∗a_{32}) - \\<br>a_{12}∗(a_{21}∗a_{33}-a_{31}∗a_{23})+ \\<br>a_{13}∗(a_{21}∗a_{32}-a{31}∗a_{22})<br>$$<br>​</p>
+</li>
+</ul>
+<p><strong>定义</strong>  令$A = (a_{ij})$ 为一n×n的矩阵，并用$M_{ij}$表示删除A中包含$a_{ij}$的行和列得到的(n-1)×(n-1)矩阵，矩阵$M_{ij}$的行列式称为$a_{ij}$的<strong>子式(minor)</strong>。定义$a_{ij}$的<strong>余子式(cofactor)</strong>$A_{ij}$ 为<br>$$<br>A_{ij} = (-1)^{i+j}det(M_{ij})<br>$$<br><strong>定义</strong>  一个n×n矩阵A的<strong>行列式(determinant)</strong>，记为det(A)，是一个与矩阵A对应的标量，它可递归定义如下：<br>$$<br>det(A) =<br>\begin{cases}<br>a_{11} &amp; 当n =1时 \\<br>a_{11}A_{11}+a_{12}A_{12}+…+a_{1n}A_{1n} &amp; 当n&gt;1时<br>\end{cases}<br>$$<br><strong><em>当然这是为了比较方便默认选择第一行提取出来相加求和，你也可以选择其他行或者其他列的所有项与其余子式的乘积和。用式子表示为如下定理</em></strong></p>
+<p><strong>定理</strong>  设A为一n×n矩阵，其中n≥2，则det(A)可表示为A的任何行或列的余子式展开，即<br>$$<br>det(A) = a_{i1}A_{i1}+a_{i2}A_{i2}+…+a_{in}A_{in} \\<br>\quad \quad \quad = a_{1j}A_{1j}+a_{2j}A_{2j}+…+a_{nj}A_{nj} \\<br>其中i=1,…,n,且j=1,…,n<br>$$<br><strong>定理</strong>  设A为一n×n的矩阵，则$det(A^T)=det(A)$。</p>
+<p><strong>定理</strong>  设A为一n×n的三角形矩阵，则A的行列式等于A的对角元素的乘积。</p>
+<p><strong>定理</strong>  设A为一n×n的矩阵：<br>​      (i) 若A有一行或者一列的元素全为0，那么det(A)=0</p>
+<p>​      (ii) 若A有两行或两列相等，则det(A)=0 </p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatQR.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -231,16 +320,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/25/线性代数学习1/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ganjun.net/2017/07/25/线性代数学习1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/24/马尔可夫模型4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">马尔可夫模型4</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -255,833 +403,70 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-马尔可夫模型4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/24/马尔可夫模型4/">马尔可夫模型4</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/24/马尔可夫模型4/" class="archive-article-date">
-  	<time datetime="2017-07-24T06:34:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="马尔科夫模型viterbi算法的java实现"><a href="#马尔科夫模型viterbi算法的java实现" class="headerlink" title="马尔科夫模型viterbi算法的java实现"></a>马尔科夫模型viterbi算法的java实现</h2>
-        
-          <a class="article-more-a" href="/2017/07/24/马尔可夫模型4/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">viterbi算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马儿可夫模型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/24/马尔可夫模型4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-方程组解的问题"><span class="toc-number">1.</span> <span class="toc-text">1.方程组解的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-齐次方程组"><span class="toc-number">2.</span> <span class="toc-text">2.齐次方程组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-行向量和列向量"><span class="toc-number">3.</span> <span class="toc-text">3.行向量和列向量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-矩阵乘法"><span class="toc-number">4.</span> <span class="toc-text">4.矩阵乘法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-矩阵的转置"><span class="toc-number">5.</span> <span class="toc-text">5.矩阵的转置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-代数法则"><span class="toc-number">6.</span> <span class="toc-text">6.代数法则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-单位矩阵"><span class="toc-number">7.</span> <span class="toc-text">7.单位矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-矩阵在网络和图中的运用-（线性代数P51）"><span class="toc-number">8.</span> <span class="toc-text">8.矩阵在网络和图中的运用 （线性代数P51）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-初等矩阵"><span class="toc-number">9.</span> <span class="toc-text">9.初等矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-行列式-线性代数P87"><span class="toc-number">10.</span> <span class="toc-text">10.行列式 (线性代数P87)</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-IIP机器学习资料1-机器学习中的数学" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/">IIP机器学习资料1-机器学习中的数学</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/" class="archive-article-date">
-  	<time datetime="2017-07-20T07:05:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="线性代数概念"><a href="#线性代数概念" class="headerlink" title="线性代数概念"></a>线性代数概念</h1><h3 id="1-Rank-of-Matrix（矩阵的秩）"><a href="#1-Rank-of-Matrix（矩阵的秩）" class="headerlink" title="1.Rank of Matrix（矩阵的秩）"></a>1.Rank of Matrix（矩阵的秩）</h3><p>​    在线性代数中，一个矩阵A的列秩是A的线性独立的纵列的极大数。通常表示为r(A)。</p>
-        
-          <a class="article-more-a" href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">线性代数</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/机器学习/" class="article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/20/IIP机器学习资料1-机器学习中的数学/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-马尔科夫模型3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/马尔科夫模型3/">马尔科夫模型3</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/20/马尔科夫模型3/" class="archive-article-date">
-  	<time datetime="2017-07-20T02:51:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前向算法（Forward-Algorithm）"><a href="#前向算法（Forward-Algorithm）" class="headerlink" title="前向算法（Forward Algorithm）"></a>前向算法（Forward Algorithm）</h2><p>​    <strong><em>计算观察序列的概率（Finding the probability of an observed sequence）</em></strong></p>
-<h4 id="1-计算t-1时的局部概率α‘S"><a href="#1-计算t-1时的局部概率α‘S" class="headerlink" title="1.计算t=1时的局部概率α‘S"></a>1.计算t=1时的局部概率α‘S</h4><p>​    按如下公式计算t=1的局部概率：</p>
-<p>$$<br>\alpha_{t}{(j)} = Pr(观察状态|隐藏状态) ∗ Pr(t时刻所有指向j状态的路径)<br>$$</p>
-<p>​    t=1的时，没有任何指向当前状态的路径。所以t=1时位于当前状态的概率是初始概率。</p>
-<p>$$<br>\alpha_{1}{(j)} = \pi(j) ∗ b_{jk_{1}}<br>$$</p>
-        
-          <a class="article-more-a" href="/2017/07/20/马尔科夫模型3/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马尔可夫模型</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前向算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/20/马尔科夫模型3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-马尔可夫模型2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/19/马尔可夫模型2/">马尔可夫模型2</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/19/马尔可夫模型2/" class="archive-article-date">
-  	<time datetime="2017-07-19T03:00:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="隐马尔可夫模型（HMM"><a href="#隐马尔可夫模型（HMM" class="headerlink" title="隐马尔可夫模型（HMM)"></a>隐马尔可夫模型（HMM)</h2><p>​    <strong>隐马尔可夫模型（Hidden Markov ， HMM）是统计模型</strong>，它用来描述一个隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来做进一步的分析，例如模式识别。</p>
-        
-          <a class="article-more-a" href="/2017/07/19/马尔可夫模型2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马尔可夫模型</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">viterbi算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/19/马尔可夫模型2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-本地Mac搭建hexo博客完整流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/18/本地Mac搭建hexo博客完整流程/">本地Mac搭建hexo博客完整流程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/18/本地Mac搭建hexo博客完整流程/" class="archive-article-date">
-  	<time datetime="2017-07-18T08:18:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong><em>这里默认电脑已经装好node.js GitBash npm相关软件</em></strong></p>
-        
-          <a class="article-more-a" href="/2017/07/18/本地Mac搭建hexo博客完整流程/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/18/本地Mac搭建hexo博客完整流程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-马尔科夫模型1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/18/马尔科夫模型1/">马尔科夫模型1</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/18/马尔科夫模型1/" class="archive-article-date">
-  	<time datetime="2017-07-18T06:14:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-非确定性模式"><a href="#1-非确定性模式" class="headerlink" title="1.非确定性模式"></a>1.非确定性模式</h2><p>​    假设我们想推断今天的天气怎么样，我们有一种做法是根据之前的天气规律来进行判断（假设模型的当前状态仅仅依赖于前面的几个状态，这被称为马尔科夫假设）</p>
-        
-          <a class="article-more-a" href="/2017/07/18/马尔科夫模型1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/18/马尔科夫模型1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-统计自然语言处理学习心得" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/17/统计自然语言处理学习心得/">统计自然语言处理学习心得</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/17/统计自然语言处理学习心得/" class="archive-article-date">
-  	<time datetime="2017-07-17T06:11:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="5-4互信息"><a href="#5-4互信息" class="headerlink" title="5.4互信息"></a>5.4互信息</h2><blockquote>
-<p>​    对于搭配发现，一种以信息论为根据的方法是点互信息。最初定义了两个特殊事件x’和y’之间的互信息，对于我们的情况，两个具体词同现的互信息如下：</p>
-</blockquote>
-<p>$$<br>I(x’,y’) =  \log_{2}\frac{P(x’y’)}{P(x’)P(y’)}<br>          \ = log_{2}\frac{P(x’|y’)}{P(x’)}<br>          \ = log_{2}\frac{P(y’|x’)}{P(y’)}<br>$$</p>
-        
-          <a class="article-more-a" href="/2017/07/17/统计自然语言处理学习心得/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘/" class="article-tag-list-link color5">数据挖掘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/17/统计自然语言处理学习心得/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python爬虫with-BeautifulSoup包-Mangodb" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/">Python爬虫with(BeautifulSoup包)+Mangodb</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/" class="archive-article-date">
-  	<time datetime="2017-07-16T12:42:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>自己是在安装的anaconda中默认带了以下相关的python数据包requests,re,BeautifulSoup,time,pymongo(mango数据库python包)</p>
-        
-          <a class="article-more-a" href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-简单神经网络学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/15/简单神经网络学习/">简单神经网络学习</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/15/简单神经网络学习/" class="archive-article-date">
-  	<time datetime="2017-07-15T07:32:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="感知器分类"><a href="#感知器分类" class="headerlink" title="感知器分类"></a>感知器分类</h2><p><strong>感知器分类算法基本步骤：</strong><br>权重向量w ，训练样本 X</p>
-<ol>
-<li>把权重向量初始化为0，或者把每个分量初始化为[0,1]之间的某一个小数</li>
-<li>把训练样本输入感知器，得到分类结果（1或者-1）</li>
-<li>根据分类结果和训练样本本身结果的比较更新权重向量</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/07/15/简单神经网络学习/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘/" class="article-tag-list-link color5">数据挖掘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/15/简单神经网络学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="线性代数学习1" data-title="线性代数学习1" data-url="http://ganjun.net/2017/07/25/线性代数学习1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://ganjun.net/2017/07/25/线性代数学习1/", 
+    sourceId: "线性代数学习1",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+  
+  <div id="SOHUCS" sid="线性代数学习1" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "true"; 
+var conf = "true"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
   
 
 
@@ -1104,8 +489,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

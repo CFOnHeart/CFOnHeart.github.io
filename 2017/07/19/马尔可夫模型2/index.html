@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/2.png">
 <meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/3.png">
 <meta property="og:image" content="http://ganjun.net/2017/07/19/马尔可夫模型2/4.png">
-<meta property="og:updated_time" content="2017-07-22T08:04:08.000Z">
+<meta property="og:updated_time" content="2017-07-24T03:07:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="马尔可夫模型2">
 <meta name="twitter:description" content="隐马尔可夫模型（HMM)​    隐马尔可夫模型（Hidden Markov ， HMM）是统计模型，它用来描述一个隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来做进一步的分析，例如模式识别。">
@@ -225,16 +225,20 @@
 <p>​    P1(D8-&gt;1) = P(D8) ∗  P(D8-&gt;1) = 1/3 ∗  1/8</p>
 <p>​    所以第一次就认为选择的是D4</p>
 <h4 id="Step-2-判断第二个骰子"><a href="#Step-2-判断第二个骰子" class="headerlink" title="Step 2: 判断第二个骰子"></a>Step 2: 判断第二个骰子</h4><p>​    看到结果为6。因为在马尔可夫模型中，当前状态只跟前一次状态存在转移关系。所以之前状态有3个-&gt;当前的3个状态，我们需要把9种状态都计算一遍，然后对于每个骰子的选择出选中它最大的一个，最后进行比较。</p>
+<p>​    但是对于当前步的隐藏状态-&gt;观察状态的概率在比较过程中先不乘进去，最后再乘上</p>
 <p>（1）前一个状态为D4，后一个状态为D6: </p>
-<p>$$<br>P2(D6 \rightarrow 6) = P1(D4 \rightarrow1) ∗ P(D4 \rightarrow D6) ∗ P(D6 \rightarrow 6) = 1/12 ∗ 1/3 ∗ 1/6<br>$$</p>
+<p>$$<br>P2(D6) = P1(D4 \rightarrow1) ∗ P(D4 \rightarrow D6)  = 1/12 ∗ 1/3<br>$$</p>
 <p>（2）前一个状态为D6，后一个状态为D6: </p>
-<p>$$<br>P2(D6 \rightarrow 6) = P1(D6 \rightarrow 1) ∗  P(D4 \rightarrow D6) ∗  P(D6 \rightarrow 6) = 1/18 ∗  1/3 ∗  1/6<br>$$</p>
+<p>$$<br>P2(D6) = P1(D6 \rightarrow 1) ∗  P(D4 \rightarrow D6) = 1/18 ∗  1/3<br>$$</p>
 <p>（3）前一个状态为D8，后一个状态为D6: </p>
-<p>$$<br>P2(D6 \rightarrow 6) = P1(D8 \rightarrow 1) ∗  P(D4 \rightarrow D6) ∗  P(D6 \rightarrow 6) = 1/24 ∗  1/3 ∗  1/6<br>$$</p>
-<p>所以P2(D6-&gt;6)最后会选择最大的1/12 ∗  1/3 ∗  1/6</p>
-<p>同理可以求出P2(D4-&gt;6) , P2(D8-&gt;6)</p>
+<p>$$<br>P2(D6) = P1(D8 \rightarrow 1) ∗  P(D4 \rightarrow D6) = 1/24 ∗  1/3<br>$$</p>
+<p>所以P2(D6)最后会选择最大的1/12 ∗  1/3</p>
+<p>同理可以求出P2(D4) , P2(D8)</p>
 <p>通过比较之后P2(D6-&gt;6)大于它们两个，所以第二个色子选择D6</p>
-<h4 id="Step-3-后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。"><a href="#Step-3-后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。" class="headerlink" title="Step 3: 后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。"></a>Step 3: 后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。</h4><h3 id="3-谁动了我的骰子–前向算法-解决一类得到已知结果的状态链，想要求出得到这个状态链的概率"><a href="#3-谁动了我的骰子–前向算法-解决一类得到已知结果的状态链，想要求出得到这个状态链的概率" class="headerlink" title="3.谁动了我的骰子–前向算法(解决一类得到已知结果的状态链，想要求出得到这个状态链的概率)"></a>3.谁动了我的骰子–前向算法(解决一类得到已知结果的状态链，想要求出得到这个状态链的概率)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">比如说你怀疑自己的六面骰被赌场动过手脚了，有可能被换成另一种六面骰，这种六面骰掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。你怎么办么？答案很简单，算一算正常的三个骰子掷出一段序列的概率，再算一算不正常的六面骰和另外两个正常骰子掷出这段序列的概率。如果前者比后者小，你就要小心了。</div></pre></td></tr></table></figure>
+<p>然后就可以计算：</p>
+<p>$$<br>P2(D6 \rightarrow 6) = P2(D6) <em> P(D6 \rightarrow 6) = 1/36 </em> 1/6<br>$$<br>同理可以算出P2(D4-&gt;6),P2(D8-&gt;6)</p>
+<h4 id="Step-3-后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。"><a href="#Step-3-后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。" class="headerlink" title="Step 3: 后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。"></a>Step 3: 后面的色子选择同理于第二个色子，每次只要判断前一次的状态即可。</h4><p>但是我们需要注意的是，到达当前最优的隐藏状态是从上一次的什么什么隐藏状态来的，最后根据最优结果进行回溯。</p>
+<h3 id="3-谁动了我的骰子–前向算法-解决一类得到已知结果的状态链，想要求出得到这个状态链的概率"><a href="#3-谁动了我的骰子–前向算法-解决一类得到已知结果的状态链，想要求出得到这个状态链的概率" class="headerlink" title="3.谁动了我的骰子–前向算法(解决一类得到已知结果的状态链，想要求出得到这个状态链的概率)"></a>3.谁动了我的骰子–前向算法(解决一类得到已知结果的状态链，想要求出得到这个状态链的概率)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">比如说你怀疑自己的六面骰被赌场动过手脚了，有可能被换成另一种六面骰，这种六面骰掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。你怎么办么？答案很简单，算一算正常的三个骰子掷出一段序列的概率，再算一算不正常的六面骰和另外两个正常骰子掷出这段序列的概率。如果前者比后者小，你就要小心了。</div></pre></td></tr></table></figure>
 <p>现在已知投掷结果是{1,6,3}</p>
 <p><strong><em>对于未被换过色子的情况来说：</em></strong></p>
 <h4 id="Step-1-第一个骰子的投掷结果"><a href="#Step-1-第一个骰子的投掷结果" class="headerlink" title="Step 1: 第一个骰子的投掷结果"></a>Step 1: 第一个骰子的投掷结果</h4><p>看到结果为1，产生这个结果的总概率就是计算每种色子到达1的概率的总和</p>
@@ -722,6 +726,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">viterbi算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
               </li>
              
               <li class="article-tag-list-item">

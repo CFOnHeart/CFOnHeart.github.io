@@ -198,8 +198,8 @@
 <li>根据分类结果和训练样本本身结果的比较更新权重向量</li>
 </ol>
    <a id="more"></a>
-<h2 id="步调函数与阈值"><a href="#步调函数与阈值" class="headerlink" title="步调函数与阈值"></a>步调函数与阈值</h2><p>$$<br>w<em>{0} =  -θ\quad and \quad x</em>{0} = 1 \z=w<em>{0}x</em>{0}+w<em>{1}x</em>{1}+…+w<em>{m}x</em>{m} = w^{T}*x\and\quad φ(z)=\left{<br>\begin{aligned}<br>&amp;1\quad if\quad z\geθ \<br>&amp;-1\quad otherwise.<br>\end{aligned}<br>\right.<br>$$</p>
-<h2 id="权重更新算法"><a href="#权重更新算法" class="headerlink" title="权重更新算法"></a>权重更新算法</h2><p>$$<br>w(j) = w(j) + ▽w(j) \<br>▽w(j) = η\times (y-y’)\times X(j)<br>$$</p>
+<h2 id="步调函数与阈值"><a href="#步调函数与阈值" class="headerlink" title="步调函数与阈值"></a>步调函数与阈值</h2><p>$$<br>w_{0} =  -θ\quad and \quad x_{0} = 1 \\z=w_{0}x_{0}+w_{1}x_{1}+…+w_{m}x_{m} = w^{T}*x\\and\quad φ(z)=\left\{<br>\begin{aligned}<br>&amp;1\quad if\quad z\geθ \\<br>&amp;-1\quad otherwise.<br>\end{aligned}<br>\right.<br>$$</p>
+<h2 id="权重更新算法"><a href="#权重更新算法" class="headerlink" title="权重更新算法"></a>权重更新算法</h2><p>$$<br>w(j) = w(j) + ▽w(j) \\<br>▽w(j) = η\times (y-y’)\times X(j)<br>$$</p>
 <p><strong>η表示学习率，用一个[0,1]之间的一个小数来表示，往往是由自己设定的，当然经常会因为随着训练次数的增加，η不断地下降，这样避免每次变化过大，因为训练次数增加，已经趋近于接近正确答案，η的下降可以提高精确度。</strong><br><strong>y表示训练样本的分类结果，y’表示感知器的分类结果</strong><br><strong>▽w(j)表示需要调整的权重向量</strong><br><strong>可以很容易看出如果经过分类过后，感知器的分类结果和原本的结果相同那么y-y’=0,▽w(j)=0</strong></p>
 
       
@@ -566,6 +566,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">viterbi算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
               </li>
              
               <li class="article-tag-list-item">
