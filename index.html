@@ -171,6 +171,168 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-projecteuler21-莫比乌斯求约数和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/03/projecteuler21-莫比乌斯求约数和/">projecteuler21-莫比乌斯求约数和</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/03/projecteuler21-莫比乌斯求约数和/" class="archive-article-date">
+  	<time datetime="2017-08-03T13:56:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Problem-21"><a href="#Problem-21" class="headerlink" title="Problem 21"></a>Problem 21</h3><p>Let d(<em>n</em>) be defined as the sum of proper divisors of <em>n</em> (numbers less than <em>n</em> which divide evenly into <em>n</em>).<br>If d(<em>a</em>) = <em>b</em> and d(<em>b</em>) = <em>a</em>, where <em>a</em> ≠ <em>b</em>, then <em>a</em> and <em>b</em> are an amicable pair and each of <em>a</em> and <em>b</em> are called amicable numbers.</p>
+<p>For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.</p>
+<p>Evaluate the sum of all the amicable numbers under 10000.</p>
+<p>这里的d(n)表示n的所有约数和减去自身<br>$$<br>d(n) = \sum_{d=1}^{n}{d}-n<br>$$</p>
+<p>这里将f(n)理解为所有的约数和，那么f(n) = d(n)+n , 最后d(n)做一个减法处理</p>
+<p>简单的暴力方法肯定没有问题，思考一个问题，在O(n)线性时间复杂度利用莫比乌斯反演的思想利用积性函数来解决。</p>
+<p>对于比如24来说：</p>
+<p>24 = 2^3 * 3</p>
+<p>那么f(24) = f(3)*2^3 + f(12)</p>
+<p>因为是利用莫比乌斯反演思想，所以考虑最小的质因子是2的情况下，除去这个因子2，那么还有12中的约数和，那么我们需要确保剩下获取到的约数均和12没有任何关系，而且需要把这个最下的因子2带进去，本身12里面就有两个2的因子，那么也就是说，剩余的约数都是包含三个所有的2，所以对应过来就是f(3)*8</p>
+<p>所以我们需要在积性函数构造过程中构造f函数和一个辅助的a函数</p>
+<p>f(n)表示n所有的约数和</p>
+<p>a(n)表示n最小的质因子的最高幂次</p>
+<p>比如24对应了2^3=8—&gt;a(24) = 8,</p>
+<p>45 = 3^2*5 —&gt;a(45) = 9</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">bool</span> vis[<span class="number">10005</span>];</div><div class="line"><span class="keyword">int</span> pri[<span class="number">10005</span>] , tot=<span class="number">0</span>;</div><div class="line"><span class="keyword">int</span> a[<span class="number">10005</span>]; <span class="comment">//表示除去最小素数因子剩下的数</span></div><div class="line"><span class="keyword">int</span> f[<span class="number">10005</span>] , d[<span class="number">10005</span>];</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">memset</span>(vis , <span class="number">0</span> , <span class="keyword">sizeof</span>(n+<span class="number">1</span>));</div><div class="line"></div><div class="line">	f[<span class="number">1</span>] = <span class="number">1</span> , a[<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span> ; i&lt;=n ; i++)&#123;</div><div class="line">		<span class="keyword">if</span>(!vis[i])&#123;</div><div class="line">			pri[tot++] = i;</div><div class="line">			vis[i] = <span class="literal">true</span>;</div><div class="line">			a[i] = i;</div><div class="line">			f[i] = <span class="number">1</span>+i;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span> ; j&lt;tot ; j++)&#123;</div><div class="line">			<span class="keyword">if</span>(pri[j]*i&gt;n) <span class="keyword">break</span>;</div><div class="line">			vis[pri[j]*i] = <span class="literal">true</span>;</div><div class="line">			<span class="keyword">if</span>(i % pri[j] == <span class="number">0</span>)&#123;</div><div class="line">				a[i*pri[j]] = a[i]*pri[j];</div><div class="line">				f[i*pri[j]] = a[i*pri[j]]*f[i*pri[j] / a[i*pri[j]]]+f[i];</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span>&#123;</div><div class="line">				a[i*pri[j]] = pri[j];</div><div class="line">				f[i*pri[j]] = a[i*pri[j]]*f[i*pri[j] / a[i*pri[j]]]+f[i];</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//printf("%d %d %d\n" , i , a[i] , f[i]);</span></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	init(<span class="number">10000</span>);</div><div class="line">	<span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;=<span class="number">10000</span> ; i++) d[i] = f[i] - i;</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;f[<span class="number">220</span>]&lt;&lt;<span class="string">" "</span>&lt;&lt;f[<span class="number">284</span>]&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;=<span class="number">10000</span> ; i++)&#123;</div><div class="line">		<span class="keyword">if</span>(d[i]&gt;<span class="number">10000</span>) <span class="keyword">continue</span>;</div><div class="line">		<span class="keyword">if</span>(i == d[d[i]])&#123;</div><div class="line">			<span class="keyword">if</span>(i!=d[i]) ret+=i;</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span> , i,d[i]);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ret);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/03/projecteuler21-莫比乌斯求约数和/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-线性代数学习2-最小二乘问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/28/线性代数学习2-最小二乘问题/">线性代数学习2--最小二乘问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/28/线性代数学习2-最小二乘问题/" class="archive-article-date">
+  	<time datetime="2017-07-28T09:57:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">最小二乘</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/线性代数/" class="article-tag-list-link color5">线性代数</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/28/线性代数学习2-最小二乘问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-线性代数学习1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -191,7 +353,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-方程组解的问题"><a href="#1-方程组解的问题" class="headerlink" title="1.方程组解的问题"></a>1.方程组解的问题</h3><p>（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。</p>
+        <p>##基本概念</p>
+<h3 id="1-方程组解的问题"><a href="#1-方程组解的问题" class="headerlink" title="1.方程组解的问题"></a>1.方程组解的问题</h3><p>（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。</p>
 <p>（2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。</p>
 <p>如果rank(matrix)&lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我们总是将每一行第一次出现的非0位置作为限制变元（自己瞎取的名字- -），它们随着其他的n-rank(matrix)个变元的变化而变化。</p>
 <p>如果在消元过程中出现了[0 0 … 0 | 1]项，那就说明是无解的。</p>
@@ -887,197 +1050,6 @@
 
 
   
-    <article id="post-Python爬虫with-BeautifulSoup包-Mangodb" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/">Python爬虫with(BeautifulSoup包)+Mangodb</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/" class="archive-article-date">
-  	<time datetime="2017-07-16T12:42:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>自己是在安装的anaconda中默认带了以下相关的python数据包requests,re,BeautifulSoup,time,pymongo(mango数据库python包)</p>
-        
-          <a class="article-more-a" href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端/" class="article-tag-list-link color3">后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/16/Python爬虫with-BeautifulSoup包-Mangodb/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-简单神经网络学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/15/简单神经网络学习/">简单神经网络学习</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/15/简单神经网络学习/" class="archive-article-date">
-  	<time datetime="2017-07-15T07:32:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="感知器分类"><a href="#感知器分类" class="headerlink" title="感知器分类"></a>感知器分类</h2><p><strong>感知器分类算法基本步骤：</strong><br>权重向量w ，训练样本 X</p>
-<ol>
-<li>把权重向量初始化为0，或者把每个分量初始化为[0,1]之间的某一个小数</li>
-<li>把训练样本输入感知器，得到分类结果（1或者-1）</li>
-<li>根据分类结果和训练样本本身结果的比较更新权重向量</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/07/15/简单神经网络学习/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘/" class="article-tag-list-link color5">数据挖掘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/15/简单神经网络学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1175,6 +1147,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
@@ -1191,15 +1167,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">apache</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1215,11 +1191,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">最小二乘</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://ganjun.net">
   <title>线性代数学习1 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.方程组解的问题（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。 （2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。 如果rank(matrix)&amp;lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我">
+  <meta name="description" content="##基本概念 1.方程组解的问题（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。 （2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。 如果rank(matrix)&amp;lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也">
 <meta name="keywords" content="线性代数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性代数学习1">
 <meta property="og:url" content="http://ganjun.net/2017/07/25/线性代数学习1/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="1.方程组解的问题（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。 （2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。 如果rank(matrix)&amp;lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我">
+<meta property="og:description" content="##基本概念 1.方程组解的问题（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。 （2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。 如果rank(matrix)&amp;lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="http://ganjun.net/2017/07/25/线性代数学习1/逆矩阵计算.png">
-<meta property="og:updated_time" content="2017-07-26T06:43:36.000Z">
+<meta property="og:updated_time" content="2017-07-28T09:55:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性代数学习1">
-<meta name="twitter:description" content="1.方程组解的问题（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。 （2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。 如果rank(matrix)&amp;lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我">
+<meta name="twitter:description" content="##基本概念 1.方程组解的问题（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。 （2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。 如果rank(matrix)&amp;lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也">
 <meta name="twitter:image" content="http://ganjun.net/2017/07/25/线性代数学习1/逆矩阵计算.png">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
@@ -193,7 +193,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-方程组解的问题"><a href="#1-方程组解的问题" class="headerlink" title="1.方程组解的问题"></a>1.方程组解的问题</h3><p>（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。</p>
+        <p>##基本概念</p>
+<h3 id="1-方程组解的问题"><a href="#1-方程组解的问题" class="headerlink" title="1.方程组解的问题"></a>1.方程组解的问题</h3><p>（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。</p>
 <p>（2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。</p>
 <p>如果rank(matrix)&lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我们总是将每一行第一次出现的非0位置作为限制变元（自己瞎取的名字- -），它们随着其他的n-rank(matrix)个变元的变化而变化。</p>
 <p>如果在消元过程中出现了[0 0 … 0 | 1]项，那就说明是无解的。</p>
@@ -261,6 +262,8 @@
 <p><strong>定理</strong>  设A为一n×n的三角形矩阵，则A的行列式等于A的对角元素的乘积。</p>
 <p><strong>定理</strong>  设A为一n×n的矩阵：<br>​      (i) 若A有一行或者一列的元素全为0，那么det(A)=0</p>
 <p>​      (ii) 若A有两行或两列相等，则det(A)=0 </p>
+<p><strong>定理</strong>  若A和B均为n×n的矩阵，那么det(AB) = det(A)*det(B)</p>
+<h3 id="11-逆矩阵及其实现-JAVA"><a href="#11-逆矩阵及其实现-JAVA" class="headerlink" title="11.逆矩阵及其实现(JAVA)"></a>11.逆矩阵及其实现(JAVA)</h3><p><a href="http://paste.ubuntu.com/25175455/" target="_blank" rel="external">逆矩阵的java实现</a></p>
 
       
 
@@ -381,6 +384,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2017/07/28/线性代数学习2-最小二乘问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          线性代数学习2--最小二乘问题
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/07/24/马尔可夫模型4/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">马尔可夫模型4</div>
@@ -410,7 +422,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-方程组解的问题"><span class="toc-number">1.</span> <span class="toc-text">1.方程组解的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-齐次方程组"><span class="toc-number">2.</span> <span class="toc-text">2.齐次方程组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-行向量和列向量"><span class="toc-number">3.</span> <span class="toc-text">3.行向量和列向量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-矩阵乘法"><span class="toc-number">4.</span> <span class="toc-text">4.矩阵乘法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-矩阵的转置"><span class="toc-number">5.</span> <span class="toc-text">5.矩阵的转置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-代数法则"><span class="toc-number">6.</span> <span class="toc-text">6.代数法则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-单位矩阵"><span class="toc-number">7.</span> <span class="toc-text">7.单位矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-矩阵在网络和图中的运用-（线性代数P51）"><span class="toc-number">8.</span> <span class="toc-text">8.矩阵在网络和图中的运用 （线性代数P51）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-初等矩阵"><span class="toc-number">9.</span> <span class="toc-text">9.初等矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-行列式-线性代数P87"><span class="toc-number">10.</span> <span class="toc-text">10.行列式 (线性代数P87)</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-方程组解的问题"><span class="toc-number">1.</span> <span class="toc-text">1.方程组解的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-齐次方程组"><span class="toc-number">2.</span> <span class="toc-text">2.齐次方程组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-行向量和列向量"><span class="toc-number">3.</span> <span class="toc-text">3.行向量和列向量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-矩阵乘法"><span class="toc-number">4.</span> <span class="toc-text">4.矩阵乘法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-矩阵的转置"><span class="toc-number">5.</span> <span class="toc-text">5.矩阵的转置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-代数法则"><span class="toc-number">6.</span> <span class="toc-text">6.代数法则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-单位矩阵"><span class="toc-number">7.</span> <span class="toc-text">7.单位矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-矩阵在网络和图中的运用-（线性代数P51）"><span class="toc-number">8.</span> <span class="toc-text">8.矩阵在网络和图中的运用 （线性代数P51）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-初等矩阵"><span class="toc-number">9.</span> <span class="toc-text">9.初等矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-行列式-线性代数P87"><span class="toc-number">10.</span> <span class="toc-text">10.行列式 (线性代数P87)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-逆矩阵及其实现-JAVA"><span class="toc-number">11.</span> <span class="toc-text">11.逆矩阵及其实现(JAVA)</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -560,6 +572,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
@@ -576,15 +592,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">apache</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,11 +616,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">最小二乘</a>
               </li>
              
               <li class="article-tag-list-item">
