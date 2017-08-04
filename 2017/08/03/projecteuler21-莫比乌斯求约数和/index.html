@@ -9,13 +9,14 @@
   <title>projecteuler21-莫比乌斯求约数和 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Problem 21Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a">
+<meta name="keywords" content="projecteuler,数论,莫比乌斯反演">
 <meta property="og:type" content="article">
 <meta property="og:title" content="projecteuler21-莫比乌斯求约数和">
 <meta property="og:url" content="http://ganjun.net/2017/08/03/projecteuler21-莫比乌斯求约数和/index.html">
 <meta property="og:site_name" content="Junnor.G">
 <meta property="og:description" content="Problem 21Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2017-08-03T15:15:48.000Z">
+<meta property="og:updated_time" content="2017-08-04T05:34:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="projecteuler21-莫比乌斯求约数和">
 <meta name="twitter:description" content="Problem 21Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a">
@@ -193,6 +194,7 @@
         <h3 id="Problem-21"><a href="#Problem-21" class="headerlink" title="Problem 21"></a>Problem 21</h3><p>Let d(<em>n</em>) be defined as the sum of proper divisors of <em>n</em> (numbers less than <em>n</em> which divide evenly into <em>n</em>).<br>If d(<em>a</em>) = <em>b</em> and d(<em>b</em>) = <em>a</em>, where <em>a</em> ≠ <em>b</em>, then <em>a</em> and <em>b</em> are an amicable pair and each of <em>a</em> and <em>b</em> are called amicable numbers.</p>
 <p>For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.</p>
 <p>Evaluate the sum of all the amicable numbers under 10000.</p>
+<a id="more"></a>
 <p>这里的d(n)表示n的所有约数和减去自身<br>$$<br>d(n) = \sum_{d=1}^{n}{d}-n<br>$$</p>
 <p>这里将f(n)理解为所有的约数和，那么f(n) = d(n)+n , 最后d(n)做一个减法处理</p>
 <p>简单的暴力方法肯定没有问题，思考一个问题，在O(n)线性时间复杂度利用莫比乌斯反演的思想利用积性函数来解决。</p>
@@ -240,7 +242,41 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">projecteuler</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">莫比乌斯反演</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法/" class="article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -303,6 +339,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2017/08/04/projecteuler25-fibnacci数列/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          projecteuler25--fibnacci数列
+        
+      </div>
+    </a>
   
   
     <a href="/2017/07/28/线性代数学习2-最小二乘问题/" id="article-nav-older" class="article-nav-link-wrap">
@@ -483,7 +528,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,15 +548,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">apache</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,7 +576,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
