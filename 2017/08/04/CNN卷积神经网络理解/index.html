@@ -8,20 +8,18 @@
   <link rel="dns-prefetch" href="http://ganjun.net">
   <title>CNN卷积神经网络理解 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.卷积神经网络层级结构 上图中CNN要做的事情是：给定一张图片，是车还是马未知，是什么车也未知，现在需要模型判断这张图片里具体是一个什么东西，总之输出一个结果：如果是车 那是什么车">
+  <meta name="description" content="推荐资料CNN笔记：通俗理解卷积神经网络卷积神经网络CNN究竟是怎样一步一步工作的？">
 <meta name="keywords" content="CNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CNN卷积神经网络理解">
 <meta property="og:url" content="http://ganjun.net/2017/08/04/CNN卷积神经网络理解/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="1.卷积神经网络层级结构 上图中CNN要做的事情是：给定一张图片，是车还是马未知，是什么车也未知，现在需要模型判断这张图片里具体是一个什么东西，总之输出一个结果：如果是车 那是什么车">
+<meta property="og:description" content="推荐资料CNN笔记：通俗理解卷积神经网络卷积神经网络CNN究竟是怎样一步一步工作的？">
 <meta property="og:locale" content="Chinese">
-<meta property="og:image" content="http://ganjun.net/2017/08/04/CNN卷积神经网络理解/1.png">
-<meta property="og:updated_time" content="2017-08-04T08:05:01.000Z">
+<meta property="og:updated_time" content="2017-08-04T08:20:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CNN卷积神经网络理解">
-<meta name="twitter:description" content="1.卷积神经网络层级结构 上图中CNN要做的事情是：给定一张图片，是车还是马未知，是什么车也未知，现在需要模型判断这张图片里具体是一个什么东西，总之输出一个结果：如果是车 那是什么车">
-<meta name="twitter:image" content="http://ganjun.net/2017/08/04/CNN卷积神经网络理解/1.png">
+<meta name="twitter:description" content="推荐资料CNN笔记：通俗理解卷积神经网络卷积神经网络CNN究竟是怎样一步一步工作的？">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -193,24 +191,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-卷积神经网络层级结构"><a href="#1-卷积神经网络层级结构" class="headerlink" title="1.卷积神经网络层级结构"></a>1.卷积神经网络层级结构</h3><p><img src="1.png" alt=""></p>
-<p>上图中CNN要做的事情是：给定一张图片，是车还是马未知，是什么车也未知，现在需要模型判断这张图片里具体是一个什么东西，总之输出一个结果：如果是车 那是什么车</p>
-<a id="more"></a>
-<p>​    所以</p>
-<ul>
-<li>最左边是数据输入层，对数据做一些处理，比如去均值（把输入数据各个维度都中心化为0，避免数据过多偏差，影响训练效果）、归一化（把所有的数据都归一到同样的范围）、PCA/白化等等。CNN只对训练集做“去均值”这一步。</li>
-</ul>
-<p>​    中间是</p>
-<ul>
-<li>CONV：卷积计算层，线性乘积 求和。</li>
-<li>RELU：激励层，上文2.2节中有提到：ReLU是激活函数的一种。</li>
-<li>POOL：池化层，简言之，即取区域平均或最大。</li>
-</ul>
-<p>​    最右边是</p>
-<ul>
-<li>FC：全连接层</li>
-</ul>
-<p>​    这几个部分中，卷积计算层是CNN的核心，下文将重点阐述。</p>
+        <p>推荐资料<br><a href="http://blog.csdn.net/v_july_v/article/details/51812459" target="_blank" rel="external">CNN笔记：通俗理解卷积神经网络</a><br><a href="http://www.jianshu.com/p/fe428f0b32c1" target="_blank" rel="external">卷积神经网络CNN究竟是怎样一步一步工作的？</a></p>
 
       
 
@@ -331,6 +312,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2017/08/05/CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          CNN句子分类(Convolutional Neural Networks for Sentence Classification)
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/08/04/projecteuler25-fibnacci数列/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">projecteuler25--fibnacci数列</div>
@@ -360,7 +350,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-卷积神经网络层级结构"><span class="toc-number">1.</span> <span class="toc-text">1.卷积神经网络层级结构</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
@@ -514,6 +504,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
@@ -530,23 +532,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">apache</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,15 +548,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">qrcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,6 +581,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">正交矩阵</a>
               </li>
              
               <li class="article-tag-list-item">
