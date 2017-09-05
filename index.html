@@ -171,6 +171,112 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/">python-networkx绘制复杂网络关系图</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/" class="archive-article-date">
+  	<time datetime="2017-09-05T06:20:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>1.创建一个图</p>
+<p>2.节点</p>
+<p>3.边</p>
+<p>4.查看图上点和边的信息</p>
+<p>5.图的属性设置</p>
+<p>6.点的属性设置</p>
+<p>7.边的属性设置</p>
+<p>8.不同类型的图（有向图Directed graphs , 重边图 Multigraphs）</p>
+<p>9.图的遍历</p>
+<p>10.图生成和图上的一些操作</p>
+<p>11.图上分析</p>
+<p>12.图的绘制</p>
+        
+          <a class="article-more-a" href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">复杂网络</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">networkx</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">可视化图形</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/python/" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-Algorithm-Exercise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -191,30 +297,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="LeetCode-667"><a href="#LeetCode-667" class="headerlink" title="LeetCode 667"></a>LeetCode 667</h2><p><strong><em>题目链接：</em></strong><a href="https://leetcode.com/problems/beautiful-arrangement-ii/description/" target="_blank" rel="external">https://leetcode.com/problems/beautiful-arrangement-ii/description/</a></p>
-<blockquote>
-<p>题目</p>
-<p>给定两个整数n，k，输出一个包含1~n的数组。假定数组是[a1,a2,…,an]，保证得到的序列[|a1-a2| , |a2-a3| , … , |an-1 - an|]包含了恰好k个不同的数字。</p>
-<p>有多组解的情况下输出任意一组解</p>
-<p>1&lt;=k&lt;n&lt;=10000</p>
-</blockquote>
-<p>题解：</p>
-<p>这里最重要的是必须使用1~n的所有数字，为了保证能得到1~（n-1）的所有差值，必须左右来回取值保证差值最大，也就是1,n,2,n-1…，取到第k个的位置，因为剩下的数是连续的，那么保证他们的差值都为1即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] constructArray(<span class="keyword">int</span> n, <span class="keyword">int</span> k) &#123;</div><div class="line">        <span class="keyword">int</span> add = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> [] ans = <span class="keyword">new</span> <span class="keyword">int</span>[n];</div><div class="line">        ans[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> l = <span class="number">2</span> , r=n;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;k ; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(i%<span class="number">2</span> == <span class="number">1</span>)&#123;</div><div class="line">                ans[i] = r--;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                ans[i] = l++;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(k%<span class="number">2</span> == <span class="number">1</span>)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=k ; i&lt;n ; i++) &#123;</div><div class="line">                ans[i] = ans[i - <span class="number">1</span>] + <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=k ; i&lt;n ; i++)&#123;</div><div class="line">                ans[i] = ans[i - <span class="number">1</span>] - <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> ans;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="LeetCode-664"><a href="#LeetCode-664" class="headerlink" title="LeetCode 664"></a>LeetCode 664</h2><p><strong><em>题目链接：</em></strong><a href="https://leetcode.com/problems/strange-printer/description/" target="_blank" rel="external">https://leetcode.com/problems/strange-printer/description/</a></p>
-<blockquote>
-<p>题目</p>
-<p>有一个奇怪的打印机满足以下两个要求：</p>
-<p>1.每次打印一整个连续的序列使其对应位置上打印上同一个字母</p>
-<p>2.每次打印可以任意选择起始位置和终点位置，之后的打印会覆盖前面的打印结果</p>
-<p>问获得对应字符串需要至少打印多少次\</p>
-</blockquote>
-<p>题解：</p>
-<p>利用区间dp的思想，dp[i][j]表示打印好[i,j]的区间至少需要多少次</p>
-<p>这里第一层循环是区间的间隔，第二层循环是区间的起始位置，第三个循环是断开的位置，用来将两个区间合并在一起计算</p>
-<p>[i,k] [k+1,j]两个区间合并的时候如果s[k] = s[j]，那么打印次数可以减一，自己可以画画图看，但是为什么这个可以满足题目所需的所有情况，我还有点困惑需要解决。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> INF = <span class="number">1000000000</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">strangePrinter</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> len = s.length();</div><div class="line">        <span class="keyword">if</span>(s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> dp[][] = <span class="keyword">new</span> <span class="keyword">int</span>[len+<span class="number">1</span>][len+<span class="number">1</span>];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;=len ; i++)</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span> ; j&lt;=len ; j++)</div><div class="line">                <span class="keyword">if</span>(i&gt;j) dp[i][j] = <span class="number">0</span>;</div><div class="line">                <span class="keyword">else</span> dp[i][j] = INF;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;len ; i++)&#123;</div><div class="line">            dp[i][i] = <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> d=<span class="number">1</span> ; d&lt;len ; d++)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i+d&lt;len ; i++)&#123;</div><div class="line">                <span class="keyword">int</span> j = i+d;</div><div class="line">                dp[i][j] = d+<span class="number">1</span>;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=i ; k&lt;j ; k++)&#123;</div><div class="line">                    <span class="keyword">if</span>(s.charAt(k) != s.charAt(j)) dp[i][j] = Math.min(dp[i][k]+dp[k+<span class="number">1</span>][j] , dp[i][j]);</div><div class="line">                    <span class="keyword">else</span> dp[i][j] = Math.min(dp[i][k]+dp[k+<span class="number">1</span>][j]-<span class="number">1</span> , dp[i][j]);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][len-<span class="number">1</span>];</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li>LeetCode 667</li>
+<li>LeetCode 664</li>
+<li>LeetCode 668</li>
+<li>projecteuler 60</li>
+<li>Projecteuler 62</li>
+</ol>
+        
+          <a class="article-more-a" href="/2017/09/03/LeetCode-Algorithm-Exercise/#more">more >></a>
+        
       
 
       
@@ -1063,98 +1155,6 @@
 
 
   
-    <article id="post-线性代数学习1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/25/线性代数学习1/">线性代数学习1</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/25/线性代数学习1/" class="archive-article-date">
-  	<time datetime="2017-07-25T06:56:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##基本概念</p>
-<h3 id="1-方程组解的问题"><a href="#1-方程组解的问题" class="headerlink" title="1.方程组解的问题"></a>1.方程组解的问题</h3><p>（1）对于n*n的方程组来说，在仅有一个解的情况下，在高斯消元得到的一定是一个“严格三角形方程组”。</p>
-<p>（2）对于m*n的方程组来说，也就是m个方程式，n个变量，如果经过高斯消元之后，舍弃掉所有的全0项，最后留下的行数就是矩阵的秩，rank(matrix)。</p>
-<p>如果rank(matrix)&lt;n，那么说明这个矩阵中有n-rank(matrix)个自由变元，解集空间也就是无限大。我们总是将每一行第一次出现的非0位置作为限制变元（自己瞎取的名字- -），它们随着其他的n-rank(matrix)个变元的变化而变化。</p>
-<p>如果在消元过程中出现了[0 0 … 0 | 1]项，那就说明是无解的。</p>
-<p>如果rank(matrix)=n，那么只存在唯一解。</p>
-        
-          <a class="article-more-a" href="/2017/07/25/线性代数学习1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">线性代数</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/25/线性代数学习1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1256,18 +1256,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
@@ -1280,11 +1268,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1292,23 +1280,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">qrcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1324,7 +1304,39 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">复杂网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">networkx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">可视化图形</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">qrcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1336,11 +1348,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">最小二乘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">正交矩阵</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">最小二乘</a>
+                <a href="javascript:void(0)" class="js-tag color5">组合数学</a>
               </li>
              
               <li class="article-tag-list-item">
