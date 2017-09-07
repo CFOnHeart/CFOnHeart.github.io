@@ -1,0 +1,256 @@
+<hr>
+<p>title: python-networkx绘制复杂网络关系图<br>date: 2017-09-05 14:20:07<br>tags: [复杂网络,networkx,可视化图形]</p>
+<h2 id="categories-python"><a href="#categories-python" class="headerlink" title="categories: [python]"></a>categories: [python]</h2><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>1.创建一个图<br>2.节点<br>3.边<br>4.查看图上点和边的信息<br>5.图的属性设置<br>6.点的属性设置<br>7.边的属性设置<br>8.不同类型的图（有向图Directed graphs , 重边图 Multigraphs）<br>9.图的遍历<br>10.图生成和图上的一些操作<br>11.图上分析<br>12.图的绘制</p>
+<!--more-->
+<h3 id="1-创建一个图"><a href="#1-创建一个图" class="headerlink" title="1. 创建一个图"></a>1. 创建一个图</h3><pre><code class="python"><span class="keyword">import</span> networkx <span class="keyword">as</span> nx
+g = nx.Graph()
+g.clear() <span class="comment">#将图上元素清空</span>
+</code></pre>
+<p>所有的构建复杂网络图的操作基本都围绕这个g来执行。</p>
+<h3 id="2-节点"><a href="#2-节点" class="headerlink" title="2. 节点"></a>2. 节点</h3><p>节点的名字可以是任意数据类型的，添加一个节点是</p>
+<pre><code class="python">g.add_node(<span class="number">1</span>)
+g.add_node(<span class="string">"a"</span>)
+g.add_node(<span class="string">"spam"</span>)
+</code></pre>
+<p>添加一组节点，就是提前构建好了一个节点列表，将其一次性加进来，这跟后边加边的操作是具有一致性的。</p>
+<pre><code class="python">g.add_nodes_from([<span class="number">2</span>,<span class="number">3</span>])
+<span class="keyword">or</span> 
+a = [<span class="number">2</span>,<span class="number">3</span>]
+g.add_nodes_from(a)
+</code></pre>
+<p>这里需要值得注意的一点是，对于add_node加一个点来说，字符串是只添加了名字为整个字符串的节点。但是对于add_nodes_from加一组点来说，字符串表示了添加了每一个字符都代表的多个节点，exp：</p>
+<pre><code class="python">g.add_node(<span class="string">"spam"</span>) <span class="comment">#添加了一个名为spam的节点</span>
+g.add_nodes_from(<span class="string">"spam"</span>) <span class="comment">#添加了4个节点，名为s,p,a,m</span>
+g.nodes() <span class="comment">#可以将以上5个节点打印出来看看</span>
+</code></pre>
+<p>加一组从0开始的连续数字的节点</p>
+<pre><code class="python">H = nx.path_graph(<span class="number">10</span>)
+g.add_nodes_from(H) <span class="comment">#将0~9加入了节点</span>
+<span class="comment">#但请勿使用g.add_node(H)</span>
+</code></pre>
+<p><strong>删除节点</strong></p>
+<p>与添加节点同理</p>
+<pre><code>g.remove_node(node_name)
+g.remove_nodes_from(nodes_list)
+</code></pre><h3 id="3-边"><a href="#3-边" class="headerlink" title="3. 边"></a>3. 边</h3><p>边是由对应节点的名字的元组组成，加一条边</p>
+<pre><code class="python">g.add_edge(<span class="number">1</span>,<span class="number">2</span>)
+e = (<span class="number">2</span>,<span class="number">3</span>)
+g.add_edge(*e) <span class="comment">#直接g.add_edge(e)数据类型不对，*是将元组中的元素取出</span>
+</code></pre>
+<p>加一组边</p>
+<pre><code class="python">g.add_edges_from([(<span class="number">1</span>,<span class="number">2</span>),(<span class="number">1</span>,<span class="number">3</span>)])
+g.add_edges_from([(<span class="string">"a"</span>,<span class="string">"spam"</span>) , (<span class="string">"a"</span>,<span class="number">2</span>)])
+</code></pre>
+<p>通过nx.path_graph(n)加一系列连续的边</p>
+<pre><code class="python">n = <span class="number">10</span>
+H = nx.path_graph(n)
+g.add_edges_from(H.edges()) <span class="comment">#添加了0~1,1~2 ... n-2~n-1这样的n-1条连续的边</span>
+</code></pre>
+<p><strong>删除边</strong></p>
+<p>同理添加边的操作</p>
+<pre><code class="python">g.remove_edge(edge)
+g.remove_edges_from(edges_list)
+</code></pre>
+<h3 id="4-查看图上点和边的信息"><a href="#4-查看图上点和边的信息" class="headerlink" title="4. 查看图上点和边的信息"></a>4. 查看图上点和边的信息</h3><pre><code class="python">g.number_of_nodes() <span class="comment">#查看点的数量</span>
+g.number_of_edges() <span class="comment">#查看边的数量</span>
+g.nodes() <span class="comment">#返回所有点的信息(list)</span>
+g.edges() <span class="comment">#返回所有边的信息(list中每个元素是一个tuple)</span>
+g.neighbors(<span class="number">1</span>) <span class="comment">#所有与1这个点相连的点的信息以列表的形式返回</span>
+g[<span class="number">1</span>] <span class="comment">#查看所有与1相连的边的属性，格式输出：{0: {}, 2: {}} 表示1和0相连的边没有设置任何属性（也就是{}没有信息），同理1和2相连的边也没有任何属性</span>
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.has_node.html#networkx.Graph.has_node"><code>Graph.has_node</code></a>(n)</td>
+<td>Return True if the graph contains the node n.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.__contains__.html#networkx.Graph.__contains__"><code>Graph.__contains__</code></a>(n)</td>
+<td>Return True if n is a node, False otherwise.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.has_edge.html#networkx.Graph.has_edge"><code>Graph.has_edge</code></a>(u, v)</td>
+<td>Return True if the edge (u,v) is in the graph.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.order.html#networkx.Graph.order"><code>Graph.order</code></a>()</td>
+<td>Return the number of nodes in the graph.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.number_of_nodes.html#networkx.Graph.number_of_nodes"><code>Graph.number_of_nodes</code></a>()</td>
+<td>Return the number of nodes in the graph.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.__len__.html#networkx.Graph.__len__"><code>Graph.__len__</code></a>()</td>
+<td>Return the number of nodes.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.degree.html#networkx.Graph.degree"><code>Graph.degree</code></a>([nbunch, weight])</td>
+<td>Return the degree of a node or nodes.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.degree_iter.html#networkx.Graph.degree_iter"><code>Graph.degree_iter</code></a>([nbunch, weight])</td>
+<td>Return an iterator for (node, degree).</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.size.html#networkx.Graph.size"><code>Graph.size</code></a>([weight])</td>
+<td>Return the number of edges.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.number_of_edges.html#networkx.Graph.number_of_edges"><code>Graph.number_of_edges</code></a>([u, v])</td>
+<td>Return the number of edges between two nodes.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.nodes_with_selfloops.html#networkx.Graph.nodes_with_selfloops"><code>Graph.nodes_with_selfloops</code></a>()</td>
+<td>Return a list of nodes with self loops.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.selfloop_edges.html#networkx.Graph.selfloop_edges"><code>Graph.selfloop_edges</code></a>([data, default])</td>
+<td>Return a list of selfloop edges.</td>
+</tr>
+<tr>
+<td><a href="https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.Graph.number_of_selfloops.html#networkx.Graph.number_of_selfloops"><code>Graph.number_of_selfloops</code></a>()</td>
+<td>Return the number of selfloop edges.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-图的属性设置"><a href="#5-图的属性设置" class="headerlink" title="5. 图的属性设置"></a>5. 图的属性设置</h3><p>为图赋予初始属性</p>
+<pre><code class="python">g = nx.Graph(day=<span class="string">"Monday"</span>) 
+g.graph <span class="comment"># {'day': 'Monday'}</span>
+</code></pre>
+<p>修改图的属性</p>
+<pre><code class="python">g.graph[<span class="string">'day'</span>] = <span class="string">'Tuesday'</span>
+g.graph <span class="comment"># {'day': 'Tuesday'}</span>
+</code></pre>
+<h3 id="6-点的属性设置"><a href="#6-点的属性设置" class="headerlink" title="6. 点的属性设置"></a>6. 点的属性设置</h3><pre><code class="python">g.add_node(<span class="string">'benz'</span>, money=<span class="number">10000</span>, fuel=<span class="string">"1.5L"</span>)
+<span class="keyword">print</span> g.node[<span class="string">'benz'</span>] <span class="comment"># {'fuel': '1.5L', 'money': 10000}</span>
+<span class="keyword">print</span> g.node[<span class="string">'benz'</span>][<span class="string">'money'</span>] <span class="comment"># 10000</span>
+<span class="keyword">print</span> g.nodes(data=<span class="keyword">True</span>) <span class="comment"># data默认false就是不输出属性信息，修改为true，会将节点名字和属性信息一起输出</span>
+</code></pre>
+<h3 id="7-边的属性设置"><a href="#7-边的属性设置" class="headerlink" title="7. 边的属性设置"></a>7. 边的属性设置</h3><p>通过上文中对g[1]的介绍可知边的属性在{}中显示出来，我们可以根据这个秀改变的属性</p>
+<pre><code class="python">g.clear()
+n = <span class="number">10</span>
+H = nx.path_graph(n)
+g.add_nodes_from(H)
+g.add_edges_from(H.edges())
+g[<span class="number">1</span>][<span class="number">2</span>][<span class="string">'color'</span>] = <span class="string">'blue'</span>
+
+g.add_edge(<span class="number">1</span>, <span class="number">2</span>, weight=<span class="number">4.7</span>)
+g.add_edges_from([(<span class="number">3</span>,<span class="number">4</span>),(<span class="number">4</span>,<span class="number">5</span>)], color=<span class="string">'red'</span>)
+g.add_edges_from([(<span class="number">1</span>,<span class="number">2</span>,{<span class="string">'color'</span>:<span class="string">'blue'</span>}), (<span class="number">2</span>,<span class="number">3</span>,{<span class="string">'weight'</span>:<span class="number">8</span>})])
+g[<span class="number">1</span>][<span class="number">2</span>][<span class="string">'weight'</span>] = <span class="number">4.7</span>
+g.edge[<span class="number">1</span>][<span class="number">2</span>][<span class="string">'weight'</span>] = <span class="number">4</span>
+</code></pre>
+<h3 id="8-不同类型的图（有向图Directed-graphs-重边图-Multigraphs）"><a href="#8-不同类型的图（有向图Directed-graphs-重边图-Multigraphs）" class="headerlink" title="8. 不同类型的图（有向图Directed graphs , 重边图 Multigraphs）"></a>8. 不同类型的图（有向图Directed graphs , 重边图 Multigraphs）</h3><ul>
+<li><h4 id="Directed-graphs"><a href="#Directed-graphs" class="headerlink" title="Directed graphs"></a>Directed graphs</h4><pre><code class="python">DG = nx.DiGraph()
+DG.add_weighted_edges_from([(<span class="number">1</span>,<span class="number">2</span>,<span class="number">0.5</span>), (<span class="number">3</span>,<span class="number">1</span>,<span class="number">0.75</span>), (<span class="number">1</span>,<span class="number">4</span>,<span class="number">0.3</span>)]) <span class="comment"># 添加带权值的边</span>
+<span class="keyword">print</span> DG.out_degree(<span class="number">1</span>) <span class="comment"># 打印结果：2 表示：找到1的出度</span>
+<span class="keyword">print</span> DG.out_degree(<span class="number">1</span>, weight=<span class="string">'weight'</span>) <span class="comment"># 打印结果：0.8 表示：从1出去的边的权值和，这里权值是以weight属性值作为标准，如果你有一个money属性，那么也可以修改为weight='money'，那么结果就是对money求和了</span>
+<span class="keyword">print</span> DG.successors(<span class="number">1</span>) <span class="comment"># [2,4] 表示1的后继节点有2和4</span>
+<span class="keyword">print</span> DG.predecessors(<span class="number">1</span>) <span class="comment"># [3] 表示只有一个节点3有指向1的连边</span>
+</code></pre>
+<p>​</p>
+</li>
+<li><h4 id="Multigraphs"><a href="#Multigraphs" class="headerlink" title="Multigraphs"></a>Multigraphs</h4><p>简答从字面上理解就是这种复杂网络图允许你相同节点之间允许出现重边</p>
+<pre><code class="python">MG=nx.MultiGraph()
+MG.add_weighted_edges_from([(<span class="number">1</span>,<span class="number">2</span>,<span class="number">.5</span>), (<span class="number">1</span>,<span class="number">2</span>,<span class="number">.75</span>), (<span class="number">2</span>,<span class="number">3</span>,<span class="number">.5</span>)])
+<span class="keyword">print</span> MG.degree(weight=<span class="string">'weight'</span>) <span class="comment"># {1: 1.25, 2: 1.75, 3: 0.5}</span>
+GG=nx.Graph()
+<span class="keyword">for</span> n,nbrs <span class="keyword">in</span> MG.adjacency_iter():
+    <span class="keyword">for</span> nbr,edict <span class="keyword">in</span> nbrs.items():
+        minvalue=min([d[<span class="string">'weight'</span>] <span class="keyword">for</span> d <span class="keyword">in</span> edict.values()])
+        GG.add_edge(n,nbr, weight = minvalue)
+
+<span class="keyword">print</span> nx.shortest_path(GG,<span class="number">1</span>,<span class="number">3</span>) <span class="comment"># [1, 2, 3]</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="9-图的遍历"><a href="#9-图的遍历" class="headerlink" title="9.  图的遍历"></a>9.  图的遍历</h3><pre><code class="Python">g = nx.Graph()
+g.add_weighted_edges_from([(<span class="number">1</span>,<span class="number">2</span>,<span class="number">0.125</span>),(<span class="number">1</span>,<span class="number">3</span>,<span class="number">0.75</span>),(<span class="number">2</span>,<span class="number">4</span>,<span class="number">1.2</span>),(<span class="number">3</span>,<span class="number">4</span>,<span class="number">0.375</span>)])
+<span class="keyword">for</span> n,nbrs <span class="keyword">in</span> g.adjacency_iter(): <span class="comment">#n表示每一个起始点，nbrs是一个字典，字典中的每一个元素包含了这个起始点连接的点和这两个点连边对应的属性</span>
+      <span class="keyword">print</span> n, nbrs
+    <span class="keyword">for</span> nbr,eattr <span class="keyword">in</span> nbrs.items():
+          <span class="comment"># nbr表示跟n连接的点，eattr表示这两个点连边的属性集合，这里只设置了weight，如果你还设置了color，那么就可以通过eattr['color']访问到对应的color元素</span>
+        data=eattr[<span class="string">'weight'</span>]
+        <span class="keyword">if</span> data&lt;<span class="number">0.5</span>: print(<span class="string">'(%d, %d, %.3f)'</span> % (n,nbr,data))
+</code></pre>
+<h3 id="10-图生成和图上的一些操作"><a href="#10-图生成和图上的一些操作" class="headerlink" title="10. 图生成和图上的一些操作"></a>10. 图生成和图上的一些操作</h3><p>下方的这些操作都是在networkx包内的方法</p>
+<pre><code class="python">subgraph(G, nbunch)      - induce subgraph of G on nodes in nbunch
+union(G1,G2)             - graph union
+disjoint_union(G1,G2)    - graph union assuming all nodes are different
+cartesian_product(G1,G2) - return Cartesian product graph
+compose(G1,G2)           - combine graphs identifying nodes common to both
+complement(G)            - graph complement
+create_empty_copy(G)     - return an empty copy of the same graph class
+convert_to_undirected(G) - return an undirected representation of G
+convert_to_directed(G)   - return a directed representation of G
+</code></pre>
+<h3 id="11-图上分析"><a href="#11-图上分析" class="headerlink" title="11. 图上分析"></a>11. 图上分析</h3><pre><code class="python">g = nx.Graph()
+g.add_edges_from([(<span class="number">1</span>,<span class="number">2</span>), (<span class="number">1</span>,<span class="number">3</span>)])
+g.add_node(<span class="string">"spam"</span>) 
+nx.connected_components(g) <span class="comment"># [[1, 2, 3], ['spam']] 表示返回g上的不同连通块</span>
+sorted(nx.degree(g).values())
+</code></pre>
+<p>通过构建权值图，可以直接快速利用dijkstra_path()接口计算最短路程</p>
+<pre><code class="Python"><span class="meta">&gt;&gt;&gt; </span>G=nx.Graph()
+<span class="meta">&gt;&gt;&gt; </span>e=[(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="number">0.3</span>),(<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="number">0.9</span>),(<span class="string">'a'</span>,<span class="string">'c'</span>,<span class="number">0.5</span>),(<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="number">1.2</span>)]
+<span class="meta">&gt;&gt;&gt; </span>G.add_weighted_edges_from(e)
+<span class="meta">&gt;&gt;&gt; </span>print(nx.dijkstra_path(G,<span class="string">'a'</span>,<span class="string">'d'</span>))
+[<span class="string">'a'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>]
+</code></pre>
+<h3 id="12-图的绘制"><a href="#12-图的绘制" class="headerlink" title="12. 图的绘制"></a>12. 图的绘制</h3><p>下面是4种图的构造方法，选择其中一个</p>
+<pre><code class="python">nx.draw(g)
+nx.draw_random(g) <span class="comment">#点随机分布</span>
+nx.draw_circular(g) <span class="comment">#点的分布形成一个环</span>
+nx.draw_spectral(g)
+</code></pre>
+<p>最后将图形表现出来</p>
+<pre><code class="python"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+plt.show()
+</code></pre>
+<p>将图片保存到下来</p>
+<pre><code class="python">nx.draw(g)
+plt.savefig(<span class="string">"path.png"</span>)
+</code></pre>
+<p>修改节点颜色，边的颜色</p>
+<pre><code class="python">g = nx.cubical_graph()
+nx.draw(g, pos=nx.spectral_layout(g), nodecolor=<span class="string">'r'</span>, edge_color=<span class="string">'b'</span>)
+plt.show()
+</code></pre>
+<h3 id="13-图形种类的选择"><a href="#13-图形种类的选择" class="headerlink" title="13. 图形种类的选择"></a>13. 图形种类的选择</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">Graph Type</th>
+<th style="text-align:center">NetworkX Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">简单无向图</td>
+<td style="text-align:center">Graph()</td>
+</tr>
+<tr>
+<td style="text-align:center">简单有向图</td>
+<td style="text-align:center">DiGraph()</td>
+</tr>
+<tr>
+<td style="text-align:center">有自环</td>
+<td style="text-align:center">Grap(),DiGraph()</td>
+</tr>
+<tr>
+<td style="text-align:center">有重边</td>
+<td style="text-align:center">MultiGraph(), MultiDiGraph()</td>
+</tr>
+</tbody>
+</table>
+<p>reference：<a href="https://networkx.github.io/documentation/networkx-1.10/reference/classes.html">https://networkx.github.io/documentation/networkx-1.10/reference/classes.html</a></p>
+<h4 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h4><ol>
+<li><a href="https://networkx.github.io/documentation/networkx-1.10/tutorial/tutorial.html#edges">neworks Documents</a></li>
+<li><a href="https://www.zhihu.com/question/27813239">知乎-如何做出漂亮的复杂网络关系图</a></li>
+</ol>
