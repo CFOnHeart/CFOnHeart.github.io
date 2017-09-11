@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://ganjun.net">
   <title>组合数学-1 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="f: N -&amp;gt; M  将n个求放入m个盒子中的多种方式    balls per bin unrestricted &amp;lt;=1 &amp;gt;=1     n distinct balls , m distinct bins $m^n$ $(m)_n$ $m!\begin{Bmatrix} m \ n \end{Bmatrix}$   n identical balls , m distinct">
+  <meta name="description" content="f: N -&amp;gt; M  将n个求放入m个盒子中的多种方式 distinct: 不同 identical: 相同    balls per bin unrestricted &amp;lt;=1 &amp;gt;=1     n distinct balls , m distinct bins $m^n$ $(m)_n$ $m!\begin{Bmatrix} m \ n \end{Bmatrix}$   n i">
 <meta name="keywords" content="组合数学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="组合数学-1">
 <meta property="og:url" content="http://ganjun.net/2017/09/11/组合数学-1/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="f: N -&amp;gt; M  将n个求放入m个盒子中的多种方式    balls per bin unrestricted &amp;lt;=1 &amp;gt;=1     n distinct balls , m distinct bins $m^n$ $(m)_n$ $m!\begin{Bmatrix} m \ n \end{Bmatrix}$   n identical balls , m distinct">
+<meta property="og:description" content="f: N -&amp;gt; M  将n个求放入m个盒子中的多种方式 distinct: 不同 identical: 相同    balls per bin unrestricted &amp;lt;=1 &amp;gt;=1     n distinct balls , m distinct bins $m^n$ $(m)_n$ $m!\begin{Bmatrix} m \ n \end{Bmatrix}$   n i">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2017-09-11T12:24:39.000Z">
+<meta property="og:updated_time" content="2017-09-11T13:13:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="组合数学-1">
-<meta name="twitter:description" content="f: N -&amp;gt; M  将n个求放入m个盒子中的多种方式    balls per bin unrestricted &amp;lt;=1 &amp;gt;=1     n distinct balls , m distinct bins $m^n$ $(m)_n$ $m!\begin{Bmatrix} m \ n \end{Bmatrix}$   n identical balls , m distinct">
+<meta name="twitter:description" content="f: N -&amp;gt; M  将n个求放入m个盒子中的多种方式 distinct: 不同 identical: 相同    balls per bin unrestricted &amp;lt;=1 &amp;gt;=1     n distinct balls , m distinct bins $m^n$ $(m)_n$ $m!\begin{Bmatrix} m \ n \end{Bmatrix}$   n i">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -192,6 +192,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>f: N -&gt; M  将n个求放入m个盒子中的多种方式</p>
+<p>distinct: 不同 identical: 相同</p>
 <table>
 <thead>
 <tr>
@@ -229,6 +230,58 @@
 </tbody>
 </table>
 <a id="more"></a>
+<h3 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h3><blockquote>
+<p>理解映射 $f: A \rightarrow B$的关键是抓住集合A中元素在集合B中的象的存在性和唯一性。根据映射中象与原象的不同状态，有下面几种有用的映射关系。</p>
+</blockquote>
+<ul>
+<li>单射：对于映射 $f: A \rightarrow B$，如果A中不同的元素在B中有不同的象，那么称映射 $f: A \rightarrow B$为集合A到B的单射。<br><strong>对于单射 $f: A \rightarrow B$，有$|A| \le |B|$。这里|M|表示集合M中的元素个数</strong></li>
+<li>满射：对于映射 $f: A \rightarrow B$，如果B中的每一个元素在A中都有原象，那么映射 $f: A \rightarrow B$为集合A到集合B的满射。<br><strong>对于满射 $f: A \rightarrow B$，有$|A| \ge |B|$。</strong></li>
+<li>双射：如果映射 $f: A \rightarrow B$同时是A到B上的单射和满射，那么称映射 $f: A \rightarrow B$为集合A到B的双射。双射也叫做一一映射。<br><strong>对于双射 $f: A \rightarrow B$，有$|A| = |B|$。</strong></li>
+</ul>
+<p>上述的表格我看作一个4*3的矩阵，根据对应位置来解释对应的答案。</p>
+<h3 id="符号定义"><a href="#符号定义" class="headerlink" title="符号定义"></a>符号定义</h3><blockquote>
+<p>先来了解一下一些对应符号的定义</p>
+<ul>
+<li>$(m)_n$也就是平时我们理解的排列数从m个数当中取n个数做全排列，$(m)_n = \frac {m!}{(m-n)!}$</li>
+<li>$\binom{m}{n}$组合数从m个球中取n个球得到的方法种数，$\binom{m}{n} = \frac{m!}{n!(m-n)!}$</li>
+<li>$\begin{Bmatrix} n \ k \end{Bmatrix}$第二类斯特林数，具体数学上给出的是表示将一个有n件物品的集合划分成k个非空子集的方法数<br>对应就有第一类斯特林数$\begin{bmatrix} n \ k \end{bmatrix}$，表示将n个元素排成k个轮换。</li>
+<li>$p_m(n)$将正整数n划分成m个正整数相加的方法数（只是交换了数字的顺序视为等价）</li>
+<li>$p(n)$就是划分函数或者分割函数我的<a href="http://localhost:4000/2017/09/11/%E5%88%92%E5%88%86%E5%87%BD%E6%95%B0-%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86-and-%E4%BA%94%E8%BE%B9%E5%BD%A2%E5%AE%9A%E7%90%86/" target="_blank" rel="external">对应博客</a>中有具体地讲解。</li>
+</ul>
+</blockquote>
+<h3 id="斯特林数"><a href="#斯特林数" class="headerlink" title="斯特林数"></a>斯特林数</h3><p><strong>第二类斯特林数</strong></p>
+<p>$\begin{Bmatrix} n \ k \end{Bmatrix} =k \begin{Bmatrix} n-1 \ k \end{Bmatrix} + \begin{Bmatrix} n-1 \ k-1 \end{Bmatrix}$</p>
+<p>上述的递归式很容易理解为最后一个物品是否单独形成一个等价类形成了两种可能，如果它不单独形成等价类，它可以加入其他k各等价类中，所以乘以k，否则单独形成等价类。</p>
+<h3 id="n个不同球放入m个不同箱子，保证每个箱子球数量大于1的解释"><a href="#n个不同球放入m个不同箱子，保证每个箱子球数量大于1的解释" class="headerlink" title="n个不同球放入m个不同箱子，保证每个箱子球数量大于1的解释"></a>n个不同球放入m个不同箱子，保证每个箱子球数量大于1的解释</h3><p>因为这里球和箱子各不相同，所以可以作为集合中的元素看待.</p>
+<p>根据映射原理：n个球属于集合A，m个箱子属于集合B，保证每个箱子球数量大于1，说明这是个$f:A \rightarrow B$满射。<br>$$<br>\forall i \in B \quad f^{-1}(i) \ne 0 \\<br> (f^{-1}(B_1),f^{-1}(B_2),f^{-1}(B_3),…,f^{-1}(B_m)) -&gt;构成了一个有序的n元集合的m组划分<br>$$<br>简单理解就是</p>
+<p>$f^{-1}(B_i)$得到的是A中映射到B中第i个元素的一组元素的集合。</p>
+<p>假定如上构成的这m组划分是有序的，那么就理解为将n个不同的元素划分到m个集合内，这就是一个第二类斯特林数$\begin{Bmatrix} n \ m \end{Bmatrix}$，然后实际上m个箱子的不同，它任意交换顺序可构成m!种有序集合。</p>
+<p>所以总的方法数量就是$m! \begin{Bmatrix} n \ m \end{Bmatrix}$。</p>
+<h3 id="n个相同的球放入m个不同箱子的解释"><a href="#n个相同的球放入m个不同箱子的解释" class="headerlink" title="n个相同的球放入m个不同箱子的解释"></a>n个相同的球放入m个不同箱子的解释</h3><p>最简单地说就叫插板法。</p>
+<p>如果每个箱子要求数量都&gt;=1，那么就相当于在n个球的n-1个间隔中找到m个间隔插入隔板，这样就区分出来了m个箱子中的球的数量。</p>
+<p>那么当可以要求任意数量的时候，那么也就是说明箱子中可以是0个球，但为了保证两个隔板间至少要有球作区分，那么只要将n+m，让每个箱子都在原基础上多加一个球即可。</p>
+<h3 id="p-k-n"><a href="#p-k-n" class="headerlink" title="$p_k(n)$"></a>$p_k(n)$</h3><blockquote>
+<p>当x限定将n表示成刚好k个正整数之和时，可以表示为$p_k(n)$。显然$p(n) = \sum_{k=1}^n{p_k(n)}$</p>
+</blockquote>
+<p><strong>性质</strong></p>
+<ul>
+<li>对于n&gt;1, $p_n(n) = p_1(n) = 1$</li>
+<li>$p_2(n) = \left\lfloor n/2 \right\rfloor$ (<a href="https://oeis.org/A004526" target="_blank" rel="external">OEIS:A004526</a>)</li>
+<li>$p_3(n)= 最接近n^2/12的正整数$。(<a href="https://oeis.org/A069905" target="_blank" rel="external">OEIS:A069905</a>)</li>
+<li>$p_{n-1}(n) = 1$</li>
+<li>$p_k(n) = p_{k-1}(n-1) + p_k(n-k)$。<br>1.最小的那个数字是1时，除去那个数字，剩余个数为k-1<br> 2.最小的数字大于1时，将每个位置上的数字都减去1，共减了k，剩余数字个数为k</li>
+</ul>
+<p>$p_k(n)$能够抽象表示为n个相同的球放入m个相同的箱子的方法种数。</p>
+<p>我们构建一个关于S -&gt; T的映射</p>
+<p>我们可以知道的对于S-&gt;T的映射</p>
+<p>1)单射情况下 $|S| \le |T|$</p>
+<p>2)满射情况下 $|S| \ge |T|$</p>
+<p>根据单射和满射的情况，这是一个很优秀的计算出上下界的方法</p>
+<p>我们构建划分和组合两种方式<br>$$<br>\begin{aligned}<br>partition \quad<br>&amp; \begin{cases}<br>x_1+x_2+ … +x_k = n \\<br>(x_1,x_2,…,x_k) &amp; x_1\ge x_2 \ge … \ge x_k \ge 1<br>\end{cases}<br>\\<br>\\<br>composition \quad<br>&amp; \begin{cases}<br>x_1+x_2+ … +x_k = n \\<br>(x_1,x_2,…,x_k) &amp; x_i \ge 1<br>\end{cases}<br>\end{aligned}<br>$$<br><strong>对于partition的结果k个数字可以任意排序，建立一个集合S，对于composition建立一个集合T，那么S到T的映射必然是满射的，因为必然包含了T中所有的结果，S中甚至可能会出现重复的部分，那么就能得知：</strong></p>
+<p>$|S| \ge |T| \Leftrightarrow k!p_k(n) \ge \binom{n-1}{k-1}$.</p>
+<p><strong>同理对于partition的结果k个数字可以任意排序，建立一个集合S，对于composition建立一个集合T，希望S到T的映射必是单射的，那么只有在任意$x_i$和$x_j$不相等的情况下成立，那么就构造</strong>$x_1+k-1 \ge x_2+k-2 \ge … \ge x_k \ge 1$，<strong>因为是单射就能得到如下结果</strong></p>
+<p>$|S| \le |T| \Leftrightarrow k!p_k(n) \le \binom{n+(k-1)k/2-1}{k-1}$.<br>$$<br>\frac{\binom{n-1}{k-1}}{k!} \le p_k(n) \le \frac{\binom{n+(k-1)k/2-1}{k-1}}{k!}<br>$$<br>那么由n趋向于无穷，可以推算得知这趋向于一个极限。</p>
+
       
 
       
@@ -377,7 +430,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#映射"><span class="toc-number">1.</span> <span class="toc-text">映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#符号定义"><span class="toc-number">2.</span> <span class="toc-text">符号定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#斯特林数"><span class="toc-number">3.</span> <span class="toc-text">斯特林数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#n个不同球放入m个不同箱子，保证每个箱子球数量大于1的解释"><span class="toc-number">4.</span> <span class="toc-text">n个不同球放入m个不同箱子，保证每个箱子球数量大于1的解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#n个相同的球放入m个不同箱子的解释"><span class="toc-number">5.</span> <span class="toc-text">n个相同的球放入m个不同箱子的解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p-k-n"><span class="toc-number">6.</span> <span class="toc-text">$p_k(n)$</span></a></li></ol>
                     </div>
                 </span>
             </div>
