@@ -178,7 +178,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/11/划分函数-整数拆分-and-五边形定理/">划分函数(整数拆分) and 五边形定理</a>
+      <a class="article-title" href="/2017/09/11/划分函数-整数拆分-and-五边形定理/">划分函数-整数拆分-and五边形定理</a>
     </h1>
   
 
@@ -214,7 +214,7 @@
 <p>1.给定正整数k和n，n表达成不多于k个正整数之和的方法数目，等于将n分割成任意个不大于k的正整数之和的方法数目。</p>
 <p>证明：将表示前者其中一个数组的Ferrers图示沿对角线反射，便得到后者的一个数组。即两者一一对应，因此其数目相同。</p>
 <p>如图所示</p>
-<p><img src="1.jpeg" alt=""></p>
+<p><img src="划分函数-整数拆分-and-五边形定理/1.jpeg" alt=""></p>
 <h3 id="生成函数求解p-n"><a href="#生成函数求解p-n" class="headerlink" title="生成函数求解p(n)"></a>生成函数求解p(n)</h3><p>定义p(n)的生成函数如下<br>$$<br>\sum_{n=0}^{\infty}p(n)x^n = \prod_{k=1}^{\infty}(\frac{1}{1-x^k})<br>$$<br>因为左侧式子理解成生成函数就是对于一个n拆成多个正整数相加.<br>$$<br>1取了多少次-&gt;(1+x^1+x^2+x^3+…) \\<br>2取了多少次-&gt;(1+x^2+x^4+x^6+…) \\<br>3取了多少次-&gt;(1+x^3+x^6+x^9+…) \\<br>\vdots \\<br>$$<br>上式是因为当|x|&lt;1时，根据无穷级数的求解可知<br>$$<br>\sum_{i=0}^{\infty}x^i = \frac{1}{1-x}<br>$$<br>所以得到p(n)的生成函数$\sum_{n=0}^{\infty}p(n)x^n = \prod_{k=1}^{\infty}(\frac{1}{1-x^k})$</p>
 <p>根据欧拉发现的<a href="https://zh.wikipedia.org/wiki/%E4%BA%94%E9%82%8A%E5%BD%A2%E6%95%B8%E5%AE%9A%E7%90%86" target="_blank" rel="external">五边形数定理</a>，描述欧拉函$\phi(x)$如下：<br>$$<br>\prod_{n=1}^{\infty}(1-x^n) = \sum_{k=-\infty}^{\infty} (-1)^kx^{k(3k-1)/2} = \sum_{k=0}^{\infty} (-1)^kx^{k(3k \pm 1)/2} \\<br>(1-x)(1-x^2)(1-x^3) … = 1-x-x^2+x^5+x^7-x^{12}-x^{15}+x^{22}+x^{26}+… \\<br>这些系数都属于广义五边形数<br>$$</p>
 <p>那么我们就很容易发现欧拉函数的导数是分割函数的母函数：<br>$$<br>\frac{1}{\phi(x)} = \sum_{k=0}^{\infty} p(k)x^k \quad &lt;=&gt; \quad 1 = \phi(x)\sum_{k=0}^{\infty} p(k)x^k \\<br>(1-x-x^2+x^5+x^7-x^{12}-x^{15}+x^{22}+x^{26}+…)(1+p(1)x+p(2)x^2+p(3)x^3+…) = 1<br>$$<br>那么在考虑$x^n$项的系数的时候，在n&gt;0的情况下，系数都为0，那么就能得到<br>$$<br>p(n)-p(n-1)-p(n-2)+p(n-5)+p(n-7)+…  = 0 \\<br>p(n) = p(n-1)+p(n-2)-p(n-5)-p(n-7)+ …<br>$$<br>这个的时间复杂度可以在O(nlogn)时间内解决。</p>
