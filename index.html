@@ -171,6 +171,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Polya定理入门学习-POJ1286" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/25/Polya定理入门学习-POJ1286/">Polya定理入门学习&amp;POJ1286</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/25/Polya定理入门学习-POJ1286/" class="archive-article-date">
+  	<time datetime="2017-09-25T15:58:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Polya定理应用简单介绍"><a href="#Polya定理应用简单介绍" class="headerlink" title="Polya定理应用简单介绍"></a>Polya定理应用简单介绍</h3><p>polya定理主要是用于解决等价类计数问题的，所谓等价类计数问题是指题目中会定义一种等价关系，满足这个关系的元素都会被看成同一类，并只需要统计一次，最终需要统计所有的不同方案数。</p>
+<blockquote>
+<p>最经典的就是手链问题，手链是个圆形的由n个珠子串成的，用m种颜色染上面的每一颗珠子，能得到多少种方法，如果旋转或者翻转得到的同样的类型就视为同一种方法。</p>
+</blockquote>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>将可以视作等价类的条件看作是一种置换群，比如珠子数量n=4，如果是顺时针旋转90度，那么得到的置换群就是</p>
+<p>0 1 2 3</p>
+<p>1 2 3 0</p>
+<p>这样将所有的置换群列举出来。可以列举的置换群总数是|G|，每一类置换群得到的结果都是这个置换群中循环的个数$c(g_i)$，保证循环中染色都是一样的，这样才能保证置换后等价。如果可以染的颜色数量没有限制，那么答案很简单就是<br>$$<br>f(n, m ) = \frac{1}{|G|} \sum_{i=1}^{|G|}m^{c(g_i)}<br>$$<br>对于旋转来说，旋转了k个位置，$c(g_k) = gcd(n,k)$</p>
+<p>对于对称来说，在这个例子中区分奇偶性即可</p>
+<p>那么根据这个gcd就很容易计算对应的数量了。</p>
+<p>有时候为了优化代码，会考虑计算得到对应gcd的值d，一共有多少种可能性，这个只要考虑$\phi(n/d) \quad s.t. \space d|n$。这个函数$\phi(x)$表示和x互质的小于等于x的数字的个数，这个函数利用积性函数的性质在O(n)的线性时间内初始化算出来。</p>
+<h3 id="POJ1286"><a href="#POJ1286" class="headerlink" title="POJ1286"></a>POJ1286</h3><blockquote>
+<p>问题</p>
+<p>圆环上n个珠子，用3种颜色染色，旋转或者翻转后保持一致的视为同一种方法，求得到的方法数</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//简单使用gcd的方法</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> pli pair<span class="meta-string">&lt;LL,int&gt;</span></span></div><div class="line">LL mi[<span class="number">30</span>];</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_mi</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    mi[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;<span class="number">30</span> ; i++)</div><div class="line">        mi[i] = mi[i<span class="number">-1</span>]*<span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;<span class="keyword">return</span> y==<span class="number">0</span>?x:gcd(y,x%y);&#125;</div><div class="line"><span class="function">pli <span class="title">rotate</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    LL ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;=n ; i++)&#123;</div><div class="line">        ret += mi[gcd(n,i)];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> make_pair(ret,n);</div><div class="line">&#125;</div><div class="line"><span class="function">pli <span class="title">symmetry</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    LL ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span>(n&amp;<span class="number">1</span>)&#123;</div><div class="line">        ret += mi[n/<span class="number">2</span>+<span class="number">1</span>]*n;</div><div class="line">        <span class="keyword">return</span> make_pair(ret, n);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        ret += mi[n/<span class="number">2</span>]*n/<span class="number">2</span>; <span class="comment">//对称轴不在点上</span></div><div class="line">        ret += mi[n/<span class="number">2</span>+<span class="number">1</span>]*n/<span class="number">2</span>; <span class="comment">//对称轴在点上</span></div><div class="line">        <span class="keyword">return</span> make_pair(ret, n);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//freopen("in.txt" , "r" , stdin);</span></div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    init_mi();</div><div class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span> , &amp;n) &amp;&amp; n!=<span class="number">-1</span>)&#123;</div><div class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">0</span>) &#123;<span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;<span class="keyword">continue</span>;&#125;</div><div class="line">        pli v1 = rotate(n);</div><div class="line">        pli v2 = symmetry(n); œ</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;(v1.first+v2.first)/(v1.second+v2.second)&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//利用phi函数优化的算法</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> pli pair<span class="meta-string">&lt;LL,int&gt;</span></span></div><div class="line"><span class="keyword">namespace</span> prime&#123;</div><div class="line">    <span class="meta">#<span class="meta-keyword">define</span> N 10000</span></div><div class="line">    <span class="keyword">int</span> pri[N+<span class="number">5</span>] , tot , phi[N+<span class="number">5</span>];</div><div class="line">    <span class="keyword">bool</span> vis[N+<span class="number">5</span>];</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init_phi</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="built_in">memset</span>(vis , <span class="number">0</span> , <span class="keyword">sizeof</span>(vis));</div><div class="line">        phi[<span class="number">0</span>] = <span class="number">0</span> , phi[<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span> ; i&lt;=N ; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(!vis[i])&#123;</div><div class="line">                pri[tot++] = i;</div><div class="line">                phi[i] = i<span class="number">-1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span> ; j&lt;tot ; j++)&#123;</div><div class="line">                <span class="keyword">if</span>(pri[j]*i &gt; N) <span class="keyword">break</span>;</div><div class="line">                vis[pri[j]*i] = <span class="literal">true</span>;</div><div class="line">                <span class="keyword">if</span>(i%pri[j] == <span class="number">0</span>)&#123;phi[pri[j]*i] = pri[j]*phi[i] ; <span class="keyword">break</span>;&#125;</div><div class="line">                <span class="keyword">else</span> phi[pri[j]*i] = phi[i]*phi[pri[j]];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> prime;</div><div class="line">LL mi[<span class="number">30</span>];</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_mi</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    mi[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;<span class="number">30</span> ; i++)</div><div class="line">        mi[i] = mi[i<span class="number">-1</span>]*<span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;<span class="keyword">return</span> y==<span class="number">0</span>?x:gcd(y,x%y);&#125;</div><div class="line"></div><div class="line"><span class="function">pli <span class="title">rotate</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    LL ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> tmp = <span class="built_in">sqrt</span>(n+<span class="number">0.5</span>);</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> d=<span class="number">1</span> ; d&lt;=tmp ; d++)&#123;</div><div class="line">        <span class="keyword">if</span>(n%d == <span class="number">0</span>)&#123;</div><div class="line">            ret += phi[n/d]*mi[d];</div><div class="line">            <span class="keyword">if</span>(n/d!=d) ret += phi[d]*mi[n/d];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> make_pair(ret,n);</div><div class="line">&#125;</div><div class="line"><span class="function">pli <span class="title">symmetry</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    LL ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span>(n&amp;<span class="number">1</span>)&#123;</div><div class="line">        ret += mi[n/<span class="number">2</span>+<span class="number">1</span>]*n;</div><div class="line">        <span class="keyword">return</span> make_pair(ret, n);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        ret += mi[n/<span class="number">2</span>]*n/<span class="number">2</span>; <span class="comment">//对称轴不在点上</span></div><div class="line">        ret += mi[n/<span class="number">2</span>+<span class="number">1</span>]*n/<span class="number">2</span>; <span class="comment">//对称轴在点上</span></div><div class="line">        <span class="keyword">return</span> make_pair(ret, n);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">   <span class="comment">// freopen("in.txt" , "r" , stdin);</span></div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    init_phi();</div><div class="line">    init_mi();</div><div class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span> , &amp;n) &amp;&amp; n!=<span class="number">-1</span>)&#123;</div><div class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">0</span>) &#123;<span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;<span class="keyword">continue</span>;&#125;</div><div class="line">        pli v1 = rotate(n);</div><div class="line">        pli v2 = symmetry(n);</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;(v1.first+v2.first)/(v1.second+v2.second)&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Polya定理</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/25/Polya定理入门学习-POJ1286/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-机器学习之神经网络" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1049,101 +1154,6 @@
 
 
   
-    <article id="post-高级算法之Min-Cut问题求解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/08/高级算法之Min-Cut问题求解/">高级算法之Min-Cut问题求解</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/08/高级算法之Min-Cut问题求解/" class="archive-article-date">
-  	<time datetime="2017-09-07T17:32:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>问题：</p>
-<p>将点集V分成S、T两个集合。使E(S,T)的边数量最少，求解最小割的值</p>
-</blockquote>
-<p>本文将采用确定性网络流算法和非确定性随机算法两方面讲解，主要求解高级算法中的随机思想</p>
-        
-          <a class="article-more-a" href="/2017/09/08/高级算法之Min-Cut问题求解/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">高级算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">网络流</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/08/高级算法之Min-Cut问题求解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1245,6 +1255,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
@@ -1269,6 +1283,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">apache</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Polya定理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">组合数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -1277,27 +1307,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">apache</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1309,19 +1319,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">组合数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1330,6 +1340,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">BP算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1394,10 +1412,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">可视化图形</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">BP算法</a>
               </li>
             
             <div class="clearfix"></div>
