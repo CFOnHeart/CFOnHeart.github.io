@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://ganjun.net">
   <title>Polya定理入门学习&amp;POJ1286 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Polya定理应用简单介绍polya定理主要是用于解决等价类计数问题的，所谓等价类计数问题是指题目中会定义一种等价关系，满足这个关系的元素都会被看成同一类，并只需要统计一次，最终需要统计所有的不同方案数。  最经典的就是手链问题，手链是个圆形的由n个珠子串成的，用m种颜色染上面的每一颗珠子，能得到多少种方法，如果旋转或者翻转得到的同样的类型就视为同一种方法。  解决方法将可以视作等价类的条件看作是">
+  <meta name="description" content="Polya定理应用简单介绍polya定理主要是用于解决等价类计数问题的，所谓等价类计数问题是指题目中会定义一种等价关系，满足这个关系的元素都会被看成同一类，并只需要统计一次，最终需要统计所有的不同方案数。  最经典的就是手链问题，手链是个圆形的由n个珠子串成的，用m种颜色染上面的每一颗珠子，能得到多少种方法，如果旋转或者翻转得到的同样的类型就视为同一种方法。">
 <meta name="keywords" content="Polya定理,组合数学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Polya定理入门学习&amp;POJ1286">
 <meta property="og:url" content="http://ganjun.net/2017/09/25/Polya定理入门学习-POJ1286/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="Polya定理应用简单介绍polya定理主要是用于解决等价类计数问题的，所谓等价类计数问题是指题目中会定义一种等价关系，满足这个关系的元素都会被看成同一类，并只需要统计一次，最终需要统计所有的不同方案数。  最经典的就是手链问题，手链是个圆形的由n个珠子串成的，用m种颜色染上面的每一颗珠子，能得到多少种方法，如果旋转或者翻转得到的同样的类型就视为同一种方法。  解决方法将可以视作等价类的条件看作是">
+<meta property="og:description" content="Polya定理应用简单介绍polya定理主要是用于解决等价类计数问题的，所谓等价类计数问题是指题目中会定义一种等价关系，满足这个关系的元素都会被看成同一类，并只需要统计一次，最终需要统计所有的不同方案数。  最经典的就是手链问题，手链是个圆形的由n个珠子串成的，用m种颜色染上面的每一颗珠子，能得到多少种方法，如果旋转或者翻转得到的同样的类型就视为同一种方法。">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2017-09-25T16:14:42.000Z">
+<meta property="og:updated_time" content="2017-09-25T16:15:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Polya定理入门学习&amp;POJ1286">
-<meta name="twitter:description" content="Polya定理应用简单介绍polya定理主要是用于解决等价类计数问题的，所谓等价类计数问题是指题目中会定义一种等价关系，满足这个关系的元素都会被看成同一类，并只需要统计一次，最终需要统计所有的不同方案数。  最经典的就是手链问题，手链是个圆形的由n个珠子串成的，用m种颜色染上面的每一颗珠子，能得到多少种方法，如果旋转或者翻转得到的同样的类型就视为同一种方法。  解决方法将可以视作等价类的条件看作是">
+<meta name="twitter:description" content="Polya定理应用简单介绍polya定理主要是用于解决等价类计数问题的，所谓等价类计数问题是指题目中会定义一种等价关系，满足这个关系的元素都会被看成同一类，并只需要统计一次，最终需要统计所有的不同方案数。  最经典的就是手链问题，手链是个圆形的由n个珠子串成的，用m种颜色染上面的每一颗珠子，能得到多少种方法，如果旋转或者翻转得到的同样的类型就视为同一种方法。">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -195,6 +195,7 @@
 <blockquote>
 <p>最经典的就是手链问题，手链是个圆形的由n个珠子串成的，用m种颜色染上面的每一颗珠子，能得到多少种方法，如果旋转或者翻转得到的同样的类型就视为同一种方法。</p>
 </blockquote>
+<a id="more"></a>
 <h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>将可以视作等价类的条件看作是一种置换群，比如珠子数量n=4，如果是顺时针旋转90度，那么得到的置换群就是</p>
 <p>0 1 2 3</p>
 <p>1 2 3 0</p>
