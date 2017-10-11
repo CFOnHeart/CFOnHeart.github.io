@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://ganjun.net">
   <title>Daily Algorithm Exercise | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="目录 LeetCode 667 LeetCode 664 LeetCode 668 projecteuler 60 Projecteuler 62 LeetCode224. 基础计算器 LeetCode115 LeetCode 122 &amp;amp; 123  Projecteuler 77 计算数由质数相加的方法数 Project 78 基础划分函数取模问题">
+  <meta name="description" content="目录 LeetCode 667 LeetCode 664 LeetCode 668 projecteuler 60 Projecteuler 62 LeetCode224. 基础计算器 LeetCode115 LeetCode 122 &amp;amp; 123  Projecteuler 77 计算数由质数相加的方法数 Project 78 基础划分函数取模问题 Leetcode87 递归子串问题 Le">
 <meta name="keywords" content="LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Daily Algorithm Exercise">
 <meta property="og:url" content="http://ganjun.net/2017/09/03/LeetCode-Algorithm-Exercise/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="目录 LeetCode 667 LeetCode 664 LeetCode 668 projecteuler 60 Projecteuler 62 LeetCode224. 基础计算器 LeetCode115 LeetCode 122 &amp;amp; 123  Projecteuler 77 计算数由质数相加的方法数 Project 78 基础划分函数取模问题">
+<meta property="og:description" content="目录 LeetCode 667 LeetCode 664 LeetCode 668 projecteuler 60 Projecteuler 62 LeetCode224. 基础计算器 LeetCode115 LeetCode 122 &amp;amp; 123  Projecteuler 77 计算数由质数相加的方法数 Project 78 基础划分函数取模问题 Leetcode87 递归子串问题 Le">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2017-09-14T17:55:16.000Z">
+<meta property="og:updated_time" content="2017-10-10T04:57:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Daily Algorithm Exercise">
-<meta name="twitter:description" content="目录 LeetCode 667 LeetCode 664 LeetCode 668 projecteuler 60 Projecteuler 62 LeetCode224. 基础计算器 LeetCode115 LeetCode 122 &amp;amp; 123  Projecteuler 77 计算数由质数相加的方法数 Project 78 基础划分函数取模问题">
+<meta name="twitter:description" content="目录 LeetCode 667 LeetCode 664 LeetCode 668 projecteuler 60 Projecteuler 62 LeetCode224. 基础计算器 LeetCode115 LeetCode 122 &amp;amp; 123  Projecteuler 77 计算数由质数相加的方法数 Project 78 基础划分函数取模问题 Leetcode87 递归子串问题 Le">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -202,6 +202,8 @@
 <li>LeetCode 122 &amp; 123 </li>
 <li>Projecteuler 77 计算数由质数相加的方法数</li>
 <li>Project 78 基础划分函数取模问题</li>
+<li>Leetcode87 递归子串问题</li>
+<li>Leetcode218 矩形相连求边界点问题</li>
 </ol>
 <a id="more"></a>
 <h2 id="LeetCode-667"><a href="#LeetCode-667" class="headerlink" title="LeetCode 667"></a>LeetCode 667</h2><p><strong><em>题目链接：</em></strong><a href="https://leetcode.com/problems/beautiful-arrangement-ii/description/" target="_blank" rel="external">https://leetcode.com/problems/beautiful-arrangement-ii/description/</a></p>
@@ -340,6 +342,30 @@
 <p>复杂度O(nsqrt(n))</p>
 <p><strong>code</strong></p>
 <p><a href="https://github.com/CFOnHeart/Code" target="_blank" rel="external">in my github</a> </p>
+<h3 id="Leetcode-87"><a href="#Leetcode-87" class="headerlink" title="Leetcode 87"></a>Leetcode 87</h3><p>题目链接：<a href="https://leetcode.com/problems/scramble-string/description/" target="_blank" rel="external">https://leetcode.com/problems/scramble-string/description/</a></p>
+<blockquote>
+<p>问题</p>
+<p>可以将一个字符串转化成一个二分树，每一个节点生成两个子节点就是将当前节点任选一个位置切分开，不一定要求二分的，这点很重要，开始就是理解错了。</p>
+<p>然后判断两个字符串是不是通过交换若干个左右儿子得到的。</p>
+</blockquote>
+<p>题解：</p>
+<p>递归处理，只要保证每一个对应子串是一个合理的节点即可，两个子串都在左侧，说明子树没有交换，一个在左一个在右说明子树交换。处理每一个切分位置的正确性，很简单递归处理即可。子树满足条件就是当前子树对应字符串的所有字符个数相同。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSame</span><span class="params">(String s1 , String s2)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> cnt[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">256</span>];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;<span class="number">256</span> ; i++) cnt[i] = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;s1.length() ; i++)</div><div class="line">            cnt[s1.charAt(i)]++;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;s2.length() ; i++)&#123;</div><div class="line">            cnt[s2.charAt(i)]--;</div><div class="line">            <span class="keyword">if</span>(cnt[s2.charAt(i)]&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">      <span class="comment">//  System.out.println("true");</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isScramble</span><span class="params">(String s1, String s2)</span> </span>&#123;</div><div class="line">     <span class="comment">//   System.out.println(s1+" "+s2);</span></div><div class="line">        <span class="keyword">if</span>(isSame(s1,s2) == <span class="keyword">false</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">if</span>(s1.length() == <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;s1.length()-<span class="number">1</span> ; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(isScramble(s1.substring(<span class="number">0</span>,i+<span class="number">1</span>) , s2.substring(<span class="number">0</span>,i+<span class="number">1</span>)) &amp;&amp; isScramble(s1.substring(i+<span class="number">1</span>,s1.length()) , s2.substring(i+<span class="number">1</span>,s2.length())))</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            <span class="keyword">if</span>(isScramble(s1.substring(<span class="number">0</span>,i+<span class="number">1</span>) , s2.substring(s2.length()-i-<span class="number">1</span>,s2.length())) &amp;&amp; isScramble(s1.substring(i+<span class="number">1</span>,s1.length()) , s2.substring(<span class="number">0</span>,s2.length()-i-<span class="number">1</span>)))</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="Leetcode218-矩形相连求边界点问题"><a href="#Leetcode218-矩形相连求边界点问题" class="headerlink" title="Leetcode218 矩形相连求边界点问题"></a>Leetcode218 矩形相连求边界点问题</h3><p><strong><em>题目链接：</em></strong><a href="https://leetcode.com/problems/the-skyline-problem/description/" target="_blank" rel="external">https://leetcode.com/problems/the-skyline-problem/description/</a></p>
+<blockquote>
+<p>问题</p>
+<p>给定所有底在x轴上的矩形，底边两个端点对应在x轴上和矩形的高3个值告诉你可以确定一个矩形。</p>
+<p>那么多个矩形覆盖在一起的时候画出除x轴之外的轮廓，找到所有轮廓上每一水平线上最左侧的点集</p>
+</blockquote>
+<p>题解：</p>
+<p>一般解决矩形的覆盖问题</p>
+<p>最通常的情况都是要区分它的左右侧的边，跟以前做线段树上解决Atlantic求矩形覆盖面积的问题一样。</p>
+<p>将左侧边标记为-1，右侧边标记为1，那么所有边由左到右排好序后，左侧边进入容器，右侧边到的时候，将和他等高的左侧边从容器里删除，因为之后的边不再受这个矩形影响了。也就是说容器里所有边的高度都是覆盖了当前对应矩形的范围，那么我们只要判断容器里面的最大高度和自己比较即可。</p>
+<p>这里边排序进入容器判断的顺序很关键，我们总是保证在等x的时候，越高的边越优先进入，越低的边越优先出去，这样才不会影响当前容器里最大值的判断。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Side</span>&#123;</span></div><div class="line">        <span class="keyword">int</span> x , y , op;</div><div class="line">        Side(<span class="keyword">int</span> x=<span class="number">0</span> , <span class="keyword">int</span> y=<span class="number">0</span> , <span class="keyword">int</span> op=<span class="number">0</span>):x(x),y(y),op(op)&#123;&#125;</div><div class="line">        <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Side a) <span class="keyword">const</span> &#123;</div><div class="line">            <span class="keyword">return</span> x&lt;a.x || (x==a.x &amp;&amp; op*y &lt; a.op*a.y);<span class="comment">//横坐标相同，希望添加的顺序一定是左侧的边越大优先入set，右侧的 边越小优先出set才不会影响最大值</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> Side a) <span class="keyword">const</span> &#123;</div><div class="line">            <span class="keyword">return</span> x==a.x &amp;&amp; y==a.y &amp;&amp; op==a.op;</div><div class="line">        &#125;</div><div class="line">    &#125;sides[<span class="number">100005</span>];</div></pre></td></tr></table></figure>
+<p>且保存这些进入的容器用一个有序的容器可以帮助你最快的找到最大值，我选择的是multiset，因为总是会出现高度一样的边，但我们不能将其相互抵消，所以都应该保存，要注意multiset删除元素一定只删除一个，所以是删除指定的指针，不然相同元素多个，删除值会导致一条右侧边删了多条左侧边。</p>
+<p>当然这个问题的解决可以是你自己定义结构体保存在set中，给每一条边定一个id，找到相同id的左侧边删除即可。但这道题目本身不需要这么麻烦就能解决。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Side</span>&#123;</span></div><div class="line">        <span class="keyword">int</span> x , y , op;</div><div class="line">        Side(<span class="keyword">int</span> x=<span class="number">0</span> , <span class="keyword">int</span> y=<span class="number">0</span> , <span class="keyword">int</span> op=<span class="number">0</span>):x(x),y(y),op(op)&#123;&#125;</div><div class="line">        <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Side a) <span class="keyword">const</span> &#123;</div><div class="line">            <span class="keyword">return</span> x&lt;a.x || (x==a.x &amp;&amp; op*y &lt; a.op*a.y);<span class="comment">//横坐标相同，希望添加的顺序一定是左侧的边越大优先入set，右侧的 边越小优先出set才不会影响最大值</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> Side a) <span class="keyword">const</span> &#123;</div><div class="line">            <span class="keyword">return</span> x==a.x &amp;&amp; y==a.y &amp;&amp; op==a.op;</div><div class="line">        &#125;</div><div class="line">    &#125;sides[<span class="number">100005</span>];</div><div class="line">    </div><div class="line">    <span class="built_in">multiset</span>&lt;<span class="keyword">int</span>&gt; st;</div><div class="line">    <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; getSkyline(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt;&amp; buildings) &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> n = buildings.size();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;n ; i++)&#123;</div><div class="line">            sides[i*<span class="number">2</span>] = Side(buildings[i][<span class="number">0</span>] , buildings[i][<span class="number">2</span>] , <span class="number">-1</span>);</div><div class="line">            sides[i*<span class="number">2</span>+<span class="number">1</span>] = Side(buildings[i][<span class="number">1</span>] , buildings[i][<span class="number">2</span>] , <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        sort(sides , sides+(n*<span class="number">2</span>));</div><div class="line"></div><div class="line">        <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &gt; ret;</div><div class="line">        st.clear();</div><div class="line">        <span class="keyword">int</span> val;</div><div class="line">        <span class="keyword">int</span> last = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;n*<span class="number">2</span> ; i++)&#123;</div><div class="line">           <span class="comment">// cout&lt;&lt;"test: "&lt;&lt;sides[i].x&lt;&lt;" "&lt;&lt;sides[i].y&lt;&lt;" "&lt;&lt;sides[i].op&lt;&lt;endl;</span></div><div class="line">            <span class="keyword">if</span>(sides[i].op == <span class="number">1</span>)&#123;</div><div class="line">                st.erase(st.lower_bound(sides[i].y));</div><div class="line">                <span class="keyword">if</span>(st.size()&gt;<span class="number">0</span>) val = *(--st.end());</div><div class="line">                <span class="keyword">else</span> val = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                st.insert(sides[i].y);</div><div class="line">                val = *(--st.end());</div><div class="line">                </div><div class="line">            &#125;</div><div class="line">         <span class="comment">//   cout&lt;&lt;"cur val : "&lt;&lt;val&lt;&lt;endl;</span></div><div class="line">            <span class="keyword">if</span>(val != last)&#123;</div><div class="line">                ret.push_back(make_pair(sides[i].x , val));</div><div class="line">                last = val;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
 
@@ -498,7 +524,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LeetCode-667"><span class="toc-number">1.1.</span> <span class="toc-text">LeetCode 667</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LeetCode-664"><span class="toc-number">1.2.</span> <span class="toc-text">LeetCode 664</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LeetCode-668"><span class="toc-number">1.3.</span> <span class="toc-text">LeetCode 668</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#project-euler-60"><span class="toc-number">1.3.1.</span> <span class="toc-text">project euler 60</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#project-euler-62"><span class="toc-number">1.3.2.</span> <span class="toc-text">project euler 62</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode224-基础计算器"><span class="toc-number">1.3.3.</span> <span class="toc-text">LeetCode224. 基础计算器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode-115"><span class="toc-number">1.3.4.</span> <span class="toc-text">LeetCode 115</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#projecteuler-69"><span class="toc-number">1.3.5.</span> <span class="toc-text">projecteuler 69</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode-122-amp-123"><span class="toc-number">1.3.6.</span> <span class="toc-text">LeetCode 122 & 123</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode122："><span class="toc-number">1.3.7.</span> <span class="toc-text">LeetCode122：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode123"><span class="toc-number">1.3.8.</span> <span class="toc-text">LeetCode123</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Projecteuler-77"><span class="toc-number">1.3.9.</span> <span class="toc-text">Projecteuler 77</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Projecteuler-78"><span class="toc-number">1.3.10.</span> <span class="toc-text">Projecteuler 78</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LeetCode-667"><span class="toc-number">1.1.</span> <span class="toc-text">LeetCode 667</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LeetCode-664"><span class="toc-number">1.2.</span> <span class="toc-text">LeetCode 664</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LeetCode-668"><span class="toc-number">1.3.</span> <span class="toc-text">LeetCode 668</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#project-euler-60"><span class="toc-number">1.3.1.</span> <span class="toc-text">project euler 60</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#project-euler-62"><span class="toc-number">1.3.2.</span> <span class="toc-text">project euler 62</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode224-基础计算器"><span class="toc-number">1.3.3.</span> <span class="toc-text">LeetCode224. 基础计算器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode-115"><span class="toc-number">1.3.4.</span> <span class="toc-text">LeetCode 115</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#projecteuler-69"><span class="toc-number">1.3.5.</span> <span class="toc-text">projecteuler 69</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode-122-amp-123"><span class="toc-number">1.3.6.</span> <span class="toc-text">LeetCode 122 & 123</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode122："><span class="toc-number">1.3.7.</span> <span class="toc-text">LeetCode122：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LeetCode123"><span class="toc-number">1.3.8.</span> <span class="toc-text">LeetCode123</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Projecteuler-77"><span class="toc-number">1.3.9.</span> <span class="toc-text">Projecteuler 77</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Projecteuler-78"><span class="toc-number">1.3.10.</span> <span class="toc-text">Projecteuler 78</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Leetcode-87"><span class="toc-number">1.3.11.</span> <span class="toc-text">Leetcode 87</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Leetcode218-矩形相连求边界点问题"><span class="toc-number">1.3.12.</span> <span class="toc-text">Leetcode218 矩形相连求边界点问题</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -668,11 +694,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,10 +707,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">apache</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,6 +726,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
               </li>
              
@@ -716,19 +742,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -740,15 +766,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">BP算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -760,10 +786,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">有限域</a>
               </li>
              
@@ -772,11 +794,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">viterbi算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -784,11 +802,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前向算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">viterbi算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">高级算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前向算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">近似算法</a>
               </li>
              
               <li class="article-tag-list-item">
