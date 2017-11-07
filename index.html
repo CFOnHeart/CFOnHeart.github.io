@@ -171,6 +171,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-hadoop-hbase-相关代码运行问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/08/hadoop-hbase-相关代码运行问题/">hadoop hbase 相关代码运行问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/08/hadoop-hbase-相关代码运行问题/" class="archive-article-date">
+  	<time datetime="2017-11-07T17:23:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###HBase代码在hadoop集群下运行找不到hbase相关类    </p>
+<p>​    hbase代码引入的jar都可以在hbase/lib的目录下找到，一次性都导入，代码就能运行了。单纯的hbase代码是可以直接作为普通java程序运行的，不用再hadoop集群下运行。</p>
+<p>​    但是hbase相关的读写写到了MapReduce的操作中，就需要打成jar包，在maven下，将hbase/lib下的jar包都导入项目，然后代码就不会报错了，然后rebuild project 完成后，就可以通过mvn compile,mvn package将代码打包了。</p>
+<p>​    通过hadoop jar Your.jar classname [hdfs:inputdir] [hdfs:outputdir]时会报hbase中的相关类找不到，原因是hadoop集群找不到本地的hbase jar包。</p>
+<p>​    很容易理解就是hadoop无法找到对应hbase相关的jar包。试了好多方法，也历经了好几天无法运行的情况，反而优先完成了Hive实验。最后的解决办法是在\$HADOOP_HOME/etc/hadoop/hadoop-env.sh中对应有个添加HADOOP_CLASSPATH的地方，在前面多加一句</p>
+<p>export  HADOOP_CLASSPATH = \$HADOOP_CLASSPATH:/home/hadoop/hadoop_installs/hbase-1.2.6/lib/*.jar</p>
+<pre><code>并且在yarn-site.xml中添加相关的jar包所在的位置，也就是增加一个property如下所示
+</code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.application.classpath<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span></div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/common/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/common/lib/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/mapreduce/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/mapreduce/lib/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/hdfs/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/hdfs/lib/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/yarn/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/yarn/lib/*,</div><div class="line">			/home/hadoop/hadoop_installs/hbase-1.2.6/lib/*</div><div class="line">			<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="HBase-Java代码的基本实现"><a href="#HBase-Java代码的基本实现" class="headerlink" title="HBase Java代码的基本实现"></a>HBase Java代码的基本实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* Created by ganjun on 2017/11/4.</div><div class="line">*/</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HBaseConfiguration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HColumnDescriptor;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HTableDescriptor;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.TableName;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Delete;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.HBaseAdmin;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.HTable;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Put;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.util.Bytes;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Scan;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.ResultScanner;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Result;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.KeyValue;</div><div class="line"><span class="keyword">import</span> java.io.FileWriter;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HBaseManage</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Configuration conf = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">static</span></div><div class="line">    &#123;</div><div class="line">        conf = HBaseConfiguration.create();</div><div class="line"><span class="comment">//        conf.set("hbase.zookeeper.quorum", "nodel");</span></div><div class="line"><span class="comment">//        conf.set("hbase.zookeeper.property.clientPort", "2181");</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createTable</span><span class="params">(String tableName, String[] familys)</span></span></div><div class="line">            <span class="keyword">throws</span> Exception&#123;</div><div class="line">        HBaseAdmin admin = <span class="keyword">new</span> HBaseAdmin(conf);</div><div class="line">        <span class="keyword">if</span> (admin.tableExists(tableName))&#123;</div><div class="line">            System.out.println(<span class="string">"table "</span>+tableName+<span class="string">" already exists!"</span>);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            HTableDescriptor tableDesc = <span class="keyword">new</span> HTableDescriptor(TableName.valueOf(tableName));</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;familys.length ; i++)&#123;</div><div class="line">                tableDesc.addFamily(<span class="keyword">new</span> HColumnDescriptor(familys[i]));</div><div class="line">            &#125;</div><div class="line">            admin.createTable(tableDesc);</div><div class="line">            System.out.println(<span class="string">"create table "</span>+tableName+<span class="string">" success!"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//表数据添加</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addData</span><span class="params">(String tableName, String rowKey, String family,</span></span></div><div class="line">                               String qualifier, String value) <span class="keyword">throws</span> Exception&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            HTable table = <span class="keyword">new</span> HTable(conf , tableName);</div><div class="line">            Put put = <span class="keyword">new</span> Put(Bytes.toBytes(rowKey));</div><div class="line">            put.add(Bytes.toBytes(family), Bytes.toBytes(qualifier), Bytes.toBytes(value));</div><div class="line">            table.put(put);</div><div class="line">            System.out.println(<span class="string">"insert recored success!"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (IOException ex)&#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//表数据删除一行</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deleteRow</span><span class="params">(String tableName, String rowKey)</span></span></div><div class="line">            <span class="keyword">throws</span> IOException &#123;</div><div class="line">        HTable table = <span class="keyword">new</span> HTable(conf, tableName);</div><div class="line">        Delete deleteRow = <span class="keyword">new</span> Delete(rowKey.getBytes());</div><div class="line">        table.delete(deleteRow);</div><div class="line">        System.out.println(<span class="string">"delete row "</span>+rowKey+<span class="string">" success!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//表数据删除某一列</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deleteColumn</span><span class="params">(String tableName, String rowKey, String falilyName, String columnName)</span></span></div><div class="line">            <span class="keyword">throws</span> IOException &#123;</div><div class="line">        HTable table = <span class="keyword">new</span> HTable(conf , tableName);</div><div class="line">        Delete deleteColumn = <span class="keyword">new</span> Delete(Bytes.toBytes(rowKey));</div><div class="line">        deleteColumn.deleteColumn(Bytes.toBytes(falilyName), Bytes.toBytes(columnName));</div><div class="line">        table.delete(deleteColumn);</div><div class="line">        System.out.println(<span class="string">"delete "</span> + rowKey + <span class="string">":"</span> + falilyName + <span class="string">" : "</span> + columnName + <span class="string">" success"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//保存一个表的数据到某一文件中</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">tableToFile</span><span class="params">(String tableName, String filename)</span></span></div><div class="line">            <span class="keyword">throws</span> IOException&#123;</div><div class="line">        FileWriter out = <span class="keyword">new</span> FileWriter(filename);</div><div class="line">        HTable table = <span class="keyword">new</span> HTable(conf, tableName);</div><div class="line">        Scan s = <span class="keyword">new</span> Scan();</div><div class="line">        s.setMaxVersions();</div><div class="line">        ResultScanner ss= table.getScanner(s);</div><div class="line">        <span class="keyword">for</span>(Result r:ss)&#123;</div><div class="line">            System.out.println(<span class="keyword">new</span> String(r.getRow()));</div><div class="line">            <span class="keyword">for</span>(KeyValue kv:r.raw())&#123;</div><div class="line">                System.out.println(<span class="keyword">new</span> String(kv.getValue()));</div><div class="line">                out.write(<span class="keyword">new</span> String(r.getRow(), <span class="string">"utf-8"</span>) + <span class="string">"\t"</span> + <span class="keyword">new</span> String(kv.getValue()) + <span class="string">"\n"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        out.close();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            String tableName = <span class="string">"Wuxia"</span>;</div><div class="line">            String[] familys = &#123;<span class="string">"Count"</span>&#125;;</div><div class="line">         <span class="comment">//   HBaseManage.createTable(tableName, familys);</span></div><div class="line">            HBaseManage.addData(tableName, <span class="string">"江湖"</span>, <span class="string">"Count"</span>, <span class="string">"NormalCount"</span>, <span class="string">"3.0"</span>);</div><div class="line">            HBaseManage.addData(tableName, <span class="string">"风雪"</span>, <span class="string">"Count"</span>, <span class="string">"NormalCount"</span>, <span class="string">"1.0"</span>);</div><div class="line">            HBaseManage.tableToFile(tableName, <span class="string">"wuxia.txt"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (Exception ex)&#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mapreduce</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">hbase</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/hadoop/" class="article-tag-list-link color2">hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/08/hadoop-hbase-相关代码运行问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-MapReduce代码Intellij本地运行调试配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1134,130 +1231,6 @@
 
 
   
-    <article id="post-组合数学-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/11/组合数学-1/">组合数学-1</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/11/组合数学-1/" class="archive-article-date">
-  	<time datetime="2017-09-11T12:23:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>f: N -&gt; M  将n个求放入m个盒子中的多种方式</p>
-<p>distinct: 不同 identical: 相同</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">balls per bin</th>
-<th style="text-align:center">unrestricted</th>
-<th style="text-align:center">&lt;=1</th>
-<th style="text-align:center">&gt;=1</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">n distinct balls , m distinct bins</td>
-<td style="text-align:center">$m^n$</td>
-<td style="text-align:center">$(m)_n$</td>
-<td style="text-align:center">$m!\begin{Bmatrix} m \ n \end{Bmatrix}$</td>
-</tr>
-<tr>
-<td style="text-align:center">n identical balls , m distinct bins</td>
-<td style="text-align:center">$(\binom{n}{m})= \binom{n+m-1}{m-1}$</td>
-<td style="text-align:center">$\binom{m}{n}$</td>
-<td style="text-align:center">$\binom{n-1}{m-1}$</td>
-</tr>
-<tr>
-<td style="text-align:center">n distinct balls , m identical bins</td>
-<td style="text-align:center">$\sum_{i=1}^m \begin{Bmatrix} n \ i \end{Bmatrix}$</td>
-<td style="text-align:center">$\begin{cases} 1 &amp;n \le m \ 0 &amp; n&gt;m   \end{cases}$</td>
-<td style="text-align:center">$\begin{Bmatrix} n \ m \end{Bmatrix}$</td>
-</tr>
-<tr>
-<td style="text-align:center">n identical balls , m identical bins</td>
-<td style="text-align:center">$\sum_{i=0}^m{p_i(n)}$  (当m&gt;=n时也可以直接表示为p(n))</td>
-<td style="text-align:center">$\begin{cases} 1 &amp;n \le m \ 0 &amp; n&gt;m   \end{cases}$</td>
-<td style="text-align:center">$p_m(n)$</td>
-</tr>
-</tbody>
-</table>
-        
-          <a class="article-more-a" href="/2017/09/11/组合数学-1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/11/组合数学-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1363,10 +1336,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
@@ -1379,7 +1348,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">apache</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1388,14 +1369,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境搭建</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">apache</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1411,7 +1384,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+                <a href="javascript:void(0)" class="js-tag color5">mapreduce</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">hbase</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1419,15 +1396,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">qrcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
+                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1443,19 +1416,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">qrcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">公式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1464,6 +1437,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">BP算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1503,11 +1484,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前向算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">近似算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">近似算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">前向算法</a>
               </li>
              
               <li class="article-tag-list-item">

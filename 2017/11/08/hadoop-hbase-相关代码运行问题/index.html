@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ganjun.net">
-  <title>Archives: 2017 | Junnor.G</title>
+  <title>hadoop hbase 相关代码运行问题 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="No one cares your tears , but ability.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Junnor.G">
-<meta property="og:url" content="http://ganjun.net/archives/2017/page/2/index.html">
+  <meta name="description" content="###HBase代码在hadoop集群下运行找不到hbase相关类     ​    hbase代码引入的jar都可以在hbase/lib的目录下找到，一次性都导入，代码就能运行了。单纯的hbase代码是可以直接作为普通java程序运行的，不用再hadoop集群下运行。 ​    但是hbase相关的读写写到了MapReduce的操作中，就需要打成jar包，在maven下，将hbase/lib下的">
+<meta name="keywords" content="mapreduce,hbase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop hbase 相关代码运行问题">
+<meta property="og:url" content="http://ganjun.net/2017/11/08/hadoop-hbase-相关代码运行问题/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="No one cares your tears , but ability.">
+<meta property="og:description" content="###HBase代码在hadoop集群下运行找不到hbase相关类     ​    hbase代码引入的jar都可以在hbase/lib的目录下找到，一次性都导入，代码就能运行了。单纯的hbase代码是可以直接作为普通java程序运行的，不用再hadoop集群下运行。 ​    但是hbase相关的读写写到了MapReduce的操作中，就需要打成jar包，在maven下，将hbase/lib下的">
 <meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2017-11-07T17:52:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Junnor.G">
-<meta name="twitter:description" content="No one cares your tears , but ability.">
+<meta name="twitter:title" content="hadoop hbase 相关代码运行问题">
+<meta name="twitter:description" content="###HBase代码在hadoop集群下运行找不到hbase相关类     ​    hbase代码引入的jar都可以在hbase/lib的目录下找到，一次性都导入，代码就能运行了。单纯的hbase代码是可以直接作为普通java程序运行的，不用再hadoop集群下运行。 ​    但是hbase相关的读写写到了MapReduce的操作中，就需要打成jar包，在maven下，将hbase/lib下的">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -169,543 +171,245 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-hadoop-hbase-相关代码运行问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hadoop hbase 相关代码运行问题
+    </h1>
+  
+
+        
+        <a href="/2017/11/08/hadoop-hbase-相关代码运行问题/" class="archive-article-date">
+  	<time datetime="2017-11-07T17:23:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-08</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###HBase代码在hadoop集群下运行找不到hbase相关类    </p>
+<p>​    hbase代码引入的jar都可以在hbase/lib的目录下找到，一次性都导入，代码就能运行了。单纯的hbase代码是可以直接作为普通java程序运行的，不用再hadoop集群下运行。</p>
+<p>​    但是hbase相关的读写写到了MapReduce的操作中，就需要打成jar包，在maven下，将hbase/lib下的jar包都导入项目，然后代码就不会报错了，然后rebuild project 完成后，就可以通过mvn compile,mvn package将代码打包了。</p>
+<p>​    通过hadoop jar Your.jar classname [hdfs:inputdir] [hdfs:outputdir]时会报hbase中的相关类找不到，原因是hadoop集群找不到本地的hbase jar包。</p>
+<p>​    很容易理解就是hadoop无法找到对应hbase相关的jar包。试了好多方法，也历经了好几天无法运行的情况，反而优先完成了Hive实验。最后的解决办法是在\$HADOOP_HOME/etc/hadoop/hadoop-env.sh中对应有个添加HADOOP_CLASSPATH的地方，在前面多加一句</p>
+<p>export  HADOOP_CLASSPATH = \$HADOOP_CLASSPATH:/home/hadoop/hadoop_installs/hbase-1.2.6/lib/*.jar</p>
+<pre><code>并且在yarn-site.xml中添加相关的jar包所在的位置，也就是增加一个property如下所示
+</code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.application.classpath<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">value</span>&gt;</span></div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/common/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/common/lib/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/mapreduce/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/mapreduce/lib/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/hdfs/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/hdfs/lib/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/yarn/*,</div><div class="line">			/home/hadoop/hadoop_installs/hadoop-2.7.4/share/hadoop/yarn/lib/*,</div><div class="line">			/home/hadoop/hadoop_installs/hbase-1.2.6/lib/*</div><div class="line">			<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="HBase-Java代码的基本实现"><a href="#HBase-Java代码的基本实现" class="headerlink" title="HBase Java代码的基本实现"></a>HBase Java代码的基本实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* Created by ganjun on 2017/11/4.</div><div class="line">*/</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HBaseConfiguration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HColumnDescriptor;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HTableDescriptor;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.TableName;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Delete;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.HBaseAdmin;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.HTable;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Put;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.util.Bytes;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Scan;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.ResultScanner;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Result;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.KeyValue;</div><div class="line"><span class="keyword">import</span> java.io.FileWriter;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HBaseManage</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Configuration conf = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">static</span></div><div class="line">    &#123;</div><div class="line">        conf = HBaseConfiguration.create();</div><div class="line"><span class="comment">//        conf.set("hbase.zookeeper.quorum", "nodel");</span></div><div class="line"><span class="comment">//        conf.set("hbase.zookeeper.property.clientPort", "2181");</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createTable</span><span class="params">(String tableName, String[] familys)</span></span></div><div class="line">            <span class="keyword">throws</span> Exception&#123;</div><div class="line">        HBaseAdmin admin = <span class="keyword">new</span> HBaseAdmin(conf);</div><div class="line">        <span class="keyword">if</span> (admin.tableExists(tableName))&#123;</div><div class="line">            System.out.println(<span class="string">"table "</span>+tableName+<span class="string">" already exists!"</span>);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            HTableDescriptor tableDesc = <span class="keyword">new</span> HTableDescriptor(TableName.valueOf(tableName));</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;familys.length ; i++)&#123;</div><div class="line">                tableDesc.addFamily(<span class="keyword">new</span> HColumnDescriptor(familys[i]));</div><div class="line">            &#125;</div><div class="line">            admin.createTable(tableDesc);</div><div class="line">            System.out.println(<span class="string">"create table "</span>+tableName+<span class="string">" success!"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//表数据添加</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addData</span><span class="params">(String tableName, String rowKey, String family,</span></span></div><div class="line">                               String qualifier, String value) <span class="keyword">throws</span> Exception&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            HTable table = <span class="keyword">new</span> HTable(conf , tableName);</div><div class="line">            Put put = <span class="keyword">new</span> Put(Bytes.toBytes(rowKey));</div><div class="line">            put.add(Bytes.toBytes(family), Bytes.toBytes(qualifier), Bytes.toBytes(value));</div><div class="line">            table.put(put);</div><div class="line">            System.out.println(<span class="string">"insert recored success!"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (IOException ex)&#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//表数据删除一行</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deleteRow</span><span class="params">(String tableName, String rowKey)</span></span></div><div class="line">            <span class="keyword">throws</span> IOException &#123;</div><div class="line">        HTable table = <span class="keyword">new</span> HTable(conf, tableName);</div><div class="line">        Delete deleteRow = <span class="keyword">new</span> Delete(rowKey.getBytes());</div><div class="line">        table.delete(deleteRow);</div><div class="line">        System.out.println(<span class="string">"delete row "</span>+rowKey+<span class="string">" success!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//表数据删除某一列</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deleteColumn</span><span class="params">(String tableName, String rowKey, String falilyName, String columnName)</span></span></div><div class="line">            <span class="keyword">throws</span> IOException &#123;</div><div class="line">        HTable table = <span class="keyword">new</span> HTable(conf , tableName);</div><div class="line">        Delete deleteColumn = <span class="keyword">new</span> Delete(Bytes.toBytes(rowKey));</div><div class="line">        deleteColumn.deleteColumn(Bytes.toBytes(falilyName), Bytes.toBytes(columnName));</div><div class="line">        table.delete(deleteColumn);</div><div class="line">        System.out.println(<span class="string">"delete "</span> + rowKey + <span class="string">":"</span> + falilyName + <span class="string">" : "</span> + columnName + <span class="string">" success"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//保存一个表的数据到某一文件中</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">tableToFile</span><span class="params">(String tableName, String filename)</span></span></div><div class="line">            <span class="keyword">throws</span> IOException&#123;</div><div class="line">        FileWriter out = <span class="keyword">new</span> FileWriter(filename);</div><div class="line">        HTable table = <span class="keyword">new</span> HTable(conf, tableName);</div><div class="line">        Scan s = <span class="keyword">new</span> Scan();</div><div class="line">        s.setMaxVersions();</div><div class="line">        ResultScanner ss= table.getScanner(s);</div><div class="line">        <span class="keyword">for</span>(Result r:ss)&#123;</div><div class="line">            System.out.println(<span class="keyword">new</span> String(r.getRow()));</div><div class="line">            <span class="keyword">for</span>(KeyValue kv:r.raw())&#123;</div><div class="line">                System.out.println(<span class="keyword">new</span> String(kv.getValue()));</div><div class="line">                out.write(<span class="keyword">new</span> String(r.getRow(), <span class="string">"utf-8"</span>) + <span class="string">"\t"</span> + <span class="keyword">new</span> String(kv.getValue()) + <span class="string">"\n"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        out.close();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            String tableName = <span class="string">"Wuxia"</span>;</div><div class="line">            String[] familys = &#123;<span class="string">"Count"</span>&#125;;</div><div class="line">         <span class="comment">//   HBaseManage.createTable(tableName, familys);</span></div><div class="line">            HBaseManage.addData(tableName, <span class="string">"江湖"</span>, <span class="string">"Count"</span>, <span class="string">"NormalCount"</span>, <span class="string">"3.0"</span>);</div><div class="line">            HBaseManage.addData(tableName, <span class="string">"风雪"</span>, <span class="string">"Count"</span>, <span class="string">"NormalCount"</span>, <span class="string">"1.0"</span>);</div><div class="line">            HBaseManage.tableToFile(tableName, <span class="string">"wuxia.txt"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (Exception ex)&#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatQR.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/11/组合数学-1/" class="archive-article-date">
-  	<time datetime="2017-09-11T12:23:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/11/组合数学-1/">组合数学-1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/11/划分函数-整数拆分-and-五边形定理/" class="archive-article-date">
-  	<time datetime="2017-09-11T06:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/11/划分函数-整数拆分-and-五边形定理/">划分函数-整数拆分-and-五边形定理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/09/数学公式笔记/" class="archive-article-date">
-  	<time datetime="2017-09-09T05:29:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/09/数学公式笔记/">数学公式笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">公式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/09/莫比乌斯反演解决euler71/" class="archive-article-date">
-  	<time datetime="2017-09-08T16:50:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/09/莫比乌斯反演解决euler71/">莫比乌斯反演解决euler71</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">projecteuler</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mapreduce</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">莫比乌斯反演</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">hbase</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
+        			<a href="/categories/hadoop/" class="article-tag-list-link color2">hadoop</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ganjun.net/2017/11/08/hadoop-hbase-相关代码运行问题/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/08/高级算法之Min-Cut问题求解/" class="archive-article-date">
-  	<time datetime="2017-09-07T17:32:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-08</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/19/MapReduce代码Intellij本地运行调试配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MapReduce代码Intellij本地运行调试配置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/08/高级算法之Min-Cut问题求解/">高级算法之Min-Cut问题求解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">高级算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">网络流</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#HBase-Java代码的基本实现"><span class="toc-number">1.</span> <span class="toc-text">HBase Java代码的基本实现</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/" class="archive-article-date">
-  	<time datetime="2017-09-05T06:20:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/">python-networkx绘制复杂网络关系图</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hadoop-hbase-相关代码运行问题" data-title="hadoop hbase 相关代码运行问题" data-url="http://ganjun.net/2017/11/08/hadoop-hbase-相关代码运行问题/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">复杂网络</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">networkx</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">可视化图形</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python/" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/03/LeetCode-Algorithm-Exercise/" class="archive-article-date">
-  	<time datetime="2017-09-02T16:59:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/03/LeetCode-Algorithm-Exercise/">Daily Algorithm Exercise</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/09/php-QRCode学习/" class="archive-article-date">
-  	<time datetime="2017-08-09T12:56:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/09/php-QRCode学习/">php-QRCode学习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">qrcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">php</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/php/" class="article-tag-list-link color4">php</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/奇技淫巧/" class="article-tag-list-link color5">奇技淫巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/09/projecteuler28-螺旋方阵对角线的和/" class="archive-article-date">
-  	<time datetime="2017-08-09T08:36:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/09/projecteuler28-螺旋方阵对角线的和/">projecteuler28-螺旋方阵对角线的和</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">projecteuler</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/08/线性代数-正交矩阵/" class="archive-article-date">
-  	<time datetime="2017-08-08T06:15:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/08/线性代数-正交矩阵/">线性代数-正交矩阵</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">线性代数</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">正交矩阵</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://ganjun.net/2017/11/08/hadoop-hbase-相关代码运行问题/", 
+    sourceId: "hadoop-hbase-相关代码运行问题",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2017/">&laquo; Prev</a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2017/page/3/">3</a><a class="page-number" href="/archives/2017/page/4/">4</a><a class="extend next" rel="next" href="/archives/2017/page/3/">Next &raquo;</a>
-    </nav>
+  
+  <div id="SOHUCS" sid="hadoop-hbase-相关代码运行问题" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "true"; 
+var conf = "true"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
   
 
 
@@ -729,8 +433,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
