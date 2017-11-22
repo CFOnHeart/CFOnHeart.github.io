@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Junnor.G">
 <meta property="og:description" content="基本概念​    比如在贝叶斯概率计算中，我们总是利用先验概率来计算后验概率，样本太大，我们总是利用采样的方法来计算先验概率，但为什么采样得到的概率分布就能代替总的样本概率分布呢，其背后就用到了极大似然估计的思想，因为在得到采集样本这个事件A的条件下，只有总样本也满足相同的概率分布，这个事件A发生的可能性才达到最大值。 ​    最大似然估计的目的就是：利用已知的样本结果，反推最有可能（最大概率）">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2017-11-22T09:02:58.000Z">
+<meta property="og:updated_time" content="2017-11-22T09:05:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概率论与数理统计-极大似然估计">
 <meta name="twitter:description" content="基本概念​    比如在贝叶斯概率计算中，我们总是利用先验概率来计算后验概率，样本太大，我们总是利用采样的方法来计算先验概率，但为什么采样得到的概率分布就能代替总的样本概率分布呢，其背后就用到了极大似然估计的思想，因为在得到采集样本这个事件A的条件下，只有总样本也满足相同的概率分布，这个事件A发生的可能性才达到最大值。 ​    最大似然估计的目的就是：利用已知的样本结果，反推最有可能（最大概率）">
@@ -194,7 +194,8 @@
         <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>​    比如在贝叶斯概率计算中，我们总是利用先验概率来计算后验概率，样本太大，我们总是利用采样的方法来计算先验概率，但为什么采样得到的概率分布就能代替总的样本概率分布呢，其背后就用到了极大似然估计的思想，因为在得到采集样本这个事件A的条件下，只有总样本也满足相同的概率分布，这个事件A发生的可能性才达到最大值。</p>
 <p>​    <strong>最大似然估计的目的就是</strong>：利用已知的样本结果，反推最有可能（最大概率）导致这样结果的参数值。</p>
 <p>​        <strong>原理：</strong>极大似然估计是建立在极大似然原理的基础上的一个统计方法，是概率论在统计学中的应用。极大似然估计提供了一种给定观察数据来评估模型参数的方法，即：“模型已定，参数未知”。通过若干次试验，观察其结果，利用试验结果得到某个参数值能够使样本出现的概率为最大，则称为极大似然估计。</p>
-<p>​        由于样本集中的样本都是独立同分布，可以只考虑一类样本集D，来估计参数向量θ。记已知的样本集为：<br>$$<br>D = \{x_1 , x_2,…,x_N\}<br>$$<br>​    <strong>似然函数(likelihood function):</strong> 联合概率密度函数$p(D|\theta)$ 称为相对于$\{x_1,x_2,…,x_N\}$的$\theta$的似然函数。那么在所有x都是在同一分布下满足独立同分布采样的前提下，可得<br>$$<br>L(\theta) = p(D|\theta) = p(x_1,x_2,…,x_N | \theta) = \prod_{i=1}^Np(x_i|\theta)<br>$$<br>​    <strong>对数似然</strong>:<br>$$<br>\ln L(\theta) = \sum_{i=1}^N\ln (p(x_i|\theta))<br>$$<br>​    如果$\hat \theta$是参数空间中能使似然函数$L(\theta)$最大的$\theta$值，则$\hat \theta$应该是“最可能”的参数值，那么$\hat \theta$就是$\theta$的极大似然估计量。<br>$$<br>\hat \theta = arg \max _{\theta} L(\theta) = arg \max _{\theta} \ln L(\theta)<br>$$<br><a id="more"></a></p>
+<a id="more"></a>
+<p>​        由于样本集中的样本都是独立同分布，可以只考虑一类样本集D，来估计参数向量θ。记已知的样本集为：<br>$$<br>D = \{x_1 , x_2,…,x_N\}<br>$$<br>​    <strong>似然函数(likelihood function):</strong> 联合概率密度函数$p(D|\theta)$ 称为相对于$\{x_1,x_2,…,x_N\}$的$\theta$的似然函数。那么在所有x都是在同一分布下满足独立同分布采样的前提下，可得<br>$$<br>L(\theta) = p(D|\theta) = p(x_1,x_2,…,x_N | \theta) = \prod_{i=1}^Np(x_i|\theta)<br>$$<br>​    <strong>对数似然</strong>:<br>$$<br>\ln L(\theta) = \sum_{i=1}^N\ln (p(x_i|\theta))<br>$$<br>​    如果$\hat \theta$是参数空间中能使似然函数$L(\theta)$最大的$\theta$值，则$\hat \theta$应该是“最可能”的参数值，那么$\hat \theta$就是$\theta$的极大似然估计量。<br>$$<br>\hat \theta = arg \max _{\theta} L(\theta) = arg \max _{\theta} \ln L(\theta)<br>$$</p>
 <h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><h4 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a>Example 1</h4><blockquote>
 <p>Question:</p>
 <p>栖息于某地区的动物个体总数N是未知的，为了得到对栖息地动物个体总数目的大致估计，生态学家们常常进行如下的实验。他们现在这个地区捕捉一些动物，例如说m个，然后标上记号就放掉它们。过一段时间，当这些标有记号的动物充分散布到整个地区后，再捉一批，例如说n个。设X为第二批捉住的n个动物中标过记号的动物个数。如果假设两次捕捉期间动物的总数没有发生变化，而且捉住每一只动物的可能性是一样的，那么X为一超几何随机变量，满足<br>$$<br>P\{X = i\} = \frac{\binom{m}{i} \binom{N-m}{n-i}}{\binom{N}{n}} \equiv P_i(N)<br>$$<br>求这个地区动物最可能为多少个</p>
@@ -219,7 +220,7 @@
 <p><strong>Solution</strong></p>
 <p>​    高斯分布的密度函数定义如下：</p>
 <p>​    对于一个$\mathcal N(\mu , \sigma^2)$的高斯分布，密度函数表示为$f(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/2\sigma^2}$</p>
-<p>​    因为是满足独立同分布的，那么似然函数可以写成如下<br>$$<br>L(x_1,x_2,…,x_N; \mu,\sigma^2) = \prod_{i=1}^N f(x_i ; \mu , \sigma^2) = \frac{1}{(\sqrt{2\pi}\sigma)^N}\exp(\sum_{i=1}^N{-(x_i-\mu)^2/2\sigma^2}) \\<br>\ln L = -N \ln (\sqrt{2\pi}\sigma) + \sum_{i=1}^N{-(x_i-\mu)^2/2\sigma^2} = -N \ln (\sqrt{2\pi}\sigma)  - \frac{1}{2\sigma^2}(\sum_{i=1}^Nx_i^2 - 2\mu\sum_{i=1}^Nx_i + N\mu^2)<br>$$<br>​    分别将lnL对$\mu$和$\sigma$求导，找到满足的$\hat \mu$和$\hat \sigma$使得似然函数达到最大值<br>$$<br>\frac{\partial \ln L}{\partial \mu} = \frac{\sum_{i=1}^Nx_i}{\sigma^2} - \frac{N\mu}{\sigma^2} = 0 \rightarrow \mu = \frac{\sum_{i=1}^Nx_i}{N} \\<br>\frac{\partial \ln L}{\partial \mu} = -N/\sigma - \frac{1}{\sigma ^3} \sum_{i=1}^N-(x_i-\mu)^2 = 0 -&gt; \sigma^2 = \frac{\sum_{i=1}^N(x_i-\mu)^2}{N}<br>$$</p>
+<p>​    因为是满足独立同分布的，那么似然函数可以写成如下<br>$$<br>L(x_1,x_2,…,x_N; \mu,\sigma^2) = \prod_{i=1}^N f(x_i ; \mu , \sigma^2) = \frac{1}{(\sqrt{2\pi}\sigma)^N}\exp(\sum_{i=1}^N{-(x_i-\mu)^2/2\sigma^2}) \\<br>\ln L = -N \ln (\sqrt{2\pi}\sigma) + \sum_{i=1}^N{-(x_i-\mu)^2/2\sigma^2} = -N \ln (\sqrt{2\pi}\sigma)  - \frac{1}{2\sigma^2}(\sum_{i=1}^Nx_i^2 - 2\mu\sum_{i=1}^Nx_i + N\mu^2)<br>$$<br>​    分别将lnL对$\mu$和$\sigma$求导，找到满足的$\hat \mu$和$\hat \sigma$使得似然函数达到最大值<br>$$<br>\frac{\partial \ln L}{\partial \mu} = \frac{\sum_{i=1}^Nx_i}{\sigma^2} - \frac{N\mu}{\sigma^2} = 0 \rightarrow \mu = \frac{\sum_{i=1}^Nx_i}{N} \\<br>\frac{\partial \ln L}{\partial \mu} = -N/\sigma - \frac{1}{\sigma ^3} \sum_{i=1}^N-(x_i-\mu)^2 = 0 \rightarrow \sigma^2 = \frac{\sum_{i=1}^N(x_i-\mu)^2}{N}<br>$$</p>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://blog.csdn.net/zengxiantao1994/article/details/72787849" target="_blank" rel="external">http://blog.csdn.net/zengxiantao1994/article/details/72787849</a></p>
 
       

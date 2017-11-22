@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Junnor.G">
 <meta property="og:description" content="###HBase代码在hadoop集群下运行找不到hbase相关类     ​    hbase代码引入的jar都可以在hbase/lib的目录下找到，一次性都导入，代码就能运行了。单纯的hbase代码是可以直接作为普通java程序运行的，不用再hadoop集群下运行。 ​    但是hbase相关的读写写到了MapReduce的操作中，就需要打成jar包，在maven下，将hbase/lib下的">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2017-11-07T18:11:13.000Z">
+<meta property="og:updated_time" content="2017-11-22T09:05:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hadoop hbase 相关代码运行问题">
 <meta name="twitter:description" content="###HBase代码在hadoop集群下运行找不到hbase相关类     ​    hbase代码引入的jar都可以在hbase/lib的目录下找到，一次性都导入，代码就能运行了。单纯的hbase代码是可以直接作为普通java程序运行的，不用再hadoop集群下运行。 ​    但是hbase相关的读写写到了MapReduce的操作中，就需要打成jar包，在maven下，将hbase/lib下的">
@@ -193,7 +193,7 @@
       
         <p>###HBase代码在hadoop集群下运行找不到hbase相关类    </p>
 <p>​    hbase代码引入的jar都可以在hbase/lib的目录下找到，一次性都导入，代码就能运行了。单纯的hbase代码是可以直接作为普通java程序运行的，不用再hadoop集群下运行。</p>
-<p>​    但是hbase相关的读写写到了MapReduce的操作中，就需要打成jar包，在maven下，将hbase/lib下的jar包都导入项目，然后代码就不会报错了，然后rebuild project 完成后，就可以通过mvn compile,mvn package将代码打包了。</p>
+<p>​    但是hbase相关的读写写到了MapReduce的操作中，就需要打成jar包，在maven下，将hbase/lib下的jar包都导入项目，然后代码就不会报错了，然后rebuild project 完成后，就可以通过mvn compile,mvn package将代码打包了。<br><a id="more"></a></p>
 <p>​    通过hadoop jar Your.jar classname [hdfs:inputdir] [hdfs:outputdir]时会报hbase中的相关类找不到，原因是hadoop集群找不到本地的hbase jar包。</p>
 <p>​    很容易理解就是hadoop无法找到对应hbase相关的jar包。试了好多方法，也历经了好几天无法运行的情况，反而优先完成了Hive实验。最后的解决办法是在\$HADOOP_HOME/etc/hadoop/hadoop-env.sh中对应有个添加HADOOP_CLASSPATH的地方，在前面多加一句</p>
 <p>export  HADOOP_CLASSPATH = \$HADOOP_CLASSPATH:/home/hadoop/hadoop_installs/hbase-1.2.6/lib/*.jar</p>
