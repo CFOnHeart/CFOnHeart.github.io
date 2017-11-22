@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ganjun.net">
-  <title>Category: 自然语言处理 | Junnor.G</title>
+  <title>概率论与数理统计-极大似然估计 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="No one cares your tears , but ability.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Junnor.G">
-<meta property="og:url" content="http://ganjun.net/categories/自然语言处理/index.html">
+  <meta name="description" content="基本概念​    比如在贝叶斯概率计算中，我们总是利用先验概率来计算后验概率，样本太大，我们总是利用采样的方法来计算先验概率，但为什么采样得到的概率分布就能代替总的样本概率分布呢，其背后就用到了极大似然估计的思想，因为在得到采集样本这个事件A的条件下，只有总样本也满足相同的概率分布，这个事件A发生的可能性才达到最大值。 ​    最大似然估计的目的就是：利用已知的样本结果，反推最有可能（最大概率）">
+<meta name="keywords" content="概率论,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概率论与数理统计-极大似然估计">
+<meta property="og:url" content="http://ganjun.net/2017/11/22/概率论与数理统计-极大似然估计/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="No one cares your tears , but ability.">
+<meta property="og:description" content="基本概念​    比如在贝叶斯概率计算中，我们总是利用先验概率来计算后验概率，样本太大，我们总是利用采样的方法来计算先验概率，但为什么采样得到的概率分布就能代替总的样本概率分布呢，其背后就用到了极大似然估计的思想，因为在得到采集样本这个事件A的条件下，只有总样本也满足相同的概率分布，这个事件A发生的可能性才达到最大值。 ​    最大似然估计的目的就是：利用已知的样本结果，反推最有可能（最大概率）">
 <meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2017-11-22T09:02:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Junnor.G">
-<meta name="twitter:description" content="No one cares your tears , but ability.">
+<meta name="twitter:title" content="概率论与数理统计-极大似然估计">
+<meta name="twitter:description" content="基本概念​    比如在贝叶斯概率计算中，我们总是利用先验概率来计算后验概率，样本太大，我们总是利用采样的方法来计算先验概率，但为什么采样得到的概率分布就能代替总的样本概率分布呢，其背后就用到了极大似然估计的思想，因为在得到采集样本这个事件A的条件下，只有总样本也满足相同的概率分布，这个事件A发生的可能性才达到最大值。 ​    最大似然估计的目的就是：利用已知的样本结果，反推最有可能（最大概率）">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -169,185 +171,267 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-概率论与数理统计-极大似然估计" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      概率论与数理统计-极大似然估计
+    </h1>
+  
+
+        
+        <a href="/2017/11/22/概率论与数理统计-极大似然估计/" class="archive-article-date">
+  	<time datetime="2017-11-22T07:56:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>​    比如在贝叶斯概率计算中，我们总是利用先验概率来计算后验概率，样本太大，我们总是利用采样的方法来计算先验概率，但为什么采样得到的概率分布就能代替总的样本概率分布呢，其背后就用到了极大似然估计的思想，因为在得到采集样本这个事件A的条件下，只有总样本也满足相同的概率分布，这个事件A发生的可能性才达到最大值。</p>
+<p>​    <strong>最大似然估计的目的就是</strong>：利用已知的样本结果，反推最有可能（最大概率）导致这样结果的参数值。</p>
+<p>​        <strong>原理：</strong>极大似然估计是建立在极大似然原理的基础上的一个统计方法，是概率论在统计学中的应用。极大似然估计提供了一种给定观察数据来评估模型参数的方法，即：“模型已定，参数未知”。通过若干次试验，观察其结果，利用试验结果得到某个参数值能够使样本出现的概率为最大，则称为极大似然估计。</p>
+<p>​        由于样本集中的样本都是独立同分布，可以只考虑一类样本集D，来估计参数向量θ。记已知的样本集为：<br>$$<br>D = \{x_1 , x_2,…,x_N\}<br>$$<br>​    <strong>似然函数(likelihood function):</strong> 联合概率密度函数$p(D|\theta)$ 称为相对于$\{x_1,x_2,…,x_N\}$的$\theta$的似然函数。那么在所有x都是在同一分布下满足独立同分布采样的前提下，可得<br>$$<br>L(\theta) = p(D|\theta) = p(x_1,x_2,…,x_N | \theta) = \prod_{i=1}^Np(x_i|\theta)<br>$$<br>​    <strong>对数似然</strong>:<br>$$<br>\ln L(\theta) = \sum_{i=1}^N\ln (p(x_i|\theta))<br>$$<br>​    如果$\hat \theta$是参数空间中能使似然函数$L(\theta)$最大的$\theta$值，则$\hat \theta$应该是“最可能”的参数值，那么$\hat \theta$就是$\theta$的极大似然估计量。<br>$$<br>\hat \theta = arg \max _{\theta} L(\theta) = arg \max _{\theta} \ln L(\theta)<br>$$<br><a id="more"></a></p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><h4 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a>Example 1</h4><blockquote>
+<p>Question:</p>
+<p>栖息于某地区的动物个体总数N是未知的，为了得到对栖息地动物个体总数目的大致估计，生态学家们常常进行如下的实验。他们现在这个地区捕捉一些动物，例如说m个，然后标上记号就放掉它们。过一段时间，当这些标有记号的动物充分散布到整个地区后，再捉一批，例如说n个。设X为第二批捉住的n个动物中标过记号的动物个数。如果假设两次捕捉期间动物的总数没有发生变化，而且捉住每一只动物的可能性是一样的，那么X为一超几何随机变量，满足<br>$$<br>P\{X = i\} = \frac{\binom{m}{i} \binom{N-m}{n-i}}{\binom{N}{n}} \equiv P_i(N)<br>$$<br>求这个地区动物最可能为多少个</p>
+</blockquote>
+<p><strong>Solution</strong></p>
+<p>​    现在假定i为X的观测值。那么，因为$P_i(N)$表示该地区事实上总共有N个动物的条件下的观测事件X取值的概率，故使$P_i(N)$达到最大值的N值应当是动物个体总数N的一个合理估计。这样的估计称为极大似然估计(maximum likelihood).</p>
+<p>​    求$P_i(N)$最大值的最简单方法是：首先注意<br>$$<br>\frac{P_i(N)}{P_i(N-1)} = \frac{(N-m)(N-n)}{N(N-m-n+i)}<br>$$<br>​    要使上述比值大于1，当且仅当<br>$$<br>(N-m)(N-n) \ge N(N-m-n+i)<br>$$<br>​    也就是等价于<br>$$<br>N \le nm/i<br>$$</p>
+<h4 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2"></a>Example 2</h4><blockquote>
+<p>Question 2</p>
+<p>概率模型中离散的情况，人口比例。</p>
+<p>假设现在有一个中国人口的样本组，样本容量为1000，服从独立同分布，男女比例为3:2。如何通过合理推理估计全国的人口比例（也就是证明样本估计总体的可行性）。</p>
+</blockquote>
+<p><strong>Solution</strong></p>
+<p>​    这里很容易理解为从中国人口中独立同分布采样了1000个样本$x_1,x_2,…,x_{1000}$，最后样本中包含的男女比例为3：2，每个样本都服从独立同分布采样的，令中国人口实际的男女比例为p，那么似然函数可以按照如下所写：<br>$$<br>L(x_1,x_2,…,x_{1000}; p) = p(x_1,x_2,…,x_{1000} | p) = \prod_{i=1}^{1000} p(x_i | p) = p^{600}(1-p)^{400} \\<br>对数似然：\ln L(x_1,x_2,…,x_{1000} ; p) = 600 \ln p + 400 \ln(1-p) \\<br>$$<br>​    我们希望找到满足概率最大情况下的参数p的值，也就是$p = \hat p$，使得$\ln L$最大。那么我们可以通过求导：<br>$$<br>\frac{\partial \ln L}{\partial p} = 600/p - 400/(1-p)<br>$$<br>​    所以p = 0.6时，导数为0，似然函数达到最大值，中国人口男女比例3:2，和样本采样得到结果一致。</p>
+<h4 id="Example-3"><a href="#Example-3" class="headerlink" title="Example 3"></a>Example 3</h4><blockquote>
+<p>Question:</p>
+<p>在连续型变量上进行极大似然估计高斯分布的均值和方差。</p>
+<p>假设我们有一组来自高斯分布(均值和方差未知)的独立样本$x_1,x_2,…,x_N$</p>
+<p>$x_i \thicksim \mathcal N(\mu , \sigma^2) , i=1,2,…,N$</p>
+<p>利用极大似然估计求解高斯分布的均值($\mu$)和方差($\sigma$)</p>
+</blockquote>
+<p><strong>Solution</strong></p>
+<p>​    高斯分布的密度函数定义如下：</p>
+<p>​    对于一个$\mathcal N(\mu , \sigma^2)$的高斯分布，密度函数表示为$f(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2/2\sigma^2}$</p>
+<p>​    因为是满足独立同分布的，那么似然函数可以写成如下<br>$$<br>L(x_1,x_2,…,x_N; \mu,\sigma^2) = \prod_{i=1}^N f(x_i ; \mu , \sigma^2) = \frac{1}{(\sqrt{2\pi}\sigma)^N}\exp(\sum_{i=1}^N{-(x_i-\mu)^2/2\sigma^2}) \\<br>\ln L = -N \ln (\sqrt{2\pi}\sigma) + \sum_{i=1}^N{-(x_i-\mu)^2/2\sigma^2} = -N \ln (\sqrt{2\pi}\sigma)  - \frac{1}{2\sigma^2}(\sum_{i=1}^Nx_i^2 - 2\mu\sum_{i=1}^Nx_i + N\mu^2)<br>$$<br>​    分别将lnL对$\mu$和$\sigma$求导，找到满足的$\hat \mu$和$\hat \sigma$使得似然函数达到最大值<br>$$<br>\frac{\partial \ln L}{\partial \mu} = \frac{\sum_{i=1}^Nx_i}{\sigma^2} - \frac{N\mu}{\sigma^2} = 0 \rightarrow \mu = \frac{\sum_{i=1}^Nx_i}{N} \\<br>\frac{\partial \ln L}{\partial \mu} = -N/\sigma - \frac{1}{\sigma ^3} \sum_{i=1}^N-(x_i-\mu)^2 = 0 -&gt; \sigma^2 = \frac{\sum_{i=1}^N(x_i-\mu)^2}{N}<br>$$</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="http://blog.csdn.net/zengxiantao1994/article/details/72787849" target="_blank" rel="external">http://blog.csdn.net/zengxiantao1994/article/details/72787849</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatQR.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/24/马尔可夫模型4/" class="archive-article-date">
-  	<time datetime="2017-07-24T06:34:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/24/马尔可夫模型4/">马尔可夫模型4</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马儿可夫模型</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">概率论</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">viterbi算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
+        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ganjun.net/2017/11/22/概率论与数理统计-极大似然估计/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/20/马尔科夫模型3/" class="archive-article-date">
-  	<time datetime="2017-07-20T02:51:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/08/hadoop-hbase-相关代码运行问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hadoop hbase 相关代码运行问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/20/马尔科夫模型3/">马尔科夫模型3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马尔可夫模型</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前向算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-number">2.</span> <span class="toc-text">Example</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Example-1"><span class="toc-number">2.1.</span> <span class="toc-text">Example 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Example-2"><span class="toc-number">2.2.</span> <span class="toc-text">Example 2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Example-3"><span class="toc-number">2.3.</span> <span class="toc-text">Example 3</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-number">3.</span> <span class="toc-text">Reference</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/19/马尔可夫模型2/" class="archive-article-date">
-  	<time datetime="2017-07-19T03:00:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/19/马尔可夫模型2/">马尔可夫模型2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">viterbi算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">马尔可夫模型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自然语言处理/" class="article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="概率论与数理统计-极大似然估计" data-title="概率论与数理统计-极大似然估计" data-url="http://ganjun.net/2017/11/22/概率论与数理统计-极大似然估计/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
   
-    </div></section>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://ganjun.net/2017/11/22/概率论与数理统计-极大似然估计/", 
+    sourceId: "概率论与数理统计-极大似然估计",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="概率论与数理统计-极大似然估计" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "true"; 
+var conf = "true"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
+  
 
 
           </div>
@@ -370,10 +454,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
