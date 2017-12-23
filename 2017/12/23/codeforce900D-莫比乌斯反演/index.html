@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Junnor.G">
 <meta property="og:description" content="1. 莫比乌斯反演首先再来简单回顾一下莫比乌斯反演 莫比乌斯函数定义如下$$n = p_1^{k_1}p_2^{k_2}…p_t^{k_t} \quad \mu(n) = \begin{cases} (-1) ^ t &amp;amp; s.t. \quad k_1=k_2=…=k_t=1 \ 0 &amp;amp; o.w \end{cases}$$莫比乌斯函数通过容斥原理可证很容易证明如下两个很重要的式子，可">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2017-12-23T08:57:35.000Z">
+<meta property="og:updated_time" content="2017-12-23T08:58:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codeforce900D-莫比乌斯反演">
 <meta name="twitter:description" content="1. 莫比乌斯反演首先再来简单回顾一下莫比乌斯反演 莫比乌斯函数定义如下$$n = p_1^{k_1}p_2^{k_2}…p_t^{k_t} \quad \mu(n) = \begin{cases} (-1) ^ t &amp;amp; s.t. \quad k_1=k_2=…=k_t=1 \ 0 &amp;amp; o.w \end{cases}$$莫比乌斯函数通过容斥原理可证很容易证明如下两个很重要的式子，可">
@@ -192,7 +192,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="1-莫比乌斯反演"><a href="#1-莫比乌斯反演" class="headerlink" title="1. 莫比乌斯反演"></a>1. 莫比乌斯反演</h3><p>首先再来简单回顾一下莫比乌斯反演</p>
-<p><strong>莫比乌斯函数定义如下</strong><br>$$<br>n = p_1^{k_1}p_2^{k_2}…p_t^{k_t} \quad \mu(n) = \begin{cases} (-1) ^ t &amp; s.t. \quad k_1=k_2=…=k_t=1 \ 0 &amp; o.w \end{cases}<br>$$<br>莫比乌斯函数通过容斥原理可证很容易证明如下两个很重要的式子，可参考<a href="https://wenku.baidu.com/view/2d706761aa00b52acec7ca63.html" target="_blank" rel="external">贾志鹏线性筛</a>。<br>$$<br>n = \sum_{d|n} \phi(d) \quad \phi(n): # \, of \, x (\, s.t. \, \gcd(x,n)=1 \,and \, x\le n )\\<br>[n=1] = \sum_{d|n} \mu(d)  \quad(n=1时答案为1，其他时候都为0)<br>$$<br>莫比乌斯反演因此可以得到一条很重要的公式如下<br>$$<br>F(n) = \sum_{d|n} f(d)  \Leftrightarrow f(n) = \sum_{d|n}\mu(d)F(\frac{n}{d})<br>$$<br><strong>Proof：</strong><br>$$<br>\begin{aligned}<br>f(n) &amp;=  \sum_{d|n}\mu(d)F(\frac{n}{d}) =  \sum_{d|n}\mu(d)\sum_{d^{‘}|\frac{n}{d}}f(d^{‘}) \\<br>&amp; = \sum_{d^{‘} | n} f(d^{‘})\sum_{d|\frac{n}{d^{‘}}}\mu(d) = \sum_{d^{‘} | n} f(d^{‘}) [\frac{n}{d^{‘}} = 1] \\<br>&amp; = f(n)<br>\end{aligned}<br>$$</p>
+<p><strong>莫比乌斯函数定义如下</strong><br>$$<br>n = p_1^{k_1}p_2^{k_2}…p_t^{k_t} \quad \mu(n) = \begin{cases} (-1) ^ t &amp; s.t. \quad k_1=k_2=…=k_t=1 \ 0 &amp; o.w \end{cases}<br>$$<br>莫比乌斯函数通过容斥原理可证很容易证明如下两个很重要的式子，可参考<a href="https://wenku.baidu.com/view/2d706761aa00b52acec7ca63.html" target="_blank" rel="external">贾志鹏线性筛</a>。<br>$$<br>n = \sum_{d|n} \phi(d) \quad \phi(n): # \, of \, x (\, s.t. \, \gcd(x,n)=1 \,and \, x\le n )\\<br>[n=1] = \sum_{d|n} \mu(d)  \quad(n=1时答案为1，其他时候都为0)<br>$$<br><a id="more"></a></p>
+<p>莫比乌斯反演因此可以得到一条很重要的公式如下<br>$$<br>F(n) = \sum_{d|n} f(d)  \Leftrightarrow f(n) = \sum_{d|n}\mu(d)F(\frac{n}{d})<br>$$<br><strong>Proof：</strong><br>$$<br>\begin{aligned}<br>f(n) &amp;=  \sum_{d|n}\mu(d)F(\frac{n}{d}) =  \sum_{d|n}\mu(d)\sum_{d^{‘}|\frac{n}{d}}f(d^{‘}) \\<br>&amp; = \sum_{d^{‘} | n} f(d^{‘})\sum_{d|\frac{n}{d^{‘}}}\mu(d) = \sum_{d^{‘} | n} f(d^{‘}) [\frac{n}{d^{‘}} = 1] \\<br>&amp; = f(n)<br>\end{aligned}<br>$$</p>
 <h3 id="2-问题描述"><a href="#2-问题描述" class="headerlink" title="2. 问题描述"></a>2. 问题描述</h3><p>Count the number of distinct sequences $a_1, a_2, …, a_n (1 ≤ a_i) $consisting of positive integers such that$\gcd(a_1, a_2, …, a_n) = x$ and $\sum_{i=1}^n a_i = y$ . As this number could be large, print the answer modulo $10^9 + 7$.</p>
 <p>简单理解就是找到序列a，满足序列上所有的数字相加等于y，且它们的gcd等于x。序列只要保证不是每一个位置上的数字都相同就是不同的序列。问这样不同的序列有多少个。(1, 2, 1和1,1,2是不同的)</p>
 <h3 id="3-问题求解"><a href="#3-问题求解" class="headerlink" title="3.问题求解"></a>3.问题求解</h3><p>因为每个数字都必须有一个公约数x。这个问题很容易转化成n = y/x，n能组成多少个序列，保证序列和是n，且最大公约数为1。</p>
