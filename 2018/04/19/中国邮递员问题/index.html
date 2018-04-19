@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Junnor.G">
 <meta property="og:description" content="中国邮递员问题1. 问题描述 中国邮递员问题是邮递员在某一地区的信件投递路程问题。邮递员每天从邮局出发，走遍该地区所有街道再返回邮局，问题是他应如何安排送信的路线可以使所走的总路程最短。  2. 问题解决 图本身就是一个欧拉回路图，那么直接走一个欧拉回路就访问了所有路径并回到了起点 （欧拉回路图的前提条件是每个点的度数都是偶数）  图不是一个欧拉回路图，需要对某些边重复走多次回到起点，等价于添加了">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2018-04-19T16:41:41.000Z">
+<meta property="og:updated_time" content="2018-04-19T16:42:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中国邮递员问题">
 <meta name="twitter:description" content="中国邮递员问题1. 问题描述 中国邮递员问题是邮递员在某一地区的信件投递路程问题。邮递员每天从邮局出发，走遍该地区所有街道再返回邮局，问题是他应如何安排送信的路线可以使所走的总路程最短。  2. 问题解决 图本身就是一个欧拉回路图，那么直接走一个欧拉回路就访问了所有路径并回到了起点 （欧拉回路图的前提条件是每个点的度数都是偶数）  图不是一个欧拉回路图，需要对某些边重复走多次回到起点，等价于添加了">
@@ -209,6 +209,7 @@
 </ul>
 </li>
 </ol>
+<a id="more"></a>
 <h3 id="3-相关算法"><a href="#3-相关算法" class="headerlink" title="3.相关算法"></a>3.相关算法</h3><ul>
 <li><p>Fleury算法：求解欧拉回路路径，可以写成非常简洁的形式</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">dfs(source , euler_path);</div><div class="line"></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u , <span class="built_in">vector</span>&lt;pii&gt; &amp;euler_path)</span></span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;edges[u].size() ; i++)&#123;</div><div class="line">        <span class="keyword">int</span> v = edges[u][i];</div><div class="line">        <span class="keyword">if</span>(<span class="number">0</span> &lt; euler_edge_degree[u][v])&#123;</div><div class="line">            <span class="comment">//                cout&lt;&lt;"here debug: "&lt;&lt;u&lt;&lt;" -- "&lt;&lt;v&lt;&lt;endl;</span></div><div class="line">            euler_edge_degree[u][v] -- ;</div><div class="line">            euler_edge_degree[v][u] -- ;</div><div class="line">            dfs(v , euler_path);</div><div class="line">            euler_path.push_back(make_pair(u, v));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
