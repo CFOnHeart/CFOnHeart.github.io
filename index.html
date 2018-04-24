@@ -171,6 +171,270 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-gan-net-入门学习以及半监督Gan-SSGAN-简单用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/gan-net-入门学习以及半监督Gan-SSGAN-简单用法/">gan-net 入门学习以及半监督Gan(SSGAN)简单用法</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/24/gan-net-入门学习以及半监督Gan-SSGAN-简单用法/" class="archive-article-date">
+  	<time datetime="2018-04-24T08:02:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="GAN-基本介绍"><a href="#GAN-基本介绍" class="headerlink" title="GAN 基本介绍"></a>GAN 基本介绍</h3><p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_jpg/iaTa8ut6HiawB3tIYo8icic0Ox7FRrBTWE6o0kEn6Ve6gjalqicZ22WUpo9333ibHzGYGmcNXIpc7RU3OQtRchzPEoIQ/0?wx_fmt=jpeg" alt=""></p>
+<h3 id="GAN的基本组成"><a href="#GAN的基本组成" class="headerlink" title="GAN的基本组成"></a>GAN的基本组成</h3><ol>
+<li><p>生成器(Generator) G</p>
+<ul>
+<li>Generator是一个函数，输入是z, 输出是x</li>
+<li>给定一个先验分布$P_{prior}(\bf z)$和一个生成器$G$决定的分布$P_G{(\bf x)}$</li>
+</ul>
+</li>
+<li><p>判别器(Discriminator) D</p>
+<ul>
+<li>Discriminator 是一个函数，输入是$\bf x$，输出是一个标量</li>
+<li>函数的作用是评估$P_{G}(\bf x)$和$P_{data}(\bf x)$之间到底有多不同</li>
+</ul>
+</li>
+<li><p>函数(Function) V(G,D)<br>$$<br>V = E_{x\sim P_{data}}[\log {D(x)}] + E_{x\sim P_{G}}[\log {(1-D(x))}]<br>$$<br>D(x)可以简单理解为将x数据判别为真实数据的概率。</p>
+<p>这里函数V的作用是衡量$P_G(x)$和$P_{data}(x)$之间不同的程度。</p>
+</li>
+</ol>
+<h3 id="GAN目标"><a href="#GAN目标" class="headerlink" title="GAN目标"></a>GAN目标</h3><ol>
+<li><p>判别器目标是为了尽可能区分真实数据和生成器生成的数据的区别。也就是尽可能使得$P_G(x)$和$P_{data}(x)$之间不同。</p>
+<p>也就是<br>$$<br>D^* = \arg \max_D V(G,D)<br>$$</p>
+</li>
+<li><p>生成器的目标是为了让自己生成的数据尽可能地不被判别器区分出和真实数据的不同，也就是使得判别器下判别$P_G(x)$和$P_{data}(x)$之间不同程度尽可能小</p>
+<p>也就是<br>$$<br>G^* = \arg \min_G \max_D V(G,D)<br>$$</p>
+</li>
+<li><p>结论：<br>$$<br>D^* = \arg \max_D V(G,D) = -\log 4 + 2 JSD(P_{data}(x) || P_G(x))<br>$$<br>引入KL散度，JS散度</p>
+<ul>
+<li><p>相对熵，又称KL散度，是描述两个概率分布P和Q差异的一种方法。它是非对称的，这意味着KL(P||Q) != KL(Q||P) 。特别的，在信息论中，KL(P||Q)表示当用概率分布Q来拟合真是分布P时，产生的信息损耗，其中P表示真是分布，Q表示P的拟合分布。<br>$$<br>KL(P||Q) = \sum_x P(x) \log \frac{P(x)}{Q(x)}<br>$$<br>相对熵可以衡量两个随机分布之间的距离当两个随机分布相同时，它们的相对熵为0，当两个随机分布的差别增大时，它们的相对熵也会增大。</p>
+</li>
+<li><p>JS散度<br>$$<br>JSD(P||Q) = \frac{1}{2} KL(P||\frac{P+Q}{2}) + \frac{1}{2}KL(Q || \frac{P+Q}{2})<br>$$</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>   <strong>Proof:</strong><br>$$<br>\begin{aligned}<br>   \max_D V(G,D)<br>   &amp; = V(G , D^<em>) = E_{x\sim P_{data}}[\log D^</em>(x)] + E_{x\sim P_G}[\log(1-D^*(x))] \\<br>   &amp; = E_{x\sim P_{data}}[\log \frac{P_{data}(x)}{P_{data}(x) + P_G(x)}] + E_{x\sim P_G}[\log \frac{P_{G}(x)}{P_{data}(x) + P_G(x)}] \\<br>   &amp; = \int_x P_{data}(x)\log \frac{P_{data}(x)}{P_{data}(x) + P_G(x)} d_x + \int_x P_{G}(x)\log \frac{P_{G}(x)}{P_{data}(x) + P_G(x)} d_x \\<br>   &amp; =  \int_x P_{data}(x)\log \frac{\frac{1}{2}P_{data}(x)}{\frac{P_{data}(x) + P_G(x)}{2}} d_x + \int_x P_{G}(x)\log \frac{\frac{1}{2}P_{G}(x)}{\frac{P_{data}(x) + P_G(x)}{2}}d_x \\<br>   &amp; = \int_x P_{data}(x)\log \frac{1}{2} d_x + \int_x P_{data}(x)\log \frac{P_{data}(x)}{\frac{P_{data}(x) + P_G(x)}{2}} d_x \\<br>   &amp; + \int_x P_G(x)\log \frac{1}{2}d_x + \int_x P_{G}(x)\log \frac{P_{G}(x)}{\frac{P_{data}(x) + P_G(x)}{2}}d_x \\<br>   &amp; = 2 \log\frac{1}{2} + \int_x P_{data}(x)\log \frac{P_{data}(x)}{\frac{P_{data}(x) + P_G(x)}{2}} d_x + \int_x P_{G}(x)\log \frac{P_{G}(x)}{\frac{P_{data}(x) + P_G(x)}{2}}d_x \\<br>   &amp; = 2 \log\frac{1}{2}  + KL(P_{data}(x) ||\frac{P_{data}(x) + P_G(x)}{2}) + KL(P_{G}(x) ||\frac{P_{data}(x) + P_G(x)}{2}) \\<br>   &amp; = -\log4 + 2JSD(P_{data}(x) || P_G(x))</p>
+<p>   \end{aligned}<br>$$</p>
+<ol>
+<li>寻找最好的$G^<em>$<br>$$<br>G^</em> = \arg \min_G \max_D V(G,D) = \arg \min_G -\log4 +2JSD(P_{data}(x) || P_G(x))<br>$$<br>那么使得最小化的G满足的条件是$P_{data}(x) = P_G(x)$</li>
+</ol>
+<p><strong>inclusion:</strong></p>
+<p>上述找到的$D^<em>,G^</em>$也满足了gan-net网络的最终目标，也就是最后判别器无法分清真实数据和生成数据，$P_{data}(x) = P_G(x)$。</p>
+<h3 id="算法结构"><a href="#算法结构" class="headerlink" title="算法结构"></a>算法结构</h3><p><img src="https://img-blog.csdn.net/20170320120034543?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2FsbHl4eWwxOTkz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h3 id="Semi-Supervied-GAN-SSGAN-基于GAN的半监督学习"><a href="#Semi-Supervied-GAN-SSGAN-基于GAN的半监督学习" class="headerlink" title="Semi Supervied GAN (SSGAN) 基于GAN的半监督学习"></a>Semi Supervied GAN (SSGAN) 基于GAN的半监督学习</h3><p>​    GAN的发明者<a href="http://www.iangoodfellow.com/" target="_blank" rel="external">Ian Goodfellow</a>2016年在Open AI任职期间发表了这篇论文，其中提到了GAN用于半监督学习(semi supervised)的方法。称为<strong>SSGAN</strong>。<br>​    作者给出了<a href="https://github.com/openai/improved-gan" target="_blank" rel="external">Theano+Lasagne实现</a>。本文结合源码对这种方法的<strong>推导和实现</strong>进行讲解。</p>
+<h4 id="核心理念"><a href="#核心理念" class="headerlink" title="核心理念"></a>核心理念</h4><p>​    在半监督学习中运用GAN的逻辑如下。</p>
+<ul>
+<li><p>无标记样本没有类别信息，无法训练分类器；</p>
+</li>
+<li><p>引入GAN后，其中生成器(Generator)可以从随机信号生成伪样本；</p>
+</li>
+<li><p>相比之下，<strong>原有的无标记样本拥有了人造类别：真</strong>。可以和伪样本一起训练分类器。 </p>
+</li>
+</ul>
+<p>  ​    简单说明就是，给定的文本类别为k，将生成器(generator)生成的伪样本看作类别为k+1。那么最后输出的就是k+1维的softmax的向量，也就是对应每个类别的概率了。(ps: $softmax(x_i) = \frac{\exp(x_i)}{\sum_jexp(x_j)}$)</p>
+<p>  ​    而最原始的Gan-net输出的实际上就只是一维的向量，因为它只需要一个数值来表示这个样本是真样本的概率。当这个概率为0.5时表示判别器无法判别生成器生成的数据了，从而达到了最好的效果。</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>​    GAN中的两个核心模块是<strong>生成器</strong>(Generator)和<strong>鉴别器</strong>(Discriminator)。这里用<strong>分类器</strong>(Classifier)代替了鉴别器。 </p>
+<p><img src="https://img-blog.csdn.net/20170723211247603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2hlbnhpYW9sdTE5ODQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<pre><code>**真实类别数量为k，$x_f$表示生成的fake样本,将其标记为类别k+1，$x_l$表示真实的带标记数据，$x_u$表示真实的无标记数据, p是一个k+1维的概率向量**
+</code></pre><h4 id="三种误差"><a href="#三种误差" class="headerlink" title="三种误差"></a>三种误差</h4><p>整个系统涉及三种误差。</p>
+<p>对于训练集中的<strong>有标签样本</strong>，考察估计的标签是否正确。即，计算分类为相应的概率：<br>$$<br>L_{l}=−E[\ln p(y|x)]<br>$$<br>对于训练集中的<strong>无标签样本</strong>，考察是否估计为“真”。即，计算不估计为K+1K+1类的概率：<br>$$<br>L_u = -E[\ln \sum_{1&lt;=i&lt;=k} p(y_i | x)] = -E[\ln (1-p(k+1|x))]<br>$$<br>对于生成器产生的<strong>伪样本</strong>，考察是否估计为“伪”。即，计算估计为K+1K+1类的概率：<br>$$<br>L_f = -E[\ln p(k+1|x)]<br>$$</p>
+<h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><p>考虑softmax函数的一个特性：<br>$$<br>\begin{aligned}<br>softmax(x_i−c)<br>&amp; =\frac{exp(x_i−c)}{\sum_jexp(x_j−c)}=\frac{exp(x_i)/exp(c)}{\sum_jexp(x_j)/exp(c)} \\<br>&amp; =\frac{exp⁡(x_i)}{\sum_jexp⁡(x_j)}\\<br>&amp; =softmax(x_i)<br>\end{aligned}<br>$$</p>
+<p>即，如果输入各维减去同一个数，softmax结果不变。 </p>
+<p>于是，可以令$l \rightarrow l-l_{k+1} $, $l_{k+1}=0$，$p=softmax(l)$保持不变。</p>
+<p>期望号略去不写，利用$exp(l_{k+1})=1$，后两种代价变为：<br>$$<br>L_u = - \ln[1-p(k+1|x)] = -\ln[\frac{\sum_{j=1}^k\exp l_j}{\sum_{j=1}^k\exp l_j + \exp l_{k+1}}] \\<br>= -ln\sum_{j=1}^k\exp l_j + \ln(1+\sum_{j=1}^k\exp l_j )<br>$$</p>
+<p>上述推导可以让我们省去k+1，<strong>让分类器仍然输出K维的估计l</strong>。</p>
+<p>对于第一个代价，由于分类器输入必定来自前K类，所以可以直接使用l的前K维：</p>
+<p> $$L_{l}=-\ln\left[ p(y|x,y&lt;k+1)\right]=-\ln \left[\frac{\exp l_y}{\sum_{j=1}^k \exp l_j}\right]=-l_y + \ln\left[ \sum_{j=1}^k \exp l_j\right]$$</p>
+<p>引入两个函数，使得书写更为简洁：</p>
+<blockquote>
+<p>$$<br>LSE(x) = \ln[\sum_{j=1}\exp(x_j)]<br>$$</p>
+<p>$$<br>softplus(x) = \ln(1+\exp(x))<br>$$</p>
+</blockquote>
+<p>三个误差：<br>$$<br>L_l =  -l_y + LSE(l)<br>$$</p>
+<p>$$<br>L_u = -LSE(l) + softplus(LSE(l))<br>$$</p>
+<p>$$<br>L_f = softplus(LSE(l))<br>$$</p>
+<h2 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h2><p>对于分类器来说，希望上述误差尽量小。引入权重w，得到<strong>分类器优化目标</strong>：<br>$$<br>L_D = L_l + \frac{w}{2}(L_u + L_f)<br>$$<br>对于生成器来说，希望其输出的伪样本能够骗过分类器。<strong>生成器优化目标</strong>与分类器的第三项相反：<br>$$<br>L_G = -L_f<br>$$</p>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><p>本文的实验包含三个图像分类问题。分类器接受图像x，输出K类分类结果l。生成器从均匀分布的噪声z生成一张图像x。</p>
+<h2 id="MNIST"><a href="#MNIST" class="headerlink" title="MNIST"></a>MNIST</h2><p>10分类问题，图像为28*28灰度。</p>
+<p>生成器是一个3层线性网络：<br><img src="https://img-blog.csdn.net/20170725113427126?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2hlbnhpYW9sdTE5ODQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>分类器是一个6层线性网络：<br><img src="https://img-blog.csdn.net/20170725121721276?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2hlbnhpYW9sdTE5ODQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>训练样本60K个，测试样本10K个。<br>选择不同数量的训练样本给予标记，考察测试样本中错误个数。使用不同随机数种子重复10次：</p>
+<table>
+<thead>
+<tr>
+<th>有标记样本</th>
+<th>20</th>
+<th>50</th>
+<th>100</th>
+<th>200</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>占比</td>
+<td>0.033%</td>
+<td>0.083%</td>
+<td>0.17%</td>
+<td>0.33%</td>
+</tr>
+<tr>
+<td>错误个数</td>
+<td>1677±452</td>
+<td>221±136</td>
+<td>93±6.5</td>
+<td>90±4.2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Cifar10"><a href="#Cifar10" class="headerlink" title="Cifar10"></a>Cifar10</h2><p>10分类问题，图像为32*32彩色。</p>
+<p>生成器是一个4层反卷积网络：<br><img src="https://img-blog.csdn.net/20170725113108308?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2hlbnhpYW9sdTE5ODQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>分类器是一个9层卷积网络：<br><img src="https://img-blog.csdn.net/20170725113158312?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2hlbnhpYW9sdTE5ODQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>训练样本50K个，测试样本10K个。<br>选择不同数量的训练样本给予标记，考察测试样本中错误个数。使用不同的测试/训练分割重复10次：</p>
+<table>
+<thead>
+<tr>
+<th>有标记样本</th>
+<th>1000</th>
+<th>2000</th>
+<th>4000</th>
+<th>8000</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>占比</td>
+<td>2%</td>
+<td>4%</td>
+<td>8%</td>
+<td>16%</td>
+</tr>
+<tr>
+<td>错误个数</td>
+<td>21.83±2.01</td>
+<td>19.61±2.09</td>
+<td>18.63±2.32</td>
+<td>17.72±1.82</td>
+</tr>
+</tbody>
+</table>
+<h2 id="SVHN"><a href="#SVHN" class="headerlink" title="SVHN"></a>SVHN</h2><p>10分类问题，图像为32*32彩色。</p>
+<p>生成器（上）以及分类器（下）和CIFAR10的结构非常类似。<br><img src="https://img-blog.csdn.net/20170725121922077?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2hlbnhpYW9sdTE5ODQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>训练样本73K，测试样本26K。<br>选择不同数量的训练样本给予标记，考察测试样本中错误个数。使用不同的测试/训练分割重复10次：</p>
+<table>
+<thead>
+<tr>
+<th>有标记样本</th>
+<th>500</th>
+<th>1000</th>
+<th>2000</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>占比</td>
+<td>0.68%</td>
+<td>1.4%</td>
+<td>2.7%</td>
+</tr>
+<tr>
+<td>错误个数</td>
+<td>18.84±4.8</td>
+<td>8.11±1.3</td>
+<td>6.16±0.58</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h3><ol>
+<li>Salimans, Tim, et al. “Improved techniques for training gans.” Advances in Neural Information Processing Systems. 2016.</li>
+<li><a href="https://arxiv.org/pdf/1406.2661.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1406.2661.pdf</a></li>
+<li><a href="https://blog.csdn.net/shenxiaolu1984/article/details/75736407" target="_blank" rel="external">https://blog.csdn.net/shenxiaolu1984/article/details/75736407</a></li>
+<li><a href="https://blog.csdn.net/szm21c11u68n04vdclmj/article/details/78420955" target="_blank" rel="external">https://blog.csdn.net/szm21c11u68n04vdclmj/article/details/78420955</a></li>
+<li><a href="https://blog.csdn.net/xierhacker/article/details/75216652" target="_blank" rel="external">https://blog.csdn.net/xierhacker/article/details/75216652</a></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">gan-net</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">半监督</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SSGAN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/深度学习/" class="article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/24/gan-net-入门学习以及半监督Gan-SSGAN-简单用法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-中国邮递员问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1049,228 +1313,6 @@
 
 
   
-    <article id="post-高级算法-balls-in-bins" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/28/高级算法-balls-in-bins/">高级算法-balls_in_bins</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/28/高级算法-balls-in-bins/" class="archive-article-date">
-  	<time datetime="2017-09-28T07:31:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>m identical balls</strong> uniform independant put into <strong>n identical bins</strong></p>
-<p>相当于是找到一个 h: [m]-&gt;[n] 的映射</p>
-<h3 id="求每个桶至多一个球的概率（类生日重复问题）"><a href="#求每个桶至多一个球的概率（类生日重复问题）" class="headerlink" title="求每个桶至多一个球的概率（类生日重复问题）"></a>求每个桶至多一个球的概率（类生日重复问题）</h3><p>$Pr = 1∗\frac{n-1}{n} ∗…∗\frac{n-m+1}{n} = \prod_{i=0}^{m-1}(1-i/n) \approx \prod_{i=0}^{m-1}e^{-i/n} = exp(-\frac{m(m-1)}{2n})$</p>
-<h3 id="求每个桶都有球的概率"><a href="#求每个桶都有球的概率" class="headerlink" title="求每个桶都有球的概率"></a>求每个桶都有球的概率</h3><p>这相当于是找一个 h : [m] -&gt; [n]满射的概率。</p>
-<p>也可以将模型转化成以前做过的扔骰子直到6面都出现的问题。</p>
-<ul>
-<li><p>解决扔骰子问题</p>
-<p>用E[i]表示扔出i-1个不同的面之后扔出第i个不同的面需要次数的数学期望，那么扔出i-1个不同的面，剩余的面数量就是7-i个，因为每一次扔骰子都是满足独立随机均匀分布的，那么Pr[new side at time i for one try] = 1-(i-1)/6，那么E[i] = 1/(1-(i-1)/6) = 6/(7-i)</p>
-<p>E[diff 6 sides] = E[1] + E[2] + E[3] + E[4] + E[5] + E[6] = 1 + 6/5 + 6/4 + 6/3 + 6/2 + 6/1</p>
-</li>
-<li><p>扩展扔骰子问题</p>
-<p>假设骰子具有均匀的n个面，将所有面都扔到的数学期望</p>
-<p>E[diff n sides] = $\sum_{k=0}^{n-1}{\frac{1}{1-k/n}} = n\sum_{k=1}^n\frac{1}{k} = nH(n)$。</p>
-</li>
-<li><p>针对原问题求解概率</p>
-<p>$\Pr[X\ge n\ln n+cn]\lt e^{-c}$</p>
-<p>证明：对于任意一个桶一个球都不存在的概率是$\left(1-\frac{1}{n}\right)^{n\ln n+cn}\lt  e^{-(\ln n+c)}=\frac{1}{ne^c}.$</p>
-<p>$\Pr[X\ge n\ln n+cn] \lt n*1/(ne^c) = 1/e^c$</p>
-</li>
-</ul>
-<h3 id="求最重的桶中的球的数量"><a href="#求最重的桶中的球的数量" class="headerlink" title="求最重的桶中的球的数量"></a>求最重的桶中的球的数量</h3><blockquote>
-<p>问题</p>
-<p>n个桶中最重的桶的球的数量是多少，这个求解的保证是在大概率下满足要求，误差不超过1/n。</p>
-<p>$X_i$作为桶i中的球的个数 $X_i = |h^{-1}(i)|$，求最大$max\{|h^{-1}(i)|\}$</p>
-</blockquote>
-<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><ul>
-<li>$E(X_i) = E(\sum-{j=1}^m{Y_{ij}}) = m*1/n$</li>
-<li>m = n时，$O(\frac{logn}{loglogn})$ with high probability Pr &gt;= 1-1/n</li>
-<li>$m=\Omega(n\log n)$时，$O(m/n)$ with high probability Pr &gt;= 1-1/n</li>
-</ul>
-<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><ol>
-<li><p>m = n时 $Pr[max_i \space X_i \le 3 \ln \ln n / \ln n] \ge 1 - 1/n$</p>
-<p>因为需要将精度满足在1/n的范围内，假定这时候满足要求的最大的桶放置的是t个球。那么就应该满足以下不等式<br>$$<br>Pr[max_i \space X_i \le t] \ge 1 - 1/n \rightarrow Pr[max_i \space X_i &gt; t] &lt; 1/n \\<br>$$<br>稍微调整一下t，上述的式子可以近似看作<br>$$<br>Pr[max_i \space X_i \ge t] \le 1/n<br>$$<br>也可以理解为<br>$$<br>Pr[\exists i: X_i \ge t] \le 1/n \quad 等价于 \quad Pr[X_i \ge t] \le 1/n^2<br>$$<br>所以现在只要找到对应的t值满足$\quad Pr[X_i \ge t] \le 1/n^2$即可。这个概率的意思就是第i个桶中至少含有t个球。因为m=n，所以相当于是从n个球中先取出t个放入第i个桶中，每个球放进第i个桶的概率满足均匀二项分布binominal(n, 1/n)，所以可以得到如下式子：<br>$$<br>\begin{aligned}<br>Pr[X_i \ge t] &amp; \le \binom {n}{t}(1/n)^t  \\<br>&amp; = \frac{n!}{t!(n-t)!n^t} \\<br>&amp; = \frac{1}{t!} \frac{n(n-1)(n-2)…(n-t+1)}{n!} \\<br>&amp; = \frac{1}{t!} \prod_{i=0}^{t-1}(1-i/n) \approx \frac{1}{t!} \prod_{i=0}^{t-1}e^{-i/n} \\<br>&amp; \le \frac{1}{t!}<br>\end{aligned}<br>$$<br>因为$t!\approx \sqrt{2\pi t}\left(\frac{t}{e}\right)^t$</p>
-<p>所以$Pr[X_i \ge t] \le 1/ \sqrt{2\pi t}\left(\frac{t}{e}\right)^t \le (\frac{e}{t})^t$。</p>
-<p>当$t = 3 \ln n / \ln\ln n$:<br>$$<br>\begin{align}<br>\left(\frac{e}{t}\right)^t<br>&amp;=<br>\left(\frac{e\ln\ln n}{3\ln n}\right)^{3\ln n/\ln\ln n}\\<br>&amp;\lt<br>\left(\frac{\ln\ln n}{\ln n}\right)^{3\ln n/\ln\ln n}\\<br>&amp;=<br>e^{3(\ln\ln\ln n-\ln\ln n)\ln n/\ln\ln n}\\<br>&amp;=<br>e^{-3\ln n+3\ln\ln\ln n\ln n/\ln\ln n}\\<br>&amp;\le<br>e^{-2\ln n}\\<br>&amp;=<br>\frac{1}{n^2}.<br>\end{align}<br>$$<br>所以说当n=m的时候，箱子中球的最大数量是$t = 3 \ln n / \ln\ln n$,且在这个数量下达到很高的正确率，误差 不会超过1/n.</p>
-</li>
-<li><p>$m=\Omega(n\log n)$时，$Pr[max_i \space X_i \le m/n] \ge 1 - 1/n$</p>
-</li>
-</ol>
-<h3 id="Chernoff-Bound"><a href="#Chernoff-Bound" class="headerlink" title="Chernoff Bound"></a>Chernoff Bound</h3><blockquote>
-<p>在n个相互独立的0,1随机变量 $X_1,X_2,…,X_n \in \{0,1\}$，令$X = X_1+X_2+…+X_n$，$\mu = E(X)$。</p>
-<p>for any $\delta &gt; 0$</p>
-<p>$Pr[X \ge (1+\delta)\mu] \le (\frac{e^\delta}{(1+\delta)^{1+\delta}})^\mu$</p>
-<p>$Pr[X \le (1-\delta)\mu] \le (\frac{e^{-\delta}}{(1-\delta)^{1-\delta}})^\mu$</p>
-<p>更多有用形式的bounds</p>
-<p>Let $X=\sum_{i=1}^n X_i$, where X1,X2,…,Xn are independent Poisson trials. Let $μ=E[X]$. Then</p>
-<p>1.for $0&lt;\delta&lt;1$</p>
-<p>$\Pr[X\ge (1+\delta)\mu]\lt \exp\left(-\frac{\mu\delta^2}{3}\right);$</p>
-<p>$\Pr[X\le (1-\delta)\mu]\lt \exp\left(-\frac{\mu\delta^2}{2}\right);$ </p>
-<p>2.for $t \ge 2e\mu$</p>
-<p>$\Pr[X\ge t]\le 2^{-t}.$</p>
-</blockquote>
-<h4 id="Chernoff-Bound证明"><a href="#Chernoff-Bound证明" class="headerlink" title="Chernoff Bound证明"></a>Chernoff Bound证明</h4><blockquote>
-<p>Chernoff Bound在一定的限制条件下提出了比马尔可夫定理更优秀的边界值。</p>
-</blockquote>
-<p><strong>预备知识</strong></p>
-<ul>
-<li>马尔可夫定理 $Pr[h(x) \ge t] \le \frac{E[h(x)]}{t}$</li>
-<li>矩生成函数 $M(\lambda) = E(e^{\lambda X}) = \sum_{k=0}^\infty\frac{\lambda^k}{k!} E[X^k]$ , $e^{\lambda X}$方便用泰勒展开成生成函数的形式，但这里证明用不到，只需要用到$E(e^{\lambda X}) =E(e^{\sum_{i=1}^n{\lambda X_i}})$ </li>
-<li>$1+x \le e^x$ 就是将泰勒展开式只取前两项</li>
-</ul>
-<p><strong>第一个式子的证明</strong></p>
-<p>$s.t. \quad \lambda &gt; 0$</p>
-<p>$\begin{aligned} Pr[X \ge (1+\delta)\mu] &amp;= Pr[\lambda X \ge \lambda (1+\delta)\mu] \ &amp;= Pr[e^{\lambda X} \ge e^{\lambda (1+\delta)\mu}]  \ &amp; \le \frac{E[e^{\lambda X}]}{e^{\lambda (1+\delta) \mu}} \end{aligned}$</p>
-<p>$E[e^{\lambda X}] = E[e^{\lambda \sum_{i=1}^nX_i}] = E[\prod_{i=1}^{n}e^{\lambda X_i}] = \prod_{i=1}^{n}E[e^{\lambda X_i}]$</p>
-<p>因为X只有0,1的取值，所以令$p_i = E[X_i]$。那么$E[e^{\lambda X_i}] = (1-p_i)∗1+p_i∗e^\lambda = 1+p_i(e^\lambda -1) \le e^{p_i(e^\lambda-1)}$，所以</p>
-<p>$E[e^{\lambda X}] = E[e^{\sum_{i=1}^n\lambda X_i}] = \prod_{i=1}^{n}E[e^{\lambda X_i}] \ \le \prod_{i=1}^{n} e^{p_i(e^\lambda-1)} = exp((e^\lambda -1)\sum_{i=1}^np_i) \\= exp((e^\lambda -1)\sum_{i=1}^nE[X_i]) = exp((e^\lambda -1) \mu) \ = e^{\mu(e^\lambda -1)}$</p>
-<p>那么最后就可以求出：<br>$$<br>\begin{aligned} Pr[X \ge (1+\delta)\mu]  &amp;\le \frac{e^{\mu(e^\lambda-1)}}{e^{\lambda (1+\delta) \mu}} \end{aligned} \\<br>$$<br>这就能看出在这里定义$\lambda$的好处了，一开始限制$\lambda &gt; 0$，那么只要大于0就可以任意取值，为了得到我们要的结果只要满足$(e^\lambda - 1) = \delta \rightarrow \lambda = \ln (\delta + 1)$</p>
-<p>带入到分母就可以得到</p>
-<p>$Pr[X \ge (1+\delta)\mu] \le (\frac{e^\delta}{(1+\delta)^{1+\delta}})^\mu$</p>
-<p><strong>第二个式子的证明</strong></p>
-<p>最关键的就是要利用马尔可夫定理，Pr[]里是满足大于等于的，这里很巧妙的还是$\lambda$，它取值小于0的时候，两边就变符号了.</p>
-<p>$s.t. \quad \lambda &lt; 0$</p>
-<p>$Pr[X \le (1-\delta)\mu] = Pr[\lambda X \ge \lambda (1-\delta)\mu]$</p>
-<p>之后只要按照前面的方法计算即可。</p>
-<p><strong>更多形式的证明</strong></p>
-<p>可以根据前两者的结论结合对应的限制条件简单证明得到。</p>
-<p><strong>Chernoff Bound在m个相同球放入n个相同桶问题求解桶内球最大值的应用</strong></p>
-<p>由前面的证明可以得到需要求解$Pr[X_i \ge t] \le 1/n^2$时t的值</p>
-<p>因为这可以理解为将m个球放入n个桶中，第i个桶最后球的个数是不是大于等于t的。</p>
-<p>所以对于每一个球能否放进第i个桶满足二项分布binomial(m , 1/n)，所以$\mu = m/n , \delta = 1-t/\mu=1-nt/m$.</p>
-<ul>
-<li><p>所以在n=m的时候</p>
-<p>$Pr[X_i \ge t] \le \frac{e^{t-1}}{t^t}$</p>
-<p>令$t = \frac{e \ln n}{\ln \ln n}$</p>
-<p>$ln(\frac{e^t}{t^t}) = t-1-t \ln t = \frac{e \ln n}{\ln \ln n}(1-\ln t) - 1 \ \le \frac{e \ln n}{\ln \ln n}(1-\ln t) = \frac{e \ln n}{\ln \ln n}(1-\ln(e \ln n) + \ln\ln\ln n)) \ = \frac{e \ln n}{\ln \ln n}(-\ln(e \ln n) + \ln\ln\ln n)) \ \le \frac{e \ln n}{\ln \ln n}(\frac{-2\ln \ln n}{e}) = \ln (1/n^2)$</p>
-<p>由上述式子可得</p>
-<p>$Pr[X_i \ge t] \le \frac{e^{t-1}}{t^t} \le e ^{\ln (1/n^2)} = 1/n^2$ </p>
-<p>所以这种条件下最多的桶中小球个数在大概率下(1-1/n)最多为$O(\frac{e \ln n}{\ln \ln n})$。</p>
-</li>
-</ul>
-<ul>
-<li><p>在$m=\Omega(n\log n)$时</p>
-<p>根据后面扩展的定理</p>
-<p>for $t \ge 2e\mu$</p>
-<p>$\Pr[X\ge t]\le 2^{-t}.$</p>
-<p>这里$\mu = m/n$</p>
-<p>那么令$t = 2em/n$</p>
-<p>$Pr[X_i \ge t] \le 2^{-2em/n} \le  2^{-2e\ln n} = (2^e)^{\ln 1/n^2} \le e^{\ln 1/n^2} = 1/n^2$</p>
-<p>所以$t = 2em/n = O(m/n)$</p>
-<p>​</p>
-</li>
-</ul>
-<h3 id="Hoeffding’s-Inequality"><a href="#Hoeffding’s-Inequality" class="headerlink" title="Hoeffding’s Inequality"></a>Hoeffding’s Inequality</h3><blockquote>
-<p>For independent r.v.(随机值) $X_1,X_2,…,X_n$，where $X_i \in [a_i,b_i]$ </p>
-<p>let $X = \sum_{i=1}^n X_i$，then:</p>
-<p>for any t&gt;0 ,</p>
-<p>​    $P(X \ge E(X)+t) \le exp(- \frac{2t^2}{\sum_{i=1}^n{(b_i-a_i)^2}})$</p>
-<p>​    $P(X \le E(X)-t) \le exp(- \frac{2t^2}{\sum_{i=1}^n{(b_i-a_i)^2}})$</p>
-</blockquote>
-<h4 id="Convenient-Hoeffding’s-Inequality"><a href="#Convenient-Hoeffding’s-Inequality" class="headerlink" title="(Convenient) Hoeffding’s Inequality"></a>(Convenient) Hoeffding’s Inequality</h4><blockquote>
-<p>For independent r.v.(随机值) $X_1,X_2,…,X_n$，where $X_i \in \{0,1\}$ </p>
-<p>let $X = \sum_{i=1}^n X_i$，then:</p>
-<p>for any t&gt;0 ,</p>
-<p>​    $P(X \ge E(X)+t) \le exp(- \frac{2t^2}{n})$</p>
-<p>​    $P(X \le E(X)-t) \le exp(- \frac{2t^2}{n})$</p>
-</blockquote>
-<h3 id="Power-of-Two-Choices"><a href="#Power-of-Two-Choices" class="headerlink" title="Power of Two Choices"></a>Power of Two Choices</h3><blockquote>
-<p><strong>Algorithm design</strong></p>
-<p>m balls are thrown into n bins in the following manner: for each ball, choose tow bins uniformly and independentlyat random,then place the ball in the less loaded bin</p>
-<p>（这里要注意的一点是选中的两个选择要理解为有放回的一个一个选择，所以是可以出现两次选择同一个箱子的情况）</p>
-</blockquote>
-<p><strong><code>the max loaded bin has O(log log n) balls , w.h.p.</code></strong></p>
-<p>Assume there are at most $\beta_i$ bins each containing at least i balls in the end</p>
-<p>Probability that a ball increases # of bins containing at least i+1 balls? <strong>at most</strong> $(\frac{\beta}{n})^2$</p>
-<p>In expectation , after n balls , #  of bins containing at least i+1 balls is at most $n(\frac{\beta^2}{n^2})$</p>
-<p>我对于上面两个式子是这么理解的，至少有i个小球的箱子个数是$\beta_i$。那么$\beta_{i+1}$是包含在$\beta_i$内的。</p>
-<p>那么一个新的小球进来，最多使一个箱子从i个球变成i+1个球，这个的概率是$ \le (\frac{\beta_i}{n})^2$</p>
-<p>那么一个球进来$\beta_{i+1} \le \beta_{i+1}+(\frac{\beta_i}{n})^2$</p>
-<p>那么n个球进来，最多有$n(\frac{\beta_i^2}{n^2})$个箱子被提高到了i+1个球$\beta_{i+1} \le \beta_{i+1}+(\frac{\beta_i ^2}{n})$</p>
-<p>因为初始的时候，所有箱子都是空的，那么扔了n个球进来后$\beta_0 = n \quad \forall_{i&gt;0} \beta_i = 0$<br>$$<br>\beta_{i+1} \le  \beta_{i}^2/n (上课内容这里是等于，我觉得应该是不大于)\\<br>\beta _{i} \le n/i ∗\beta_0 ^ 2 / (n∗n) = n/i \rightarrow \beta_4 \le n/4<br>$$<br>这个同样很好理解，因为选中一个那么最多可乘以n，那么至少每个要增加i次，所以数量就变成n/i了.<br>$$<br>\begin{aligned}<br>\beta_i &amp; \le (\beta_{i-2}^2/n)^2/n \\<br>&amp; \le \beta_{i-2}^4/n^3 \\<br>&amp; \le \beta_{i-3}^6/n^5 \\<br>&amp; \le \beta_{4}^{2(i-4)} / n^{2(i-4)-1} \\<br>&amp; \le \frac{n}{4^{2^{i-4}}}<br>\end{aligned}<br>$$<br>那么就很容易得到 $\beta_i \le 1$ when $i \ge loglogn$.</p>
-<h3 id="Power-of-two-choice-扩展-Power-of-d-Choice"><a href="#Power-of-two-choice-扩展-Power-of-d-Choice" class="headerlink" title="Power of two choice 扩展 Power of d Choice"></a>Power of two choice 扩展 Power of d Choice</h3><blockquote>
-<p>上一个问题的解决方法是每次有放回的选择两个箱子，找到其中小球数量较小的一个，将球放进去，现在修改为有放回的选择d&gt;=2的箱子，就是将上一个解决方案更一般化了，得到的箱子的最最大值逼近于$O(\log \log n / \log d)$,也就是说最大箱子球的数量在这个数量级下有着很高的正确率。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">高级算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">近似算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/28/高级算法-balls-in-bins/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1372,10 +1414,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
@@ -1392,11 +1430,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">apache</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1424,6 +1466,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">gan-net</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SSGAN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -1436,14 +1498,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mapreduce</a>
               </li>
              
@@ -1452,15 +1506,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">qrcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1512,19 +1566,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">BP算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">神经网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">BP算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1544,15 +1598,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">有限域</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">群论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1576,11 +1630,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hash</a>
+                <a href="javascript:void(0)" class="js-tag color5">近似算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">近似算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hash</a>
               </li>
              
               <li class="article-tag-list-item">
