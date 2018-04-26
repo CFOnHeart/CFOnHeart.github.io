@@ -171,6 +171,95 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-tensorflow-简单对数据做多分类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/26/tensorflow-简单对数据做多分类/">tensorflow 简单对数据做多分类</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/26/tensorflow-简单对数据做多分类/" class="archive-article-date">
+  	<time datetime="2018-04-26T05:13:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># @Time    : 2018/4/26 上午2:29</span></div><div class="line"><span class="comment"># @Author  : Junnor.G</span></div><div class="line"><span class="comment"># @Site    : NJU</span></div><div class="line"><span class="comment"># @File    : wine_classification.py</span></div><div class="line"><span class="comment"># @Software: PyCharm</span></div><div class="line"><span class="string">'''</span></div><div class="line">随机生成了500个点，将这些点分为4个类别，类别的区分就是作两条对角线，将区域划分成4块，</div><div class="line">每块的点对应了一个类别</div><div class="line"></div><div class="line">使用的是一个双隐层的神经网络</div><div class="line">输入是2维的，输出是4维的softmax，中间的连接层激活函数均是relu，只有最后的输出激活函数是softmax</div><div class="line">'''</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generateData</span><span class="params">()</span>:</span></div><div class="line">    y_labels = []</div><div class="line">    x_array = np.random.normal(size=[<span class="number">500</span>, <span class="number">2</span>])</div><div class="line">    <span class="comment"># print(type(x_array), x_array.shape)</span></div><div class="line">    <span class="comment"># print(x_array)</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x_array.shape[<span class="number">0</span>]):</div><div class="line">        <span class="keyword">if</span> x_array[i][<span class="number">1</span>] &gt;= x_array[i][<span class="number">0</span>] <span class="keyword">and</span> x_array[i][<span class="number">1</span>] &gt;= -x_array[i][<span class="number">0</span>]:</div><div class="line">            y_labels.append([<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>])</div><div class="line">        <span class="keyword">elif</span> x_array[i][<span class="number">1</span>] &lt;= x_array[i][<span class="number">0</span>] <span class="keyword">and</span> x_array[i][<span class="number">1</span>] &gt;= -x_array[i][<span class="number">0</span>]:</div><div class="line">            y_labels.append([<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>])</div><div class="line">        <span class="keyword">elif</span> x_array[i][<span class="number">1</span>] &lt;= x_array[i][<span class="number">0</span>] <span class="keyword">and</span> x_array[i][<span class="number">1</span>] &lt;= -x_array[i][<span class="number">0</span>]:</div><div class="line">            y_labels.append([<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            y_labels.append([<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>])</div><div class="line">    <span class="keyword">return</span> x_array, np.array(y_labels)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_net</span><span class="params">(x, input_dim, hidden_dim1, hidden_dim2, output_dim)</span>:</span></div><div class="line">    w1 = tf.Variable(tf.random_normal([input_dim, hidden_dim1]))</div><div class="line">    b1 = tf.Variable(tf.zeros([hidden_dim1]))</div><div class="line">    h1 = tf.nn.relu(tf.matmul(x, w1) + b1)</div><div class="line"></div><div class="line">    w2 = tf.Variable(tf.random_normal([hidden_dim1, hidden_dim2]))</div><div class="line">    b2 = tf.Variable(tf.zeros([hidden_dim2]))</div><div class="line">    h2 = tf.nn.tanh(tf.matmul(h1, w2) + b2)</div><div class="line"></div><div class="line">    w3 = tf.Variable(tf.random_normal([hidden_dim2, output_dim]))</div><div class="line">    b3 = tf.Variable(tf.zeros([output_dim]))</div><div class="line">    h3 = tf.nn.softmax(tf.matmul(h2, w3) + b3)</div><div class="line">    var_list = [w1, w2, w3, b1, b2, b3]</div><div class="line">    <span class="keyword">return</span> h3, var_list</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample_batch</span><span class="params">(train_x, train_y, batch_size)</span>:</span></div><div class="line">    indexs = list(range(len(train_y)))</div><div class="line">    x_mat = []</div><div class="line">    y_mat = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(batch_size):</div><div class="line">        a = int(np.random.uniform(<span class="number">0</span>, len(indexs)))</div><div class="line">        index = indexs[a]</div><div class="line">        indexs.remove(index)</div><div class="line">        x_mat.append(train_x[index])</div><div class="line">        y_mat.append(train_y[index])</div><div class="line">    <span class="keyword">return</span> x_mat, y_mat</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    input_dim = <span class="number">2</span></div><div class="line">    hidden_dim1 = <span class="number">5</span></div><div class="line">    hidden_dim2 = <span class="number">6</span></div><div class="line">    output_dim = <span class="number">4</span></div><div class="line">    batch_size = <span class="number">32</span></div><div class="line">    train_x, train_y = generateData()</div><div class="line"></div><div class="line">    <span class="comment"># plt.show()</span></div><div class="line">    print(train_x)</div><div class="line">    print(train_y)</div><div class="line">    X = tf.placeholder(dtype=tf.float32, shape=[<span class="keyword">None</span>, input_dim])</div><div class="line">    Y = tf.placeholder(dtype=tf.float32, shape=[<span class="keyword">None</span>, output_dim])</div><div class="line">    out, var_list = build_net(X, input_dim, hidden_dim1, hidden_dim2, output_dim)</div><div class="line">    loss = tf.reduce_mean(tf.reduce_sum(tf.square(Y-out), reduction_indices=[<span class="number">1</span>]))</div><div class="line">    optimizer = tf.train.AdamOptimizer().minimize(loss, var_list=var_list)</div><div class="line"></div><div class="line">    sess = tf.Session()</div><div class="line">    sess.run(tf.initialize_all_variables())</div><div class="line"></div><div class="line">    <span class="keyword">for</span> iter <span class="keyword">in</span> range(<span class="number">50000</span>):</div><div class="line">        x_sample, y_sample = sample_batch(train_x, train_y, batch_size)</div><div class="line">        sess.run(optimizer, feed_dict=&#123;X: x_sample, Y: y_sample&#125;)</div><div class="line">        <span class="keyword">if</span> iter % <span class="number">100</span> == <span class="number">0</span>:</div><div class="line">            print(<span class="string">'iter: &#123;&#125; ; loss: &#123;&#125;'</span>.format(iter, sess.run(loss, feed_dict=&#123;X: x_sample, Y: y_sample&#125;)))</div><div class="line"></div><div class="line">    <span class="comment"># 预测部分，将所有的训练集都作为测试集</span></div><div class="line">    prediction = sess.run(out, feed_dict=&#123;X: train_x&#125;)</div><div class="line">    predict_label = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prediction)):</div><div class="line">        max_pro = prediction[i][<span class="number">0</span>]</div><div class="line">        max_index = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(prediction[i])):</div><div class="line">            <span class="keyword">if</span> prediction[i][j] &gt; max_pro:</div><div class="line">                max_pro = prediction[i][j]</div><div class="line">                max_index = j</div><div class="line"></div><div class="line">        predict_label.append(max_index)</div><div class="line">    real_label = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(train_y)):</div><div class="line">        <span class="keyword">if</span> train_y[i][<span class="number">0</span>] &gt; <span class="number">0.5</span>:</div><div class="line">            real_label.append(<span class="number">0</span>)</div><div class="line">        <span class="keyword">elif</span> train_y[i][<span class="number">1</span>] &gt; <span class="number">0.5</span>:</div><div class="line">            real_label.append(<span class="number">1</span>)</div><div class="line">        <span class="keyword">elif</span> train_y[i][<span class="number">2</span>] &gt; <span class="number">0.5</span>:</div><div class="line">            real_label.append(<span class="number">2</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            real_label.append(<span class="number">3</span>)</div><div class="line"></div><div class="line">    error_cnt = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(predict_label)):</div><div class="line">        <span class="keyword">if</span> predict_label[i] != real_label[i]:</div><div class="line">            error_cnt += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="comment"># 绘图部分</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(predict_label)):</div><div class="line">        <span class="keyword">if</span> predict_label[i] == <span class="number">0</span>:</div><div class="line">            plt.scatter(train_x[i][<span class="number">0</span>], train_x[i][<span class="number">1</span>], c=<span class="string">'r'</span>)</div><div class="line">        <span class="keyword">elif</span> predict_label[i] == <span class="number">1</span>:</div><div class="line">            plt.scatter(train_x[i][<span class="number">0</span>], train_x[i][<span class="number">1</span>], c=<span class="string">'b'</span>)</div><div class="line">        <span class="keyword">elif</span> predict_label[i] == <span class="number">2</span>:</div><div class="line">            plt.scatter(train_x[i][<span class="number">0</span>], train_x[i][<span class="number">1</span>], c=<span class="string">'g'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            plt.scatter(train_x[i][<span class="number">0</span>], train_x[i][<span class="number">1</span>], c=<span class="string">'y'</span>)</div><div class="line"></div><div class="line">    x = np.linspace(<span class="number">-2.</span>, <span class="number">2.</span>, <span class="number">200</span>)</div><div class="line">    y1 = x</div><div class="line">    plt.plot(x, y1)</div><div class="line">    y2 = -x</div><div class="line">    plt.plot(x, y2)</div><div class="line">    plt.show()</div><div class="line">    print(<span class="string">'error rate: '</span>, error_cnt / <span class="number">300.0</span>)</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tensorflow</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/深度学习/" class="article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/26/tensorflow-简单对数据做多分类/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-codeforces-955C-莫比乌斯反演进行容斥" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -812,11 +901,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">莫比乌斯反演</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">莫比乌斯反演</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1061,106 +1150,6 @@
 
 
   
-    <article id="post-MapReduce代码Intellij本地运行调试配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/19/MapReduce代码Intellij本地运行调试配置/">MapReduce代码Intellij本地运行调试配置</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/19/MapReduce代码Intellij本地运行调试配置/" class="archive-article-date">
-  	<time datetime="2017-10-19T10:26:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>用maven创建一个项目，基本的MapReduce，我暂时觉得只用到了两个jar包，所以把依赖写到pom.xml中</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-cli<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-cli<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>关于具体的依赖包的信息查询可以参考<a href="https://repo.maven.apache.org/maven2/" target="_blank" rel="external">maven2库</a></p>
-</li>
-<li><p>比如写了一个WordCount的代码，写完之后发现ide里各种报错，说明包没导入，添加依赖包(File-&gt;ProjectStructure-&gt;libraries，可以自己下载好上面的两个包(commons-cli-1.4和org.apache.hadoop:hadoop-core:1.2.0)导入，也可以用里面的maven自己帮你下载好导入，查找对应包只要把名字输入就行)。</p>
-</li>
-<li><p>将这个maven项目打成jar包，就是在主目录下mvn compile 然后mvn package，那么打包出来的jar包在target目录下，就是可以直接使用的了，你要用的对应的类就是你src/main/java 之后的路径，如果你的路径是src/main/java/test/WordCount.java ，那么使用的时候就要hadoop jar name.jar test.WordCount.java /input /output</p>
-</li>
-</ol>
-<p>上述的过程是打包MapReduce程序在hadoop下运行的方法，但是代码出错调试很不方便，你运行的代码本地就能跑，只不过不是分布式环境，但结果正确在拿到hadoop上运行方便很多。</p>
-<p>主要配置就是在工具栏运行按钮旁边的小框中点出Edit Configuration，然后点进Application，设置参数，就是输入目录和输出目录（如果你Main函数是写死的输入输出目录就不用参数），将你要运行的类Main Class作为主类，然后确定工作目录没问题即可，你创建的输入输出目录也都是相对于工作目录而言的 。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MapReduce</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境搭建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Hadoop/" class="article-tag-list-link color2">Hadoop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/19/MapReduce代码Intellij本地运行调试配置/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1278,19 +1267,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1302,7 +1287,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Polya定理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">组合数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">apache</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">容斥原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1315,26 +1324,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">组合数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">容斥原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Polya定理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1374,6 +1363,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">分类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">中国邮递员问题</a>
               </li>
              
@@ -1390,18 +1387,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">技术方案小结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">泛型编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">遗传算法</a>
               </li>
              
@@ -1414,11 +1399,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公式</a>
+                <a href="javascript:void(0)" class="js-tag color2">技术方案小结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">泛型编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">公式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1430,15 +1423,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">概率论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1462,7 +1459,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
+                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1470,7 +1467,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
+                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1478,7 +1475,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前向算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hash</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1486,11 +1483,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">网络流</a>
+                <a href="javascript:void(0)" class="js-tag color5">前向算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hash</a>
+                <a href="javascript:void(0)" class="js-tag color4">网络流</a>
               </li>
              
               <li class="article-tag-list-item">

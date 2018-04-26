@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ganjun.net">
-  <title>Junnor.G</title>
+  <title>tensorflow 简单对数据做多分类 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="No one cares your tears , but ability.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Junnor.G">
-<meta property="og:url" content="http://ganjun.net/page/3/index.html">
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta name="keywords" content="tensorflow,分类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow 简单对数据做多分类">
+<meta property="og:url" content="http://ganjun.net/2018/04/26/tensorflow-简单对数据做多分类/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="No one cares your tears , but ability.">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
 <meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-04-26T05:13:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Junnor.G">
-<meta name="twitter:description" content="No one cares your tears , but ability.">
+<meta name="twitter:title" content="tensorflow 简单对数据做多分类">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -169,132 +171,56 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-划分函数-整数拆分-and-五边形定理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-tensorflow-简单对数据做多分类" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/11/划分函数-整数拆分-and-五边形定理/">划分函数-整数拆分-and-五边形定理</a>
+    <h1 class="article-title" itemprop="name">
+      tensorflow 简单对数据做多分类
     </h1>
   
 
         
-        <a href="/2017/09/11/划分函数-整数拆分-and-五边形定理/" class="archive-article-date">
-  	<time datetime="2017-09-11T06:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
+        <a href="/2018/04/26/tensorflow-简单对数据做多分类/" class="archive-article-date">
+  	<time datetime="2018-04-26T05:13:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="整数拆分"><a href="#整数拆分" class="headerlink" title="整数拆分"></a>整数拆分</h3><blockquote>
-<p>一个正整数可以写成一些正整数的和。在数论上，跟这些和式相关的问题成为整数分拆、整数剖分、整数分割、分割数或划分数。最常见的问题就是给定正整数n，求不同数组$(a_1,a_2,…,a_k)$的数目，符合下面的条件：</p>
-<ol>
-<li>$a_1+a_2+ … +a_k = n (k大小不定)$</li>
-<li>$a_1 \ge a_2 \ge … \ge a_k &gt; 0$</li>
-<li>其他附加条件(例如限定”k是偶数”，或”$a_i$不是1就是2”等)</li>
-</ol>
-<p><strong>分割函数p(n)</strong>就是求符合以上第一个和第二个调教的数组数目。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/09/11/划分函数-整数拆分-and-五边形定理/#more">more >></a>
-        
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># @Time    : 2018/4/26 上午2:29</span></div><div class="line"><span class="comment"># @Author  : Junnor.G</span></div><div class="line"><span class="comment"># @Site    : NJU</span></div><div class="line"><span class="comment"># @File    : wine_classification.py</span></div><div class="line"><span class="comment"># @Software: PyCharm</span></div><div class="line"><span class="string">'''</span></div><div class="line">随机生成了500个点，将这些点分为4个类别，类别的区分就是作两条对角线，将区域划分成4块，</div><div class="line">每块的点对应了一个类别</div><div class="line"></div><div class="line">使用的是一个双隐层的神经网络</div><div class="line">输入是2维的，输出是4维的softmax，中间的连接层激活函数均是relu，只有最后的输出激活函数是softmax</div><div class="line">'''</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generateData</span><span class="params">()</span>:</span></div><div class="line">    y_labels = []</div><div class="line">    x_array = np.random.normal(size=[<span class="number">500</span>, <span class="number">2</span>])</div><div class="line">    <span class="comment"># print(type(x_array), x_array.shape)</span></div><div class="line">    <span class="comment"># print(x_array)</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x_array.shape[<span class="number">0</span>]):</div><div class="line">        <span class="keyword">if</span> x_array[i][<span class="number">1</span>] &gt;= x_array[i][<span class="number">0</span>] <span class="keyword">and</span> x_array[i][<span class="number">1</span>] &gt;= -x_array[i][<span class="number">0</span>]:</div><div class="line">            y_labels.append([<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>])</div><div class="line">        <span class="keyword">elif</span> x_array[i][<span class="number">1</span>] &lt;= x_array[i][<span class="number">0</span>] <span class="keyword">and</span> x_array[i][<span class="number">1</span>] &gt;= -x_array[i][<span class="number">0</span>]:</div><div class="line">            y_labels.append([<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>])</div><div class="line">        <span class="keyword">elif</span> x_array[i][<span class="number">1</span>] &lt;= x_array[i][<span class="number">0</span>] <span class="keyword">and</span> x_array[i][<span class="number">1</span>] &lt;= -x_array[i][<span class="number">0</span>]:</div><div class="line">            y_labels.append([<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            y_labels.append([<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>])</div><div class="line">    <span class="keyword">return</span> x_array, np.array(y_labels)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_net</span><span class="params">(x, input_dim, hidden_dim1, hidden_dim2, output_dim)</span>:</span></div><div class="line">    w1 = tf.Variable(tf.random_normal([input_dim, hidden_dim1]))</div><div class="line">    b1 = tf.Variable(tf.zeros([hidden_dim1]))</div><div class="line">    h1 = tf.nn.relu(tf.matmul(x, w1) + b1)</div><div class="line"></div><div class="line">    w2 = tf.Variable(tf.random_normal([hidden_dim1, hidden_dim2]))</div><div class="line">    b2 = tf.Variable(tf.zeros([hidden_dim2]))</div><div class="line">    h2 = tf.nn.tanh(tf.matmul(h1, w2) + b2)</div><div class="line"></div><div class="line">    w3 = tf.Variable(tf.random_normal([hidden_dim2, output_dim]))</div><div class="line">    b3 = tf.Variable(tf.zeros([output_dim]))</div><div class="line">    h3 = tf.nn.softmax(tf.matmul(h2, w3) + b3)</div><div class="line">    var_list = [w1, w2, w3, b1, b2, b3]</div><div class="line">    <span class="keyword">return</span> h3, var_list</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample_batch</span><span class="params">(train_x, train_y, batch_size)</span>:</span></div><div class="line">    indexs = list(range(len(train_y)))</div><div class="line">    x_mat = []</div><div class="line">    y_mat = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(batch_size):</div><div class="line">        a = int(np.random.uniform(<span class="number">0</span>, len(indexs)))</div><div class="line">        index = indexs[a]</div><div class="line">        indexs.remove(index)</div><div class="line">        x_mat.append(train_x[index])</div><div class="line">        y_mat.append(train_y[index])</div><div class="line">    <span class="keyword">return</span> x_mat, y_mat</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    input_dim = <span class="number">2</span></div><div class="line">    hidden_dim1 = <span class="number">5</span></div><div class="line">    hidden_dim2 = <span class="number">6</span></div><div class="line">    output_dim = <span class="number">4</span></div><div class="line">    batch_size = <span class="number">32</span></div><div class="line">    train_x, train_y = generateData()</div><div class="line"></div><div class="line">    <span class="comment"># plt.show()</span></div><div class="line">    print(train_x)</div><div class="line">    print(train_y)</div><div class="line">    X = tf.placeholder(dtype=tf.float32, shape=[<span class="keyword">None</span>, input_dim])</div><div class="line">    Y = tf.placeholder(dtype=tf.float32, shape=[<span class="keyword">None</span>, output_dim])</div><div class="line">    out, var_list = build_net(X, input_dim, hidden_dim1, hidden_dim2, output_dim)</div><div class="line">    loss = tf.reduce_mean(tf.reduce_sum(tf.square(Y-out), reduction_indices=[<span class="number">1</span>]))</div><div class="line">    optimizer = tf.train.AdamOptimizer().minimize(loss, var_list=var_list)</div><div class="line"></div><div class="line">    sess = tf.Session()</div><div class="line">    sess.run(tf.initialize_all_variables())</div><div class="line"></div><div class="line">    <span class="keyword">for</span> iter <span class="keyword">in</span> range(<span class="number">50000</span>):</div><div class="line">        x_sample, y_sample = sample_batch(train_x, train_y, batch_size)</div><div class="line">        sess.run(optimizer, feed_dict=&#123;X: x_sample, Y: y_sample&#125;)</div><div class="line">        <span class="keyword">if</span> iter % <span class="number">100</span> == <span class="number">0</span>:</div><div class="line">            print(<span class="string">'iter: &#123;&#125; ; loss: &#123;&#125;'</span>.format(iter, sess.run(loss, feed_dict=&#123;X: x_sample, Y: y_sample&#125;)))</div><div class="line"></div><div class="line">    <span class="comment"># 预测部分，将所有的训练集都作为测试集</span></div><div class="line">    prediction = sess.run(out, feed_dict=&#123;X: train_x&#125;)</div><div class="line">    predict_label = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prediction)):</div><div class="line">        max_pro = prediction[i][<span class="number">0</span>]</div><div class="line">        max_index = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(prediction[i])):</div><div class="line">            <span class="keyword">if</span> prediction[i][j] &gt; max_pro:</div><div class="line">                max_pro = prediction[i][j]</div><div class="line">                max_index = j</div><div class="line"></div><div class="line">        predict_label.append(max_index)</div><div class="line">    real_label = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(train_y)):</div><div class="line">        <span class="keyword">if</span> train_y[i][<span class="number">0</span>] &gt; <span class="number">0.5</span>:</div><div class="line">            real_label.append(<span class="number">0</span>)</div><div class="line">        <span class="keyword">elif</span> train_y[i][<span class="number">1</span>] &gt; <span class="number">0.5</span>:</div><div class="line">            real_label.append(<span class="number">1</span>)</div><div class="line">        <span class="keyword">elif</span> train_y[i][<span class="number">2</span>] &gt; <span class="number">0.5</span>:</div><div class="line">            real_label.append(<span class="number">2</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            real_label.append(<span class="number">3</span>)</div><div class="line"></div><div class="line">    error_cnt = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(predict_label)):</div><div class="line">        <span class="keyword">if</span> predict_label[i] != real_label[i]:</div><div class="line">            error_cnt += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="comment"># 绘图部分</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(predict_label)):</div><div class="line">        <span class="keyword">if</span> predict_label[i] == <span class="number">0</span>:</div><div class="line">            plt.scatter(train_x[i][<span class="number">0</span>], train_x[i][<span class="number">1</span>], c=<span class="string">'r'</span>)</div><div class="line">        <span class="keyword">elif</span> predict_label[i] == <span class="number">1</span>:</div><div class="line">            plt.scatter(train_x[i][<span class="number">0</span>], train_x[i][<span class="number">1</span>], c=<span class="string">'b'</span>)</div><div class="line">        <span class="keyword">elif</span> predict_label[i] == <span class="number">2</span>:</div><div class="line">            plt.scatter(train_x[i][<span class="number">0</span>], train_x[i][<span class="number">1</span>], c=<span class="string">'g'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            plt.scatter(train_x[i][<span class="number">0</span>], train_x[i][<span class="number">1</span>], c=<span class="string">'y'</span>)</div><div class="line"></div><div class="line">    x = np.linspace(<span class="number">-2.</span>, <span class="number">2.</span>, <span class="number">200</span>)</div><div class="line">    y1 = x</div><div class="line">    plt.plot(x, y1)</div><div class="line">    y2 = -x</div><div class="line">    plt.plot(x, y2)</div><div class="line">    plt.show()</div><div class="line">    print(<span class="string">'error rate: '</span>, error_cnt / <span class="number">300.0</span>)</div></pre></td></tr></table></figure>
+
       
 
       
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/11/划分函数-整数拆分-and-五边形定理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatQR.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数学公式笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/09/数学公式笔记/">数学公式笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/09/数学公式笔记/" class="archive-article-date">
-  	<time datetime="2017-09-09T05:29:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1.斯特林公式</strong></p>
-<p>当k较大时</p>
-<p> $k! \quad约等于 \quad k^{k+1/2}e^{-k} \sqrt{2 \pi}$</p>
-<p><strong>2.平方和公式</strong><br>$$<br>f(n) = \sum_{i=1}^n{i^2} = 1/6n∗(n+1)<em>(2n+1)<br>$$<br><em>*3.立方和公式</em></em></p>
-<p>数学归纳法易证<br>$$<br>f(n) = \sum_{i=1}^n{i^3} = (\sum_{i=1}^n{i})^2<br>$$<br><strong>4.莫比乌斯反演公式（线性筛法）</strong></p>
-<p>可参考贾志鹏线性筛<br>$$<br>n = \sum_{d|n} \phi(d) \quad (\phi(x)表示小于x的且与x互质的自然数的个数，这是个积性函数) \\<br> [n=1] = \sum_{d|n} \mu(d)<br>$$<br><strong>5.泰勒展开式</strong><br>$$<br>f(x) = \sum_{i=0}^\infty f^{(i)}(x_0)  / (i!) ∗ (x-x_0)^i \quad f^{(i)}(x)表示f(x)的i次导数 \\<br>= \frac{f^{}(x_0)}{0!} + \frac {f^{‘}(x_0)}{1!}(x-x_0) + \frac {f^{‘’}(x_0)}{2!}(x-x_0)^2 + … + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n + R_n(x)<br>$$<br>由泰勒展开式可推出<br>$$<br>e^x = \sum_{i=0}^\infty x^i / i! \quad (泰勒展开时x0=0)<br>$$</p>
-
-      
-
       
     </div>
     <div class="article-info article-info-index">
@@ -305,808 +231,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">公式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/09/数学公式笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-莫比乌斯反演解决euler71" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/09/莫比乌斯反演解决euler71/">莫比乌斯反演解决euler71</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/09/莫比乌斯反演解决euler71/" class="archive-article-date">
-  	<time datetime="2017-09-08T16:50:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>题目</p>
-<p>给你n，列出所有以1~n作为分母的最简分数按照从小到大排序。</p>
-<p>当n=1000000时，求在3/7左侧第一个数的分子</p>
-<p>（这个问题的思考过程中顺便解决了求解在x/y左侧一共有多少个数字的问题）</p>
-</blockquote>
-<p><strong><em>题目链接：</em></strong><a href="https://projecteuler.net/problem=71" target="_blank" rel="external">https://projecteuler.net/problem=71</a></p>
-<p>题解</p>
-<p>一开始题目看错了，看成了求3/7左侧一共有多少个数。</p>
-<p>最简单的想法是，对于1~n找到每个数作为分母的时候，小于3/7的分子的取值范围是[1,m]</p>
-<p>那么在这n个循环的过程中，每次都在求解[1,m]有多少个数与作为分母的数互质</p>
-<p>根据莫比乌斯反演的思想，参考贾志鹏线性筛：<br>$$<br>\sum_{d|n} \mu (d) = [n=1] \\<br>\begin{aligned}<br>\sum_{i=1}^m{[gcd(i,n)=1]}  &amp; = \sum_{i=1}^m{\sum_{d|gcd(i,n)}{\mu (d)}} \\<br>&amp; = \sum_{i=1}^m{\sum_{d|i \space and \space d|n}{\mu (d)}} \\<br>&amp; = \sum_{d|n}{\sum_{i=1 \space and \space d|i}^{m}{\mu (d)}} \\<br>&amp; = \sum_{d|n}{\left\lfloor m/d \right\rfloor \mu (d)}<br>\end{aligned}<br>$$<br>​    每次循环里的一次操作只要考虑约数即可，在$O(\sqrt n)$解决，这个代码就呼之欲出了。但并没有达到题目要求解的答案。对于题目要求的球左侧第一个数字，我们可以对于每个分母，求出小于当前数字3/7的和分母互质的最大分子，这个求的方法就是利用求互质数字的个数二分求解。</p>
-<p>这样总的时间复杂度就是$O(n \sqrt n logn)$，所以运行时间达到了48s…代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">namespace</span> euler71&#123;</div><div class="line">    <span class="keyword">int</span> pri[N] , mu[N+<span class="number">5</span>] , tot;</div><div class="line">    <span class="keyword">bool</span> vis[N+<span class="number">5</span>];</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mubius_init</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        clr(vis,<span class="number">0</span>); tot = <span class="number">0</span>;</div><div class="line">        mu[<span class="number">0</span>] = <span class="number">0</span> , mu[<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span> ; i&lt;=n ; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(!vis[i])&#123;</div><div class="line">                pri[tot++] = i;</div><div class="line">                mu[i] = <span class="number">-1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span> ; j&lt;tot ; j++)&#123;</div><div class="line">                <span class="keyword">if</span>((LL)pri[j]*i&gt;n) <span class="keyword">break</span>;</div><div class="line">                vis[pri[j]*i] = <span class="literal">true</span>;</div><div class="line">                <span class="keyword">if</span>(i%pri[j] == <span class="number">0</span>)&#123;</div><div class="line">                    mu[i*pri[j]] = <span class="number">0</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> mu[i*pri[j]] = -mu[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//找到1~m中有多少个数和n互质</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">num_of_relative_prime</span><span class="params">(<span class="keyword">int</span> m , <span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> p = (<span class="keyword">int</span>) <span class="built_in">sqrt</span>(n+<span class="number">0.5</span>);</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> d=<span class="number">1</span> ; d&lt;=p ; d++)&#123;</div><div class="line">            <span class="keyword">if</span>(n%d == <span class="number">0</span>)&#123;</div><div class="line">                res += mu[d]*(m/d);</div><div class="line">                <span class="keyword">if</span>(n/d != d)&#123;</div><div class="line">                    res += mu[n/d]*(m/(n/d));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//找到m往左数第一个跟n互质的数字</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">bin_search</span><span class="params">(<span class="keyword">int</span> m , <span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> cnt = num_of_relative_prime(m, n);</div><div class="line">       <span class="comment">// cout&lt;&lt;"bin_search: "&lt;&lt;m&lt;&lt;" "&lt;&lt;n&lt;&lt;" "&lt;&lt;cnt&lt;&lt;endl;</span></div><div class="line">        <span class="keyword">int</span> lf=<span class="number">1</span> , rg=m , mid , ans=<span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(lf&lt;=rg)&#123;</div><div class="line">            mid = (lf+rg)&gt;&gt;<span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>(num_of_relative_prime(mid, n) == cnt) ans = mid , rg = mid<span class="number">-1</span>;</div><div class="line">            <span class="keyword">else</span> lf = mid+<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> ans;</div><div class="line">    &#125;</div><div class="line">	<span class="comment">//本题要求的答案解决的接口，分母为1~n组合出的最简分数有序序列，输出x/y左侧第一个数的分子</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">solution</span><span class="params">(<span class="keyword">int</span> x , <span class="keyword">int</span> y , <span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        mubius_init(n);</div><div class="line">        <span class="keyword">double</span> mx = <span class="number">0</span>; </div><div class="line">        <span class="keyword">int</span> numerator = <span class="number">-1</span>; <span class="comment">//分子</span></div><div class="line">        <span class="keyword">int</span> fraction = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span> ; i&lt;=n ; i++)&#123;</div><div class="line">            <span class="keyword">int</span> m = i*x/y;</div><div class="line">            <span class="keyword">int</span> val = bin_search(i==y?m<span class="number">-1</span>:m , i);</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(val&lt;<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">if</span>(val*<span class="number">1.0</span> / i &gt; mx) mx = val*<span class="number">1.0</span> / i , numerator = val , fraction = i;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;numerator&lt;&lt;<span class="string">"/"</span>&lt;&lt;fraction&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">return</span> numerator;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//求所有以1~n作为分母的小于1的最简分数小于x/y的数目</span></div><div class="line">    <span class="function">LL <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x , <span class="keyword">int</span> y , <span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        mubius_init(n);</div><div class="line">        LL res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;=n ; i++)&#123;</div><div class="line">            <span class="keyword">int</span> m = i*x/y;</div><div class="line">            res = res+num_of_relative_prime(m , i);</div><div class="line">           <span class="comment">// cout&lt;&lt;i&lt;&lt;" "&lt;&lt;m&lt;&lt;" "&lt;&lt;res&lt;&lt;endl;</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res - <span class="number">1</span>; <span class="comment">//自己本身被算了一遍</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;euler71::solution(<span class="number">3</span>,<span class="number">7</span>,<span class="number">1000000</span>)&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">   <span class="comment">// cout&lt;&lt;euler71::solve(3,7,1000000)&lt;&lt;endl;</span></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//428570/999997 , 对于euler71需要的答案是分子428570，running 48.224 seconds</span></div></pre></td></tr></table></figure>
-<p>但是这个做法显然太复杂又麻烦了，换个简单的方法就是，外层的n的循环对于每个分母都能找到一个最大的分子，无所谓他们是否互质，不互质就大家除以公约数即可，反正大小一定保证是最大的解。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> euler71&#123;</div><div class="line">    <span class="function">LL <span class="title">gcd</span><span class="params">(LL x , LL y)</span></span>&#123;<span class="keyword">return</span> y==<span class="number">0</span>?x:gcd(y,x%y);&#125;</div><div class="line">    <span class="function">LL <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x , <span class="keyword">int</span> y , <span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">        LL x1 = <span class="number">0</span> , x2 = <span class="number">1</span>; <span class="comment">//x1/x2</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;=n ; i++)&#123;</div><div class="line">            LL m = (i*x<span class="number">-1</span>)/y;</div><div class="line">            <span class="keyword">if</span>(x1*i &lt; x2*m)</div><div class="line">                x1 = m , x2 = i; </div><div class="line">           <span class="comment">// cout&lt;&lt;i&lt;&lt;" "&lt;&lt;m&lt;&lt;" "&lt;&lt;res&lt;&lt;endl;</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> x1/gcd(x1,x2); <span class="comment">//自己本身被算了一遍</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;euler71::solve(<span class="number">3</span>,<span class="number">7</span>,<span class="number">1000000</span>)&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//428570/999997 , 对于euler71需要的答案是分子428570，running 48.224 seconds</span></div></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">莫比乌斯反演</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tensorflow</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">projecteuler</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/09/莫比乌斯反演解决euler71/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-高级算法之Min-Cut问题求解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/08/高级算法之Min-Cut问题求解/">高级算法之Min-Cut问题求解</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/08/高级算法之Min-Cut问题求解/" class="archive-article-date">
-  	<time datetime="2017-09-07T17:32:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>问题：</p>
-<p>将点集V分成S、T两个集合。使E(S,T)的边数量最少，求解最小割的值</p>
-</blockquote>
-<p>本文将采用确定性网络流算法和非确定性随机算法两方面讲解，主要求解高级算法中的随机思想</p>
-        
-          <a class="article-more-a" href="/2017/09/08/高级算法之Min-Cut问题求解/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">高级算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">网络流</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/08/高级算法之Min-Cut问题求解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/">python-networkx绘制复杂网络关系图</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/" class="archive-article-date">
-  	<time datetime="2017-09-05T06:20:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>1.创建一个图<br>2.节点<br>3.边<br>4.查看图上点和边的信息<br>5.图的属性设置<br>6.点的属性设置<br>7.边的属性设置<br>8.不同类型的图（有向图Directed graphs , 重边图 Multigraphs）<br>9.图的遍历<br>10.图生成和图上的一些操作<br>11.图上分析<br>12.图的绘制</p>
-        
-          <a class="article-more-a" href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">复杂网络</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">networkx</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">可视化图形</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python/" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/05/LeetCode-Algorithm-Exercise/python-networkx绘制复杂网络关系图/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-Algorithm-Exercise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/03/LeetCode-Algorithm-Exercise/">Daily Algorithm Exercise</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/03/LeetCode-Algorithm-Exercise/" class="archive-article-date">
-  	<time datetime="2017-09-02T16:59:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
-<li>LeetCode 667</li>
-<li>LeetCode 664</li>
-<li>LeetCode 668</li>
-<li>projecteuler 60</li>
-<li>Projecteuler 62</li>
-<li>LeetCode224. 基础计算器</li>
-<li>LeetCode115</li>
-<li>LeetCode 122 &amp; 123 </li>
-<li>Projecteuler 77 计算数由质数相加的方法数</li>
-<li>Project 78 基础划分函数取模问题</li>
-<li>Leetcode87 递归子串问题</li>
-<li>Leetcode218 矩形相连求边界点问题</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/09/03/LeetCode-Algorithm-Exercise/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/03/LeetCode-Algorithm-Exercise/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-php-QRCode学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/09/php-QRCode学习/">php-QRCode学习</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/09/php-QRCode学习/" class="archive-article-date">
-  	<time datetime="2017-08-09T12:56:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>php绘制简单QRCODE</p>
-<p>从站点下载最新的phpqrcode包<a href="https://sourceforge.net/projects/phpqrcode/files/releases/" target="_blank" rel="external">https://sourceforge.net/projects/phpqrcode/files/releases/</a><br>将这个模块包复制到对应的php目录下</p>
-        
-          <a class="article-more-a" href="/2017/08/09/php-QRCode学习/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">qrcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">php</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/php/" class="article-tag-list-link color4">php</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/奇技淫巧/" class="article-tag-list-link color5">奇技淫巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/09/php-QRCode学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-projecteuler28-螺旋方阵对角线的和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/09/projecteuler28-螺旋方阵对角线的和/">projecteuler28-螺旋方阵对角线的和</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/09/projecteuler28-螺旋方阵对角线的和/" class="archive-article-date">
-  	<time datetime="2017-08-09T08:36:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Number-spiral-diagonals"><a href="#Number-spiral-diagonals" class="headerlink" title="Number spiral diagonals"></a>Number spiral diagonals</h2><h3 id="Problem-28"><a href="#Problem-28" class="headerlink" title="Problem 28"></a>Problem 28</h3><p>Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:</p>
-<p><strong>21</strong> 22 23 24 <strong>25</strong><br>20  <strong>7</strong>  8  <strong>9</strong> 10<br>19  6  <strong>1</strong>  2 11<br>18  <strong>5</strong>  4  <strong>3</strong> 12<br><strong>17</strong> 16 15 14 <strong>13</strong></p>
-<p>It can be verified that the sum of the numbers on the diagonals is 101.</p>
-<p>What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?</p>
-        
-          <a class="article-more-a" href="/2017/08/09/projecteuler28-螺旋方阵对角线的和/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">projecteuler</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/09/projecteuler28-螺旋方阵对角线的和/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-线性代数-正交矩阵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/线性代数-正交矩阵/">线性代数-正交矩阵</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/08/线性代数-正交矩阵/" class="archive-article-date">
-  	<time datetime="2017-08-08T06:15:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="正交矩阵的定义"><a href="#正交矩阵的定义" class="headerlink" title="正交矩阵的定义"></a>正交矩阵的定义</h2><p>如果Q是一个正交矩阵，$\mathbf Q = [q_1 , q_2 , … , q_n]$</p>
-<p>会使得：<br>$$<br>\mathbf Q ∗ \mathbf {Q^T} = \mathbf I \quad (1)\\<br>\mathbf {Q^T} = \mathbf {Q^{-1}}  \quad (2)\\<br>根据(1)可得对于任意两个q中的列向量 \\<br>q_i∗q_j =<br>\begin{cases}<br>1 &amp; if(i=j)\\<br>0 &amp; if(i&lt;&gt;j)<br>\end{cases}<br>$$</p>
-        
-          <a class="article-more-a" href="/2017/08/08/线性代数-正交矩阵/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">线性代数</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">正交矩阵</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/08/线性代数-正交矩阵/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/05/CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification/">CNN句子分类(Convolutional Neural Networks for Sentence Classification)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/05/CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification/" class="archive-article-date">
-  	<time datetime="2017-08-05T09:11:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Convolutional-Neural-Networks-for-Sentence-Classification"><a href="#Convolutional-Neural-Networks-for-Sentence-Classification" class="headerlink" title="Convolutional Neural Networks for Sentence Classification"></a>Convolutional Neural Networks for Sentence Classification</h2><p><strong><em>遇到的最严重问题，优先列出：</em></strong></p>
-<p>新版本theano.tensor.signal包下已经不包含downsample模块，然后利用theano.tensor.signal.pool.pool_2d()方法代替了theano.tensor.signal.downsample.max_pool_2d()方法</p>
-<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>1.实验所需的是theano框架</p>
-<p>安装稳定的最前沿版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install --user --no-deps git+https://github.com/Theano/Theano.git#egg=Theano</div></pre></td></tr></table></figure>
-<p>2.gpuarray 的安装：为了利用gpu加速运行</p>
-<p><a href="http://deeplearning.net/software/libgpuarray/installation.html" target="_blank" rel="external">参照官网gpuarray网址</a></p>
-<p>1）下载安装包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/Theano/libgpuarray.git</div><div class="line">cd libgpuarray</div></pre></td></tr></table></figure>
-<p>2）安装</p>
-<p>For libgpuarray</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cd &lt;dir&gt; # 这一步如果紧接着上方可以省去，主要是为了进入你下载的目录</div><div class="line">mkdir Build</div><div class="line">cd Build</div><div class="line"># you can pass -DCMAKE_INSTALL_PREFIX=/path/to/somewhere to install to an alternate location</div><div class="line">cmake .. -DCMAKE_BUILD_TYPE=Release # or Debug if you are investigating a crash # 这一步我的mac上通过brew install cmake安装cmake后执行</div><div class="line">make</div><div class="line">make install</div><div class="line">cd ..</div></pre></td></tr></table></figure>
-<p>For pygpu:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># This must be done after libgpuarray is installed as per instructions above.</div><div class="line">python setup.py build</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
-<p>If you installed libgpuarray in a path that isn’t a default one, you will need to specify where it is. Replace the first line by something like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python setup.py build_ext -L $MY_PREFIX/lib -I $MY_PREFIX/include</div></pre></td></tr></table></figure>
-<p>If installed globally under Linux (in /usr/local), you might have to run:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo ldconfig</div></pre></td></tr></table></figure>
-<p>虽然没爱搞懂，但最后一步我没有执行</p>
-<p><a href="https://github.com/yoonkim/CNN_sentence" target="_blank" rel="external">github源代码</a></p>
-<p><a href="https://code.google.com/archive/p/word2vec/" target="_blank" rel="external">实验数据</a>:在这个页面我下载的是<a href="https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing" target="_blank" rel="external">GoogleNews-vectors-negative300.bin.gz</a></p>
-<p>这个压缩包解压缩后就是已经用word2vec预处理好的数据</p>
-<p><strong><em>然后就是根据这个例子做实验</em></strong></p>
-<h3 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h3><p>To process the raw data, run</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python process_data.py path</div></pre></td></tr></table></figure>
-<p>where path points to the word2vec binary file (i.e. <code>GoogleNews-vectors-negative300.bin</code> file). This will create a pickle object called <code>mr.p</code> in the same folder, which contains the dataset in the right format.</p>
-<p>Note: This will create the dataset with different fold-assignments than was used in the paper. You should still be getting a CV score of &gt;81% with CNN-nonstatic model, though.</p>
-<h3 id="Running-the-models-CPU"><a href="#Running-the-models-CPU" class="headerlink" title="Running the models (CPU)"></a>Running the models (CPU)</h3><p>这一步会遇到一个很严重的问题就是<strong>前面说的新版本theano.tensor.signal包下已经不包含downsample模块，然后利用theano.tensor.signal.pool.pool_2d()方法代替了theano.tensor.signal.downsample.max_pool_2d()方法，所以需要修改conv_net_classes.py中相关的地方。</strong></p>
-<p>Example commands:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">THEANO_FLAGS=mode=FAST_RUN,device=cpu,floatX=float32 python conv_net_sentence.py -nonstatic -rand</div><div class="line">THEANO_FLAGS=mode=FAST_RUN,device=cpu,floatX=float32 python conv_net_sentence.py -static -word2vec</div><div class="line">THEANO_FLAGS=mode=FAST_RUN,device=cpu,floatX=float32 python conv_net_sentence.py -nonstatic -word2vec</div></pre></td></tr></table></figure>
-<p>This will run the CNN-rand, CNN-static, and CNN-nonstatic models respectively in the paper.</p>
-<h3 id="Using-the-GPU"><a href="#Using-the-GPU" class="headerlink" title="Using the GPU"></a>Using the GPU</h3><p>GPU will result in a good 10x to 20x speed-up, so it is highly recommended. To use the GPU, simply change <code>device=cpu</code> to <code>device=gpu</code> (or whichever gpu you are using). For example:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python conv_net_sentence.py -nonstatic -word2vec</div></pre></td></tr></table></figure>
-<h3 id="Example-output"><a href="#Example-output" class="headerlink" title="Example output"></a>Example output</h3><p>CPU output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">epoch: 1, training time: 219.72 secs, train perf: 81.79 %, val perf: 79.26 %</div><div class="line">epoch: 2, training time: 219.55 secs, train perf: 82.64 %, val perf: 76.84 %</div><div class="line">epoch: 3, training time: 219.54 secs, train perf: 92.06 %, val perf: 80.95 %</div></pre></td></tr></table></figure>
-<p>GPU output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">epoch: 1, training time: 16.49 secs, train perf: 81.80 %, val perf: 78.32 %</div><div class="line">epoch: 2, training time: 16.12 secs, train perf: 82.53 %, val perf: 76.74 %</div><div class="line">epoch: 3, training time: 16.16 secs, train perf: 91.87 %, val perf: 81.37 %</div></pre></td></tr></table></figure>
-<p>### </p>
-        
-          <a class="article-more-a" href="/2017/08/05/CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CNN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">分类</a>
         		</li>
       		
 		</ul>
@@ -1126,16 +255,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/05/CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://ganjun.net/2018/04/26/tensorflow-简单对数据做多分类/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/26/codeforces-955C-莫比乌斯反演进行容斥/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">codeforces 955C 莫比乌斯反演进行容斥</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -1150,17 +338,70 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="tensorflow-简单对数据做多分类" data-title="tensorflow 简单对数据做多分类" data-url="http://ganjun.net/2018/04/26/tensorflow-简单对数据做多分类/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
-    </nav>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://ganjun.net/2018/04/26/tensorflow-简单对数据做多分类/", 
+    sourceId: "tensorflow-简单对数据做多分类",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+  
+  <div id="SOHUCS" sid="tensorflow-简单对数据做多分类" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "true"; 
+var conf = "true"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
   
 
 
@@ -1183,8 +424,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
