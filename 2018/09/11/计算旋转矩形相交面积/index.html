@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://ganjun.net">
   <title>计算旋转矩形相交面积 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题对于两个旋转的矩形求相交的面积 输入:  矩形1的4个点 [(ax1, ay1), (ax2, ay2), (ax3, ay3), (ax4, ay4)] ​       矩形2的4个点 [(bx1, by1), (bx2, by2), (bx3, by3), (bx4, by4)] 输出:  矩形1和矩形2相交的面积 求解流程 将4个点按照时钟序排列(我实现的是逆时针) (PS:这一步不重要">
+  <meta name="description" content="问题对于两个旋转的矩形求相交的面积 输入:  矩形1的4个点 [(ax1, ay1), (ax2, ay2), (ax3, ay3), (ax4, ay4)] 矩形2的4个点 [(bx1, by1), (bx2, by2), (bx3, by3), (bx4, by4)] 输出:  矩形1和矩形2相交的面积 求解流程 将4个点按照时钟序排列(我实现的是逆时针) (PS:这一步不重要，我只是为了利用">
 <meta name="keywords" content="平面几何">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算旋转矩形相交面积">
 <meta property="og:url" content="http://ganjun.net/2018/09/11/计算旋转矩形相交面积/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="问题对于两个旋转的矩形求相交的面积 输入:  矩形1的4个点 [(ax1, ay1), (ax2, ay2), (ax3, ay3), (ax4, ay4)] ​       矩形2的4个点 [(bx1, by1), (bx2, by2), (bx3, by3), (bx4, by4)] 输出:  矩形1和矩形2相交的面积 求解流程 将4个点按照时钟序排列(我实现的是逆时针) (PS:这一步不重要">
+<meta property="og:description" content="问题对于两个旋转的矩形求相交的面积 输入:  矩形1的4个点 [(ax1, ay1), (ax2, ay2), (ax3, ay3), (ax4, ay4)] 矩形2的4个点 [(bx1, by1), (bx2, by2), (bx3, by3), (bx4, by4)] 输出:  矩形1和矩形2相交的面积 求解流程 将4个点按照时钟序排列(我实现的是逆时针) (PS:这一步不重要，我只是为了利用">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2018-09-11T07:27:36.000Z">
+<meta property="og:updated_time" content="2018-09-11T07:27:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算旋转矩形相交面积">
-<meta name="twitter:description" content="问题对于两个旋转的矩形求相交的面积 输入:  矩形1的4个点 [(ax1, ay1), (ax2, ay2), (ax3, ay3), (ax4, ay4)] ​       矩形2的4个点 [(bx1, by1), (bx2, by2), (bx3, by3), (bx4, by4)] 输出:  矩形1和矩形2相交的面积 求解流程 将4个点按照时钟序排列(我实现的是逆时针) (PS:这一步不重要">
+<meta name="twitter:description" content="问题对于两个旋转的矩形求相交的面积 输入:  矩形1的4个点 [(ax1, ay1), (ax2, ay2), (ax3, ay3), (ax4, ay4)] 矩形2的4个点 [(bx1, by1), (bx2, by2), (bx3, by3), (bx4, by4)] 输出:  矩形1和矩形2相交的面积 求解流程 将4个点按照时钟序排列(我实现的是逆时针) (PS:这一步不重要，我只是为了利用">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
   
@@ -193,8 +193,8 @@
       
         <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>对于两个旋转的矩形求相交的面积</p>
 <p>输入:  矩形1的4个点 [(ax1, ay1), (ax2, ay2), (ax3, ay3), (ax4, ay4)]</p>
-<p>​       矩形2的4个点 [(bx1, by1), (bx2, by2), (bx3, by3), (bx4, by4)]</p>
-<p>输出:  矩形1和矩形2相交的面积</p>
+<pre><code>矩形2的4个点 [(bx1, by1), (bx2, by2), (bx3, by3), (bx4, by4)]
+</code></pre><p>输出:  矩形1和矩形2相交的面积</p>
 <h3 id="求解流程"><a href="#求解流程" class="headerlink" title="求解流程"></a>求解流程</h3><ol>
 <li>将4个点按照时钟序排列(我实现的是逆时针)</li>
 <li>(<strong>PS:这一步不重要，我只是为了利用python里给定的函数求交点必须要转成这个数据结构</strong>)得到矩形的数据结构表示 ((x,y), (w,h), angle)   #(x,y)表示矩形的中心点, (w,h)表示边长，w不一定大于h，而是w表示y值最小的点(如果相等就x最小)右侧的边长，同理h表示左侧的边长。angle表示为度数(360度一圈)，是w对应的边长和x轴正方向的夹角。</li>
@@ -202,6 +202,7 @@
 <li>对S求个凸包 hull</li>
 <li>hull是个凸多边形，根据向量的叉积求解面积即可(如找到一个点p，将每一条边都和这个点相连的三角形通过叉积求面积进行加和)</li>
 </ol>
+<a id="more"></a>
 <h3 id="利用的函数"><a href="#利用的函数" class="headerlink" title="利用的函数"></a>利用的函数</h3><ol>
 <li>scipy.spatial.ConvexHull 求凸包</li>
 <li>cv2.rotatedRectangleIntersection(rect1, rect2) 求两个矩形的交点(就是我第三步所说)</li>
