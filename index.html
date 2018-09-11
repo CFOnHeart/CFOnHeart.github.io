@@ -171,6 +171,202 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-计算旋转矩形相交面积" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/11/计算旋转矩形相交面积/">计算旋转矩形相交面积</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/11/计算旋转矩形相交面积/" class="archive-article-date">
+  	<time datetime="2018-09-11T07:11:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>对于两个旋转的矩形求相交的面积</p>
+<p>输入:  矩形1的4个点 [(ax1, ay1), (ax2, ay2), (ax3, ay3), (ax4, ay4)]</p>
+<p>​       矩形2的4个点 [(bx1, by1), (bx2, by2), (bx3, by3), (bx4, by4)]</p>
+<p>输出:  矩形1和矩形2相交的面积</p>
+<h3 id="求解流程"><a href="#求解流程" class="headerlink" title="求解流程"></a>求解流程</h3><ol>
+<li>将4个点按照时钟序排列(我实现的是逆时针)</li>
+<li>(<strong>PS:这一步不重要，我只是为了利用python里给定的函数求交点必须要转成这个数据结构</strong>)得到矩形的数据结构表示 ((x,y), (w,h), angle)   #(x,y)表示矩形的中心点, (w,h)表示边长，w不一定大于h，而是w表示y值最小的点(如果相等就x最小)右侧的边长，同理h表示左侧的边长。angle表示为度数(360度一圈)，是w对应的边长和x轴正方向的夹角。</li>
+<li>求解出两个矩形相交的点以及某个矩形的顶点落在另一个矩形内的点集合S</li>
+<li>对S求个凸包 hull</li>
+<li>hull是个凸多边形，根据向量的叉积求解面积即可(如找到一个点p，将每一条边都和这个点相连的三角形通过叉积求面积进行加和)</li>
+</ol>
+<h3 id="利用的函数"><a href="#利用的函数" class="headerlink" title="利用的函数"></a>利用的函数</h3><ol>
+<li>scipy.spatial.ConvexHull 求凸包</li>
+<li>cv2.rotatedRectangleIntersection(rect1, rect2) 求两个矩形的交点(就是我第三步所说)</li>
+<li>cv2.contourArea 求多边形的面积</li>
+</ol>
+<h3 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cv2</div><div class="line"><span class="keyword">import</span> math</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">from</span> scipy.spatial <span class="keyword">import</span> ConvexHull</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RotatedRect</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, points)</span>:</span></div><div class="line">        self.points = sort_rotatedrect_points(points)</div><div class="line">        self.rect = rotate_rect(points)  <span class="comment"># ((centerX, centerY), (width,height), angle)</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">intersection_area</span><span class="params">(self, rotated_rect)</span>:</span></div><div class="line">        <span class="keyword">return</span> intersect_area(self.rect, rotated_rect.rect)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">union_area</span><span class="params">(self, rotated_rect)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.rect[<span class="number">1</span>][<span class="number">0</span>]*self.rect[<span class="number">1</span>][<span class="number">1</span>] + \</div><div class="line">               rotated_rect.rect[<span class="number">1</span>][<span class="number">0</span>]*rotated_rect.rect[<span class="number">1</span>][<span class="number">1</span>] - \</div><div class="line">               self.intersection_area(rotated_rect)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">iou</span><span class="params">(self, rotated_rect)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.intersection_area(rotated_rect) / self.union_area(rotated_rect)</div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">distance</span><span class="params">(a, b)</span>:</span> <span class="comment"># 计算点对之间的距离</span></div><div class="line">    <span class="keyword">return</span> math.sqrt((a[<span class="number">0</span>]-b[<span class="number">0</span>])*(a[<span class="number">0</span>]-b[<span class="number">0</span>]) + (a[<span class="number">1</span>]-b[<span class="number">1</span>])*(a[<span class="number">1</span>]-b[<span class="number">1</span>]))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sort_rotatedrect_points</span><span class="params">(points)</span>:</span>  <span class="comment"># 将旋转矩形的四个点按照逆时针输出，且保证起始位置是y值最小的点</span></div><div class="line">    print(<span class="string">'before sort: '</span>, points)</div><div class="line">    points = sorted(points, key=<span class="keyword">lambda</span> a: (a[<span class="number">1</span>], a[<span class="number">0</span>]))</div><div class="line">    print(<span class="string">'after sort: '</span>, points)</div><div class="line">    tmp1 = points[<span class="number">1</span>].copy()</div><div class="line">    tmp2 = points[<span class="number">2</span>].copy()</div><div class="line">    tmp3 = points[<span class="number">3</span>].copy()</div><div class="line">    <span class="keyword">if</span> points[<span class="number">1</span>][<span class="number">0</span>] &lt; points[<span class="number">0</span>][<span class="number">0</span>]:</div><div class="line">        points[<span class="number">1</span>] = tmp2</div><div class="line">        points[<span class="number">2</span>] = tmp3</div><div class="line">        points[<span class="number">3</span>] = tmp1</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        points[<span class="number">2</span>] = tmp3</div><div class="line">        points[<span class="number">3</span>] = tmp2</div><div class="line">    print(<span class="string">'after update sort: '</span>, points)</div><div class="line">    <span class="keyword">return</span> points</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rotate_rect</span><span class="params">(points)</span>:</span></div><div class="line">    <span class="string">'''</span></div><div class="line">    :param points: points 表示旋转矩形的4个点  [(x1, y1), (x2, y2), (x3, y3), (x4, y4)]</div><div class="line">    :return: (centerx,centery), (width,height), angle</div><div class="line">    '''</div><div class="line">    <span class="keyword">assert</span> len(points) == <span class="number">4</span>, <span class="string">'The points nums != 4'</span></div><div class="line">    points = sort_rotatedrect_points(points)</div><div class="line">    <span class="keyword">assert</span> abs(points[<span class="number">0</span>][<span class="number">0</span>] + points[<span class="number">2</span>][<span class="number">0</span>] - points[<span class="number">1</span>][<span class="number">0</span>] - points[<span class="number">3</span>][<span class="number">0</span>]) &lt; <span class="number">1e-6</span>, <span class="string">'These points can\'t form a rectangle'</span></div><div class="line">    <span class="keyword">assert</span> ( abs(points[<span class="number">0</span>][<span class="number">1</span>] + points[<span class="number">2</span>][<span class="number">1</span>] - points[<span class="number">1</span>][<span class="number">1</span>] - points[<span class="number">3</span>][<span class="number">1</span>]) &lt; <span class="number">1e-6</span> ), <span class="string">'These points can\'t form a rectangle'</span></div><div class="line">    centerx = (points[<span class="number">0</span>][<span class="number">0</span>] + points[<span class="number">2</span>][<span class="number">0</span>]) / <span class="number">2</span></div><div class="line">    centery = (points[<span class="number">0</span>][<span class="number">1</span>] + points[<span class="number">2</span>][<span class="number">1</span>]) / <span class="number">2</span></div><div class="line">    center = (centerx, centery)</div><div class="line"></div><div class="line">    width = distance(points[<span class="number">0</span>], points[<span class="number">1</span>])</div><div class="line">    height = distance(points[<span class="number">0</span>], points[<span class="number">3</span>])</div><div class="line"></div><div class="line">    angle = math.atan2(points[<span class="number">1</span>][<span class="number">1</span>]-points[<span class="number">0</span>][<span class="number">1</span>], points[<span class="number">1</span>][<span class="number">0</span>]-points[<span class="number">0</span>][<span class="number">0</span>])</div><div class="line">    PI = math.acos(<span class="number">-1.0</span>)</div><div class="line">    <span class="keyword">return</span> center, (width, height), angle/PI*<span class="number">180</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">convexhull</span><span class="params">(points)</span>:</span></div><div class="line">    <span class="string">'''</span></div><div class="line">    :param unordered points: np.array([(x1, y1), (x2, y2), (x3, y3), ..., (xn, yn)])</div><div class="line">    :return: ordered points of convex</div><div class="line">    '''</div><div class="line">    hull = ConvexHull(points)</div><div class="line">    arg_index = hull.vertices  <span class="comment"># 返回的是重新排序后的点坐标</span></div><div class="line">    hull = points[arg_index]  <span class="comment"># 重排后凸包后的顺序点</span></div><div class="line">    <span class="keyword">return</span> hull</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">intersect_area</span><span class="params">(rect1, rect2)</span>:</span>  <span class="comment"># rect的数据格式要求((centerx,centery), (width,height), angle)(角度，以360作为一圈)</span></div><div class="line">    r1 = cv2.rotatedRectangleIntersection(rect1, rect2)</div><div class="line">    p = []</div><div class="line">    len_p = r1[<span class="number">1</span>].shape[<span class="number">0</span>]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len_p):</div><div class="line">        p.append((r1[<span class="number">1</span>][i][<span class="number">0</span>][<span class="number">0</span>], r1[<span class="number">1</span>][i][<span class="number">0</span>][<span class="number">1</span>]))</div><div class="line">    p = np.array(p)</div><div class="line">    hull = convexhull(p)</div><div class="line">    r2 = cv2.contourArea(hull)     <span class="comment"># 根据凸包顺序点求面积</span></div><div class="line">    <span class="keyword">return</span> r2</div><div class="line"></div><div class="line"><span class="comment"># 中心点 矩形的w h, 逆时针旋转的theta（角度，不是弧度）</span></div><div class="line">rect1 = ((<span class="number">0</span>,<span class="number">0</span>),(<span class="number">1</span>,<span class="number">1</span>),<span class="number">30</span>)</div><div class="line">rect2 = ((<span class="number">1.5</span>,<span class="number">0</span>),(<span class="number">4</span>,<span class="number">3</span>),<span class="number">0</span>)</div><div class="line">r1 = cv2.rotatedRectangleIntersection(rect1, rect2)</div><div class="line"><span class="keyword">print</span> (r1)</div><div class="line"></div><div class="line">points1 = [[<span class="number">1.</span>, <span class="number">0</span>], [<span class="number">-1.</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">-1.</span>], [<span class="number">0</span>, <span class="number">1.</span>]]</div><div class="line">rect1 = rotate_rect(points1)</div><div class="line"></div><div class="line">points2 = [[<span class="number">-0.5</span>, <span class="number">-0.5</span>], [<span class="number">-0.5</span>, <span class="number">1.5</span>], [<span class="number">1.5</span>, <span class="number">-0.5</span>], [<span class="number">1.5</span>, <span class="number">1.5</span>]]</div><div class="line">rect2 = rotate_rect(points2)</div><div class="line"></div><div class="line">print(rect1)</div><div class="line">print(rect2)</div><div class="line"></div><div class="line">print(intersect_area(rect1, rect2))</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">平面几何</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/cv/" class="article-tag-list-link color3">cv</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/11/计算旋转矩形相交面积/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Sampling-in-Machine-Learning" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/17/Sampling-in-Machine-Learning/">Sampling in Machine Learning</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/17/Sampling-in-Machine-Learning/" class="archive-article-date">
+  	<time datetime="2018-07-16T18:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Why-Sampling"><a href="#Why-Sampling" class="headerlink" title="Why Sampling"></a>Why Sampling</h3><blockquote>
+<p>采样是生活和机器学习算法中都会经常用到的技术，一般来说采样的目的是评估一个函数在某个分布上的期望值：<br>$$<br>E_{x\sim P(x)}[f(x)] = \int_Xf(x)P(x)d_x<br>$$<br>这就是评估f(x)在PDF(概率密度函数) P(X)这个分布上的期望值</p>
+</blockquote>
+<p>通过Monte Carlo的思想我们可以知道，多次对一个分布进行采样，可以通过均值来作为真实期望的近似。根据中心极限定理可知，当采样次数无限多次的时候，样本的均值就是真实的期望值。（如抛硬币）</p>
+<p><strong>部分概率密度函数过于复杂，不像扔硬币，均匀分布那般好采样，所以我们需要通过另外的思想进行采样。</strong></p>
+<h3 id="Inverse-Sampling"><a href="#Inverse-Sampling" class="headerlink" title="Inverse Sampling"></a>Inverse Sampling</h3><p>计算概率密度函数的分布函数(cdf)。<br>$$<br>F(x) = \int_{-\infty}^xf(a)da<br>$$</p>
+<p>对于分布函数$F(x) \in [0,1]$, 对于这个分布函数在[0,1]区间进行均匀采样，如采样得到t，说明对于该分布来说实际应该采样为x。<br>$$<br>F(x) = \int_{-\infty}^xf(a)da = t  \Leftrightarrow x = cdf^{-1}(t)<br>$$<br>如果能计算出F(x)的话，可以通过二分的思想找到对应的样本，如果无法计算F(x)，可以通过将连续的函数切割成多个小段，一段一段当成矩形叠加，知道概率和超过t。</p>
+<h3 id="Rejective-Sampling"><a href="#Rejective-Sampling" class="headerlink" title="Rejective Sampling"></a>Rejective Sampling</h3><h3 id="Importance-Sampling"><a href="#Importance-Sampling" class="headerlink" title="Importance Sampling"></a>Importance Sampling</h3><p>$$<br>x^2 + \frac{1}{2} + \int_{0}^{+\infty} + \sum + \sigma + \lambda + \gamma + \theta<br>$$</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ol>
+<li><a href="https://blog.csdn.net/u011332699/article/details/74298555" target="_blank" rel="external">https://blog.csdn.net/u011332699/article/details/74298555</a></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Sampling</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/机器学习/" class="article-tag-list-link color5">机器学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/17/Sampling-in-Machine-Learning/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-复杂网络社区发现算法-Fast-Unfolding" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -941,216 +1137,6 @@
 
 
   
-    <article id="post-中国邮递员问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/19/中国邮递员问题/">中国邮递员问题</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/19/中国邮递员问题/" class="archive-article-date">
-  	<time datetime="2018-04-19T13:14:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="中国邮递员问题"><a href="#中国邮递员问题" class="headerlink" title="中国邮递员问题"></a>中国邮递员问题</h2><h3 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1. 问题描述"></a>1. 问题描述</h3><blockquote>
-<p>中国邮递员问题是邮递员在某一地区的信件投递路程问题。邮递员每天从邮局出发，走遍该地区所有街道再返回邮局，问题是他应如何安排送信的路线可以使所走的总路程最短。</p>
-</blockquote>
-<h3 id="2-问题解决"><a href="#2-问题解决" class="headerlink" title="2. 问题解决"></a>2. 问题解决</h3><ol>
-<li><p>图本身就是一个欧拉回路图，那么直接走一个欧拉回路就访问了所有路径并回到了起点</p>
-<p>（欧拉回路图的前提条件是每个点的度数都是偶数）</p>
-</li>
-<li><p>图不是一个欧拉回路图，需要对某些边重复走多次回到起点，等价于添加了一些已经存在的重边，构建了欧拉回路。</p>
-<p>不是欧拉回路需要通过增加一些边使得图变成一个欧拉回路，并能保证问题的最优解，添加的边权值和一定是尽可能短的。</p>
-<ul>
-<li>计算度数为奇数的点</li>
-<li>算出所有点之间的最短路径</li>
-<li>奇度数的点一定为偶数，点与点之间构建二分图，权值为两点之间的最短路，找到一个最小权值匹配集</li>
-<li>对于匹配集，找到每一个匹配集两点之间形成的最短路径，那么这条最短路径就需要加入到额外的边中，且一定能保证这条路径上除了这两个匹配的奇度数点度数加了1变成了偶数，其他所有中间点都是加了2，不影奇偶性。</li>
-<li>所有边都添加好后，就是一个欧拉回路了，计算从起点开始的欧拉回路路径</li>
-</ul>
-</li>
-</ol>
-        
-          <a class="article-more-a" href="/2018/04/19/中国邮递员问题/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">中国邮递员问题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">欧拉回路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">匹配算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">最短路</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/图论/" class="article-tag-list-link color3">图论</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/19/中国邮递员问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-快排的c-模板类实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/18/快排的c-模板类实现/">快排的c++模板类实现</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/18/快排的c-模板类实现/" class="archive-article-date">
-  	<time datetime="2018-03-18T10:53:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>很久没写快速排序了，没事的时候尝试着回忆了一下，顺便结合泛型编程的思想，将代码改成了void * ，满足所有数据类型的要求。</p>
-<h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>快速排序最大的问题就是在不额外赋值空间的情况下，怎么做到在不变的空间内，按照快排的思想，将base基点左侧都放上比它小的值，base基点右侧都放上比它大的值。</p>
-<p>很多时候base基点直接选择的是第一个元素，也是为了方便我们的排序。</p>
-<p>但为了防止特殊情况出现，导致快排效率不高，base基点的选择最好是随机的，但只要将随机选中的base和第一个位置的元素交换位置就可以同样达到我们想要的效果。所以思想的讲解主要从base基点作为第一个元素来讲解。</p>
-        
-          <a class="article-more-a" href="/2018/03/18/快排的c-模板类实现/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">泛型编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/c++/" class="article-tag-list-link color4">c++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/18/快排的c-模板类实现/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1248,10 +1234,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
@@ -1264,14 +1246,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">A*</a>
               </li>
              
@@ -1280,7 +1254,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1288,7 +1278,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Sampling</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1308,18 +1314,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">容斥原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">莫比乌斯</a>
               </li>
              
@@ -1328,15 +1322,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
+                <a href="javascript:void(0)" class="js-tag color5">容斥原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1352,18 +1342,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pca</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">人脸识别</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">opencv</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">gan-net</a>
               </li>
              
@@ -1373,6 +1351,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SSGAN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pca</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">人脸识别</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">opencv</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1392,6 +1382,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">分类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">中国邮递员问题</a>
               </li>
              
@@ -1408,6 +1406,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">svd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">社区发现</a>
               </li>
              
@@ -1417,18 +1419,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">贪心算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">分类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1444,10 +1434,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
@@ -1460,19 +1446,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">概率论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">公式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1484,7 +1458,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">正交矩阵</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">概率论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1493,6 +1483,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1512,7 +1506,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
+                <a href="javascript:void(0)" class="js-tag color5">高级算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1520,7 +1514,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">高级算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
               </li>
              
               <li class="article-tag-list-item">
