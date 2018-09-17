@@ -171,6 +171,110 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-莫比乌斯反演解决euler71" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/09/莫比乌斯反演解决euler71/">莫比乌斯反演解决euler71</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/09/莫比乌斯反演解决euler71/" class="archive-article-date">
+  	<time datetime="2017-09-08T16:50:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>题目</p>
+<p>给你n，列出所有以1~n作为分母的最简分数按照从小到大排序。</p>
+<p>当n=1000000时，求在3/7左侧第一个数的分子</p>
+<p>（这个问题的思考过程中顺便解决了求解在x/y左侧一共有多少个数字的问题）</p>
+</blockquote>
+<p><strong><em>题目链接：</em></strong><a href="https://projecteuler.net/problem=71" target="_blank" rel="external">https://projecteuler.net/problem=71</a></p>
+<p>题解</p>
+<p>一开始题目看错了，看成了求3/7左侧一共有多少个数。</p>
+<p>最简单的想法是，对于1~n找到每个数作为分母的时候，小于3/7的分子的取值范围是[1,m]</p>
+<p>那么在这n个循环的过程中，每次都在求解[1,m]有多少个数与作为分母的数互质</p>
+<p>根据莫比乌斯反演的思想，参考贾志鹏线性筛：<br>$$<br>\sum_{d|n} \mu (d) = [n=1] \\<br>\begin{aligned}<br>\sum_{i=1}^m{[gcd(i,n)=1]}  &amp; = \sum_{i=1}^m{\sum_{d|gcd(i,n)}{\mu (d)}} \\<br>&amp; = \sum_{i=1}^m{\sum_{d|i \space and \space d|n}{\mu (d)}} \\<br>&amp; = \sum_{d|n}{\sum_{i=1 \space and \space d|i}^{m}{\mu (d)}} \\<br>&amp; = \sum_{d|n}{\left\lfloor m/d \right\rfloor \mu (d)}<br>\end{aligned}<br>$$<br>​    每次循环里的一次操作只要考虑约数即可，在$O(\sqrt n)$解决，这个代码就呼之欲出了。但并没有达到题目要求解的答案。对于题目要求的球左侧第一个数字，我们可以对于每个分母，求出小于当前数字3/7的和分母互质的最大分子，这个求的方法就是利用求互质数字的个数二分求解。</p>
+<p>这样总的时间复杂度就是$O(n \sqrt n logn)$，所以运行时间达到了48s…代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">namespace</span> euler71&#123;</div><div class="line">    <span class="keyword">int</span> pri[N] , mu[N+<span class="number">5</span>] , tot;</div><div class="line">    <span class="keyword">bool</span> vis[N+<span class="number">5</span>];</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">mubius_init</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        clr(vis,<span class="number">0</span>); tot = <span class="number">0</span>;</div><div class="line">        mu[<span class="number">0</span>] = <span class="number">0</span> , mu[<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span> ; i&lt;=n ; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(!vis[i])&#123;</div><div class="line">                pri[tot++] = i;</div><div class="line">                mu[i] = <span class="number">-1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span> ; j&lt;tot ; j++)&#123;</div><div class="line">                <span class="keyword">if</span>((LL)pri[j]*i&gt;n) <span class="keyword">break</span>;</div><div class="line">                vis[pri[j]*i] = <span class="literal">true</span>;</div><div class="line">                <span class="keyword">if</span>(i%pri[j] == <span class="number">0</span>)&#123;</div><div class="line">                    mu[i*pri[j]] = <span class="number">0</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> mu[i*pri[j]] = -mu[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//找到1~m中有多少个数和n互质</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">num_of_relative_prime</span><span class="params">(<span class="keyword">int</span> m , <span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> p = (<span class="keyword">int</span>) <span class="built_in">sqrt</span>(n+<span class="number">0.5</span>);</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> d=<span class="number">1</span> ; d&lt;=p ; d++)&#123;</div><div class="line">            <span class="keyword">if</span>(n%d == <span class="number">0</span>)&#123;</div><div class="line">                res += mu[d]*(m/d);</div><div class="line">                <span class="keyword">if</span>(n/d != d)&#123;</div><div class="line">                    res += mu[n/d]*(m/(n/d));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//找到m往左数第一个跟n互质的数字</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">bin_search</span><span class="params">(<span class="keyword">int</span> m , <span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> cnt = num_of_relative_prime(m, n);</div><div class="line">       <span class="comment">// cout&lt;&lt;"bin_search: "&lt;&lt;m&lt;&lt;" "&lt;&lt;n&lt;&lt;" "&lt;&lt;cnt&lt;&lt;endl;</span></div><div class="line">        <span class="keyword">int</span> lf=<span class="number">1</span> , rg=m , mid , ans=<span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(lf&lt;=rg)&#123;</div><div class="line">            mid = (lf+rg)&gt;&gt;<span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>(num_of_relative_prime(mid, n) == cnt) ans = mid , rg = mid<span class="number">-1</span>;</div><div class="line">            <span class="keyword">else</span> lf = mid+<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> ans;</div><div class="line">    &#125;</div><div class="line">	<span class="comment">//本题要求的答案解决的接口，分母为1~n组合出的最简分数有序序列，输出x/y左侧第一个数的分子</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">solution</span><span class="params">(<span class="keyword">int</span> x , <span class="keyword">int</span> y , <span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        mubius_init(n);</div><div class="line">        <span class="keyword">double</span> mx = <span class="number">0</span>; </div><div class="line">        <span class="keyword">int</span> numerator = <span class="number">-1</span>; <span class="comment">//分子</span></div><div class="line">        <span class="keyword">int</span> fraction = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span> ; i&lt;=n ; i++)&#123;</div><div class="line">            <span class="keyword">int</span> m = i*x/y;</div><div class="line">            <span class="keyword">int</span> val = bin_search(i==y?m<span class="number">-1</span>:m , i);</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(val&lt;<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">if</span>(val*<span class="number">1.0</span> / i &gt; mx) mx = val*<span class="number">1.0</span> / i , numerator = val , fraction = i;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;numerator&lt;&lt;<span class="string">"/"</span>&lt;&lt;fraction&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">        <span class="keyword">return</span> numerator;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//求所有以1~n作为分母的小于1的最简分数小于x/y的数目</span></div><div class="line">    <span class="function">LL <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x , <span class="keyword">int</span> y , <span class="keyword">int</span> n)</span></span></div><div class="line">    &#123;</div><div class="line">        mubius_init(n);</div><div class="line">        LL res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;=n ; i++)&#123;</div><div class="line">            <span class="keyword">int</span> m = i*x/y;</div><div class="line">            res = res+num_of_relative_prime(m , i);</div><div class="line">           <span class="comment">// cout&lt;&lt;i&lt;&lt;" "&lt;&lt;m&lt;&lt;" "&lt;&lt;res&lt;&lt;endl;</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res - <span class="number">1</span>; <span class="comment">//自己本身被算了一遍</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;euler71::solution(<span class="number">3</span>,<span class="number">7</span>,<span class="number">1000000</span>)&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">   <span class="comment">// cout&lt;&lt;euler71::solve(3,7,1000000)&lt;&lt;endl;</span></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//428570/999997 , 对于euler71需要的答案是分子428570，running 48.224 seconds</span></div></pre></td></tr></table></figure>
+<p>但是这个做法显然太复杂又麻烦了，换个简单的方法就是，外层的n的循环对于每个分母都能找到一个最大的分子，无所谓他们是否互质，不互质就大家除以公约数即可，反正大小一定保证是最大的解。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> euler71&#123;</div><div class="line">    <span class="function">LL <span class="title">gcd</span><span class="params">(LL x , LL y)</span></span>&#123;<span class="keyword">return</span> y==<span class="number">0</span>?x:gcd(y,x%y);&#125;</div><div class="line">    <span class="function">LL <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x , <span class="keyword">int</span> y , <span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">        LL x1 = <span class="number">0</span> , x2 = <span class="number">1</span>; <span class="comment">//x1/x2</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;=n ; i++)&#123;</div><div class="line">            LL m = (i*x<span class="number">-1</span>)/y;</div><div class="line">            <span class="keyword">if</span>(x1*i &lt; x2*m)</div><div class="line">                x1 = m , x2 = i; </div><div class="line">           <span class="comment">// cout&lt;&lt;i&lt;&lt;" "&lt;&lt;m&lt;&lt;" "&lt;&lt;res&lt;&lt;endl;</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> x1/gcd(x1,x2); <span class="comment">//自己本身被算了一遍</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;euler71::solve(<span class="number">3</span>,<span class="number">7</span>,<span class="number">1000000</span>)&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//428570/999997 , 对于euler71需要的答案是分子428570，running 48.224 seconds</span></div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">莫比乌斯反演</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">projecteuler</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/09/莫比乌斯反演解决euler71/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-高级算法之Min-Cut问题求解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1061,107 +1165,6 @@
 
 
   
-    <article id="post-projecteuler21-莫比乌斯求约数和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/projecteuler21-莫比乌斯求约数和/">projecteuler21-莫比乌斯求约数和</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/03/projecteuler21-莫比乌斯求约数和/" class="archive-article-date">
-  	<time datetime="2017-08-03T13:56:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Problem-21"><a href="#Problem-21" class="headerlink" title="Problem 21"></a>Problem 21</h3><p>Let d(<em>n</em>) be defined as the sum of proper divisors of <em>n</em> (numbers less than <em>n</em> which divide evenly into <em>n</em>).<br>If d(<em>a</em>) = <em>b</em> and d(<em>b</em>) = <em>a</em>, where <em>a</em> ≠ <em>b</em>, then <em>a</em> and <em>b</em> are an amicable pair and each of <em>a</em> and <em>b</em> are called amicable numbers.</p>
-<p>For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.</p>
-<p>Evaluate the sum of all the amicable numbers under 10000.</p>
-        
-          <a class="article-more-a" href="/2017/08/03/projecteuler21-莫比乌斯求约数和/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">莫比乌斯反演</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">projecteuler</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/03/projecteuler21-莫比乌斯求约数和/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1259,18 +1262,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">博客相关</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">A*</a>
               </li>
              
@@ -1283,11 +1274,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">博客相关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1295,7 +1294,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1303,23 +1302,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Sampling</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1331,11 +1314,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Polya定理</a>
+                <a href="javascript:void(0)" class="js-tag color4">Sampling</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Mongodb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">组合数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1347,35 +1354,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">容斥原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mapreduce</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">hbase</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gan-net</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SSGAN</a>
+                <a href="javascript:void(0)" class="js-tag color3">Polya定理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1391,15 +1374,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">gan-net</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SSGAN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mapreduce</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">hbase</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">qrcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1431,10 +1434,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">社区发现</a>
               </li>
              
@@ -1447,18 +1446,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">遗传算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本特征</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
@@ -1467,11 +1454,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">技术方案小结</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">公式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">技术方案小结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1480,10 +1471,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">BP算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1503,15 +1490,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">最小二乘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
+                <a href="javascript:void(0)" class="js-tag color5">最小二乘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1523,6 +1506,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
               </li>
              
@@ -1531,7 +1518,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">高级算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">遗传算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本特征</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">svd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1539,15 +1542,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">近似算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">高级算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">近似算法</a>
               </li>
              
               <li class="article-tag-list-item">
