@@ -17,7 +17,7 @@
 <meta property="og:description" content="扔硬币问题em实现(二项分布)具体的算法介绍不赘述了，看看网上的资料就可以了解大概意思了。 这里主要是两份代码的实现。一份是参考：https://blog.csdn.net/LilyNothing/article/details/64443563 扔硬币问题的极大似然地实现">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="http://ganjun.net/2018/09/18/EM算法及简单例子python实现/distribution.png">
-<meta property="og:updated_time" content="2018-09-18T14:01:06.000Z">
+<meta property="og:updated_time" content="2018-09-25T12:46:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EM算法及简单例子python实现">
 <meta name="twitter:description" content="扔硬币问题em实现(二项分布)具体的算法介绍不赘述了，看看网上的资料就可以了解大概意思了。 这里主要是两份代码的实现。一份是参考：https://blog.csdn.net/LilyNothing/article/details/64443563 扔硬币问题的极大似然地实现">
@@ -196,7 +196,7 @@
         <h3 id="扔硬币问题em实现-二项分布"><a href="#扔硬币问题em实现-二项分布" class="headerlink" title="扔硬币问题em实现(二项分布)"></a>扔硬币问题em实现(二项分布)</h3><p>具体的算法介绍不赘述了，看看网上的资料就可以了解大概意思了。</p>
 <p>这里主要是两份代码的实现。一份是参考：<a href="https://blog.csdn.net/LilyNothing/article/details/64443563" target="_blank" rel="external">https://blog.csdn.net/LilyNothing/article/details/64443563</a></p>
 <p>扔硬币问题的极大似然地实现</p>
-<a id="more"></a>
+<a id="more"></a> 
 <p><strong>问题描述：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">定义问题: 假设用两种不同的硬币采样做了5次试验，每次试验丢10次，正反面结果表示在observations，</div><div class="line">         来判断这两个硬币正反面的概率分布(默认是二项分布，所以参数只有一个theta)</div><div class="line">#硬币投掷结果</div><div class="line">observations = np.array([[1,0,0,0,1,1,0,1,0,1],</div><div class="line">                        [1,1,1,1,0,1,1,1,0,1],</div><div class="line">                        [1,0,1,1,1,1,1,0,1,1],</div><div class="line">                        [1,0,1,0,0,0,1,1,0,0],</div><div class="line">                        [0,1,1,1,0,1,1,1,0,1]])</div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># reference: https://blog.csdn.net/LilyNothing/article/details/64443563</span></div><div class="line"><span class="comment"># 定义问题: 假设用两种不同的硬币采样做了5次试验，每次试验丢10次，正反面结果表示在observations，</span></div><div class="line"><span class="comment">#          来判断这两个硬币正反面的概率分布(默认是二项分布，所以参数只有一个theta)</span></div><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> scipy</div><div class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> binom</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">em_single</span><span class="params">(observations, priors)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">        EM算法的单次迭代</div><div class="line">        Arguments</div><div class="line">        ------------</div><div class="line">        priors:[theta_A,theta_B]</div><div class="line">        observation:[m X n matrix]</div><div class="line"></div><div class="line">        Returns</div><div class="line">        ---------------</div><div class="line">        new_priors:[new_theta_A,new_theta_B]</div><div class="line">        :param priors:</div><div class="line">        :param observations:</div><div class="line">        :return:</div><div class="line">    """</div><div class="line">    counts = &#123;<span class="string">'A'</span>: &#123;<span class="string">'H'</span>: <span class="number">0</span>, <span class="string">'T'</span>: <span class="number">0</span>&#125;, <span class="string">'B'</span>: &#123;<span class="string">'H'</span>: <span class="number">0</span>, <span class="string">'T'</span>: <span class="number">0</span>&#125;&#125;</div><div class="line">    theta_A = priors[<span class="number">0</span>]</div><div class="line">    theta_B = priors[<span class="number">1</span>]</div><div class="line"></div><div class="line">    <span class="comment"># E step</span></div><div class="line">    <span class="keyword">for</span> observation <span class="keyword">in</span> observations:</div><div class="line">        len_observation = len(observation)</div><div class="line">        num_heads = observation.sum()           <span class="comment"># 正面次数</span></div><div class="line">        num_tails = len_observation - num_heads <span class="comment"># 反面次数</span></div><div class="line">        <span class="comment"># 扔硬币服从二项分布，二项分布求解概率</span></div><div class="line">        contribution_A = binom.pmf(num_heads, len_observation, theta_A)</div><div class="line">        contribution_B = binom.pmf(num_heads, len_observation, theta_B)</div><div class="line">        weight_A = contribution_A / (contribution_A+contribution_B)</div><div class="line">        weight_B = contribution_B / (contribution_A+contribution_B)</div><div class="line"></div><div class="line">        <span class="comment"># 更新在当前参数下A,B硬币产生的正反面次数</span></div><div class="line">        counts[<span class="string">'A'</span>][<span class="string">'H'</span>] += weight_A * num_heads</div><div class="line">        counts[<span class="string">'A'</span>][<span class="string">'T'</span>] += weight_A * num_tails</div><div class="line">        counts[<span class="string">'B'</span>][<span class="string">'H'</span>] += weight_B * num_heads</div><div class="line">        counts[<span class="string">'B'</span>][<span class="string">'T'</span>] += weight_B * num_tails</div><div class="line"></div><div class="line">    <span class="comment"># M step</span></div><div class="line">    new_theta_A = counts[<span class="string">'A'</span>][<span class="string">'H'</span>] / (counts[<span class="string">'A'</span>][<span class="string">'H'</span>] + counts[<span class="string">'A'</span>][<span class="string">'T'</span>])</div><div class="line">    new_theta_B = counts[<span class="string">'B'</span>][<span class="string">'H'</span>] / (counts[<span class="string">'B'</span>][<span class="string">'H'</span>] + counts[<span class="string">'B'</span>][<span class="string">'T'</span>])</div><div class="line">    <span class="keyword">return</span> [new_theta_A, new_theta_B]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">em</span><span class="params">(observations,prior,tol = <span class="number">1e-6</span>,iterations=<span class="number">10000</span>)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    EM算法</div><div class="line">    ：param observations :观测数据</div><div class="line">    ：param prior：模型初值</div><div class="line">    ：param tol：迭代结束阈值</div><div class="line">    ：param iterations：最大迭代次数</div><div class="line">    ：return：局部最优的模型参数</div><div class="line">    """</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(iterations):</div><div class="line">        new_prior = em_single(observations, prior)</div><div class="line">        <span class="keyword">if</span> abs(np.array(new_prior)-np.array(prior)).sum() &lt; tol:</div><div class="line">            <span class="keyword">return</span> [new_prior, i+<span class="number">1</span>]</div><div class="line">        prior = new_prior.copy()</div><div class="line">    <span class="keyword">return</span> [prior, iterations]</div><div class="line"></div><div class="line"><span class="comment">#硬币投掷结果</span></div><div class="line">observations = np.array([[<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>],</div><div class="line">                        [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>],</div><div class="line">                        [<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>],</div><div class="line">                        [<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>],</div><div class="line">                        [<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>]])</div><div class="line"></div><div class="line"><span class="comment"># 1. 参数初始化</span></div><div class="line">theta_0 = <span class="number">0.3</span></div><div class="line">theta_1 = <span class="number">0.9</span></div><div class="line">print(em(observations, [theta_0, theta_1]))</div></pre></td></tr></table></figure>
@@ -339,6 +339,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/02/20/git-fork下的项目管理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          git fork下的项目管理
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/09/17/python3-sort-cmp问题/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">python3 sort cmp问题</div>
@@ -435,7 +444,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Junnor.G
+    		&copy; 2019 Junnor.G
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -518,19 +527,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">em</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">极大似然</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">A*</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">em</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">极大似然</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,23 +563,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">apache</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,6 +584,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境搭建</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,6 +607,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -606,11 +623,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Sampling</a>
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+                <a href="javascript:void(0)" class="js-tag color4">Sampling</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,10 +636,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -646,18 +659,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">qrcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">pca</a>
               </li>
              
@@ -667,6 +668,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">opencv</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">qrcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,6 +711,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">svd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">遗传算法</a>
               </li>
              
@@ -707,10 +724,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">svd</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -734,7 +747,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">技术方案小结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -742,7 +755,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">技术方案小结</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,19 +767,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">正交矩阵</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">概率论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">正交矩阵</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -786,11 +799,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">viterbi算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -798,7 +807,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
+                <a href="javascript:void(0)" class="js-tag color5">viterbi算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
               </li>
              
               <li class="article-tag-list-item">
