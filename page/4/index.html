@@ -171,6 +171,130 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-组合数学-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/11/组合数学-1/">组合数学-1</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/11/组合数学-1/" class="archive-article-date">
+  	<time datetime="2017-09-11T12:23:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>f: N -&gt; M  将n个求放入m个盒子中的多种方式</p>
+<p>distinct: 不同 identical: 相同</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">balls per bin</th>
+<th style="text-align:center">unrestricted</th>
+<th style="text-align:center">&lt;=1</th>
+<th style="text-align:center">&gt;=1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">n distinct balls , m distinct bins</td>
+<td style="text-align:center">$m^n$</td>
+<td style="text-align:center">$(m)_n$</td>
+<td style="text-align:center">$m!\begin{Bmatrix} m \ n \end{Bmatrix}$</td>
+</tr>
+<tr>
+<td style="text-align:center">n identical balls , m distinct bins</td>
+<td style="text-align:center">$(\binom{n}{m})= \binom{n+m-1}{m-1}$</td>
+<td style="text-align:center">$\binom{m}{n}$</td>
+<td style="text-align:center">$\binom{n-1}{m-1}$</td>
+</tr>
+<tr>
+<td style="text-align:center">n distinct balls , m identical bins</td>
+<td style="text-align:center">$\sum_{i=1}^m \begin{Bmatrix} n \ i \end{Bmatrix}$</td>
+<td style="text-align:center">$\begin{cases} 1 &amp;n \le m \ 0 &amp; n&gt;m   \end{cases}$</td>
+<td style="text-align:center">$\begin{Bmatrix} n \ m \end{Bmatrix}$</td>
+</tr>
+<tr>
+<td style="text-align:center">n identical balls , m identical bins</td>
+<td style="text-align:center">$\sum_{i=0}^m{p_i(n)}$  (当m&gt;=n时也可以直接表示为p(n))</td>
+<td style="text-align:center">$\begin{cases} 1 &amp;n \le m \ 0 &amp; n&gt;m   \end{cases}$</td>
+<td style="text-align:center">$p_m(n)$</td>
+</tr>
+</tbody>
+</table>
+        
+          <a class="article-more-a" href="/2017/09/11/组合数学-1/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组合数学</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数学/" class="article-tag-list-link color3">数学</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/11/组合数学-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-划分函数-整数拆分-and-五边形定理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1029,134 +1153,6 @@
 
 
   
-    <article id="post-CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/05/CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification/">CNN句子分类(Convolutional Neural Networks for Sentence Classification)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/05/CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification/" class="archive-article-date">
-  	<time datetime="2017-08-05T09:11:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Convolutional-Neural-Networks-for-Sentence-Classification"><a href="#Convolutional-Neural-Networks-for-Sentence-Classification" class="headerlink" title="Convolutional Neural Networks for Sentence Classification"></a>Convolutional Neural Networks for Sentence Classification</h2><p><strong><em>遇到的最严重问题，优先列出：</em></strong></p>
-<p>新版本theano.tensor.signal包下已经不包含downsample模块，然后利用theano.tensor.signal.pool.pool_2d()方法代替了theano.tensor.signal.downsample.max_pool_2d()方法</p>
-<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>1.实验所需的是theano框架</p>
-<p>安装稳定的最前沿版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install --user --no-deps git+https://github.com/Theano/Theano.git#egg=Theano</div></pre></td></tr></table></figure>
-<p>2.gpuarray 的安装：为了利用gpu加速运行</p>
-<p><a href="http://deeplearning.net/software/libgpuarray/installation.html" target="_blank" rel="external">参照官网gpuarray网址</a></p>
-<p>1）下载安装包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/Theano/libgpuarray.git</div><div class="line">cd libgpuarray</div></pre></td></tr></table></figure>
-<p>2）安装</p>
-<p>For libgpuarray</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cd &lt;dir&gt; # 这一步如果紧接着上方可以省去，主要是为了进入你下载的目录</div><div class="line">mkdir Build</div><div class="line">cd Build</div><div class="line"># you can pass -DCMAKE_INSTALL_PREFIX=/path/to/somewhere to install to an alternate location</div><div class="line">cmake .. -DCMAKE_BUILD_TYPE=Release # or Debug if you are investigating a crash # 这一步我的mac上通过brew install cmake安装cmake后执行</div><div class="line">make</div><div class="line">make install</div><div class="line">cd ..</div></pre></td></tr></table></figure>
-<p>For pygpu:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># This must be done after libgpuarray is installed as per instructions above.</div><div class="line">python setup.py build</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
-<p>If you installed libgpuarray in a path that isn’t a default one, you will need to specify where it is. Replace the first line by something like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python setup.py build_ext -L $MY_PREFIX/lib -I $MY_PREFIX/include</div></pre></td></tr></table></figure>
-<p>If installed globally under Linux (in /usr/local), you might have to run:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo ldconfig</div></pre></td></tr></table></figure>
-<p>虽然没爱搞懂，但最后一步我没有执行</p>
-<p><a href="https://github.com/yoonkim/CNN_sentence" target="_blank" rel="external">github源代码</a></p>
-<p><a href="https://code.google.com/archive/p/word2vec/" target="_blank" rel="external">实验数据</a>:在这个页面我下载的是<a href="https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing" target="_blank" rel="external">GoogleNews-vectors-negative300.bin.gz</a></p>
-<p>这个压缩包解压缩后就是已经用word2vec预处理好的数据</p>
-<p><strong><em>然后就是根据这个例子做实验</em></strong></p>
-<h3 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h3><p>To process the raw data, run</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python process_data.py path</div></pre></td></tr></table></figure>
-<p>where path points to the word2vec binary file (i.e. <code>GoogleNews-vectors-negative300.bin</code> file). This will create a pickle object called <code>mr.p</code> in the same folder, which contains the dataset in the right format.</p>
-<p>Note: This will create the dataset with different fold-assignments than was used in the paper. You should still be getting a CV score of &gt;81% with CNN-nonstatic model, though.</p>
-<h3 id="Running-the-models-CPU"><a href="#Running-the-models-CPU" class="headerlink" title="Running the models (CPU)"></a>Running the models (CPU)</h3><p>这一步会遇到一个很严重的问题就是<strong>前面说的新版本theano.tensor.signal包下已经不包含downsample模块，然后利用theano.tensor.signal.pool.pool_2d()方法代替了theano.tensor.signal.downsample.max_pool_2d()方法，所以需要修改conv_net_classes.py中相关的地方。</strong></p>
-<p>Example commands:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">THEANO_FLAGS=mode=FAST_RUN,device=cpu,floatX=float32 python conv_net_sentence.py -nonstatic -rand</div><div class="line">THEANO_FLAGS=mode=FAST_RUN,device=cpu,floatX=float32 python conv_net_sentence.py -static -word2vec</div><div class="line">THEANO_FLAGS=mode=FAST_RUN,device=cpu,floatX=float32 python conv_net_sentence.py -nonstatic -word2vec</div></pre></td></tr></table></figure>
-<p>This will run the CNN-rand, CNN-static, and CNN-nonstatic models respectively in the paper.</p>
-<h3 id="Using-the-GPU"><a href="#Using-the-GPU" class="headerlink" title="Using the GPU"></a>Using the GPU</h3><p>GPU will result in a good 10x to 20x speed-up, so it is highly recommended. To use the GPU, simply change <code>device=cpu</code> to <code>device=gpu</code> (or whichever gpu you are using). For example:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python conv_net_sentence.py -nonstatic -word2vec</div></pre></td></tr></table></figure>
-<h3 id="Example-output"><a href="#Example-output" class="headerlink" title="Example output"></a>Example output</h3><p>CPU output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">epoch: 1, training time: 219.72 secs, train perf: 81.79 %, val perf: 79.26 %</div><div class="line">epoch: 2, training time: 219.55 secs, train perf: 82.64 %, val perf: 76.84 %</div><div class="line">epoch: 3, training time: 219.54 secs, train perf: 92.06 %, val perf: 80.95 %</div></pre></td></tr></table></figure>
-<p>GPU output:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">epoch: 1, training time: 16.49 secs, train perf: 81.80 %, val perf: 78.32 %</div><div class="line">epoch: 2, training time: 16.12 secs, train perf: 82.53 %, val perf: 76.74 %</div><div class="line">epoch: 3, training time: 16.16 secs, train perf: 91.87 %, val perf: 81.37 %</div></pre></td></tr></table></figure>
-<p>### </p>
-        
-          <a class="article-more-a" href="/2017/08/05/CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CNN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/深度学习/" class="article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/05/CNN句子分类-Convolutional-Neural-Networks-for-Sentence-Classification/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1254,19 +1250,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">A*</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CNN</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">A*</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1290,6 +1286,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">apache</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
               </li>
              
@@ -1298,11 +1298,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">apache</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1314,7 +1310,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1323,18 +1319,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">组合数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">容斥原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1350,11 +1334,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color4">Sampling</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Sampling</a>
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">容斥原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1378,11 +1370,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mapreduce</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">hbase</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1406,11 +1410,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">进程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1442,18 +1450,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">遗传算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本特征</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">社区发现</a>
               </li>
              
@@ -1466,6 +1462,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">遗传算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本特征</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
@@ -1474,15 +1482,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">技术方案小结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">公式</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">技术方案小结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1502,10 +1514,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">正交矩阵</a>
               </li>
              
@@ -1518,6 +1526,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">有限域</a>
               </li>
              
@@ -1526,11 +1538,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
+                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1538,7 +1546,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
+                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
               </li>
              
               <li class="article-tag-list-item">
