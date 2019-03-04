@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Junnor.G">
 <meta property="og:description" content="背景需求我们经常可能需要从代码中启动一个脚本，或者一个程序来辅助自己完成需要的功能。比如bash脚本启动一个程序服务，可以通过进程之间的通信(比如socket)获取本程序想要的信息。 ##进程的创建  Java提供了两种方法用来启动进程或其它程序：（1）使用Runtime的exec()方法（2）使用ProcessBuilder的start()方法  实际上Runtime.exec() 代码中最终也">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-02-25T11:18:56.000Z">
+<meta property="og:updated_time" content="2019-02-27T02:15:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="scala&#x2F;java 通过bash创建新的进程,杀死相应进程">
 <meta name="twitter:description" content="背景需求我们经常可能需要从代码中启动一个脚本，或者一个程序来辅助自己完成需要的功能。比如bash脚本启动一个程序服务，可以通过进程之间的通信(比如socket)获取本程序想要的信息。 ##进程的创建  Java提供了两种方法用来启动进程或其它程序：（1）使用Runtime的exec()方法（2）使用ProcessBuilder的start()方法  实际上Runtime.exec() 代码中最终也">
@@ -197,7 +197,7 @@
 <p>实际上Runtime.exec() 代码中最终也调用了ProcessBuilder的start()方法 。</p>
 <p>这里主要展示一个简单的执行查看网卡信息的代码和从java代码中启动一个bash进程执行java命令的代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bash查看网络配置信息</span></div><div class="line">String cmd = <span class="string">"ifconfig"</span>;  </div><div class="line">String [] execCmd = &#123;<span class="string">"sh"</span>, <span class="string">"-c"</span>, cmd&#125;;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Process process = Runtime.getRuntime().exec(execCmd);</div><div class="line">    process.waitFor();</div><div class="line">    Scanner scanner = <span class="keyword">new</span> Scanner(process.getInputStream());</div><div class="line">    <span class="keyword">while</span>(scanner.hasNextLine())&#123;</div><div class="line">        System.out.println(scanner.nextLine());</div><div class="line">    &#125;</div><div class="line">&#125;<span class="keyword">catch</span> (Exception ex)&#123;</div><div class="line">    ex.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bash执行java的main函数</span></div><div class="line">String classpath = System.getProperty(<span class="string">"java.class.path"</span>);</div><div class="line"><span class="comment">// -cp -&gt; -classpath, 这里是前提是代码已经编译成class文件，且在infrastructure包下有一个包含main函数的TranswarpServer类，且这个main函数可以接受三个String的参数12346 server1 NORMAL</span></div><div class="line">String cmd = <span class="string">"java -cp "</span> + classpath + <span class="string">" infrastructure.TranswarpServer 12346 server1 NORMAL"</span>;</div><div class="line"><span class="comment">// String cmd = "nohup java -cp " + classpath + " infrastructure.TranswarpServer 12346 server1 NORMAL &amp;";  //如果不想因为等待这个进程完成而堵塞，可以直接选择在bash里挂起进程</span></div><div class="line">String [] env = &#123;<span class="string">"PATH=%s:%s/bin"</span>.format(System.getenv(<span class="string">"PATH"</span>),System.getenv(<span class="string">"JAVA_HOME"</span>))&#125;;</div><div class="line">String [] execCmd = &#123;<span class="string">"sh"</span>, <span class="string">"-c"</span>, cmd&#125;;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Process process = Runtime.getRuntime().exec(execCmd, env);</div><div class="line">    process.waitFor();</div><div class="line">    Scanner scanner = <span class="keyword">new</span> Scanner(process.getInputStream());</div><div class="line">	<span class="comment">// Scanner scanner = new Scanner(process.getInputStream()); //可以查看java不能正常执行的报错信息</span></div><div class="line">    <span class="keyword">while</span>(scanner.hasNextLine())&#123;</div><div class="line">        System.out.println(scanner.nextLine());</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//            Thread.sleep(1000);</span></div><div class="line">&#125;<span class="keyword">catch</span> (Exception ex)&#123;</div><div class="line">    ex.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// bash执行java的main函数</span></div><div class="line">String classpath = System.getProperty(<span class="string">"java.class.path"</span>);</div><div class="line"><span class="comment">// -cp -&gt; -classpath, 这里是前提是代码已经编译成class文件，且在infrastructure包下有一个包含main函数的TranswarpServer类，且这个main函数可以接受三个String的参数12346 server1 NORMAL</span></div><div class="line">String cmd = <span class="string">"java -cp "</span> + classpath + <span class="string">" infrastructure.TranswarpServer 12346 server1 NORMAL"</span>;</div><div class="line"><span class="comment">// String cmd = "nohup java -cp " + classpath + " infrastructure.TranswarpServer 12346 server1 NORMAL &amp;";  //如果不想因为等待这个进程完成而堵塞，可以直接选择在bash里挂起进程</span></div><div class="line">String [] env = &#123;<span class="string">"PATH=%s:%s/bin"</span>.format(System.getenv(<span class="string">"PATH"</span>),System.getenv(<span class="string">"JAVA_HOME"</span>))&#125;;</div><div class="line">String [] execCmd = &#123;<span class="string">"sh"</span>, <span class="string">"-c"</span>, cmd&#125;;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Process process = Runtime.getRuntime().exec(execCmd, env);</div><div class="line">    process.waitFor();</div><div class="line">    Scanner scanner = <span class="keyword">new</span> Scanner(process.getInputStream());</div><div class="line">	<span class="comment">// Scanner scanner = new Scanner(process.getErrorStream()); //可以查看java不能正常执行的报错信息</span></div><div class="line">    <span class="keyword">while</span>(scanner.hasNextLine())&#123;</div><div class="line">        System.out.println(scanner.nextLine());</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//            Thread.sleep(1000);</span></div><div class="line">&#125;<span class="keyword">catch</span> (Exception ex)&#123;</div><div class="line">    ex.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="杀死进程"><a href="#杀死进程" class="headerlink" title="杀死进程"></a>杀死进程</h2><p>代码中启动的新进程可能是一个服务或者类似ping baidu.com这种的不停执行的命令，不会因为当前进程的退出而退出。而且进程process对象中也无法获取到进程的id，给我们用于kill。</p>
 <h3 id="杀掉创建的进程"><a href="#杀掉创建的进程" class="headerlink" title="杀掉创建的进程"></a>杀掉创建的进程</h3><ol>
 <li><p>代码中通过启动一个新的进程找到和之前启动的进程相关的程序，比如之前启动的进程包含了执行infrastructure.TranswarpServer的java程序，那么可以通过ps aux | grep ‘infrastructure.TranswarpServer’找到相关的进程信息</p>
@@ -343,6 +343,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/02/28/maven项目打jar包包含所有依赖运行相应主类程序/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          maven项目打jar包包含所有依赖运行相应主类程序
+        
+      </div>
+    </a>
   
   
     <a href="/2019/02/20/git-fork下的项目管理/" id="article-nav-older" class="article-nav-link-wrap">
@@ -539,14 +548,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">em</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">极大似然</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
@@ -559,10 +560,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">apache</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
               </li>
              
@@ -571,7 +568,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">em</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">极大似然</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">apache</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,10 +593,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境搭建</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -631,6 +640,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">gan-net</a>
               </li>
              
@@ -643,7 +656,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,14 +669,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">hbase</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,7 +692,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">projecteuler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">斐波那契数列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -723,18 +736,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">社区发现</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Fast Unfolding</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">贪心算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">遗传算法</a>
               </li>
              
@@ -747,6 +748,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">社区发现</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Fast Unfolding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">贪心算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
@@ -755,19 +768,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">技术方案小结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">公式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -776,6 +785,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">BP算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -791,23 +804,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">最小二乘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">最小二乘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">有限域</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">群论</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -820,6 +825,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">有限域</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">群论</a>
               </li>
              
               <li class="article-tag-list-item">
