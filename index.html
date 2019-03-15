@@ -171,6 +171,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-enum对象详细编写" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/15/Java-enum对象详细编写/">Java enum对象详细编写</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/15/Java-enum对象详细编写/" class="archive-article-date">
+  	<time datetime="2019-03-15T12:37:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简单demo实现"><a href="#简单demo实现" class="headerlink" title="简单demo实现"></a>简单demo实现</h2><p>下方是一份简单的java代码。一般我们最简单的enum写法会是如下即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Fruit&#123;</div><div class="line">    Apple, Banana;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实际上这些Apple, Banana相当于是一个无参数的构造对象。如下想要运行有参数的构造对象，需要自己如下定义对应的构造方法。我们保证里面存了一个name和一个id。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"></div><div class="line"><span class="keyword">enum</span> StreamCeommandType &#123;</div><div class="line">    UNSUPPORT_TYPE(<span class="string">"UNSUPPORT TYPE"</span>, <span class="number">0</span>),</div><div class="line">    START_STREAMJOB(<span class="string">"START STREAMJOB"</span>, <span class="number">1</span>),</div><div class="line">    STOP_STREAMJOB(<span class="string">"STOP STREAMJOB"</span>, <span class="number">2</span>),</div><div class="line">    CREATE_STREAMJOB(<span class="string">"CREATE STREAMJOB"</span>, <span class="number">3</span>),</div><div class="line">    DROP_STREAMJOB(<span class="string">"DROP STREAMJOB"</span>, <span class="number">4</span>),</div><div class="line">    START_APP(<span class="string">"START APP"</span>, <span class="number">5</span>),</div><div class="line">    STOP_APP(<span class="string">"STOP APP"</span>, <span class="number">6</span>),</div><div class="line">    CREATE_APP(<span class="string">"CREATE APP"</span>, <span class="number">7</span>),</div><div class="line">    DROP_APP(<span class="string">"DROP APP"</span>, <span class="number">8</span>),</div><div class="line">    USE_APP(<span class="string">"USE APP"</span>, <span class="number">9</span>),</div><div class="line">    LIST_STREAMJOBS(<span class="string">"LIST STREAMJOBS"</span>, <span class="number">10</span>),</div><div class="line">    SHOW_APP(<span class="string">"SHOW APP"</span>, <span class="number">11</span>)</div><div class="line">    ;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">int</span> id;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> HashMap&lt;String, StreamCeommandType&gt; commands = <span class="keyword">new</span> HashMap&lt;String, StreamCeommandType&gt;();</div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        commands.put(<span class="string">"START STREAMJOB"</span>, START_STREAMJOB);</div><div class="line">        commands.put(<span class="string">"STOP STREAMJOB"</span>, STOP_STREAMJOB);</div><div class="line">        commands.put(<span class="string">"CREATE STREAMJOB"</span>, CREATE_STREAMJOB);</div><div class="line">        commands.put(<span class="string">"DROP STREAMJOB"</span>, DROP_STREAMJOB);</div><div class="line">        commands.put(<span class="string">"START APP"</span>, START_APP);</div><div class="line">        commands.put(<span class="string">"STOP APP"</span>, STOP_APP);</div><div class="line">        commands.put(<span class="string">"CREATE APP"</span>, CREATE_APP);</div><div class="line">        commands.put(<span class="string">"DROP APP"</span>, DROP_APP);</div><div class="line">        commands.put(<span class="string">"USE APP"</span>, USE_APP);</div><div class="line">        commands.put(<span class="string">"LIST STREAMJOBS"</span>, LIST_STREAMJOBS);</div><div class="line">        commands.put(<span class="string">"SHOW APP"</span>, SHOW_APP);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line"></div><div class="line">    StreamCeommandType(String name, <span class="keyword">int</span> id)&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> String.valueOf(id) + <span class="string">" : "</span> + name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StreamCeommandType <span class="title">find</span><span class="params">(String name)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(name == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> UNSUPPORT_TYPE;</div><div class="line">        <span class="keyword">if</span>(commands.containsKey(name))</div><div class="line">            <span class="keyword">return</span> commands.get(name);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> UNSUPPORT_TYPE;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StreamCommandParser</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</div><div class="line">        System.out.println(StreamCeommandType.find(<span class="string">"LIST STREAMJOBS"</span>));</div><div class="line">        System.out.println(StreamCeommandType.find(<span class="string">"haha"</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下方是个scala版本的类似实现</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">UnkownCommandType</span> <span class="keyword">extends</span> <span class="title">Enumeration</span></span>&#123;</div><div class="line">  <span class="class"><span class="keyword">type</span> <span class="title">UnkownCommandType</span> </span>= <span class="type">Value</span></div><div class="line">  <span class="keyword">val</span> <span class="type">START_STREAMJOB</span> = <span class="type">Value</span>(<span class="string">"start streamjob"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">STOP_STREAMJOB</span> = <span class="type">Value</span>(<span class="string">"stop streamjob"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">CREATE_STREAMJOB</span> = <span class="type">Value</span>(<span class="string">"create streamjob"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">DROP_STREAMJOB</span> = <span class="type">Value</span>(<span class="string">"drop streamjob"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">START_APP</span> = <span class="type">Value</span>(<span class="string">"start app"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">STOP_APP</span> = <span class="type">Value</span>(<span class="string">"stop app"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">CREATE_APP</span> = <span class="type">Value</span>(<span class="string">"create app"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">DROP_APP</span> = <span class="type">Value</span>(<span class="string">"drop app"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">USE_APP</span> = <span class="type">Value</span>(<span class="string">"use app"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">LIST_JOBS</span> = <span class="type">Value</span>(<span class="string">"list streamjobs"</span>)</div><div class="line">  <span class="keyword">val</span> <span class="type">UNSUPPORT_TYPE</span> = <span class="type">Value</span>(<span class="string">"unsupport type"</span>)</div><div class="line"></div><div class="line">  <span class="keyword">val</span> arr$: <span class="type">Array</span>[<span class="type">UnkownCommandType</span>] = values.toArray</div><div class="line">  <span class="keyword">val</span> len$ = arr$.length</div><div class="line">  <span class="comment">//  arr$.foreach(x =&gt; println(x.toString) )</span></div><div class="line">  <span class="keyword">lazy</span> <span class="keyword">val</span> commands: mutable.<span class="type">Map</span>[<span class="type">String</span>, <span class="type">UnkownCommandType</span>] =&#123;</div><div class="line">    <span class="keyword">var</span> commands = mutable.<span class="type">HashMap</span>[<span class="type">String</span>, <span class="type">UnkownCommandType</span>]()</div><div class="line">    arr$.foreach(x =&gt; commands.put(x.toString, x))</div><div class="line">    commands</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">find</span></span>(command: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Option</span>[<span class="type">UnkownCommandType</span>] = &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="literal">null</span> == command)</div><div class="line">      <span class="type">Some</span>(<span class="type">UNSUPPORT_TYPE</span>)</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">      <span class="keyword">val</span> cmd: <span class="type">String</span> = command.length <span class="keyword">match</span> &#123;</div><div class="line">        <span class="keyword">case</span> <span class="number">0</span> =&gt; <span class="string">""</span></div><div class="line">        <span class="keyword">case</span> <span class="number">1</span> =&gt; command(<span class="number">0</span>).toLowerCase</div><div class="line">        <span class="keyword">case</span> _ =&gt; &#123;</div><div class="line">          <span class="keyword">if</span>(command(<span class="number">1</span>) == <span class="string">"application"</span>) command(<span class="number">0</span>).toLowerCase + <span class="string">" "</span> + <span class="string">"app"</span></div><div class="line">          <span class="keyword">else</span> (command(<span class="number">0</span>) + <span class="string">" "</span> + command(<span class="number">1</span>)).toLowerCase</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span> (commands.contains(cmd)) commands.get(cmd)</div><div class="line">      <span class="keyword">else</span> <span class="type">Some</span>(<span class="type">UNSUPPORT_TYPE</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">==</span> </span>(unkownCommandType: <span class="type">UnkownCommandType</span>): <span class="type">Boolean</span> =&#123;</div><div class="line">    toString == unkownCommandType.toString</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">enum</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java/" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/15/Java-enum对象详细编写/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-maven项目打jar包包含所有依赖运行相应主类程序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1041,98 +1135,9 @@
 
 
   
-    <article id="post-A-八数码-HDU1043" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/10/A-八数码-HDU1043/">A*八数码 HDU1043</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/10/A-八数码-HDU1043/" class="archive-article-date">
-  	<time datetime="2018-05-10T00:00:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// HDU 1043 但是这份代码只能跑单组的数据，无法ac hdu的题目</span></div><div class="line"><span class="comment">//  main.cpp</span></div><div class="line"><span class="comment">//  gongwen</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by ganjun on 2018/5/9.</span></div><div class="line"><span class="comment">//  Copyright © 2018年 ganjun. All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> factorial[<span class="number">10</span>] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">24</span>, <span class="number">120</span>, <span class="number">720</span>, <span class="number">5040</span>, <span class="number">40320</span>, <span class="number">362880</span>&#125;;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EightCode</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> a[<span class="number">9</span>];</div><div class="line">    <span class="keyword">int</span> index0;  <span class="comment">// 空白也就是0所在位置</span></div><div class="line">    EightCode()&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">9</span> ; i++) a[i] = i;</div><div class="line">        index0 = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    EightCode(<span class="keyword">int</span> b[])&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">9</span> ; i++)&#123;</div><div class="line">            a[i] = b[i];</div><div class="line">            <span class="keyword">if</span>(b[i] == <span class="number">0</span>) index0 = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"&#123;"</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;<span class="number">9</span> ; i++) <span class="built_in">cout</span>&lt;&lt;a[i]&lt;&lt;<span class="string">" "</span>;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"&#125;"</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 9! 次编解码</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">encode</span><span class="params">(EightCode v)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;<span class="number">9</span> ; i++)&#123;</div><div class="line">        <span class="keyword">int</span> bigger = <span class="number">0</span>;</div><div class="line"><span class="comment">//        cout&lt;&lt;i&lt;&lt;" "&lt;&lt;v.a[i]&lt;&lt;endl;</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span> ; j&lt;i ; j++)</div><div class="line">            <span class="keyword">if</span>(v.a[j] &lt; v.a[i]) bigger++;</div><div class="line">        ret += bigger * factorial[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">EightCode <span class="title">decode</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">&#123;</div><div class="line">    EightCode v;</div><div class="line">    <span class="keyword">bool</span> vis[<span class="number">9</span>] = &#123;<span class="literal">false</span>&#125;;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">8</span> ; i&gt;=<span class="number">0</span> ; i--)&#123;</div><div class="line">        <span class="keyword">int</span> kth = x / factorial[i] + <span class="number">1</span>;</div><div class="line">        x %= factorial[i];</div><div class="line">        v.a[i] = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(kth)&#123;</div><div class="line">            <span class="keyword">if</span>(!vis[v.a[i]]) kth--;</div><div class="line">            <span class="keyword">if</span>(!kth) <span class="keyword">break</span>;</div><div class="line">            v.a[i] ++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(v.a[i] == <span class="number">0</span>) v.index0 = i;</div><div class="line">        vis[v.a[i]] = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> v;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> X first</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> Y second</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;int,int&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> piii pair<span class="meta-string">&lt;int, pii &gt;  // h , &lt;f, status&gt;</span></span></div><div class="line"><span class="built_in">set</span>&lt;piii&gt; st;</div><div class="line"><span class="keyword">int</span> f[<span class="number">400000</span>]; <span class="comment">// 状态不超过9!个</span></div><div class="line">pii last[<span class="number">400000</span>]; <span class="comment">// 记录到达当前最优状态的上一次状态以及走棋的方向</span></div><div class="line"><span class="keyword">int</span> dir[<span class="number">4</span>] = &#123;<span class="number">-1</span>, <span class="number">1</span>, <span class="number">-3</span>, <span class="number">3</span>&#125;; <span class="comment">// 交换位置的4个方向</span></div><div class="line"><span class="keyword">char</span> dir_c[<span class="number">4</span>] = &#123;<span class="string">'r'</span>, <span class="string">'l'</span>, <span class="string">'d'</span>, <span class="string">'u'</span>&#125;; <span class="comment">// 目标和起始交换，倒过来</span></div><div class="line"></div><div class="line"><span class="comment">// g通过计算曼哈顿距离进行估计</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">g</span><span class="params">(EightCode v , EightCode des)</span></span></div><div class="line">&#123;</div><div class="line">    pii pos[<span class="number">9</span>];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;<span class="number">9</span> ; i++)&#123;</div><div class="line">        pos[des.a[i]] = mp(i/<span class="number">3</span>, i%<span class="number">3</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;<span class="number">9</span> ; i++)&#123;</div><div class="line">        ret += <span class="built_in">abs</span>(i/<span class="number">3</span> - pos[v.a[i]].X) + <span class="built_in">abs</span>(i%<span class="number">3</span> - pos[v.a[i]].Y);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(EightCode &amp;v , <span class="keyword">int</span> x , <span class="keyword">int</span> y)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> temp = v.a[x];</div><div class="line">    v.a[x] = v.a[y];</div><div class="line">    v.a[y] = temp;</div><div class="line">    <span class="keyword">if</span>(v.a[x] == <span class="number">0</span>) v.index0 = x;</div><div class="line">    <span class="keyword">if</span>(v.a[y] == <span class="number">0</span>) v.index0 = y;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">A_star</span><span class="params">(EightCode source, EightCode des)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">memset</span>(f, <span class="number">0x7f</span>, <span class="keyword">sizeof</span>(f));</div><div class="line">    <span class="built_in">memset</span>(last , <span class="number">-1</span> , <span class="keyword">sizeof</span>(last));</div><div class="line">    <span class="keyword">int</span> sx = encode(source);</div><div class="line">    <span class="keyword">int</span> dx = encode(des);</div><div class="line">    st.insert(mp(<span class="number">0</span>, mp(<span class="number">0</span>, sx)));</div><div class="line">    f[sx] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(!st.empty())&#123;</div><div class="line">        piii u = *(st.begin());</div><div class="line">        st.erase(st.begin());</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(u.Y.Y == dx) <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">if</span>(f[u.Y.Y] &lt; u.Y.X) <span class="keyword">continue</span>;</div><div class="line">        EightCode v = decode(u.Y.Y);</div><div class="line"><span class="comment">//        v.print();</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ; i&lt;<span class="number">4</span> ; i++)&#123;</div><div class="line">            <span class="keyword">int</span> change_index = v.index0 + dir[i];</div><div class="line">            </div><div class="line"><span class="comment">//            cout&lt;&lt;"debug "&lt;&lt;change_index&lt;&lt;endl;</span></div><div class="line">            <span class="keyword">if</span>(change_index &gt;= <span class="number">0</span> &amp;&amp; change_index &lt; <span class="number">9</span>)&#123;</div><div class="line">                EightCode t = EightCode(v.a);</div><div class="line">                swap(t , change_index , v.index0);</div><div class="line">                <span class="keyword">int</span> code = encode(t);</div><div class="line"><span class="comment">//                t.print();</span></div><div class="line">                <span class="keyword">if</span>(f[code] &gt; f[u.Y.Y] + <span class="number">1</span>)&#123;</div><div class="line"><span class="comment">//                    cout&lt;&lt;"in"&lt;&lt;endl;</span></div><div class="line">                    <span class="keyword">int</span> g_estimate = g(t, des);</div><div class="line">                    f[code] = f[u.Y.Y] + <span class="number">1</span>;</div><div class="line">                    <span class="keyword">int</span> h = f[code] + g_estimate;</div><div class="line">                    st.insert(mp(h, mp(f[code], code)));</div><div class="line">                    last[code] = mp(u.Y.Y, (<span class="keyword">int</span>)dir_c[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// print result</span></div><div class="line">    <span class="keyword">int</span> cur = dx;</div><div class="line"><span class="comment">//    cout&lt;&lt;"hre"&lt;&lt;endl;</span></div><div class="line">    <span class="keyword">if</span>(f[cur] == <span class="number">0x7f7f7f7f</span>) <span class="built_in">cout</span>&lt;&lt;<span class="string">"unsolvable"</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        </div><div class="line"><span class="comment">//        char ret[400000]; int tot = 0;</span></div><div class="line">        <span class="keyword">while</span>(last[cur].X &gt;= <span class="number">0</span>)&#123;</div><div class="line"><span class="comment">//            decode(cur).print(); cout&lt;&lt;f[cur]&lt;&lt;endl;</span></div><div class="line">            <span class="built_in">cout</span>&lt;&lt;(<span class="keyword">char</span>)last[cur].Y;</div><div class="line">            cur = last[cur].X;</div><div class="line">        &#125;</div><div class="line"><span class="comment">//        for(int i=tot-1 ; i&gt;=0 ; i--) cout&lt;&lt;ret[i];</span></div><div class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    freopen(<span class="string">"a.in"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span>);</div><div class="line">    <span class="keyword">int</span> b[] = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">0</span>,<span class="number">7</span>,<span class="number">6</span>,<span class="number">8</span>&#125;;</div><div class="line">    <span class="keyword">int</span> c[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">0</span>&#125;;</div><div class="line">    <span class="keyword">char</span> v[<span class="number">10</span>];</div><div class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%s"</span>, v))&#123;</div><div class="line">        <span class="keyword">if</span>(v[<span class="number">0</span>] == <span class="string">'x'</span>) b[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">        <span class="keyword">else</span> b[<span class="number">0</span>] = v[<span class="number">0</span>]-<span class="string">'0'</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span> ; i&lt;<span class="number">9</span> ; i++)&#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>, v);</div><div class="line">            <span class="keyword">if</span>(v[<span class="number">0</span>] == <span class="string">'x'</span>) b[i] = <span class="number">0</span>;</div><div class="line">            <span class="keyword">else</span> b[i] = v[<span class="number">0</span>]-<span class="string">'0'</span>;</div><div class="line">        &#125;</div><div class="line">        A_star(EightCode(c), EightCode(b));</div><div class="line">    &#125;</div><div class="line"><span class="comment">//    EightCode v = EightCode(b);</span></div><div class="line"><span class="comment">//    int t =encode(v);</span></div><div class="line"><span class="comment">//    cout&lt;&lt;t&lt;&lt;endl;</span></div><div class="line"><span class="comment">//    decode(t).print();</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">A*</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/HDU/" class="article-tag-list-link color4">HDU</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/10/A-八数码-HDU1043/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1255,14 +1260,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">em</a>
               </li>
              
@@ -1271,11 +1268,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">apache</a>
+                <a href="javascript:void(0)" class="js-tag color5">线性代数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">enum</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">apache</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1291,14 +1304,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Polya定理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">组合数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -1311,11 +1316,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Sampling</a>
+                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">莫比乌斯反演</a>
+                <a href="javascript:void(0)" class="js-tag color5">组合数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1323,7 +1328,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">容斥原理</a>
+                <a href="javascript:void(0)" class="js-tag color3">Polya定理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1332,6 +1337,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Sampling</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">容斥原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1400,14 +1413,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">进程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">分类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1483,10 +1488,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">概率论</a>
               </li>
              
@@ -1495,11 +1496,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">正交矩阵</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
+                <a href="javascript:void(0)" class="js-tag color5">正交矩阵</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1507,19 +1508,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
+                <a href="javascript:void(0)" class="js-tag color3">分类</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">viterbi算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
+                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1531,15 +1528,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">马儿可夫模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">viterbi算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">平面几何</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">马尔可夫模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">高级算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">前向算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">近似算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">近似算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">前向算法</a>
               </li>
              
               <li class="article-tag-list-item">
