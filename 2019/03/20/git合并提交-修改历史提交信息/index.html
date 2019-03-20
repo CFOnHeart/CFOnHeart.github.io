@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://ganjun.net">
   <title>git合并提交&amp;修改历史提交信息 | Junnor.G</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、合并提交当你在本地已经有了好几次提交，但提交MR的时候发现这几次提交需要合为一次提交，想合并的时候该怎么做呢？ 这时候需要使用git rebase -i进入交互模式来完成，请看下面的例子： 在我的test项目里，我要把前两次提交（4d0f937b981，7ce5cf55db）合并成一次提交：  1.找到这两次提交的前一个提交，即e361e4a92926c0 2 执行 git rebase -i">
+  <meta name="description" content="一、合并提交当你在本地已经有了好几次提交，但提交MR的时候发现这几次提交需要合为一次提交，想合并的时候该怎么做呢？ 这时候需要使用git rebase -i进入交互模式来完成，请看下面的例子：">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git合并提交&amp;修改历史提交信息">
 <meta property="og:url" content="http://ganjun.net/2019/03/20/git合并提交-修改历史提交信息/index.html">
 <meta property="og:site_name" content="Junnor.G">
-<meta property="og:description" content="一、合并提交当你在本地已经有了好几次提交，但提交MR的时候发现这几次提交需要合为一次提交，想合并的时候该怎么做呢？ 这时候需要使用git rebase -i进入交互模式来完成，请看下面的例子： 在我的test项目里，我要把前两次提交（4d0f937b981，7ce5cf55db）合并成一次提交：  1.找到这两次提交的前一个提交，即e361e4a92926c0 2 执行 git rebase -i">
+<meta property="og:description" content="一、合并提交当你在本地已经有了好几次提交，但提交MR的时候发现这几次提交需要合为一次提交，想合并的时候该怎么做呢？ 这时候需要使用git rebase -i进入交互模式来完成，请看下面的例子：">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="http://ganjun.net/2019/03/20/git合并提交-修改历史提交信息/1.png">
 <meta property="og:image" content="http://ganjun.net/2019/03/20/git合并提交-修改历史提交信息/2.png">
@@ -24,10 +24,10 @@
 <meta property="og:image" content="http://ganjun.net/2019/03/20/git合并提交-修改历史提交信息/6.png">
 <meta property="og:image" content="http://ganjun.net/2019/03/20/git合并提交-修改历史提交信息/7.png">
 <meta property="og:image" content="http://ganjun.net/2019/03/20/git合并提交-修改历史提交信息/8.png">
-<meta property="og:updated_time" content="2019-03-20T10:49:51.000Z">
+<meta property="og:updated_time" content="2019-03-20T10:51:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git合并提交&amp;修改历史提交信息">
-<meta name="twitter:description" content="一、合并提交当你在本地已经有了好几次提交，但提交MR的时候发现这几次提交需要合为一次提交，想合并的时候该怎么做呢？ 这时候需要使用git rebase -i进入交互模式来完成，请看下面的例子： 在我的test项目里，我要把前两次提交（4d0f937b981，7ce5cf55db）合并成一次提交：  1.找到这两次提交的前一个提交，即e361e4a92926c0 2 执行 git rebase -i">
+<meta name="twitter:description" content="一、合并提交当你在本地已经有了好几次提交，但提交MR的时候发现这几次提交需要合为一次提交，想合并的时候该怎么做呢？ 这时候需要使用git rebase -i进入交互模式来完成，请看下面的例子：">
 <meta name="twitter:image" content="http://ganjun.net/2019/03/20/git合并提交-修改历史提交信息/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Junnor.G" type="application/atom+xml">
@@ -202,6 +202,7 @@
       
         <h3 id="一、合并提交"><a href="#一、合并提交" class="headerlink" title="一、合并提交"></a>一、合并提交</h3><p>当你在本地已经有了好几次提交，但提交MR的时候发现这几次提交需要合为一次提交，想合并的时候该怎么做呢？</p>
 <p>这时候需要使用git rebase -i进入交互模式来完成，请看下面的例子：</p>
+<a id="more"></a>
 <p>在我的test项目里，我要把前两次提交（4d0f937b981，7ce5cf55db）合并成一次提交：</p>
 <p><img src="1.png" alt="img"></p>
 <p>1.找到这两次提交的前一个提交，即e361e4a92926c0</p>
